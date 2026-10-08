@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <!--
+    Web: MVC controller'lar, Razor view'lar, Areas/Admin (Faz 03), middleware, statik dosyalar.
+    Composition root olduğu için Infrastructure'a yalnızca DI kaydı amacıyla referans verir;
+    controller'lar Infrastructure tiplerini doğrudan kullanmaz.
+  -->
+  <PropertyGroup>
+    <RootNamespace>CevatBiyik.Web</RootNamespace>
+    <UserSecretsId>5d9e2f3a-6b1c-4c7e-9a0d-3f8b2c1e7a44</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CevatBiyik.Application\CevatBiyik.Application.csproj" />
+    <ProjectReference Include="..\CevatBiyik.Infrastructure\CevatBiyik.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

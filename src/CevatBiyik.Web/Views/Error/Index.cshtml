@@ -1,0 +1,16 @@
+@model int
+@{
+    string baslik = Model switch
+    {
+        404 => "Sayfa bulunamadı",
+        403 => "Erişim reddedildi",
+        >= 500 => "Bir hata oluştu",
+        _ => "İstek işlenemedi"
+    };
+    ViewData["Title"] = $"{Model} — {baslik}";
+    ViewData["Robots"] = "noindex, nofollow";
+}
+
+<h1>@Model</h1>
+<p>@baslik</p>
+<p><a href="/">Ana sayfaya dön</a></p>

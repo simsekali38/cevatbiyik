@@ -1,0 +1,22 @@
+# Plesk Launch Checklist
+
+- [ ] Supported .NET runtime verified
+- [ ] ASP.NET Core hosting support verified
+- [ ] IIS configuration verified
+- [ ] domain mapped
+- [ ] HTTPS certificate
+- [ ] production environment variables
+- [ ] MySQL connection
+- [ ] migrations
+- [ ] upload permissions
+- [ ] writable logs if used
+- [ ] static files
+- [ ] admin login
+- [ ] contact form
+- [ ] SMTP
+- [ ] sitemap
+- [ ] robots
+- [ ] canonical URL
+- [ ] error pages
+- [ ] backups
+- [ ] restore procedure

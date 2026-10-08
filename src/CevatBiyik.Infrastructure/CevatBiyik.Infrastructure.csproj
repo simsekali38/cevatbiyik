@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Infrastructure: EF Core + MySQL (Faz 02), Identity persistence (Faz 03), dosya depolama (Faz 05),
+    e-posta (Faz 09). Application soyutlamalarını uygular. Henüz paket yok; sağlayıcı seçimi Faz 02 ADR'sinde.
+  -->
+  <PropertyGroup>
+    <RootNamespace>CevatBiyik.Infrastructure</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CevatBiyik.Application\CevatBiyik.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+  </ItemGroup>
+
+</Project>

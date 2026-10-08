@@ -1,0 +1,30 @@
+{
+  "project": "Av. Cevat Bıyık Personal Legal Website",
+  "language": "tr-TR",
+  "framework": ".NET 10 LTS preferred; .NET 8 fallback",
+  "architecture": "ASP.NET Core MVC + Razor + Bootstrap, modular monolith",
+  "database": "MySQL 8.x",
+  "hosting": "Windows + Plesk",
+  "storage": "Hosting filesystem",
+  "cloudflare": false,
+  "single_domain": true,
+  "api_initially": false,
+  "admin_path": "/admin",
+  "phase_count": 16,
+  "skills": [
+    "accessibility",
+    "admin-panel",
+    "architecture",
+    "backend",
+    "content",
+    "database",
+    "devops",
+    "frontend",
+    "legal-content",
+    "performance",
+    "qa",
+    "security",
+    "seo",
+    "testing"
+  ]
+}

@@ -1,0 +1,33 @@
+<Project>
+
+  <!--
+    Tüm projeler için ortak ayarlar.
+    ADR-008 / PROJECT_AUDIT.md R-01: .NET 8 LTS desteği 2026-11-10'da bitiyor.
+    Hedef framework SADECE burada tanımlıdır; .NET 10'a yükseltme için tek satır değişikliği yeterli olmalıdır.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>12.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Deterministic>true</Deterministic>
+    <InvariantGlobalization>false</InvariantGlobalization>
+  </PropertyGroup>
+
+  <!-- Analyzer ve kod stili -->
+  <PropertyGroup>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <!-- Nullable uyarıları hata sayılır; diğer uyarılar görünür kalır (Faz 11'de sıkılaştırılabilir). -->
+    <WarningsAsErrors>$(WarningsAsErrors);nullable</WarningsAsErrors>
+  </PropertyGroup>
+
+  <!-- Paket güvenliği: bilinen zafiyetli bağımlılıkları görünür kıl -->
+  <PropertyGroup>
+    <NuGetAudit>true</NuGetAudit>
+    <NuGetAuditMode>all</NuGetAuditMode>
+    <NuGetAuditLevel>low</NuGetAuditLevel>
+  </PropertyGroup>
+
+</Project>

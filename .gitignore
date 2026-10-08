@@ -1,0 +1,40 @@
+## .NET / Visual Studio
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userprefs
+*.rsuser
+launchSettings.json.user
+TestResults/
+*.log
+*.trx
+coverage*/
+publish/
+artifacts/
+
+## Sırlar ve ortam dosyaları (ASLA commit'leme)
+secrets.json
+appsettings.*.local.json
+appsettings.Secrets.json
+*.pfx
+*.pem
+*.key
+.env
+.env.*
+
+## Yüklenen dosyalar (Faz 05): içerik repoda değil, hosting/yedekte tutulur
+src/CevatBiyik.Web/wwwroot/uploads/*
+!src/CevatBiyik.Web/wwwroot/uploads/.gitkeep
+
+## OS
+Thumbs.db
+.DS_Store
+
+## Geçici
+test.txt

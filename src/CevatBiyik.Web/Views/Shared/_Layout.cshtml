@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    @* Faz 07'ye kadar site indexlenmez. SEO metadata CMS'i devreye girince bu değer yönetilebilir olacak. *@
+    <meta name="robots" content="@(ViewData["Robots"] ?? "noindex, nofollow")" />
+    <title>@(ViewData["Title"] ?? "Av. Cevat Bıyık")</title>
+</head>
+<body>
+    <a href="#icerik">Ana içeriğe geç</a>
+    <header>
+        <p>Av. Cevat Bıyık</p>
+    </header>
+    <main id="icerik">
+        @RenderBody()
+    </main>
+    <footer>
+        @* Faz 06: gerçek footer (iletişim, KVKK, yasal bilgilendirme). Bilgiler CONTENT_REQUIRED. *@
+    </footer>
+</body>
+</html>

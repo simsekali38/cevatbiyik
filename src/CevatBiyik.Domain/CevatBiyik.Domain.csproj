@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Domain: saf domain kavramları. Hiçbir projeye ve pakete bağımlı DEĞİLDİR. -->
+  <PropertyGroup>
+    <RootNamespace>CevatBiyik.Domain</RootNamespace>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Application: use case'ler, DTO'lar, doğrulama, servis soyutlamaları. Sadece Domain'e bağımlıdır. -->
+  <PropertyGroup>
+    <RootNamespace>CevatBiyik.Application</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CevatBiyik.Domain\CevatBiyik.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+  </ItemGroup>
+
+</Project>
