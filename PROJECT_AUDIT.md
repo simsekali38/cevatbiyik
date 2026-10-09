@@ -2,7 +2,7 @@
 
 > **Faz:** 00 — Discovery
 > **Tarih:** 2026-10-09
-> **Durum:** TASLAK (kullanıcı onayı bekliyor)
+> **Durum:** KAPANDI (2026-10-09) — Faz 01'e geçildi. Aşağıdaki bölümler (özellikle 2) **Faz 00 sırasındaki durumu** gösterir; güncel durum için `OPEN_QUESTIONS.md`, `DECISIONS.md` ve `CHANGELOG.md`'ye bakın.
 > **Kapsam kuralı:** Bu fazda üretim davranışına dokunulmaz, kod yazılmaz.
 
 ---
@@ -13,7 +13,7 @@
 - Elde yalnızca **blueprint paketi** vardır: 60 dosya (ana dokümanlar, 16 faz dosyası, 14 skill, `docs/` altı şablonlar, `project-manifest.json`).
 - Teknoloji kararı: **ASP.NET Core MVC + Razor + Bootstrap, .NET 8 LTS, MySQL 8, Windows + Plesk, tek domain.**
 - **En kritik bulgu:** .NET 8 desteği **10 Kasım 2026** tarihinde sona eriyor (bugünden yaklaşık 1 ay sonra). Kullanıcı .NET 8 kararını bu uyarıdan sonra tekrar teyit etti; risk **kabul edilmiş risk** olarak kaydedildi ve bir yükseltme planı zorunlu kılındı. Bkz. R-01.
-- Plesk'in gerçekte hangi .NET sürümünü desteklediği **doğrulanmadı**. Bu doğrulama Faz 01'e geçmeden yapılmalıdır.
+- Plesk'in .NET 8'i desteklediği proje sahibi tarafından bildirildi (yazılı hosting teyidi yok). .NET 10 Hosting Bundle'ın kurulabilirliği **hâlâ açık**.
 
 ---
 
@@ -66,20 +66,20 @@ Faz 01'den itibaren build/test çıktıları **kendi makinende** çalıştırıl
 ### F-01 — Tek parça `.md` ile zip arasındaki çelişki
 `claude_free_ai_blueprint.md` genel bir şablondur; REST/GraphQL, JWT, CORS ve "Node.js / .NET / Next.js" seçeneklerinden söz eder. Zip'teki manifest ve `AGENTS.md` ise API'siz, tek domain, server-rendered Razor mimarisini zorunlu kılar. **Çözüm:** Zip esas alınır. Faz 10 (Security Hardening) içindeki "CORS" maddesi tek domain nedeniyle büyük ölçüde geçerli değildir.
 
-### F-02 — .NET 10 referansları güncellenmeli
-.NET 8 kararı verildiği için şu dosyalar güncellenmelidir (Faz 01'de uygulanacak, bu fazda sadece öneri):
+### F-02 — .NET 10 referansları güncellenmeli — ✅ ÇÖZÜLDÜ (Faz 01)
+.NET 8 kararı verildiği için `project-manifest.json`, `README.md`, `MASTER_PROMPT.md`, `DEPLOYMENT.md` güncellendi ve `DECISIONS.md` içine **ADR-008** eklendi (güncel metinler bu dosyalarda; burada ilk öneri korunmaktadır):
 - `project-manifest.json` → `"framework": ".NET 8 LTS"`
 - `README.md`, `MASTER_PROMPT.md`, `DEPLOYMENT.md` → ".NET 10 tercih / .NET 8 fallback" ifadeleri
 - `DECISIONS.md` → yeni **ADR-008: Target Framework = .NET 8 LTS** (gerekçe: hosting uyumluluğu ve kullanıcı kararı; risk: 2026-11-10 destek sonu; yükseltme planı)
 
-### F-03 — ADR statüleri
-ADR-001 ve ADR-002 hâlâ "Proposed". Onaylanıp "Accepted" yapılması önerilir.
+### F-03 — ADR statüleri — ✅ ÇÖZÜLDÜ
+ADR-001 ve ADR-002 `DECISIONS.md` içinde "Accepted" olarak işaretlendi.
 
 ### F-04 — Faz 00 görev listesi ile kullanım şekli
 Faz 00 "repository'yi incele" der; repo yoktur. Bu nedenle audit, başlangıç durumu (baseline) belgesi olarak yazıldı.
 
-### F-05 — `CHANGELOG.md` boş
-İlk kayıt Faz 00 çıktısı olarak eklenmelidir (aşağıda önerildi).
+### F-05 — `CHANGELOG.md` boş — ✅ ÇÖZÜLDÜ
+Faz 00 ve Faz 01 kayıtları `CHANGELOG.md` içine eklendi.
 
 ---
 
@@ -143,9 +143,10 @@ Hosting sağlayıcıya (veya Plesk panelinden kendin) şunlar sorulmalı:
 - [x] Teknoloji kararları kaydedildi (.NET 8, domain)
 - [x] Riskler çıkarıldı; R-01 kabul edilmiş risk olarak işaretlendi
 - [x] `OPEN_QUESTIONS.md` güncellendi
-- [ ] Hosting/Plesk .NET desteği **doğrulandı** (bekliyor)
-- [ ] Yerel geliştirme ortamı (SDK, MySQL, Git) **doğrulandı** (bekliyor)
-- [ ] Kullanıcı Faz 00 çıktısını onayladı
+- [x] Hosting/Plesk .NET 8 desteği (proje sahibi beyanı; yazılı hosting teyidi yok)
+- [ ] .NET 10 Hosting Bundle kurulabilirliği (açık — OPEN_QUESTIONS #2, ADR-008)
+- [x] Yerel geliştirme ortamı (.NET 8 SDK, Git 2.56.0.windows.1; yerel MySQL kurulmayacak) — proje sahibi bildirimi
+- [x] Kullanıcı Faz 00'ı kapattı (2026-10-09)
 
 ## 9. Önerilen `CHANGELOG.md` Kaydı
 
@@ -157,9 +158,6 @@ Hosting sağlayıcıya (veya Plesk panelinden kendin) şunlar sorulmalı:
 - Decision: working domain avcevatbiyik.com (unconfirmed).
 ```
 
-## 10. Bir Sonraki Adım (Faz 01 öncesi)
+## 10. Faz 00 Sonrası Durum
 
-1. Hosting sağlayıcıdan bölüm 7'deki yanıtlar (özellikle .NET 8 / .NET 10 Hosting Bundle durumu).
-2. Yerel ortam teyidi: `dotnet --list-sdks`, MySQL 8, `git --version` çıktıları.
-3. Git deposu kararı (yerel `git init` + uzak depo).
-4. Domain sahipliği teyidi.
+Faz 01 tamamlandı (bkz. `CHANGELOG.md`). Faz 02 öncesi açık konular: `OPEN_QUESTIONS.md` #18, #19, #26; ayrıca uzak Git deposu kararı (#20) ve domain sahipliği teyidi (#1).

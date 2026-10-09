@@ -25,11 +25,11 @@ Bu repository'yi gerçek bir production software project olarak ele al.
 
 ## Teknoloji kararı
 
-Tercih: .NET 10 LTS.
+Karar: .NET 8 LTS (ADR-008). Hosting .NET 8'i destekliyor.
 
-Plesk ortamı .NET 10 desteklemiyorsa .NET 8 LTS fallback olarak kullanılabilir.
+.NET 8 desteği 2026-11-10'da bitiyor; .NET 10 LTS'e yükseltme planlanmalıdır. `TargetFramework` yalnızca `Directory.Build.props` içinde tanımlanmalıdır.
 
-Gerçek hosting runtime'ını implementation öncesi doğrula.
+Gerçek hosting runtime'ını deployment öncesi yeniden doğrula.
 
 ## Temel ilkeler
 

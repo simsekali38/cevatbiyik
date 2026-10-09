@@ -27,8 +27,8 @@ Bu paket, Av. Cevat Bıyık için geliştirilecek production-ready kişisel huku
 
 ## Varsayımlar
 
-- Hedef framework: .NET 10 LTS.
-- Plesk .NET 10 desteklemiyorsa .NET 8 LTS fallback'tir.
+- Hedef framework: .NET 8 LTS (`net8.0`, ADR-008).
+- Domain: `cevatbiyik.av.tr` (ADR-009).
 - MySQL 8.x.
 - Cloudflare zorunlu değildir.
 - Public site server-rendered Razor ile çalışır.

@@ -15,4 +15,8 @@ CevatBiyik.sln
 └── phases
 ```
 
-Keep project references directional and intentional.
+Project references (ADR-012):
+
+`CevatBiyik.Web` → `CevatBiyik.Infrastructure` → `CevatBiyik.Application` → `CevatBiyik.Domain`
+
+Target framework is defined only in `Directory.Build.props` (`net8.0`). Package versions are defined only in `Directory.Packages.props`.

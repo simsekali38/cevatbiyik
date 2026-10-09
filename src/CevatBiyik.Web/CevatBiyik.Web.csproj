@@ -2,8 +2,8 @@
 
   <!--
     Web: MVC controller'lar, Razor view'lar, Areas/Admin (Faz 03), middleware, statik dosyalar.
-    Composition root olduğu için Infrastructure'a yalnızca DI kaydı amacıyla referans verir;
-    controller'lar Infrastructure tiplerini doğrudan kullanmaz.
+    Proje referans zinciri: Web -> Infrastructure -> Application -> Domain.
+    Controller'lar Infrastructure somut tiplerini kullanmaz; kayıt AddInfrastructure içindedir.
   -->
   <PropertyGroup>
     <RootNamespace>CevatBiyik.Web</RootNamespace>
@@ -11,7 +11,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CevatBiyik.Application\CevatBiyik.Application.csproj" />
     <ProjectReference Include="..\CevatBiyik.Infrastructure\CevatBiyik.Infrastructure.csproj" />
   </ItemGroup>
 

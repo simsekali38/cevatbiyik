@@ -10,8 +10,8 @@ ASP.NET Core MVC published output.
 
 ## Runtime
 
-Preferred .NET 10 LTS.
-Fallback .NET 8 LTS if hosting requires it.
+Target: .NET 8 LTS (ADR-008). Hosting is confirmed to support .NET 8.
+.NET 8 support ends 2026-11-10; plan the upgrade to .NET 10 LTS (see DECISIONS.md ADR-008).
 
 ## Pre-deployment
 

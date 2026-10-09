@@ -12,11 +12,13 @@
     <PackageReference Include="xunit.runner.visualstudio" />
     <PackageReference Include="coverlet.collector" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\CevatBiyik.Domain\CevatBiyik.Domain.csproj" />
     <ProjectReference Include="..\..\src\CevatBiyik.Application\CevatBiyik.Application.csproj" />
+    <ProjectReference Include="..\..\src\CevatBiyik.Infrastructure\CevatBiyik.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

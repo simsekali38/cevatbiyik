@@ -1,7 +1,8 @@
 {
   "project": "Av. Cevat Bıyık Personal Legal Website",
   "language": "tr-TR",
-  "framework": ".NET 10 LTS preferred; .NET 8 fallback",
+  "framework": ".NET 8 LTS (net8.0, ADR-008)",
+  "domain": "cevatbiyik.av.tr",
   "architecture": "ASP.NET Core MVC + Razor + Bootstrap, modular monolith",
   "database": "MySQL 8.x",
   "hosting": "Windows + Plesk",
