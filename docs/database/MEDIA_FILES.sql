@@ -1,4 +1,4 @@
-﻿START TRANSACTION;
+START TRANSACTION;
 
 CREATE TABLE `PrivateDocuments` (
     `Id` bigint NOT NULL AUTO_INCREMENT,
@@ -19,4 +19,3 @@ INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
 VALUES ('20261009210341_MediaFiles', '8.0.29');
 
 COMMIT;
-

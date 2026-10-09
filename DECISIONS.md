@@ -2,7 +2,7 @@
 
 ## ADR-020 — Private documents, retained files and bounded reconciliation
 
-Status: Implemented (2026-10-10, requested Phase 07 scope); owner phase closure pending.
+Status: Implemented (2026-10-10, requested Phase 07 scope); owner phase closure approved (2026-10-10).
 
 Preserve ADR-019 MediaAsset/IMediaService/FileImageStorage and filesystem storage, .NET 8/MySQL 8, one Razor app.
 Add separate PrivateDocument with SHA-256 and shared soft-delete fields; no client filename on disk.

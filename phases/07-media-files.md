@@ -49,4 +49,4 @@ The phase is complete only when its implementation and verification criteria are
 Preserves ADR-019. ADR-020 records private PDF storage, fail-closed antivirus, retained soft deletion,
 bounded reconciliation/temporary-file quarantine and combined backups. See docs/media/MEDIA_FILES.md,
 docs/deployment/PLESK_MEDIA_RUNBOOK.md and docs/qa/PHASE_07_REVIEW.md for implementation/validation.
-Owner closure is pending; code acceptance does not imply real MySQL/Plesk/Defender/ACL/restore drill completion.
+Owner approved closure and commit on 2026-10-10; code acceptance does not imply real MySQL/Plesk/Defender/ACL/restore drill completion.

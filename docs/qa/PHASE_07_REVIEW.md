@@ -1,7 +1,7 @@
 # Faz 07 doğrulama raporu — 2026-10-10
 
-Durum: Kod uygulandı ve yerelde doğrulandı; proje sahibinin kapanış onayı bekleniyor.
-00–06 kapanışı korunur; 08 başlatılmadı. ADR-019 hattı korunmuş, ADR-020 eklenmiştir.
+Durum: Kod uygulandı ve yerelde doğrulandı; proje sahibi 2026-10-10 tarihinde kapanış ve commit onayını verdi.
+00–07 tamamlandı; 08 başlatılmadı. ADR-019 hattı korunmuş, ADR-020 eklenmiştir.
 
 ## Çalıştırılan kontroller
 
@@ -43,4 +43,4 @@ Plesk ACL/virtual-directory/IIS limitleri, gerçek app-pool native load, tutarl�
 Hukuki retention süresi **CONTENT_REQUIRED**; otomatik hard purge yoktur. Tüm bu adımlar PLESK_MEDIA_RUNBOOK.md'de somutlaştırılmıştır.
 
 Concurrent src/CevatBiyik.Web/appsettings.json değişiklikleri kullanıcıya aittir; korunmuş ve Faz 07 değişikliği olarak değerlendirilmemiştir.
-Commit ve deployment yapılmadı. Kapanış onayı kod kabulünü temsil eder; açık hosting gate'lerini geçtiği anlamına gelmez.
+Kapanış ve commit proje sahibi tarafından onaylandı; deployment yapılmadı. Kapanış onayı kod kabulünü temsil eder; açık hosting gate'lerini geçtiği anlamına gelmez.

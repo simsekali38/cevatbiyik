@@ -13,7 +13,7 @@ All notable project changes should be recorded here.
 - Added ADR-020, media setup, Plesk ACL/native/Defender gates and coordinated DB/public/private backup/restore runbook.
 - Verified Release build: 0 errors/0 warnings; 86 unit + 67 integration = 153 passed; 5 dedicated MySQL tests skipped (no test connection).
 - Local publish succeeded: Windows x64 Skia/native assets, IIS limit and private App_Data exclusion checked. No production deployment or hosting restore drill.
-- Owner closure pending; concurrent appsettings.json edits were preserved and are outside this phase's changes.
+- Owner approved Phase 07 closure and commit on 2026-10-10; concurrent appsettings.json edits were preserved and are outside this phase's changes.
 
 ### Phase 06 — CMS Features & SEO Enhancements
 - Owner approved phase closure and commit after reviewing 129 passing tests and the 0-error/0-warning build.
