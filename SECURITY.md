@@ -4,6 +4,12 @@
 
 ASP.NET Core Identity.
 
+Phase 05 implements the Admin role with secure host-only session cookies, lockout,
+CSRF and login rate limiting. Every Admin route has server-side authorization except
+explicit login/access-denied. Live role/active checks revoke stale access immediately.
+No public registration endpoint. See [admin setup](docs/security/ADMIN_SETUP.md).
+CRUD audit and mutation share a transaction; no credentials/request bodies in AuditLogs.
+
 ## Authorization
 
 Server-side authorization for every admin action.

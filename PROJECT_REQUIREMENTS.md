@@ -36,3 +36,9 @@
 - API
 - additional languages
 - advanced analytics
+
+## Visual identity
+
+- Follow docs/design/BRAND_GUIDELINES.md (ADR-017): navy/gold business-card identity.
+- Preserve the existing circular CB/scales/column emblem; use a clean web asset.
+- Maintain accessible text/focus contrast; gold on a light background is decorative only.

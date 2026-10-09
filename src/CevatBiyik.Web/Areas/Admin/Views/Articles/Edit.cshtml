@@ -1,0 +1,13 @@
+@model CreateArticleDto
+@{ ViewData["Title"] = "Makale düzenle"; }
+<h1>Makale düzenle</h1><p>İçerik düz metin olarak yayımlanır. Taslak için yayın kutusunu kapalı bırakın. Başlık değişince mevcut URL korunur.</p>
+<form asp-action="Save" asp-route-id="@ViewData["EntityId"]" method="post" asp-antiforgery="false">
+@Html.AntiForgeryToken()<div asp-validation-summary="All" class="validation-summary-errors" role="alert"></div>
+<div class="mb-3"><label asp-for="Title" class="form-label">Başlık</label><input asp-for="Title" class="form-control" required maxlength="200" /></div>
+<div class="mb-3"><label asp-for="Excerpt" class="form-label">Kısa açıklama</label><textarea asp-for="Excerpt" class="form-control" rows="3"></textarea></div>
+<div class="mb-3"><label asp-for="Content" class="form-label">İçerik</label><textarea asp-for="Content" class="form-control" rows="12" required></textarea></div>
+<div class="mb-3"><label asp-for="PracticeAreaId" class="form-label">Uzmanlık alanı (isteğe bağlı)</label><select asp-for="PracticeAreaId" class="form-select"><option value="">Alan seçilmedi</option>@foreach(var area in ViewData["Areas"] as IReadOnlyList<PracticeAreaDto> ?? Array.Empty<PracticeAreaDto>()) { <option value="@area.Id">@area.Name</option> }</select></div>
+<div class="mb-3"><label asp-for="PublishedAt" class="form-label">Yayın zamanı (UTC)</label><input asp-for="PublishedAt" type="datetime-local" class="form-control" /><p class="form-text">Etkin yayın için zaman zorunludur; gelecekteki zaman içeriği planlar. Türkiye saati için UTC değerine 3 saat eklenir.</p></div>
+<div class="form-check mb-3"><input asp-for="IsActive" class="form-check-input" /><label asp-for="IsActive" class="form-check-label">Yayını etkinleştir</label></div>
+<button class="btn btn-primary" type="submit">Kaydet</button> <a asp-action="Index">Listeye dön</a>
+</form>

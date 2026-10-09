@@ -24,6 +24,38 @@ public sealed class MySqlFactAttribute : FactAttribute
 public class MySqlPersistenceTests
 {
     [MySqlFact]
+    public async Task IdentityStore_PersistsPasswordRoleAndAuditOnMySql()
+    {
+        var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
+        {
+            ["ConnectionStrings:DefaultConnection"] = Environment.GetEnvironmentVariable("CEVATBIYIK_TEST_MYSQL")
+        }).Build();
+        var services = new ServiceCollection().AddLogging().AddInfrastructure(configuration);
+        await using var provider = services.BuildServiceProvider();
+        await using var scope = provider.CreateAsyncScope();
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        Assert.StartsWith("cevatbiyik_test_", db.Database.GetDbConnection().Database, StringComparison.Ordinal);
+        await db.Database.MigrateAsync();
+        await using var transaction = await db.Database.BeginTransactionAsync();
+        var users = scope.ServiceProvider.GetRequiredService<Microsoft.AspNetCore.Identity.UserManager<CevatBiyik.Infrastructure.Identity.ApplicationUser>>();
+        var roles = scope.ServiceProvider.GetRequiredService<Microsoft.AspNetCore.Identity.RoleManager<Microsoft.AspNetCore.Identity.IdentityRole>>();
+        const string role = CevatBiyik.Infrastructure.Identity.AdminAccess.Role;
+        if (!await roles.RoleExistsAsync(role))
+        {
+            Assert.True((await roles.CreateAsync(new Microsoft.AspNetCore.Identity.IdentityRole(role))).Succeeded);
+        }
+        var name = "test_" + Guid.NewGuid().ToString("N");
+        var user = new CevatBiyik.Infrastructure.Identity.ApplicationUser { UserName = name, Email = name + "@example.test" };
+        Assert.True((await users.CreateAsync(user, AdminWebFactory.Password)).Succeeded);
+        Assert.True((await users.AddToRoleAsync(user, role)).Succeeded);
+        Assert.True(await users.CheckPasswordAsync(user, AdminWebFactory.Password));
+        Assert.True(await users.IsInRoleAsync((await users.FindByNameAsync(name))!, role));
+        await scope.ServiceProvider.GetRequiredService<IAuditLogService>().WriteAsync(SecurityEvent.AdminProvisioned, user.Id);
+        Assert.True(await db.AuditLogs.AnyAsync(x => x.ActorId == user.Id && x.Action == "AdminProvisioned"));
+        await transaction.RollbackAsync();
+    }
+
+    [MySqlFact]
     public async Task ApplicationServices_WorkThroughMySqlRepository()
     {
         var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
@@ -45,8 +77,11 @@ public class MySqlPersistenceTests
         var area = await areas.CreateAsync(new CreatePracticeAreaDto { Name = "Test " + suffix, Content = "Test metni", IsActive = true });
         var article = await articles.CreateAsync(new CreateArticleDto
         {
-            Title = "Test " + suffix, Content = "Test metni", PracticeAreaId = area.Id,
-            IsActive = true, PublishedAt = DateTime.UtcNow.AddMinutes(-1)
+            Title = "Test " + suffix,
+            Content = "Test metni",
+            PracticeAreaId = area.Id,
+            IsActive = true,
+            PublishedAt = DateTime.UtcNow.AddMinutes(-1)
         });
         Assert.Contains(await articles.ListPublishedAsync(1, 100), x => x.Id == article.Id);
         await areas.DeleteAsync(area.Id);
@@ -57,7 +92,10 @@ public class MySqlPersistenceTests
         Assert.Null(await articles.GetAsync(article.Id));
         var message = await contacts.CreateAsync(new CreateContactMessageDto
         {
-            Name = "Test", Email = "test@example.com", Message = "Test mesajı", Consent = true
+            Name = "Test",
+            Email = "test@example.com",
+            Message = "Test mesajı",
+            Consent = true
         });
         Assert.True((await contacts.MarkReadAsync(message.Id)).IsRead);
         await contacts.DeleteAsync(message.Id);

@@ -4,6 +4,22 @@ All notable project changes should be recorded here.
 
 ## [Unreleased]
 
+### Phase 05 — Identity, Auth & Admin Panels
+- Added ASP.NET Core Identity/MySQL persistence, Admin role/policy, secure session cookies and protected Admin Area.
+- Added login/logout with CSRF, lockout, IP rate limit, generic errors and local redirects; explicit first-admin CLI provisioning.
+- Added dashboard statistics, articles/practice-area CRUD, message read/unread/deletion and allowlisted contact/SEO settings.
+- Added transactional mutation/audit service, append-only audit events and IdentityAdmin migration plus reviewed SQL.
+- Added real Identity/cookie/CRUD relational integration tests and dashboard/read-toggle unit tests.
+- Renamed the single Phase 05 guide to 05-identity-auth.md; updated ADR-018, setup/security/database/route documentation.
+- Database update and first real administrator provisioning remain local rollout steps; no credentials or live data seeded.
+
+### Business-card visual identity
+- Applied navy/gold CSS tokens, dark header/footer, accessible focus and responsive brand typography.
+- Replaced temporary CB text marks with a local font-free SVG adaptation of the card emblem; added static SVG delivery coverage.
+- Added docs/design/BRAND_GUIDELINES.md from the owner's two card photos: navy/gold palette, logo, typography and measured contrast pairs.
+- Linked project rules, requirements, content intake and public UI guides to ADR-017; updated the brand-assets open question.
+- Documented safe source-image handling; UI adaptation now implemented, no database changes.
+
 ### Phase roadmap correction
 - Removed duplicate phase numbers: completed 00–04 remain; pending scopes now use 05–17.
 - Identity/admin is next (05), followed by CMS (06); no pending scope was removed.

@@ -20,7 +20,7 @@
     "02": "phases/02-domain-database.md",
     "03": "phases/03-application.md",
     "04": "phases/04-public-ui.md",
-    "05": "phases/05-identity-admin-foundation.md",
+    "05": "phases/05-identity-auth.md",
     "06": "phases/06-cms.md",
     "07": "phases/07-media-files.md",
     "08": "phases/08-public-site.md",

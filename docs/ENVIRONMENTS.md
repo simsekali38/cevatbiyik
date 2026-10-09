@@ -86,3 +86,7 @@ dotnet test
 ```
 
 Faz 01 doğrulama (2026-10-09): `dotnet build CevatBiyik.sln -c Release` 0 hata; `dotnet test` 11 unit + 3 integration test başarılı.
+
+## Phase 05 administrator provisioning
+
+AdminBootstrap:UserName/Email/Password are temporary user-secrets (Development) or protected environment variables (Production). They are read only by the explicit --provision-admin CLI. Remove bootstrap values afterward. Authentication cookies always require HTTPS, including Development. Database rollout, bootstrap commands and Data Protection/Plesk gates are in security/ADMIN_SETUP.md.

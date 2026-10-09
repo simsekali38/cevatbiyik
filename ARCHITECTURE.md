@@ -1,5 +1,14 @@
 # Architecture
 
+## Phase 05 Identity and admin boundary
+
+Infrastructure owns ApplicationUser/Identity EF stores in the shared AppDbContext.
+Application defines IAdminAuthenticationService, IAuditLogService, IAdminOperation and
+dashboard services without referencing ASP.NET Identity. Web owns cookie/policy configuration,
+Admin-area authorization convention and Razor controllers/views. Linear references are preserved.
+Core mutations reuse Application services and commit with audit in one DB transaction.
+See ADR-018 and docs/security/ADMIN_SETUP.md; no second app, API or subdomain.
+
 ## Overview
 
 A modular monolithic ASP.NET Core MVC application.

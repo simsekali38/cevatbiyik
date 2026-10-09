@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" /><title>@ViewData["Title"] | Yönetim</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+</head>
+<body>
+    <a class="skip-link" href="#icerik">Ana içeriğe geç</a>
+    <header class="site-header"><div class="container py-3 d-flex flex-wrap align-items-center gap-3">
+        <a class="brand text-decoration-none" href="/admin"><img class="brand-emblem" src="~/images/brand/cevat-biyik-emblem.svg" width="72" height="72" alt="" /><span class="brand-name">Av. Cevat Bıyık<span class="brand-caption">YÖNETİM PANELİ</span></span></a>
+        <a class="admin-public-link ms-auto" href="/">Siteyi görüntüle</a>
+        @if (User.IsInRole("Admin"))
+        {
+            <form asp-area="Admin" asp-controller="Account" asp-action="Logout" method="post" asp-antiforgery="false">@Html.AntiForgeryToken()<button class="btn btn-outline-primary" type="submit">Çıkış yap</button></form>
+        }
+    </div></header>
+    @if (User.IsInRole("Admin"))
+    {
+        <nav class="container py-3 admin-navigation" aria-label="Yönetim menüsü"><a href="/admin">Özet</a><a href="/admin/articles">Makaleler</a><a href="/admin/practice-areas">Uzmanlık alanları</a><a href="/admin/contact-messages">İletişim mesajları</a><a href="/admin/settings">Site ayarları</a></nav>
+    }
+    <main class="container py-4" id="icerik" tabindex="-1">
+        @if (TempData["AdminSuccess"] is string success) { <p class="alert alert-success" role="status">@success</p> }
+        @RenderBody()
+    </main>
+</body>
+</html>
+

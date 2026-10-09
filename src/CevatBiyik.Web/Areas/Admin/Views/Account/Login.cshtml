@@ -1,0 +1,12 @@
+@model LoginModel
+@{ ViewData["Title"] = "Yönetici girişi"; }
+<div class="admin-login"><h1>Yönetici girişi</h1>
+<form asp-action="Login" method="post" asp-antiforgery="false">
+    @Html.AntiForgeryToken()
+    <input asp-for="ReturnUrl" type="hidden" />
+    <div asp-validation-summary="All" class="validation-summary-errors" role="alert"></div>
+    <div class="mb-3"><label asp-for="UserName" class="form-label">Kullanıcı adı</label><input asp-for="UserName" class="form-control" autocomplete="username" required maxlength="256" /></div>
+    <div class="mb-3"><label for="Password" class="form-label">Şifre</label><input id="Password" name="Password" type="password" class="form-control" autocomplete="current-password" required maxlength="256" /></div>
+    <button class="btn btn-primary" type="submit">Giriş yap</button>
+</form></div>
+

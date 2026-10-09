@@ -1,6 +1,7 @@
 # Phase Order
 
-Completed phases: 00–04. Pending phases: 05–17. Numbering is unique; see ADR-016.
+Completed phases: 00–05 (owner-approved closure). Phase 05 database rollout confirmation is not recorded.
+Pending implementation phases: 06–17. Numbering is unique; see ADR-016/018.
 
 | Phase | Guide | Status |
 |---|---|---|
@@ -9,7 +10,7 @@ Completed phases: 00–04. Pending phases: 05–17. Numbering is unique; see ADR
 | 02 | [02-domain-database.md](02-domain-database.md) | Completed |
 | 03 | [03-application.md](03-application.md) | Completed |
 | 04 | [04-public-ui.md](04-public-ui.md) | Completed |
-| 05 | [05-identity-admin-foundation.md](05-identity-admin-foundation.md) | Pending |
+| 05 | [05-identity-auth.md](05-identity-auth.md) | Completed (owner approved) |
 | 06 | [06-cms.md](06-cms.md) | Pending |
 | 07 | [07-media-files.md](07-media-files.md) | Pending |
 | 08 | [08-public-site.md](08-public-site.md) | Pending |
@@ -23,4 +24,4 @@ Completed phases: 00–04. Pending phases: 05–17. Numbering is unique; see ADR
 | 16 | [16-production-audit.md](16-production-audit.md) | Pending |
 | 17 | [17-launch.md](17-launch.md) | Pending |
 
-Phase 08 covers remaining FAQ/legal/location pages and public-site completion. Phase 04 does not close that remaining scope. Identity/admin and CMS are pending in phases 05 and 06.
+Phase 08 covers remaining FAQ/legal/location pages and public-site completion. Phase 04 does not close that remaining scope. Phase 05 delivers Identity/admin and core CRUD; remaining CMS entities/workflows are pending in Phase 06.

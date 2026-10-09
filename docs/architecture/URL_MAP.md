@@ -41,3 +41,7 @@ Admin:
 API future:
 
 /api/v1/
+
+## Admin (Phase 05)
+
+/admin/login GET/POST; /admin/logout POST; /admin/access-denied GET; /admin dashboard. Protected lists: /admin/articles, /admin/practice-areas, /admin/contact-messages, /admin/settings. Editors use create and edit/{id}; writes use save/{id?}, delete/{id} and contact-messages/read/{id}. Admin is noindex/no-store; every write requires antiforgery and Admin role. No /admin/register endpoint.

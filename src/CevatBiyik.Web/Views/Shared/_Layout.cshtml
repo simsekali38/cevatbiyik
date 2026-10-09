@@ -40,8 +40,8 @@
 <body>
     <a class="skip-link" href="#icerik">Ana içeriğe geç</a>
     <header class="site-header"><div class="container">
-        <nav class="navbar navbar-expand-lg py-3" aria-label="Ana menü">
-            <a class="navbar-brand brand" asp-controller="Home" asp-action="Index" aria-label="@site.Name — ana sayfa"><span class="brand-mark" aria-hidden="true">CB<span class="brand-dot">.</span></span><span class="brand-name">@site.Name<span class="brand-caption">HUKUK BÜROSU</span></span></a>
+        <nav class="navbar navbar-expand-lg py-3" data-bs-theme="dark" aria-label="Ana menü">
+            <a class="navbar-brand brand" asp-controller="Home" asp-action="Index" aria-label="@site.Name — ana sayfa"><img class="brand-emblem" src="~/images/brand/cevat-biyik-emblem.svg" asp-append-version="true" width="72" height="72" alt="" /><span class="brand-name">@site.Name<span class="brand-caption">HUKUK &amp; DANIŞMANLIK</span></span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#ana-menu" aria-controls="ana-menu" aria-expanded="false" aria-label="Menüyü aç veya kapat"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="ana-menu"><ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
                 <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="About" aria-current="@(currentAction == "About" ? "page" : null)">Hakkımda</a></li>
@@ -54,7 +54,7 @@
     <main id="icerik" tabindex="-1">@RenderBody()</main>
     <footer class="site-footer"><div class="container">
         <div class="row g-4 footer-top">
-            <div class="col-lg-5"><p class="footer-name">@site.Name</p><p class="footer-description">Makaleler, çalışma alanları ve iletişim.</p></div>
+            <div class="col-lg-5"><div class="footer-brand"><img class="brand-emblem" src="~/images/brand/cevat-biyik-emblem.svg" asp-append-version="true" width="72" height="72" alt="" /><p class="footer-name">@site.Name<span class="brand-caption">HUKUK &amp; DANIŞMANLIK</span></p></div><p class="footer-description">Makaleler, çalışma alanları ve iletişim.</p></div>
             <div class="col-sm-6 col-lg-3"><h2 class="footer-heading">Keşfedin</h2><nav aria-label="Alt menü"><ul class="list-unstyled footer-links"><li><a asp-controller="Home" asp-action="About">Hakkımda</a></li><li><a asp-controller="PracticeAreas" asp-action="Index">Uzmanlık alanları</a></li><li><a asp-controller="Articles" asp-action="Index">Makaleler</a></li></ul></nav></div>
             <div class="col-sm-6 col-lg-4"><h2 class="footer-heading">İletişim</h2><p class="mb-2">@site.Email</p><p class="mb-2">@site.Phone</p><a asp-controller="Home" asp-action="Contact">İletişim formuna git <span aria-hidden="true">↗</span></a></div>
         </div>

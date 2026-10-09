@@ -44,3 +44,9 @@ Use restrained CTAs:
 - WhatsApp'tan Ulaş
 
 Do not use deceptive urgency.
+
+## Marka ve kartvizit kaynakları
+
+Marka yazımı, tipografi ve amblem için docs/design/BRAND_GUIDELINES.md esas alınır.
+Kartvizit, marka/iletişim kaynağıdır; güncel içerik yayını ayrı intake kontrolünden geçer.
+Ön yüzdeki kişisel kimlik numarası hiçbir site içeriğine veya metadata alanına aktarılmaz.

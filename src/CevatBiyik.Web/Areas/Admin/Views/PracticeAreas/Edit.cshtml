@@ -1,0 +1,12 @@
+@model CreatePracticeAreaDto
+@{ ViewData["Title"] = "Uzmanlık alanı düzenle"; }
+<h1>Uzmanlık alanı düzenle</h1><p>Yalnızca doğrulanmış çalışma alanlarını yayımlayın. İçerik düz metindir.</p>
+<form asp-action="Save" asp-route-id="@ViewData["EntityId"]" method="post" asp-antiforgery="false">
+@Html.AntiForgeryToken()<div asp-validation-summary="All" class="validation-summary-errors" role="alert"></div>
+<div class="mb-3"><label asp-for="Name" class="form-label">Ad</label><input asp-for="Name" class="form-control" required maxlength="200" /></div>
+<div class="mb-3"><label asp-for="ShortDescription" class="form-label">Kısa açıklama</label><textarea asp-for="ShortDescription" class="form-control" rows="3"></textarea></div>
+<div class="mb-3"><label asp-for="Content" class="form-label">İçerik</label><textarea asp-for="Content" class="form-control" rows="8" required></textarea></div>
+<div class="mb-3"><label asp-for="SortOrder" class="form-label">Sıralama</label><input asp-for="SortOrder" type="number" min="0" class="form-control" /></div>
+<div class="form-check mb-3"><input asp-for="IsActive" class="form-check-input" /><label asp-for="IsActive" class="form-check-label">Etkin</label></div>
+<button class="btn btn-primary" type="submit">Kaydet</button> <a asp-action="Index">Listeye dön</a>
+</form>

@@ -79,3 +79,7 @@ TTFB
 database query performance
 bundle size
 image weight
+
+## Phase 05 verification
+
+AdminBusinessTests cover dashboard publication/unread counts and idempotent read/unread timestamp behavior. AdminFlowTests exercise real Identity EF stores and cookies against isolated in-memory SQLite: role/inactive/2FA rejection, lockout, rate limit, antiforgery, safe redirects/logout, CRUD validation/publishing/overposting/soft-delete, audit rollback/immutability and bootstrap policy/idempotence. MySqlPersistenceTests also has an opt-in Identity/password/role/audit test against a cevatbiyik_test_ DB. SQLite is test-only and does not replace MySQL provider verification.

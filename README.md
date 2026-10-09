@@ -39,3 +39,7 @@ Bu paket, Av. Cevat Bıyık için geliştirilecek production-ready kişisel huku
 ## Kritik kural
 
 Avukatın gerçek mesleki bilgileri, uzmanlık alanları, baro bilgileri, adresi, telefonları, ödülleri, yorumları veya dava başarıları verilmeden asla uydurulmaz. Eksik alanlar `CONTENT_REQUIRED` olarak bırakılır.
+
+## Görsel kimlik
+
+Kartvizit kaynakları ve lacivert–altın palet: [Görsel Kimlik Rehberi](docs/design/BRAND_GUIDELINES.md). Logo, tipografi ve erişilebilirlik kararları bu belgeye göre uygulanır.

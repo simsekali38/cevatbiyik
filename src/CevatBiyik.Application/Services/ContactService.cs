@@ -25,8 +25,12 @@ public sealed class ContactService(IRepository<ContactMessage> messages, IValida
         await validator.ValidateAndThrowAsync(input, cancellationToken);
         var entity = new ContactMessage
         {
-            Name = input.Name.Trim(), Email = input.Email.Trim(), Phone = input.Phone?.Trim(),
-            Subject = input.Subject?.Trim(), Message = input.Message.Trim(), Consent = input.Consent
+            Name = input.Name.Trim(),
+            Email = input.Email.Trim(),
+            Phone = input.Phone?.Trim(),
+            Subject = input.Subject?.Trim(),
+            Message = input.Message.Trim(),
+            Consent = input.Consent
         };
         messages.Add(entity);
         await messages.SaveAsync(cancellationToken);
@@ -47,6 +51,18 @@ public sealed class ContactService(IRepository<ContactMessage> messages, IValida
     }
 
     public Task DeleteAsync(long id, CancellationToken cancellationToken = default) => ServiceRules.DeleteAsync(messages, id, cancellationToken);
+
+    public async Task<ContactMessageDto> SetReadAsync(long id, bool isRead, CancellationToken cancellationToken = default)
+    {
+        var entity = await ServiceRules.RequireAsync(messages, id, cancellationToken);
+        if (entity.IsRead != isRead)
+        {
+            entity.IsRead = isRead;
+            entity.ProcessedAt = isRead ? timeProvider.GetUtcNow().UtcDateTime : null;
+            await messages.SaveAsync(cancellationToken);
+        }
+        return Map(entity);
+    }
 
     private static ContactMessageDto Map(ContactMessage x) => new(x.Id, x.Name, x.Email, x.Phone, x.Subject,
         x.Message, x.Consent, x.IsRead, ServiceRules.AsUtc(x.CreatedAt), ServiceRules.AsUtc(x.ProcessedAt));

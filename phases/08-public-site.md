@@ -45,3 +45,11 @@ The phase is complete only when its implementation and verification criteria are
 - contact
 - legal pages
 - WCAG baseline
+
+## Visual identity acceptance
+
+- Follow ../docs/design/BRAND_GUIDELINES.md and ADR-017.
+- Apply navy/gold Bootstrap tokens, header/footer and accessible component states.
+- Replace the temporary CB text mark with a clean asset faithful to the supplied card emblem.
+- Keep source photos and personal identity numbers out of public assets/content.
+- Verify logo clarity, mobile layout, keyboard/focus and actual component contrast.

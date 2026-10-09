@@ -30,4 +30,11 @@ dotnet format whitespace CevatBiyik.sln --verify-no-changes --no-restore --inclu
 
 No schema migration is required. PublicWebFactory uses real MVC/Razor/Application with isolated fake repositories.
 Two real MySQL tests separately require CEVATBIYIK_TEST_MYSQL. Full WCAG/Lighthouse, Plesk trusted-proxy/HTTPS,
-approved factual/legal content and original Identity/admin/CMS/Phase 07 SEO remain launch gates.
+approved factual/legal content and Identity/admin/CMS/Phase 09 SEO remain launch gates.
+
+## Subsequent brand reference (2026-10-09)
+
+Use ../docs/design/BRAND_GUIDELINES.md and ADR-017 for the next UI adaptation.
+The completed Phase 04 baseline uses a temporary CB text mark and teal accents;
+these are superseded as design direction by the supplied navy/gold card and its emblem.
+CSS/Razor and local SVG emblem adaptation implemented on 2026-10-09; see the brand guide.

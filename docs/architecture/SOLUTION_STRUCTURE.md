@@ -33,3 +33,7 @@ src/CevatBiyik.Application/
 src/CevatBiyik.Infrastructure/Persistence/
   EfRepository.cs   MySQL implementation of the Application port
 ```
+
+## Phase 05 additions
+
+Domain/Entities/AuditLog; Application auth/audit/transaction/dashboard ports and services; Infrastructure/Identity implementations and IdentityAdmin migration; Web/Areas/Admin controllers/models/Razor views and Security/AdminAreaConvention. Infrastructure references Microsoft.AspNetCore.App and Identity EF; Domain/Application remain framework-independent. Tests add SQLite solely for relational Identity/cookie integration.

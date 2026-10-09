@@ -391,3 +391,7 @@ Bir işi tamamlandı diye raporlama, şu kontroller geçmeden:
 ## Final principle
 
 Understand → Document → Architect → Implement → Test → Audit → Optimize → Deploy.
+
+## Görsel kimlik kaynağı
+
+docs/design/BRAND_GUIDELINES.md ve ADR-017 esas alınır. Kullanıcının sağladığı iki kartvizitteki lacivert–altın kimlik ve dairesel CB/terazi/sütun amblemi korunur. Fotoğraflar public asset olarak kullanılmaz; temiz web logo varlığı ayrı üretilir. Kaynaktaki kişisel kimlik numarası aktarılmaz.

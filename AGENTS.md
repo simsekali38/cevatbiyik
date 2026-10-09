@@ -36,3 +36,10 @@ Never deploy untested migrations, secrets, debug settings, fake content, or unre
 - Inspect relevant skills/acceptance criteria, implement modular code/tests and update CHANGELOG.md and meaningful ADRs/docs.
 - Run build/test and applicable format/migration checks; report commands/results and environment-dependent skips explicitly.
 - Finish the active requested scope; wait for the owner's instruction before starting another phase.
+
+## Visual identity
+
+- For UI/logo work, read docs/design/BRAND_GUIDELINES.md and ADR-017 first.
+- Use the supplied business-card navy/gold identity and existing circular CB/scales/column emblem.
+- Do not publish source card photos or transcribe their personal identity number.
+- Documentation approval does not mean the CSS/logo assets have been implemented.

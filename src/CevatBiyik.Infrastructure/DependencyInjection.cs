@@ -4,6 +4,8 @@ using CevatBiyik.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using CevatBiyik.Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace CevatBiyik.Infrastructure;
 
@@ -20,6 +22,22 @@ public static class DependencyInjection
         ArgumentNullException.ThrowIfNull(configuration);
 
         services.AddApplication();
+        services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+        {
+            options.Password.RequiredLength = 12;
+            options.Password.RequiredUniqueChars = 4;
+            options.Password.RequireDigit = true;
+            options.Password.RequireLowercase = true;
+            options.Password.RequireUppercase = true;
+            options.Password.RequireNonAlphanumeric = true;
+            options.User.RequireUniqueEmail = true;
+            options.Lockout.MaxFailedAccessAttempts = 5;
+            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+            options.Lockout.AllowedForNewUsers = true;
+        }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+        services.AddScoped<IAdminAuthenticationService, AdminAuthenticationService>();
+        services.AddScoped<IAuditLogService, AuditLogService>();
+        services.AddScoped<IAdminOperation, AdminOperation>();
         services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 
         services.AddDbContext<AppDbContext>(options =>
@@ -32,9 +50,7 @@ public static class DependencyInjection
 
             options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 0)));
         });
-        // Faz 03 : Identity
-        // Faz 05 : dosya depolama
-        // Faz 09 : e-posta
+        // Phase 07: file storage; Phase 11: email.
         return services;
     }
 }

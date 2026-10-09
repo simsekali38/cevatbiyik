@@ -113,6 +113,7 @@ public partial class PublicUiTests(PublicWebFactory factory) : IClassFixture<Pub
     [InlineData("/lib/bootstrap/bootstrap.min.css", "text/css")]
     [InlineData("/css/site.css", "text/css")]
     [InlineData("/js/site.js", "text/javascript")]
+    [InlineData("/images/brand/cevat-biyik-emblem.svg", "image/svg+xml")]
     public async Task LocalAssets_AreServed(string path, string contentType)
     {
         using var client = factory.CreateHttpsClient();

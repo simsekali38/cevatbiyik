@@ -49,3 +49,7 @@ Remove-Item Env:CEVATBIYIK_TEST_MYSQL
 
 Seed strategy: no HasData or automatic inserts. Add only approved, non-sensitive system data in future explicit migrations. Legal content, profile facts, contact details and credentials are never fabricated or seeded.
 Fluent API required/max-length mappings constrain storage; application-level validation, HTML sanitization, authorization and consent enforcement belong to later form/CMS phases.
+
+## Phase 05 — IdentityAdmin
+
+Migration 20261009194432_IdentityAdmin adds Identity/AuditLogs without changing content tables or seeding users. SQL is in IDENTITY_ADMIN.sql; database update was not executed by the agent. Run the reviewed setup sequence in ../security/ADMIN_SETUP.md. Never seed an admin password into a migration or run Migrate automatically during production startup.

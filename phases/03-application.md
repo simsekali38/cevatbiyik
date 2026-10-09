@@ -5,7 +5,7 @@
 Closure: owner accepted Phase 03 after zero-error/zero-warning build and 54 passed tests.
 
 User-requested Application phase added after Phase 02 closure. The original
-`05-identity-admin-foundation.md` remains a separate pending scope; this phase does not implement Identity or admin routes.
+`05-identity-auth.md` remains a separate pending scope; this phase does not implement Identity or admin routes.
 
 ## Deliverables
 

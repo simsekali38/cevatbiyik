@@ -1,0 +1,7 @@
+@{ var page = (int?)ViewData["Page"] ?? 1; }
+<nav class="page-links" aria-label="Liste sayfaları">
+    @if (page > 1) { <a asp-action="Index" asp-route-page="@(page - 1)">Önceki sayfa</a> }
+    <span>Sayfa @(page)</span>
+    @if (ViewData["HasNext"] is true) { <a asp-action="Index" asp-route-page="@(page + 1)">Sonraki sayfa</a> }
+</nav>
+

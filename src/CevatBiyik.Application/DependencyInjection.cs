@@ -28,6 +28,7 @@ public static class DependencyInjection
         services.AddScoped<IValidator<CreatePracticeAreaDto>, CreatePracticeAreaValidator>();
         services.AddScoped<IValidator<CreateContactMessageDto>, CreateContactMessageValidator>();
         services.AddScoped<IValidator<UpdateSiteSettingDto>, UpdateSiteSettingValidator>();
+        services.AddScoped<IAdminDashboardService, AdminDashboardService>();
         return services;
     }
 }

@@ -39,7 +39,7 @@
 | 8 | Mesleki biyografi (eğitim, deneyim) | ❓ `CONTENT_REQUIRED` |
 | 9 | Google Business Profile durumu | ❓ |
 | 10 | Sosyal/profesyonel profiller | ❓ |
-| 11 | Logo / marka varlıkları, profil fotoğrafı | ❓ |
+| 11 | Logo / marka varlıkları, profil fotoğrafı | ⚠️ Kartvizit marka referansı sağlandı (ADR-017); temiz web logo varlığı ve profil fotoğrafı bekliyor. |
 | 12 | Nihai KVKK / gizlilik / çerez / yasal bilgilendirme metinleri | ❓ — avukat onayı gerekir |
 | 23 | Çalışma saatleri ve harita konumu | ❓ `CONTENT_REQUIRED` |
 | 24 | Mevcut makale/yayınlar ve doğrulanmış SSS içerikleri | ❓ |

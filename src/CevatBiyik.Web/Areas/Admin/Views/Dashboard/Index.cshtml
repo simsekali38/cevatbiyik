@@ -1,0 +1,19 @@
+@model AdminDashboardDto
+@{ ViewData["Title"] = "Yönetim özeti"; }
+<h1>Yönetim özeti</h1>
+<div class="row g-3 my-3">
+    <div class="col-sm-6 col-lg-3"><div class="content-card"><h2>Makaleler</h2><p>@Model.Articles toplam · @Model.PublishedArticles yayında</p><a href="/admin/articles">Makaleleri yönet</a></div></div>
+    <div class="col-sm-6 col-lg-3"><div class="content-card"><h2>Uzmanlık alanları</h2><p>@Model.PracticeAreas kayıt</p><a href="/admin/practice-areas">Alanları yönet</a></div></div>
+    <div class="col-sm-6 col-lg-3"><div class="content-card"><h2>Okunmamış mesajlar</h2><p>@Model.UnreadMessages mesaj</p><a href="/admin/contact-messages">Mesajları incele</a></div></div>
+    <div class="col-sm-6 col-lg-3"><div class="content-card"><h2>Site ayarları</h2><p>İletişim ve site açıklaması</p><a href="/admin/settings">Ayarları yönet</a></div></div>
+</div>
+<h2>Son yönetim işlemleri</h2>
+<ul>@foreach (var entry in ViewData["RecentAudit"] as IReadOnlyList<AuditLogDto> ?? Array.Empty<AuditLogDto>())
+{ <li><time datetime="@entry.CreatedAt.ToString("O")">@entry.CreatedAt.ToString("yyyy-MM-dd HH:mm") UTC</time> — @(entry.Action switch {
+    "LoginSucceeded" => "Başarılı giriş", "LoginFailed" => "Başarısız giriş", "Logout" => "Çıkış",
+    "AdminProvisioned" => "Yönetici oluşturuldu", "ArticleSaved" => "Makale kaydedildi", "ArticleDeleted" => "Makale silindi",
+    "PracticeAreaSaved" => "Uzmanlık alanı kaydedildi", "PracticeAreaDeleted" => "Uzmanlık alanı silindi",
+    "ContactReadChanged" => "Mesajın okunma durumu değişti", "ContactDeleted" => "Mesaj silindi",
+    "SettingSaved" => "Site ayarı kaydedildi", "SettingDeleted" => "Site ayarı silindi", _ => "Yönetim işlemi"
+})</li> }</ul>
+

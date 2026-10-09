@@ -1,5 +1,45 @@
 # Architecture Decision Records
 
+## ADR-018 — Identity and expanded Phase 05 admin scope
+
+Status: Accepted (owner requested Identity/Auth plus core CRUD, 2026-10-09)
+
+Canonical guide is phases/05-identity-auth.md; renamed the foundation guide instead of
+introducing another Phase 05. Keep .NET 8, MySQL 8, one MVC app/domain and linear layer references.
+Infrastructure owns IdentityDbContext/ApplicationUser and EF Identity 8.0.29; Application
+owns auth/audit/transaction ports and dashboard/read-toggle business logic, with no ASP.NET dependency.
+Add the ASP.NET shared framework to Infrastructure only because Identity's SignInManager is implemented there.
+Role name is Admin. Secure cookie, live role/active validation, lockout, login rate limiting,
+antiforgery, local return URLs and blanket Admin-area authorization are documented in ADMIN_SETUP.md.
+Only login/access-denied allow anonymous access; no registration API or JWT is introduced.
+Provision the first Admin through an explicit CLI transaction reading local secrets, never automatic startup seed.
+
+Core articles/practice areas/contact messages/settings panels reuse Phase 03 services.
+CRUD and append-only audit share one transaction; only action/actor/time are stored, no submitted content.
+Existing active/published-at and soft-delete rules remain; expanded CMS entities/states stay Phase 06.
+Site.Name/Description and allowlisted contact settings are editable; security config stays outside CMS.
+IdentityAdmin migration adds eight tables; generated SQL is reviewed without applying it to cevodb.
+Tests add SQLite solely for isolated real Identity/relational/cookie workflows, not production storage.
+Pin test SQLite native bundle 3.0.3 to remove the default vulnerable dependency; audit remains enabled.
+MySQL provider-specific tests stay opt-in against a cevatbiyik_test_ database.
+
+
+## ADR-017 — Business-card visual identity
+
+Status: Accepted design direction (owner request, 2026-10-09)
+
+Use the owner-supplied 20261008_105655.jpg and 20261008_105703.jpg as visual references.
+docs/design/BRAND_GUIDELINES.md defines the navy/gold web palette, typography,
+contrast pairs and faithful use of the circular CB/scales/column emblem.
+HEX values are a web adaptation of photographed print, not exact print specifications.
+This supersedes ADR-015's temporary CB text treatment and the current teal design direction.
+Use local assets/system fonts; no new dependency, external font, API or schema change.
+Do not publish the source photos or transcribe the personal identity number on the front.
+CSS/Razor adaptation implemented on 2026-10-09 with a local, hand-drawn SVG preserving
+the reference emblem's circle, CB, scales and column. It is a web adaptation, not an exact
+original vector reproduction. The original artwork may replace it at the same asset path.
+Completed phases 00–04 and the next functional phase 05 stay unchanged.
+
 ## ADR-016 — Unique phase numbering
 
 Status: Accepted (owner requested duplicate phase resolution)

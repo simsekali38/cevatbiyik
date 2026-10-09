@@ -26,3 +26,13 @@ Automated MVC tests use isolated repositories; they do not prove live MySQL writ
 Responsive/keyboard checks and contrast-conscious styling are baseline evidence, not complete WCAG 2.2 AA certification.
 Full accessibility/performance audit, actual Plesk/HTTPS/trusted-proxy verification, approved legal notice/profile/contact content,
 Identity/admin/CMS and final SEO publication controls remain future work. No deployment or schema migration occurred in this phase.
+
+## Business-card identity adaptation — 2026-10-09
+
+- Build: 0 errors, 0 warnings. Tests: 55 unit + 38 integration passed; 2 optional MySQL tests skipped.
+- SVG served as image/svg+xml; no fonts, scripts or external resources in the emblem.
+- Browser: homepage loaded through Development settings; three emblem images loaded.
+- 390 px viewport: client/scroll width both 375 (scrollbar included); logo 52 px, Enter toggles menu.
+- 1440 px viewport: client/scroll width both 1425; desktop nav and logo visible.
+- Palette contrast pairs are recorded in docs/design/BRAND_GUIDELINES.md; full WCAG audit remains Phase 14.
+- SVG is a hand-drawn reference adaptation, not the original vector artwork. Source photos are not served publicly.

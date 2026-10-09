@@ -39,3 +39,11 @@ Before production content is created, collect and verify:
 - FAQs
 
 Do not publish unverified claims.
+
+## Supplied business-card reference (2026-10-09)
+
+The owner supplied root files 20261008_105655.jpg and 20261008_105703.jpg.
+Brand reference is available; see ../design/BRAND_GUIDELINES.md. A clean logo web asset remains pending.
+Contact details are source-backed but must be checked for current publication use.
+Do not transcribe the personal identity number or publish the full source photos.
+Biography, bar registration, hours and practice claims remain CONTENT_REQUIRED.

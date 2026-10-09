@@ -35,6 +35,8 @@ Document concrete files, code, tests and configuration produced during this phas
 The phase is complete only when its implementation and verification criteria are satisfied.
 
 ## Specific tasks
+- reuse Phase 05 articles/practice areas/contact/settings panels and protected Admin foundation
+- add the remaining CMS entities/workflows without rebuilding Identity or duplicating core CRUD
 - implement CRUD and publishing state
 - implement profile management
 - practice areas

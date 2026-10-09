@@ -29,7 +29,9 @@ public class PersistenceTests
         Assert.Contains(article.GetIndexes(), i => i.IsUnique && i.Properties.Single().Name == "Slug");
         Assert.Equal(DeleteBehavior.Restrict, article.GetForeignKeys().Single().DeleteBehavior);
         Assert.Equal(250, article.FindProperty(nameof(Article.Title))!.GetMaxLength());
-        Assert.Equal(4, context.Model.GetEntityTypes().Count());
+        Assert.Equal(12, context.Model.GetEntityTypes().Count());
+        Assert.NotNull(context.Model.FindEntityType(typeof(AuditLog)));
+        Assert.NotNull(context.Model.FindEntityType(typeof(CevatBiyik.Infrastructure.Identity.ApplicationUser)));
     }
 
     [Fact]
@@ -52,6 +54,9 @@ public class PersistenceTests
         Assert.Contains("ON DELETE RESTRICT", sql, StringComparison.Ordinal);
         Assert.Contains("utf8mb4", sql, StringComparison.Ordinal);
         Assert.DoesNotContain("INSERT INTO `SiteSettings`", sql, StringComparison.Ordinal);
+        Assert.Contains("CREATE TABLE `AspNetUsers`", sql, StringComparison.Ordinal);
+        Assert.Contains("CREATE TABLE `AuditLogs`", sql, StringComparison.Ordinal);
+        Assert.DoesNotContain("INSERT INTO `AspNetUsers`", sql, StringComparison.Ordinal);
         Assert.False(context.Database.HasPendingModelChanges());
     }
 

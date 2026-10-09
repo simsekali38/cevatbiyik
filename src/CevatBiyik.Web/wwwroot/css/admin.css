@@ -1,0 +1,11 @@
+.admin-login { max-width: 480px; margin: 2rem auto; }
+.admin-navigation { display: flex; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--line); }
+.admin-public-link { color: var(--surface-paper); }
+.admin-public-link:hover { color: var(--brand-gold); }
+.admin-table { overflow-x: auto; }
+.admin-table td { max-width: 420px; overflow-wrap: anywhere; vertical-align: top; }
+.admin-actions { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; }
+.admin-delete { margin-top: 1rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+.admin-delete label { display: inline-block; margin: .5rem; }
+.admin-message { white-space: pre-wrap; }
+

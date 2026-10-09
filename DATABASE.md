@@ -188,3 +188,7 @@ At minimum:
 - media path/stored_name where appropriate
 
 Use foreign keys and cascading behavior intentionally.
+
+## Phase 05 implemented persistence
+
+AppDbContext now derives from IdentityDbContext<ApplicationUser>. IdentityAdmin adds the seven standard AspNet Identity tables and AuditLogs. AuditLog stores Id, UTC CreatedAt, nullable ActorId (255) and Action (64), with a CreatedAt/Id index and no soft-delete. ApplicationUser adds IsActive. No credential seed or content-table alteration. See docs/security/ADMIN_SETUP.md and docs/database/IDENTITY_ADMIN.sql. Migration application to cevodb remains pending.
