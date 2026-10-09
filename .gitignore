@@ -28,9 +28,10 @@ appsettings.Secrets.json
 .env
 .env.*
 
-## Yüklenen dosyalar (Faz 07): içerik repoda değil, hosting/yedekte tutulur
+## Yüklenen dosyalar (Faz 06/07): içerik repoda değil, hosting/yedekte tutulur
 src/CevatBiyik.Web/wwwroot/uploads/*
 !src/CevatBiyik.Web/wwwroot/uploads/.gitkeep
+!src/CevatBiyik.Web/wwwroot/uploads/web.config
 
 ## OS
 Thumbs.db

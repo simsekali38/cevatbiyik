@@ -27,9 +27,9 @@ public class PersistenceTests
         using var context = CreateContext();
         var article = context.Model.FindEntityType(typeof(Article))!;
         Assert.Contains(article.GetIndexes(), i => i.IsUnique && i.Properties.Single().Name == "Slug");
-        Assert.Equal(DeleteBehavior.Restrict, article.GetForeignKeys().Single().DeleteBehavior);
+        Assert.Equal(DeleteBehavior.Restrict, article.GetForeignKeys().Single(x => x.Properties.Any(p => p.Name == "PracticeAreaId")).DeleteBehavior);
         Assert.Equal(250, article.FindProperty(nameof(Article.Title))!.GetMaxLength());
-        Assert.Equal(12, context.Model.GetEntityTypes().Count());
+        Assert.Equal(17, context.Model.GetEntityTypes().Count());
         Assert.NotNull(context.Model.FindEntityType(typeof(AuditLog)));
         Assert.NotNull(context.Model.FindEntityType(typeof(CevatBiyik.Infrastructure.Identity.ApplicationUser)));
     }

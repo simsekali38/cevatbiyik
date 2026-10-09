@@ -1,5 +1,34 @@
 # Architecture Decision Records
 
+## ADR-019 — Revised Phase 06 CMS/media/SEO scope
+
+Status: Accepted (2026-10-09, owner's revised Phase 06 instructions).
+
+Keep .NET 8, MySQL 8, Windows/Plesk, linear project references, Razor, one app/domain and filesystem storage.
+ArticleCategory is separate from PracticeArea; ArticleTag uses composite ArticleTagLink. Add MediaAsset and PageSeo.
+Keep soft-delete/reserved stable slugs; deleted taxonomy labels are hidden in public output, not physically cascaded.
+PageSeo supports five fixed routes; disable/re-enable reusable records instead of deleting and reserving these fixed paths forever.
+Article metadata is stored with the article. Blank fields use existing fallback; content remains encoded plain text.
+
+Use Infrastructure-only SkiaSharp 3.119.1: MIT license, .NET 8 support and Windows native assets.
+Re-encode still JPEG/PNG/WebP to random WebP paths: 5 MiB, 8000 px/axis, 16 MP input limits; 1600 px output longest edge; two concurrent decodes.
+Uploads are public images, never legal/client documents. Soft removal retains files; referenced assets cannot be removed.
+DB mutation/audit are transactional; compensate filesystem writes on DB/audit failure. MySQL/filesystem are not an atomic distributed transaction.
+Process termination can leave orphan files; reconciliation belongs to Phase 07. Scheduled visibility needs no background worker.
+
+ISitemapService projects bounded scalar rows in Infrastructure without loading article bodies or relations.
+Sitemap/robots follow indexing gate and configured HTTPS origin; child sitemaps hold at most 1000 entries.
+Placeholder profile/contact routes are omitted until content completion. Filtered article URLs are noindex and absent from sitemap.
+JSON-LD uses default HTML-safe System.Text.Json encoding in one controlled TagHelper, with a per-response CSP nonce.
+Article/BreadcrumbList represent visible published content; LegalService requires visible non-placeholder contact values and explicit reviewed configuration.
+No fake reviews, qualifications, locations or production content are seeded.
+
+Images/core SEO are brought forward from 07/09 as requested; those phases are not closed.
+Original profile/page-content/FAQ CMS moves to remaining Phase 08 work. The single Phase 06 guide is 06-cms-features.md.
+Migration is generated/SQL-reviewed, not applied by the agent. Dedicated MySQL/Plesk validation remains a rollout gate.
+Sources: [SkiaSharp package/license/dependencies](https://www.nuget.org/packages/SkiaSharp/3.119.1),
+[Microsoft IIS extension allowlist](https://learn.microsoft.com/en-us/iis/configuration/system.webServer/security/requestFiltering/fileExtensions/).
+
 ## ADR-018 — Identity and expanded Phase 05 admin scope
 
 Status: Accepted (owner requested Identity/Auth plus core CRUD, 2026-10-09)

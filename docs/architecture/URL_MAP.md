@@ -1,5 +1,14 @@
 # URL Map
 
+## Phase 06 additions
+
+Public article GET/POST adds topic=ArticleCategoryId, tag=tagSlug, metadataPage=taxonomyChooserPage.
+Older category=PracticeAreaId remains. Filtered URLs are noindex; choices are paged.
+GET /sitemap.xml, /robots.txt; children /sitemaps/pages.xml, /sitemaps/{articles|practice-areas}/{page}.xml.
+Admin /admin/taxonomy/{categories|tags}: edit/{id?}, save/{id?}, delete/{id};
+/admin/media: upload POST, delete/{id} POST; /admin/page-seo: edit/{id?}, save/{id?}, disable/{id} POST.
+Editors accept choicesPage. Every write requires Admin/CSRF; no upload API.
+
 Implemented in Phase 04:
 
 ```text

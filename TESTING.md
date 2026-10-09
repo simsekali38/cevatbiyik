@@ -18,6 +18,11 @@ Details and connection templates are in `docs/database/MIGRATIONS.md`.
 
 ## Integration
 
+Phase 06 adds CmsBusinessTests, CmsFlowTests, ImageStorageTests and a dedicated MySQL CMS test.
+Coverage: taxonomy/SEO/publication, native image validation/resizing, audit rollback/file compensation, XML/JSON-LD.
+Verified: 129 passed, 4 MySQL skipped without CEVATBIYIK_TEST_MYSQL. Optional responsive Razor snapshot review
+uses CEVATBIYIK_CMS_PREVIEW=1; see docs/cms/CMS_SETUP.md.
+
 PublicUiTests/ContactFlowTests exercise real MVC, Razor, Application and validation with isolated PublicWebFactory repositories.
 They cover 200 text/html public routes, detail/404, filter/400, encoded legacy markup, configured canonical host, local assets,
 CSRF/400, validation feedback, PRG/TempData, overposting prevention, rate limit/429 and production notice gates.

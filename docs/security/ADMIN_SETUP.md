@@ -81,8 +81,8 @@ plus the current selected area; searchable larger catalogs belong to the later C
 All deletes require a checked confirmation and keep records through soft-delete.
 Published content follows the existing public safety filters, including hidden practice areas.
 Editor content is plain text with FluentValidation and Razor encoding. No rich HTML editor is added.
-Full per-content SEO metadata, categories/tags, profile/pages/FAQ and expanded publishing
-states remain Phase 06/09 scope. Canonical origin, indexing enablement, SMTP and other
+Phase 06 adds per-article/fixed-page SEO, categories/tags and image media; UTC visibility changes on reads.
+Profile/page-content/FAQ and broader SEO remain Phase 08/09 (ADR-019). Canonical origin, indexing enablement, SMTP and other
 security-sensitive configuration are not editable as public SiteSettings.
 
 ## Audit and hosting

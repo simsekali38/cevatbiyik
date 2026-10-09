@@ -9,24 +9,24 @@
                 @if (Model.Category.HasValue && !Model.Categories.Items.Any(x => x.Id == Model.Category)) { <option value="@Model.Category" selected>Seçili çalışma alanı</option> }
                 @foreach (var category in Model.Categories.Items) { <option value="@category.Id" selected="@(Model.Category == category.Id)">@category.Name</option> }
             </select><input type="hidden" name="categoryPage" value="@Model.CategoryPage" /></div>
-            <div class="col-md-2"><button type="submit" class="btn btn-primary w-100">Ara</button></div>
+            <div class="col-md-4"><label for="topic" class="form-label">Makale kategorisi</label><select id="topic" name="topic" class="form-select"><option value="">Tüm kategoriler</option>@if(Model.Topic.HasValue && Model.Topics.All(x => x.Id != Model.Topic)){<option value="@Model.Topic" selected>Seçili kategori</option>}@foreach(var item in Model.Topics){<option value="@item.Id" selected="@(Model.Topic == item.Id)">@item.Name</option>}</select></div><div class="col-md-4"><label for="tag" class="form-label">Etiket</label><select id="tag" name="tag" class="form-select"><option value="">Tüm etiketler</option>@if(Model.Tag is not null && Model.Labels.All(x => x.Slug != Model.Tag)){<option value="@Model.Tag" selected>Seçili etiket</option>}@foreach(var label in Model.Labels){<option value="@label.Slug" selected="@(Model.Tag == label.Slug)">@label.Name</option>}</select><input type="hidden" name="metadataPage" value="@Model.MetadataPage" /></div><div class="col-md-2"><button type="submit" class="btn btn-primary w-100">Ara</button></div>
         </div>
     </form>
     @if (Model.Categories.HasPrevious || Model.Categories.HasNext)
     {
         <nav class="filter-pages" aria-label="Çalışma alanı seçenekleri">
-            @if (Model.Categories.HasPrevious) { <a asp-action="Index" asp-route-categoryPage="@(Model.CategoryPage - 1)" asp-route-q="@Model.Search" asp-route-category="@Model.Category">Önceki çalışma alanları</a> }
-            @if (Model.Categories.HasNext) { <a asp-action="Index" asp-route-categoryPage="@(Model.CategoryPage + 1)" asp-route-q="@Model.Search" asp-route-category="@Model.Category">Diğer çalışma alanları</a> }
+            @if (Model.Categories.HasPrevious) { <a asp-action="Index" asp-route-categoryPage="@(Model.CategoryPage - 1)" asp-route-q="@Model.Search" asp-route-category="@Model.Category" asp-route-topic="@Model.Topic" asp-route-tag="@Model.Tag" asp-route-metadataPage="@Model.MetadataPage">Önceki çalışma alanları</a> }
+            @if (Model.Categories.HasNext) { <a asp-action="Index" asp-route-categoryPage="@(Model.CategoryPage + 1)" asp-route-q="@Model.Search" asp-route-category="@Model.Category" asp-route-topic="@Model.Topic" asp-route-tag="@Model.Tag" asp-route-metadataPage="@Model.MetadataPage">Diğer çalışma alanları</a> }
         </nav>
     }
-    <p class="result-count">@Model.Result.TotalCount makale</p>
+    <nav class="filter-pages" aria-label="Kategori ve etiket seçenekleri">@if(Model.MetadataPage > 1){<a asp-action="Index" asp-route-metadataPage="@(Model.MetadataPage - 1)" asp-route-q="@Model.Search" asp-route-category="@Model.Category" asp-route-topic="@Model.Topic" asp-route-tag="@Model.Tag">Önceki seçenekler</a>}@if(Model.Topics.Count == 20 || Model.Labels.Count == 20){<a asp-action="Index" asp-route-metadataPage="@(Model.MetadataPage + 1)" asp-route-q="@Model.Search" asp-route-category="@Model.Category" asp-route-topic="@Model.Topic" asp-route-tag="@Model.Tag">Diğer seçenekler</a>}</nav><p class="result-count">@Model.Result.TotalCount makale</p>
     @if (Model.Result.Items.Count == 0) { <div class="empty-state"><h2>Makale bulunamadı</h2><p>Henüz yayımlanmış makale bulunmuyor veya aramanızla eşleşen bir sonuç yok.</p><a asp-action="Index">Filtreleri temizle</a></div> }
     else
     {
         <div class="row g-4">@foreach (var article in Model.Result.Items) { <div class="col-md-6 col-lg-4"><article class="content-card h-100"><p class="eyebrow"><time datetime="@article.PublishedAt?.ToString("yyyy-MM-dd")">@article.PublishedAt?.ToString("dd.MM.yyyy")</time></p><h2><a asp-action="Detail" asp-route-slug="@article.Slug">@article.Title</a></h2><p>@article.Excerpt</p><a class="text-link" asp-action="Detail" asp-route-slug="@article.Slug">Makaleyi oku <span class="visually-hidden">: @article.Title</span><span aria-hidden="true">↗</span></a></article></div> }</div>
     }
     <nav class="page-links" aria-label="Makale sayfaları">
-        @if (Model.Result.HasPrevious) { <a class="btn btn-outline-primary" asp-action="Index" asp-route-page="@(Model.Result.Page - 1)" asp-route-q="@Model.Search" asp-route-category="@Model.Category" asp-route-categoryPage="@Model.CategoryPage">Önceki sayfa</a> }
-        @if (Model.Result.HasNext) { <a class="btn btn-outline-primary" asp-action="Index" asp-route-page="@(Model.Result.Page + 1)" asp-route-q="@Model.Search" asp-route-category="@Model.Category" asp-route-categoryPage="@Model.CategoryPage">Sonraki sayfa</a> }
+        @if (Model.Result.HasPrevious) { <a class="btn btn-outline-primary" asp-action="Index" asp-route-page="@(Model.Result.Page - 1)" asp-route-q="@Model.Search" asp-route-category="@Model.Category" asp-route-categoryPage="@Model.CategoryPage" asp-route-topic="@Model.Topic" asp-route-tag="@Model.Tag" asp-route-metadataPage="@Model.MetadataPage">Önceki sayfa</a> }
+        @if (Model.Result.HasNext) { <a class="btn btn-outline-primary" asp-action="Index" asp-route-page="@(Model.Result.Page + 1)" asp-route-q="@Model.Search" asp-route-category="@Model.Category" asp-route-categoryPage="@Model.CategoryPage" asp-route-topic="@Model.Topic" asp-route-tag="@Model.Tag" asp-route-metadataPage="@Model.MetadataPage">Sonraki sayfa</a> }
     </nav>
 </div></section>

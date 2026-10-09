@@ -10,6 +10,8 @@ public interface IArticleService
     Task<PagedResult<ArticleDto>> SearchPublishedAsync(string? search = null, long? practiceAreaId = null,
         int page = 1, int pageSize = 12, CancellationToken cancellationToken = default);
     Task<ArticleDto?> GetPublishedBySlugAsync(string slug, CancellationToken cancellationToken = default);
+    Task<PagedResult<ArticleDto>> SearchCmsPublishedAsync(string? search, long? practiceAreaId, long? categoryId, string? tag,
+        int page = 1, CancellationToken cancellationToken = default);
     Task<ArticleDto> CreateAsync(CreateArticleDto input, CancellationToken cancellationToken = default);
     Task<ArticleDto> UpdateAsync(long id, UpdateArticleDto input, CancellationToken cancellationToken = default);
     Task DeleteAsync(long id, CancellationToken cancellationToken = default);

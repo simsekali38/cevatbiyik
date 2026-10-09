@@ -1,11 +1,13 @@
 using CevatBiyik.Application;
 using CevatBiyik.Application.Interfaces;
+using CevatBiyik.Infrastructure.Identity;
+using CevatBiyik.Infrastructure.Media;
 using CevatBiyik.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using CevatBiyik.Infrastructure.Identity;
-using Microsoft.AspNetCore.Identity;
 
 namespace CevatBiyik.Infrastructure;
 
@@ -38,6 +40,12 @@ public static class DependencyInjection
         services.AddScoped<IAdminAuthenticationService, AdminAuthenticationService>();
         services.AddScoped<IAuditLogService, AuditLogService>();
         services.AddScoped<IAdminOperation, AdminOperation>();
+        services.AddScoped<ISitemapService, SitemapService>();
+        services.AddSingleton<IImageStorage>(provider =>
+        {
+            var environment = provider.GetRequiredService<IWebHostEnvironment>();
+            return new FileImageStorage(Path.Combine(environment.WebRootPath ?? Path.Combine(environment.ContentRootPath, "wwwroot"), "uploads"));
+        });
         services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 
         services.AddDbContext<AppDbContext>(options =>
@@ -50,7 +58,7 @@ public static class DependencyInjection
 
             options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 0)));
         });
-        // Phase 07: file storage; Phase 11: email.
+        // Phase 07 extends image storage with retention/documents; Phase 11 adds email.
         return services;
     }
 }

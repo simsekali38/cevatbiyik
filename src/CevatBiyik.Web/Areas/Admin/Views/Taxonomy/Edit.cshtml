@@ -1,0 +1,8 @@
+@model TaxonomyInput
+@{ ViewData["Title"] = "Kategori / etiket düzenle"; }
+<h1>@ViewData["Title"]</h1><p>Adı değiştirmeniz mevcut URL'yi değiştirmez.</p>
+<form asp-action="Save" asp-route-kind="@ViewData["Kind"]" asp-route-id="@ViewData["EntityId"]" method="post" asp-antiforgery="false">
+@Html.AntiForgeryToken()<div asp-validation-summary="All" class="validation-summary-errors" role="alert"></div>
+<label asp-for="Name" class="form-label">Ad</label><input asp-for="Name" class="form-control mb-3" maxlength="150" required />
+<div class="form-check mb-3"><input asp-for="IsActive" class="form-check-input" /><label asp-for="IsActive">Etkin</label></div>
+<button class="btn btn-primary" type="submit">Kaydet</button> <a asp-action="Index" asp-route-kind="@ViewData["Kind"]">Listeye dön</a></form>

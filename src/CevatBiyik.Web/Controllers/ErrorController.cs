@@ -12,8 +12,14 @@ public sealed class ErrorController : Controller
     // Status-code re-execution preserves the original verb, including contact POST failures.
     [Route("{statusCode:int?}")]
     [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
-    public IActionResult Index(int? statusCode)
+    public IActionResult Index([FromRoute] int? statusCode)
     {
+        // Malformed multipart forms can fail the value-provider factory before parameter binding.
+        // The re-execution route remains trusted even when the nullable action parameter is unset.
+        if (statusCode is null && int.TryParse(RouteData.Values["statusCode"]?.ToString(), out var routeStatus))
+        {
+            statusCode = routeStatus;
+        }
         int code = statusCode is >= 400 and <= 599
             ? statusCode.Value
             : (statusCode is null ? StatusCodes.Status500InternalServerError : StatusCodes.Status404NotFound);

@@ -10,6 +10,7 @@ namespace CevatBiyik.Web.Areas.Admin.Controllers;
 [Area("Admin"), Authorize(Roles = "Admin", Policy = "AdminOnly"), AutoValidateAntiforgeryToken, RequestSizeLimit(262144)]
 public abstract class AdminControllerBase(IAdminOperation operations) : Controller
 {
+    protected IAdminOperation Operations => operations;
     protected async Task<IActionResult> SaveAsync(object input, Func<Task> mutation, SecurityEvent securityEvent,
         CancellationToken cancellationToken)
     {
@@ -26,6 +27,10 @@ public abstract class AdminControllerBase(IAdminOperation operations) : Controll
         }
         catch (ValidationException exception)
         {
+            if (!exception.Errors.Any())
+            {
+                ModelState.AddModelError(string.Empty, exception.Message);
+            }
             foreach (var error in exception.Errors)
             {
                 ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
@@ -45,5 +50,10 @@ public abstract class AdminControllerBase(IAdminOperation operations) : Controll
             return RedirectToAction("Index");
         }
         catch (NotFoundException) { return NotFound(); }
+        catch (ConflictException)
+        {
+            TempData["AdminError"] = "Bu kayıt içerikte kullanılıyor. Önce bağlı içerikleri düzenleyin.";
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -10,6 +10,10 @@ Phase 02 implements only Article, PracticeArea, ContactMessage and SiteSetting p
 The sections below are the broader roadmap, not the implemented schema. ContactMessage is the implemented name for planned ContactSubmission.
 Current details: `docs/database/ERD.md`, ADR-013 and `docs/database/MIGRATIONS.md`.
 
+Phase 05 adds Identity/AuditLogs. Phase 06 adds ArticleCategories, ArticleTags, ArticleTagLinks,
+MediaAssets, PageSeo and nullable article taxonomy/media/SEO fields (ADR-019, CmsFeatures).
+Profile, arbitrary page content, FAQ, redirects and locations remain roadmap.
+
 ### Profile
 
 id

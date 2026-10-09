@@ -3,7 +3,7 @@
 ## Scope
 
 Owner-requested successor to accepted Phase 03 Application. Phase 00 and ADR-008/012/013/014 remain in force.
-Uses original 08-public-site.md's frontend/security/SEO/accessibility rules. Identity/admin, 06-cms.md and remaining FAQ/legal/location pages stay pending.
+Uses original 08-public-site.md's frontend/security/SEO/accessibility rules. Identity/admin, 06-cms-features.md and remaining FAQ/legal/location pages stay pending.
 
 ## Acceptance criteria
 

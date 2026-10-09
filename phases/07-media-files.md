@@ -35,6 +35,8 @@ Document concrete files, code, tests and configuration produced during this phas
 The phase is complete only when its implementation and verification criteria are satisfied.
 
 ## Specific tasks
+- Reuse Phase 06 MediaAsset/IMediaService/FileImageStorage/UI; do not rebuild the image pipeline (ADR-019).
+- Complete retention/recovery/orphan reconciliation, backup/restore and Plesk ACL/native-assets/body-limit checks.
 - implement secure filesystem storage
 - validate file content/type/size
 - sanitize filenames

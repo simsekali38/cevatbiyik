@@ -35,6 +35,8 @@ Document concrete files, code, tests and configuration produced during this phas
 The phase is complete only when its implementation and verification criteria are satisfied.
 
 ## Specific tasks
+- Remaining profile/page-content/FAQ CMS is deferred here from original Phase 06 (ADR-019).
+- Reuse Identity/admin, article/taxonomy/media and SEO modules; no duplicate foundation.
 - create Bootstrap design system
 - build responsive Razor layouts
 - navigation/footer

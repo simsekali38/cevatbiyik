@@ -1,5 +1,13 @@
 # Security Baseline
 
+## Phase 06 uploads and JSON-LD
+
+Public uploads accept decoded/re-encoded JPEG/PNG/WebP, byte/pixel limits, random paths and validated alt text.
+SVG/documents/executables are rejected. App middleware permits generated WebP paths; IIS adds extension/verb allowlists.
+Taxonomy/media/SEO require Admin/CSRF/audit; failed saves/audits compensate filesystem writes.
+JSON-LD uses default HTML-safe encoding and CSP nonce in a controlled TagHelper, never raw CMS HTML.
+Hosting ACL/native-assets/request-filtering/body-limit checks remain mandatory: docs/cms/CMS_SETUP.md.
+
 ## Authentication
 
 ASP.NET Core Identity.

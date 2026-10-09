@@ -1,10 +1,10 @@
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using CevatBiyik.Application.DTOs;
 using CevatBiyik.Application.Interfaces;
 using CevatBiyik.Application.Services;
 using CevatBiyik.Application.Validation;
 using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace CevatBiyik.Application;
 
@@ -29,6 +29,9 @@ public static class DependencyInjection
         services.AddScoped<IValidator<CreateContactMessageDto>, CreateContactMessageValidator>();
         services.AddScoped<IValidator<UpdateSiteSettingDto>, UpdateSiteSettingValidator>();
         services.AddScoped<IAdminDashboardService, AdminDashboardService>();
+        services.AddScoped<ITaxonomyService, TaxonomyService>();
+        services.AddScoped<IMediaService, MediaService>();
+        services.AddScoped<IPageSeoService, PageSeoService>();
         return services;
     }
 }

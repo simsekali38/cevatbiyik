@@ -1,10 +1,10 @@
-using CevatBiyik.Domain.Entities;
-using CevatBiyik.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
 using CevatBiyik.Application.DTOs;
 using CevatBiyik.Application.Exceptions;
 using CevatBiyik.Application.Interfaces;
+using CevatBiyik.Domain.Entities;
 using CevatBiyik.Infrastructure;
+using CevatBiyik.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,6 +23,29 @@ public sealed class MySqlFactAttribute : FactAttribute
 
 public class MySqlPersistenceTests
 {
+    [MySqlFact]
+    public async Task CmsTaxonomySeoAndSitemap_WorkOnMySql8()
+    {
+        var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
+        { ["ConnectionStrings:DefaultConnection"] = Environment.GetEnvironmentVariable("CEVATBIYIK_TEST_MYSQL") }).Build();
+        await using var provider = new ServiceCollection().AddInfrastructure(configuration).BuildServiceProvider();
+        await using var scope = provider.CreateAsyncScope();
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        Assert.StartsWith("cevatbiyik_test_", db.Database.GetDbConnection().Database, StringComparison.Ordinal);
+        await db.Database.MigrateAsync(); await using var transaction = await db.Database.BeginTransactionAsync();
+        var taxonomy = scope.ServiceProvider.GetRequiredService<ITaxonomyService>();
+        var name = "Test " + Guid.NewGuid().ToString("N");
+        var category = await taxonomy.SaveAsync(false, null, new TaxonomyInput { Name = name, IsActive = true });
+        var tag = await taxonomy.SaveAsync(true, null, new TaxonomyInput { Name = name, IsActive = true });
+        var articles = scope.ServiceProvider.GetRequiredService<IArticleService>();
+        var article = await articles.CreateAsync(new CreateArticleDto { Title = name, Content = "Test", CategoryId = category.Id, TagIds = [tag.Id], IsActive = true, PublishedAt = DateTime.UtcNow.AddDays(-1), Seo = new SeoInput { MetaTitle = "Test SEO" } });
+        Assert.Single((await articles.SearchCmsPublishedAsync(null, null, category.Id, tag.Slug)).Items);
+        Assert.Equal("Test SEO", (await articles.GetPublishedBySlugAsync(article.Slug))!.Seo.MetaTitle);
+        Assert.Contains(await scope.ServiceProvider.GetRequiredService<ISitemapService>().ListAsync(true, 1), x => x.Path.EndsWith(article.Slug, StringComparison.Ordinal));
+        await taxonomy.DeleteAsync(true, tag.Id);
+        Assert.Empty((await articles.SearchCmsPublishedAsync(null, null, category.Id, tag.Slug)).Items);
+        await transaction.RollbackAsync();
+    }
     [MySqlFact]
     public async Task IdentityStore_PersistsPasswordRoleAndAuditOnMySql()
     {

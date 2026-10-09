@@ -319,6 +319,7 @@ public class ApplicationServiceTests
     {
         var services = new ServiceCollection();
         services.AddSingleton(typeof(IRepository<>), typeof(FakeRepository<>));
+        services.AddSingleton<IImageStorage, TestImageStorage>();
         services.AddApplication();
         using var provider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
         using var scope = provider.CreateScope();

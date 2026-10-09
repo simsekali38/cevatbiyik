@@ -73,9 +73,11 @@ Yerel MySQL kurulu değil; hosting'deki uzak MySQL kullanılacak. Dikkat edilece
 ## 6. Dosya yüklemeleri
 
 - Yol: `src/CevatBiyik.Web/wwwroot/uploads/` (ADR-004).
-- İçerik repoya girmez; yalnızca `.gitkeep` takip edilir.
+- İçerik repoya girmez; `.gitkeep` ve güvenlik için `uploads/web.config` takip edilir.
 - Production'da uygulama havuzu kimliğinin bu klasöre **yazma** izni olmalı, başka yerlere olmamalı (Faz 07 ve 13).
-- `wwwroot` altındaki dosyalar herkese açık servis edilir; gizli belgeler burada tutulmamalıdır (Faz 07'te karar verilecek).
+- Faz 06 yalnızca doğrulanıp yeniden kodlanan public WebP görsellerini kabul eder; gizli belgeler burada tutulmaz.
+- Plesk ACL/native bağımlılık/upload konfigürasyonu: `cms/CMS_SETUP.md`.
+- `Site:LegalServiceSchemaEnabled` varsayılan false; doğrulanmış görünür iletişim bilgileri sonrası açılır.
 
 ## 7. Doğrulama komutları (yerel)
 

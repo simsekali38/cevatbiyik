@@ -1,5 +1,14 @@
 # Architecture
 
+## Phase 06 CMS and SEO boundary
+
+Domain owns taxonomy/join/media/page-SEO entities. Application owns CMS DTOs/validators/use cases and
+IImageStorage/ISitemapService ports. Infrastructure supplies EF, bounded scalar sitemap projections and
+SkiaSharp filesystem re-encoding. Web owns protected Razor modules, metadata/XML/robots and HTML-safe JSON-LD.
+No new project references, API or background publication worker. DB/audit share a transaction;
+filesystem writes are compensated, not distributed-transaction atomic. See ADR-019 and docs/cms/CMS_SETUP.md.
+Generic reads remain bounded; dedicated scalar sitemap batches are capped at 1000.
+
 ## Phase 05 Identity and admin boundary
 
 Infrastructure owns ApplicationUser/Identity EF stores in the shared AppDbContext.

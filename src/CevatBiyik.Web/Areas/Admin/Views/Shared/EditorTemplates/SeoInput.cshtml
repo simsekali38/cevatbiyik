@@ -1,0 +1,9 @@
+@model SeoInput
+<fieldset><legend>SEO ve sosyal paylaşım</legend>
+<div class="mb-3"><label asp-for="MetaTitle" class="form-label">Meta başlık</label><input asp-for="MetaTitle" class="form-control" maxlength="120" /></div>
+<div class="mb-3"><label asp-for="MetaDescription" class="form-label">Meta açıklama</label><textarea asp-for="MetaDescription" class="form-control" maxlength="320" rows="3"></textarea></div>
+<div class="mb-3"><label asp-for="Keywords" class="form-label">Anahtar kelimeler</label><input asp-for="Keywords" class="form-control" maxlength="300" /></div>
+<div class="mb-3"><label asp-for="OpenGraphTitle" class="form-label">Paylaşım başlığı</label><input asp-for="OpenGraphTitle" class="form-control" maxlength="120" /></div>
+<div class="mb-3"><label asp-for="OpenGraphDescription" class="form-label">Paylaşım açıklaması</label><textarea asp-for="OpenGraphDescription" class="form-control" maxlength="320" rows="3"></textarea></div>
+<div class="mb-3"><label asp-for="OpenGraphMediaId" class="form-label">Paylaşım görseli</label><select asp-for="OpenGraphMediaId" class="form-select"><option value="">Varsayılan</option>@if(Model.OpenGraphMediaId.HasValue && (ViewData["Media"] as IReadOnlyList<MediaDto> ?? Array.Empty<MediaDto>()).All(x => x.Id != Model.OpenGraphMediaId)){<option value="@Model.OpenGraphMediaId">Mevcut görsel</option>}@foreach(var image in ViewData["Media"] as IReadOnlyList<MediaDto> ?? Array.Empty<MediaDto>()){<option value="@image.Id">@image.AltText</option>}</select></div>
+</fieldset>

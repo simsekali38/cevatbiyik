@@ -9,4 +9,16 @@ public sealed class Article : BaseEntity
     public DateTime? PublishedAt { get; set; }
     public long? PracticeAreaId { get; set; }
     public PracticeArea? PracticeArea { get; set; }
+    public long? CategoryId { get; set; }
+    public ArticleCategory? Category { get; set; }
+    public List<ArticleTagLink> TagLinks { get; set; } = [];
+    public long? CoverMediaId { get; set; }
+    public MediaAsset? CoverMedia { get; set; }
+    public string? MetaTitle { get; set; }
+    public string? MetaDescription { get; set; }
+    public string? Keywords { get; set; }
+    public string? OpenGraphTitle { get; set; }
+    public string? OpenGraphDescription { get; set; }
+    public long? OpenGraphMediaId { get; set; }
+    public MediaAsset? OpenGraphMedia { get; set; }
 }

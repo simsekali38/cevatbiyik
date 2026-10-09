@@ -53,3 +53,11 @@ Fluent API required/max-length mappings constrain storage; application-level val
 ## Phase 05 — IdentityAdmin
 
 Migration 20261009194432_IdentityAdmin adds Identity/AuditLogs without changing content tables or seeding users. SQL is in IDENTITY_ADMIN.sql; database update was not executed by the agent. Run the reviewed setup sequence in ../security/ADMIN_SETUP.md. Never seed an admin password into a migration or run Migrate automatically during production startup.
+
+## Phase 06 — CmsFeatures
+
+20261009202119_CmsFeatures adds five CMS tables, eight nullable article fields, nine indexes and six FKs.
+Reviewed SQL: CMS_FEATURES.sql. No content/admin seed or existing-data drop. Down loses CMS data.
+MySQL DDL is not fully atomic despite the transaction wrapper. Generation used EF 8.0.29 in artifacts/ef8,
+preserving existing EF 10 manifest edits. Compatible commands/MySQL test instructions: ../cms/CMS_SETUP.md.
+No database update was executed here.

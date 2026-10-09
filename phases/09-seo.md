@@ -35,6 +35,8 @@ Document concrete files, code, tests and configuration produced during this phas
 The phase is complete only when its implementation and verification criteria are satisfied.
 
 ## Specific tasks
+- Reuse Phase 06 metadata, safe JSON-LD, sitemap and robots (ADR-019).
+- Complete redirects, broader schema checks, approved sitemap coverage and production indexing review.
 - create reusable SEO model/service
 - render metadata
 - canonical

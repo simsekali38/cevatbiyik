@@ -1,7 +1,7 @@
-using Microsoft.AspNetCore.Mvc;
 using CevatBiyik.Application.DTOs;
 using CevatBiyik.Application.Interfaces;
 using CevatBiyik.Web.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CevatBiyik.Web.Controllers;
 

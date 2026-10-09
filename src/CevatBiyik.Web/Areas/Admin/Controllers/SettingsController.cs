@@ -1,7 +1,7 @@
 using CevatBiyik.Application.DTOs;
 using CevatBiyik.Application.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using CevatBiyik.Application.Validation;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CevatBiyik.Web.Areas.Admin.Controllers;
 
@@ -67,4 +67,3 @@ public sealed class SettingsController(ISettingService settings, IAdminOperation
         return item is not null && PublicSettingKeys.All.Contains(item.Key);
     }
 }
-

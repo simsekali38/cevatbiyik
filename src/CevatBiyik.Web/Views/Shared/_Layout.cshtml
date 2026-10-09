@@ -3,6 +3,7 @@
     var site = ViewData["SiteSettings"] as PublicSiteSettings ?? PublicSiteSettings.Empty;
     var title = ViewData["Title"]?.ToString() ?? site.Name;
     var description = ViewData["MetaDescription"]?.ToString() ?? site.Description;
+    var fullTitle = ViewData["SeoTitle"]?.ToString() ?? title + " | " + site.Name;
     var robots = ViewData["Robots"]?.ToString() ?? (Configuration.GetValue<bool>("Site:AllowIndexing") ? "index, follow" : "noindex, nofollow");
     var origin = Configuration["Site:BaseUrl"] ?? "https://cevatbiyik.av.tr";
     if (!Uri.TryCreate(origin, UriKind.Absolute, out var baseUri) || baseUri.Scheme != "https" || !string.IsNullOrEmpty(baseUri.UserInfo))
@@ -20,15 +21,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="@robots" />
-    <title>@title | @site.Name</title>
+    <title>@fullTitle</title>
     <meta name="description" content="@description" />
     @if (canonical is not null)
     {
         <link rel="canonical" href="@canonical" />
         <meta property="og:url" content="@canonical" />
     }
-    <meta property="og:title" content="@title | @site.Name" />
-    <meta property="og:description" content="@description" />
+    <meta property="og:title" content="@(ViewData["OpenGraphTitle"] ?? fullTitle)" />
+    <meta property="og:description" content="@(ViewData["OpenGraphDescription"] ?? description)" />
+    @if(ViewData["Keywords"] is string keywords){<meta name="keywords" content="@keywords" />}
+    @if(ViewData["OpenGraphImage"] is string image){<meta property="og:image" content="@(baseUri.GetLeftPart(UriPartial.Authority) + image)" />}
+    <structured-data model="@ViewData["StructuredData"]" nonce="@Context.Items["CspNonce"]"></structured-data>
     <meta property="og:type" content="@(ViewData["OpenGraphType"] ?? "website")" />
     <meta property="og:site_name" content="@site.Name" />
     <meta property="og:locale" content="tr_TR" />

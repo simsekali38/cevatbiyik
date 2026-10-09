@@ -12,6 +12,11 @@ public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : Ident
     public DbSet<ContactMessage> ContactMessages => Set<ContactMessage>();
     public DbSet<SiteSetting> SiteSettings => Set<SiteSetting>();
     public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
+    public DbSet<ArticleCategory> ArticleCategories => Set<ArticleCategory>();
+    public DbSet<ArticleTag> ArticleTags => Set<ArticleTag>();
+    public DbSet<ArticleTagLink> ArticleTagLinks => Set<ArticleTagLink>();
+    public DbSet<MediaAsset> MediaAssets => Set<MediaAsset>();
+    public DbSet<PageSeo> PageSeo => Set<PageSeo>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

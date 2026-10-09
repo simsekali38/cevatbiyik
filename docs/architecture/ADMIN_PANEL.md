@@ -1,5 +1,9 @@
 # Admin Panel Blueprint
 
+Phase 06 adds /admin/taxonomy/categories, /admin/taxonomy/tags, /admin/media and /admin/page-seo.
+Article editors include taxonomy/cover/SEO. Every write inherits Admin policy/CSRF and transactional audit.
+Workflows and rollout: ../cms/CMS_SETUP.md. Profile/page-content/FAQ remain Phase 08 work.
+
 ## Implemented in Phase 05
 
 - /admin/login (GET/POST), /admin/logout (POST), /admin/access-denied

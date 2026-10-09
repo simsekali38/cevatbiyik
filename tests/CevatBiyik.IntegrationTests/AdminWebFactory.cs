@@ -1,4 +1,6 @@
+using CevatBiyik.Application.Interfaces;
 using CevatBiyik.Infrastructure.Identity;
+using CevatBiyik.Infrastructure.Media;
 using CevatBiyik.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -16,6 +18,10 @@ public sealed class AdminWebFactory : WebApplicationFactory<Program>
 {
     private readonly SqliteConnection connection = new("Data Source=:memory:");
     public const string Password = "Test-Only_Strong9!";
+    public string UploadRoot { get; } = Path.Combine(Path.GetTempPath(), "cevat-cms-tests-" + Guid.NewGuid().ToString("N"));
+    public bool AllowIndexing { get; init; }
+    public bool LegalServiceSchemaEnabled { get; init; }
+    public bool FailMediaAudit { get; init; }
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
@@ -23,13 +29,22 @@ public sealed class AdminWebFactory : WebApplicationFactory<Program>
         builder.UseEnvironment("Testing");
         builder.ConfigureAppConfiguration((_, configuration) => configuration.AddInMemoryCollection(new Dictionary<string, string?>
         {
-            ["ConnectionStrings:DefaultConnection"] = "Server=127.0.0.1;Database=unused;User ID=unused;"
+            ["ConnectionStrings:DefaultConnection"] = "Server=127.0.0.1;Database=unused;User ID=unused;",
+            ["Site:AllowIndexing"] = AllowIndexing ? "true" : "false",
+            ["Site:LegalServiceSchemaEnabled"] = LegalServiceSchemaEnabled ? "true" : "false"
         }));
         builder.ConfigureServices(services =>
         {
             services.RemoveAll<DbContextOptions<AppDbContext>>();
             services.RemoveAll<AppDbContext>();
             services.AddDbContext<AppDbContext>(options => options.UseSqlite(connection));
+            services.RemoveAll<IImageStorage>();
+            services.AddSingleton<IImageStorage>(_ => new FileImageStorage(UploadRoot));
+            if (FailMediaAudit)
+            {
+                services.RemoveAll<IAuditLogService>();
+                services.AddScoped<IAuditLogService, FailingMediaAudit>();
+            }
         });
     }
 
@@ -68,6 +83,24 @@ public sealed class AdminWebFactory : WebApplicationFactory<Program>
         if (disposing)
         {
             connection.Dispose();
+            if (Directory.Exists(UploadRoot))
+            {
+                foreach (var file in Directory.GetFiles(Path.Combine(UploadRoot, "images")))
+                {
+                    File.Delete(file);
+                }
+
+                Directory.Delete(Path.Combine(UploadRoot, "images"));
+                Directory.Delete(UploadRoot);
+            }
         }
     }
+}
+
+internal sealed class FailingMediaAudit(AppDbContext db) : IAuditLogService
+{
+    public Task WriteAsync(SecurityEvent securityEvent, string? actorId, CancellationToken cancellationToken = default) =>
+        securityEvent == SecurityEvent.MediaUploaded ? throw new InvalidOperationException("Test-only audit failure.")
+        : new AuditLogService(db).WriteAsync(securityEvent, actorId, cancellationToken);
+    public Task<IReadOnlyList<AuditLogDto>> RecentAsync(CancellationToken cancellationToken = default) => new AuditLogService(db).RecentAsync(cancellationToken);
 }

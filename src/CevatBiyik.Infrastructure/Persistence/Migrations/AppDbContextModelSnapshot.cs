@@ -32,9 +32,15 @@ namespace CevatBiyik.Infrastructure.Persistence.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<long?>("CategoryId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<long?>("CoverMediaId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
@@ -52,6 +58,29 @@ namespace CevatBiyik.Infrastructure.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(1)")
                         .HasDefaultValue(false);
+
+                    b.Property<string>("Keywords")
+                        .HasMaxLength(300)
+                        .HasColumnType("varchar(300)");
+
+                    b.Property<string>("MetaDescription")
+                        .HasMaxLength(320)
+                        .HasColumnType("varchar(320)");
+
+                    b.Property<string>("MetaTitle")
+                        .HasMaxLength(120)
+                        .HasColumnType("varchar(120)");
+
+                    b.Property<string>("OpenGraphDescription")
+                        .HasMaxLength(320)
+                        .HasColumnType("varchar(320)");
+
+                    b.Property<long?>("OpenGraphMediaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("OpenGraphTitle")
+                        .HasMaxLength(120)
+                        .HasColumnType("varchar(120)");
 
                     b.Property<long?>("PracticeAreaId")
                         .HasColumnType("bigint");
@@ -74,6 +103,12 @@ namespace CevatBiyik.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("CoverMediaId");
+
+                    b.HasIndex("OpenGraphMediaId");
+
                     b.HasIndex("PracticeAreaId");
 
                     b.HasIndex("Slug")
@@ -82,6 +117,105 @@ namespace CevatBiyik.Infrastructure.Persistence.Migrations
                     b.HasIndex("IsDeleted", "IsActive", "PublishedAt");
 
                     b.ToTable("Articles", (string)null);
+                });
+
+            modelBuilder.Entity("CevatBiyik.Domain.Entities.ArticleCategory", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Slug")
+                        .IsUnique();
+
+                    b.ToTable("ArticleCategories", (string)null);
+                });
+
+            modelBuilder.Entity("CevatBiyik.Domain.Entities.ArticleTag", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Slug")
+                        .IsUnique();
+
+                    b.ToTable("ArticleTags", (string)null);
+                });
+
+            modelBuilder.Entity("CevatBiyik.Domain.Entities.ArticleTagLink", b =>
+                {
+                    b.Property<long>("ArticleId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("TagId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("ArticleId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("ArticleTagLinks", (string)null);
                 });
 
             modelBuilder.Entity("CevatBiyik.Domain.Entities.AuditLog", b =>
@@ -172,6 +306,124 @@ namespace CevatBiyik.Infrastructure.Persistence.Migrations
                     b.HasIndex("IsDeleted", "IsRead", "CreatedAt");
 
                     b.ToTable("ContactMessages", (string)null);
+                });
+
+            modelBuilder.Entity("CevatBiyik.Domain.Entities.MediaAsset", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("AltText")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<long>("Bytes")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("varchar(32)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("Height")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("StoragePath")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("Width")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StoragePath")
+                        .IsUnique();
+
+                    b.ToTable("MediaAssets", (string)null);
+                });
+
+            modelBuilder.Entity("CevatBiyik.Domain.Entities.PageSeo", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("Keywords")
+                        .HasMaxLength(300)
+                        .HasColumnType("varchar(300)");
+
+                    b.Property<string>("MetaDescription")
+                        .HasMaxLength(320)
+                        .HasColumnType("varchar(320)");
+
+                    b.Property<string>("MetaTitle")
+                        .HasMaxLength(120)
+                        .HasColumnType("varchar(120)");
+
+                    b.Property<string>("OpenGraphDescription")
+                        .HasMaxLength(320)
+                        .HasColumnType("varchar(320)");
+
+                    b.Property<long?>("OpenGraphMediaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("OpenGraphTitle")
+                        .HasMaxLength(120)
+                        .HasColumnType("varchar(120)");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OpenGraphMediaId");
+
+                    b.HasIndex("Path")
+                        .IsUnique();
+
+                    b.ToTable("PageSeo", (string)null);
                 });
 
             modelBuilder.Entity("CevatBiyik.Domain.Entities.PracticeArea", b =>
@@ -474,12 +726,62 @@ namespace CevatBiyik.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("CevatBiyik.Domain.Entities.Article", b =>
                 {
+                    b.HasOne("CevatBiyik.Domain.Entities.ArticleCategory", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("CevatBiyik.Domain.Entities.MediaAsset", "CoverMedia")
+                        .WithMany()
+                        .HasForeignKey("CoverMediaId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("CevatBiyik.Domain.Entities.MediaAsset", "OpenGraphMedia")
+                        .WithMany()
+                        .HasForeignKey("OpenGraphMediaId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("CevatBiyik.Domain.Entities.PracticeArea", "PracticeArea")
                         .WithMany("Articles")
                         .HasForeignKey("PracticeAreaId")
                         .OnDelete(DeleteBehavior.Restrict);
 
+                    b.Navigation("Category");
+
+                    b.Navigation("CoverMedia");
+
+                    b.Navigation("OpenGraphMedia");
+
                     b.Navigation("PracticeArea");
+                });
+
+            modelBuilder.Entity("CevatBiyik.Domain.Entities.ArticleTagLink", b =>
+                {
+                    b.HasOne("CevatBiyik.Domain.Entities.Article", "Article")
+                        .WithMany("TagLinks")
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CevatBiyik.Domain.Entities.ArticleTag", "Tag")
+                        .WithMany()
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Article");
+
+                    b.Navigation("Tag");
+                });
+
+            modelBuilder.Entity("CevatBiyik.Domain.Entities.PageSeo", b =>
+                {
+                    b.HasOne("CevatBiyik.Domain.Entities.MediaAsset", "OpenGraphMedia")
+                        .WithMany()
+                        .HasForeignKey("OpenGraphMediaId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("OpenGraphMedia");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -531,6 +833,11 @@ namespace CevatBiyik.Infrastructure.Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CevatBiyik.Domain.Entities.Article", b =>
+                {
+                    b.Navigation("TagLinks");
                 });
 
             modelBuilder.Entity("CevatBiyik.Domain.Entities.PracticeArea", b =>

@@ -6,8 +6,8 @@ using CevatBiyik.Infrastructure.Identity;
 using CevatBiyik.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CevatBiyik.IntegrationTests;
 

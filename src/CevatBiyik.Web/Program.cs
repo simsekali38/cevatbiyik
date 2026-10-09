@@ -96,6 +96,14 @@ app.UseStatusCodePagesWithReExecute("/hata/{0}");
 app.UseHttpsRedirection();
 app.Use(async (context, next) =>
 {
+    if (context.Request.Path.StartsWithSegments("/uploads") &&
+        !System.Text.RegularExpressions.Regex.IsMatch(context.Request.Path.Value ?? "", "^/uploads/images/[a-f0-9]{32}\\.webp$", System.Text.RegularExpressions.RegexOptions.CultureInvariant))
+    {
+        context.Response.StatusCode = 404;
+        return;
+    }
+    var nonce = Convert.ToBase64String(System.Security.Cryptography.RandomNumberGenerator.GetBytes(24));
+    context.Items["CspNonce"] = nonce;
     if (context.Request.Path.StartsWithSegments("/admin"))
     {
         context.Response.Headers["X-Robots-Tag"] = "noindex, nofollow";
@@ -103,7 +111,7 @@ app.Use(async (context, next) =>
     }
     context.Response.Headers["X-Content-Type-Options"] = "nosniff";
     context.Response.Headers["Referrer-Policy"] = "strict-origin-when-cross-origin";
-    context.Response.Headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'";
+    context.Response.Headers["Content-Security-Policy"] = $"default-src 'self'; script-src 'self' 'nonce-{nonce}'; style-src 'self'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'";
     await next(context);
 });
 app.UseStaticFiles();

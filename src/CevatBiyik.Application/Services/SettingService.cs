@@ -1,9 +1,9 @@
 using CevatBiyik.Application.DTOs;
 using CevatBiyik.Application.Exceptions;
 using CevatBiyik.Application.Interfaces;
+using CevatBiyik.Application.Validation;
 using CevatBiyik.Domain.Entities;
 using FluentValidation;
-using CevatBiyik.Application.Validation;
 
 namespace CevatBiyik.Application.Services;
 

@@ -1,5 +1,9 @@
 # SEO Launch Checklist
 
+Phase 06 implements metadata/OG, sitemap/robots and safe Article/BreadcrumbList JSON-LD;
+LegalService remains opt-in with visible verified facts. Automated isolated tests passed;
+these launch boxes still require real-host/content/indexing validation. See ../qa/PHASE_06_REVIEW.md.
+
 ## Technical
 - [ ] HTTPS
 - [ ] canonical host

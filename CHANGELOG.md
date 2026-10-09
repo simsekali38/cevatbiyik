@@ -4,6 +4,19 @@ All notable project changes should be recorded here.
 
 ## [Unreleased]
 
+### Phase 06 — CMS Features & SEO Enhancements
+- Owner approved phase closure and commit after reviewing 129 passing tests and the 0-error/0-warning build.
+- Added separate categories/tags, join mapping, stable slugs, soft deletion and paged public/admin choices.
+- Added secure image media: type/byte/pixel checks, EXIF orientation, WebP re-encoding/1600 px resize, alt text and reference-aware removal.
+- Added cover/article SEO/OG and fixed-page metadata editors; preserved UTC draft/scheduled/published visibility.
+- Added bounded sitemap index/children, robots gate, safe JSON-LD Article/BreadcrumbList and opt-in verified LegalService.
+- Added CSP nonce, IIS upload allowlist and filesystem compensation when save/audit fails.
+- Fixed malformed multipart error re-execution preserving antiforgery 400.
+- Added CmsFeatures migration/reviewed SQL; 129 tests passed, 4 dedicated MySQL tests skipped.
+- Release build 0 warnings/errors; NuGet audit clean; 390 px Razor snapshot review passed.
+- Single guide renamed 06-cms-features.md; ADR-019 and rollout/QA docs updated. Live database update and deployment were not independently verified.
+- Original profile/page-content/FAQ CMS remains Phase 08; Phase 07/09 remaining scopes preserved.
+
 ### Phase 05 — Identity, Auth & Admin Panels
 - Added ASP.NET Core Identity/MySQL persistence, Admin role/policy, secure session cookies and protected Admin Area.
 - Added login/logout with CSRF, lockout, IP rate limit, generic errors and local redirects; explicit first-admin CLI provisioning.

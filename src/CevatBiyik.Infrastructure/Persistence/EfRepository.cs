@@ -10,7 +10,22 @@ namespace CevatBiyik.Infrastructure.Persistence;
 public sealed class EfRepository<T>(AppDbContext context) : IRepository<T> where T : BaseEntity
 {
     public Task<T?> FindAsync(long id, CancellationToken cancellationToken = default) =>
-        context.Set<T>().SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
+        WithRelations(context.Set<T>()).SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
+
+    private static IQueryable<T> WithRelations(IQueryable<T> query)
+    {
+        if (typeof(T) == typeof(Article))
+        {
+            return query.Include("Category").Include("CoverMedia").Include("OpenGraphMedia").Include("TagLinks.Tag").AsSplitQuery();
+        }
+
+        if (typeof(T) == typeof(PageSeo))
+        {
+            return query.Include("OpenGraphMedia");
+        }
+
+        return query;
+    }
 
     public async Task<IReadOnlyList<T>> ListAsync(Expression<Func<T, bool>> predicate, int page, int pageSize,
         Expression<Func<T, object>>? orderBy, bool descending, CancellationToken cancellationToken = default)
@@ -19,7 +34,7 @@ public sealed class EfRepository<T>(AppDbContext context) : IRepository<T> where
         ArgumentOutOfRangeException.ThrowIfLessThan(pageSize, 1);
         ArgumentOutOfRangeException.ThrowIfGreaterThan(pageSize, 100);
         var offset = checked((page - 1) * pageSize);
-        var query = context.Set<T>().AsNoTracking().Where(predicate);
+        var query = WithRelations(context.Set<T>().AsNoTracking()).Where(predicate);
         var ordered = orderBy is null ? query.OrderByDescending(x => x.Id)
             : descending ? query.OrderByDescending(orderBy).ThenByDescending(x => x.Id)
             : query.OrderBy(orderBy).ThenBy(x => x.Id);

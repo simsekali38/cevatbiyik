@@ -1,0 +1,7 @@
+@model IReadOnlyList<TaxonomyDto>
+@{ var kind = ViewData["Kind"]?.ToString(); ViewData["Title"] = kind == "tags" ? "Etiketler" : "Kategoriler"; var page = (int)(ViewData["Page"] ?? 1); }
+<h1>@ViewData["Title"]</h1><a class="btn btn-primary mb-3" asp-action="Edit" asp-route-kind="@kind">Yeni kayıt</a>
+<div class="table-responsive"><table class="table"><caption>Kayıtlar</caption><thead><tr><th>Ad</th><th>URL</th><th>Durum</th><th>İşlemler</th></tr></thead><tbody>
+@foreach (var item in Model) { <tr><td>@item.Name</td><td>@item.Slug</td><td>@(item.IsActive ? "Etkin" : "Pasif")</td><td><a asp-action="Edit" asp-route-kind="@kind" asp-route-id="@item.Id">Düzenle</a><form asp-action="Delete" asp-route-kind="@kind" asp-route-id="@item.Id" method="post" asp-antiforgery="false">@Html.AntiForgeryToken()<label><input type="checkbox" name="confirmed" value="true" required /> Silmeyi onaylıyorum</label> <button class="btn btn-sm btn-outline-danger" type="submit">Sil</button></form></td></tr> }
+</tbody></table></div>
+<nav aria-label="Kayıt sayfaları">@if(page > 1){<a asp-action="Index" asp-route-kind="@kind" asp-route-page="@(page - 1)">Önceki</a>} @if(Model.Count == 20){<a asp-action="Index" asp-route-kind="@kind" asp-route-page="@(page + 1)">Sonraki</a>}</nav>

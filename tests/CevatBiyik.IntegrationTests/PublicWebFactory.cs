@@ -16,6 +16,10 @@ public sealed class PublicWebFactory : WebApplicationFactory<Program>
     public PublicTestRepository<PracticeArea> Areas { get; } = new();
     public PublicTestRepository<SiteSetting> Settings { get; } = new();
     public PublicTestRepository<ContactMessage> Messages { get; } = new();
+    public PublicTestRepository<ArticleCategory> Categories { get; } = new();
+    public PublicTestRepository<ArticleTag> Tags { get; } = new();
+    public PublicTestRepository<MediaAsset> Media { get; } = new();
+    public PublicTestRepository<PageSeo> PageSeo { get; } = new();
 
     public PublicWebFactory()
     {
@@ -49,6 +53,10 @@ public sealed class PublicWebFactory : WebApplicationFactory<Program>
             services.AddSingleton<IRepository<PracticeArea>>(Areas);
             services.AddSingleton<IRepository<SiteSetting>>(Settings);
             services.AddSingleton<IRepository<ContactMessage>>(Messages);
+            services.AddSingleton<IRepository<ArticleCategory>>(Categories);
+            services.AddSingleton<IRepository<ArticleTag>>(Tags);
+            services.AddSingleton<IRepository<MediaAsset>>(Media);
+            services.AddSingleton<IRepository<PageSeo>>(PageSeo);
         });
     }
 

@@ -19,12 +19,12 @@
     </div></header>
     @if (User.IsInRole("Admin"))
     {
-        <nav class="container py-3 admin-navigation" aria-label="Yönetim menüsü"><a href="/admin">Özet</a><a href="/admin/articles">Makaleler</a><a href="/admin/practice-areas">Uzmanlık alanları</a><a href="/admin/contact-messages">İletişim mesajları</a><a href="/admin/settings">Site ayarları</a></nav>
+        <nav class="container py-3 admin-navigation" aria-label="Yönetim menüsü"><a href="/admin">Özet</a><a href="/admin/articles">Makaleler</a><a href="/admin/practice-areas">Uzmanlık alanları</a><a href="/admin/taxonomy/categories">Kategoriler</a><a href="/admin/taxonomy/tags">Etiketler</a><a href="/admin/media">Görseller</a><a href="/admin/page-seo">Sayfa SEO</a><a href="/admin/contact-messages">İletişim mesajları</a><a href="/admin/settings">Site ayarları</a></nav>
     }
     <main class="container py-4" id="icerik" tabindex="-1">
         @if (TempData["AdminSuccess"] is string success) { <p class="alert alert-success" role="status">@success</p> }
+        @if (TempData["AdminError"] is string error) { <p class="alert alert-danger" role="alert">@error</p> }
         @RenderBody()
     </main>
 </body>
 </html>
-

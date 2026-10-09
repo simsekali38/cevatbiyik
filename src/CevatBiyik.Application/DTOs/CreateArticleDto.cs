@@ -8,4 +8,8 @@ public class CreateArticleDto
     public DateTime? PublishedAt { get; init; }
     public long? PracticeAreaId { get; init; }
     public bool IsActive { get; init; }
+    public long? CategoryId { get; init; }
+    public long[] TagIds { get; init; } = [];
+    public long? CoverMediaId { get; init; }
+    public SeoInput Seo { get; init; } = new();
 }
