@@ -1,2 +1,6 @@
+@model ProfileDto
 <section class="page-heading"><div class="container"><p class="eyebrow">AV. CEVAT BIYIK</p><h1>Hakkımda</h1></div></section>
-<section class="section-pad"><div class="container reading-width"><h2>Av. Cevat Bıyık</h2><p class="plain-content">CONTENT_REQUIRED</p></div></section>
+<section class="section-pad"><div class="container"><div class="row g-5">
+<div class="col-lg-8"><section aria-labelledby="biography-title"><h2 id="biography-title">Av. Cevat Bıyık</h2><div class="plain-content">@(Model?.Biography ?? "CONTENT_REQUIRED")</div></section><section class="profile-section" aria-labelledby="vision-title"><h2 id="vision-title">Vizyon</h2><div class="plain-content">@(Model?.Vision ?? "CONTENT_REQUIRED")</div></section></div>
+<div class="col-lg-4"><aside class="content-card" aria-labelledby="bar-title"><img class="profile-emblem mb-4" src="~/images/brand/cevat-biyik-emblem.svg" width="120" height="120" alt="" /><h2 id="bar-title">Baro bilgisi</h2><p>@(Model?.BarAssociation ?? "CONTENT_REQUIRED")</p><a class="text-link" asp-action="Contact">İletişim <span aria-hidden="true">↗</span></a></aside></div>
+</div></div></section>

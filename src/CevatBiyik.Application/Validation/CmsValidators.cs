@@ -26,7 +26,7 @@ public sealed class SeoValidator : AbstractValidator<SeoInput>
 }
 public sealed class PageSeoValidator : AbstractValidator<PageSeoInput>
 {
-    public static IReadOnlyList<string> Paths { get; } = new[] { "/", "/hakkimda", "/iletisim", "/makaleler", "/uzmanlik-alanlari" };
+    public static IReadOnlyList<string> Paths { get; } = new[] { "/", "/hakkimda", "/iletisim", "/makaleler", "/uzmanlik-alanlari", "/sss", "/kvkk", "/cerez-politikasi", "/yasal-uyari" };
     public PageSeoValidator()
     {
         RuleFor(x => x.Path).Must(Paths.Contains);

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CevatBiyik.Web.Controllers;
 
 public sealed class HomeController(IArticleService articles, IPracticeAreaService practiceAreas,
-    IWebHostEnvironment environment, IConfiguration configuration) : PublicController
+    IWebHostEnvironment environment, IConfiguration configuration, IProfileService profiles, IPageContentService pages) : PublicController
 {
     [HttpGet("/")]
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
@@ -15,21 +15,28 @@ public sealed class HomeController(IArticleService articles, IPracticeAreaServic
         // Sequential queries share the same scoped EF context.
         var recent = await articles.SearchPublishedAsync(pageSize: 3, cancellationToken: cancellationToken);
         var areas = await practiceAreas.ListActiveAsync(pageSize: 3, cancellationToken: cancellationToken);
-        return View(new HomeViewModel(recent.Items, areas.Items));
+        return View(new HomeViewModel(recent.Items, areas.Items, await pages.PublishedAsync("/", cancellationToken)));
     }
 
     [HttpGet("/hakkimda")]
-    public IActionResult About()
+    public async Task<IActionResult> About(CancellationToken cancellationToken)
     {
-        SetPage("Hakkımda", "Av. Cevat Bıyık hakkında bilgiler.", "/hakkimda");
-        return View();
+        var profile = await profiles.GetAsync(true, cancellationToken);
+        SetPage("Hakkımda", "Av. Cevat Bıyık hakkında bilgiler.", "/hakkimda", profile is null);
+        return View(profile);
     }
 
     [HttpGet("/iletisim")]
     [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
-    public IActionResult Contact()
+    public async Task<IActionResult> Contact(CancellationToken cancellationToken)
     {
         SetPage("İletişim", "Av. Cevat Bıyık iletişim bilgileri ve iletişim formu.", "/iletisim");
-        return View(ContactFormPolicy.Create(new CreateContactMessageDto(), environment, configuration));
+        var model = ContactFormPolicy.Create(new CreateContactMessageDto(), environment, configuration);
+        if (environment.IsProduction() && await pages.PublishedAsync("/kvkk", cancellationToken) is null)
+        {
+            model = model with { CanSubmit = false };
+        }
+
+        return View(model);
     }
 }

@@ -1,5 +1,13 @@
 # Architecture
 
+## Phase 08 public content boundary
+
+LawyerProfile/PageContent/FaqItem add review-gated content through Application ports and existing EF repositories.
+One fixed profile and four immutable page paths avoid a general-purpose route CMS. FAQ reads are paged at 12;
+layout uses bounded public projections. Admin Areas reuse Identity/CSRF/audit transactions. Public Razor always
+encodes plain text; native FAQ disclosure needs no JavaScript. Existing brand SVG/Bootstrap/media remain shared.
+No content seeds, sensitive profile fields, new dependency, API or project reference. See ADR-021.
+
 ## Phase 07 file boundary
 
 PrivateDocument is distinct from public MediaAsset. Application defines IDocumentStorage, IMalwareScanner,

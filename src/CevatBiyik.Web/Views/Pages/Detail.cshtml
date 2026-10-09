@@ -1,0 +1,6 @@
+@model PageContentDto
+<section class="page-heading"><div class="container reading-width"><p class="eyebrow">BİLGİLENDİRME</p><h1>@(Model?.Title ?? ViewData["FallbackTitle"])</h1></div></section>
+<section class="section-pad"><div class="container reading-width">
+@if (Model is null) { <div class="empty-state"><p>Bu sayfanın metni henüz yayımlanmamıştır.</p><p class="mb-0">CONTENT_REQUIRED</p></div> }
+else { <div class="plain-content">@Model.Body</div> }
+</div></section>

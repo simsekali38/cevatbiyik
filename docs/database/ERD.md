@@ -28,7 +28,17 @@ MediaAsset (1) ---- (*) PageSeo         [optional OpenGraphMediaId, RESTRICT]
 Unique slugs on category/tag, unique StoragePath on media and fixed Path on PageSeo.
 Four new BaseEntity types have UTC/soft-delete fields; join has composite FKs and matching parent query filters.
 Physical Article cascade affects join rows only; application deletion stays soft. Metadata limits: title/OG-title 120,
-descriptions 320, keywords 300. No source filename/blob stored. Profile/page-content/FAQ/redirect/location remain roadmap.
+descriptions 320, keywords 300. No source filename/blob stored. At Phase 06 closure profile/page-content/FAQ
+were deferred to Phase 08; these are now implemented below. Redirect/location remain roadmap.
+
+## Phase 08 implemented content
+
+LawyerProfiles: unique Key (20), Biography (5000), Vision (2000), BarAssociation (150), IsReviewed.
+PageContents: unique immutable Path (100), Title (200), Body (12000), IsReviewed.
+FaqItems: Question (250), Answer (4000), SortOrder, IsReviewed; composite visibility/order index.
+All inherit UTC timestamps/IsActive/IsDeleted. These records are independent; no artificial article/area relation,
+personal identity field or fabricated content seed. Fixed-page metadata uses existing PageSeo by allowlisted path.
+Profile/page/FAQ are implemented; location/redirect relations below remain future concepts.
 
 ## Future concept
 

@@ -4,6 +4,15 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 namespace CevatBiyik.Web.Seo;
 public static class SeoPresentation
 {
+    public static object Faq(IReadOnlyList<FaqDto> items) => new Dictionary<string, object>
+    {
+        ["@context"] = "https://schema.org", ["@type"] = "FAQPage",
+        ["mainEntity"] = items.Select(x => new Dictionary<string, object>
+        {
+            ["@type"] = "Question", ["name"] = x.Question,
+            ["acceptedAnswer"] = new Dictionary<string, string> { ["@type"] = "Answer", ["text"] = x.Answer }
+        }).ToArray()
+    };
     public static string Origin(IConfiguration configuration)
     {
         var value = configuration["Site:BaseUrl"];

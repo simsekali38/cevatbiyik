@@ -24,6 +24,29 @@ public sealed class MySqlFactAttribute : FactAttribute
 public class MySqlPersistenceTests
 {
     [MySqlFact]
+    public async Task ReviewedPublicContent_WorksThroughMySql8Repositories()
+    {
+        var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
+        { ["ConnectionStrings:DefaultConnection"] = Environment.GetEnvironmentVariable("CEVATBIYIK_TEST_MYSQL") }).Build();
+        await using var provider = new ServiceCollection().AddInfrastructure(configuration).BuildServiceProvider();
+        await using var scope = provider.CreateAsyncScope();
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        Assert.StartsWith("cevatbiyik_test_", db.Database.GetDbConnection().Database, StringComparison.Ordinal);
+        await db.Database.MigrateAsync();
+        await using var transaction = await db.Database.BeginTransactionAsync();
+        var profile = scope.ServiceProvider.GetRequiredService<IProfileService>();
+        await profile.SaveAsync(new ProfileInput { Biography = "TEST_ONLY", Vision = "TEST_ONLY", BarAssociation = "TEST_ONLY", IsActive = true, IsReviewed = true });
+        Assert.NotNull(await profile.GetAsync(true));
+        var pages = scope.ServiceProvider.GetRequiredService<IPageContentService>();
+        var existing = (await pages.ListAsync()).FirstOrDefault(x => x.Path == "/kvkk");
+        await pages.SaveAsync(existing?.Id, new PageContentInput { Path = "/kvkk", Title = "TEST_ONLY", Body = "TEST_ONLY", IsActive = true, IsReviewed = true });
+        Assert.NotNull(await pages.PublishedAsync("/kvkk"));
+        var faq = scope.ServiceProvider.GetRequiredService<IFaqService>();
+        await faq.SaveAsync(null, new FaqInput { Question = "TEST_ONLY " + Guid.NewGuid().ToString("N"), Answer = "TEST_ONLY", IsActive = true, IsReviewed = true });
+        Assert.NotEmpty((await faq.ListAsync(publicOnly: true)).Items);
+        await transaction.RollbackAsync();
+    }
+    [MySqlFact]
     public async Task PrivateDocuments_EnforceUniqueStoragePath_AndReconcileDeletedRowsOnMySql()
     {
         var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>

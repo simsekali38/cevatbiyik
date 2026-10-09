@@ -4,6 +4,14 @@
 
 Implement public Razor site, Bootstrap design system, responsive layouts and accessibility.
 
+## Implementation status — 2026-10-10
+
+Implemented and locally verified; owner closure approved (2026-10-10). 185 tests passed, 6 dedicated MySQL tests skipped;
+Release build 0 errors/0 warnings. No database update, deployment or automatic advancement to Phase 09.
+Reuse existing clean SVG/theme and article/area/Identity/media/SEO modules. Remaining profile/page/FAQ CMS added.
+ADR-021, [CMS setup](../docs/cms/PUBLIC_CONTENT_SETUP.md) and [verification report](../docs/qa/PHASE_08_REVIEW.md)
+record files, commands, 390 px/keyboard/contrast evidence and human/hosting rollout gates.
+
 ## Mandatory process
 
 1. Read `AGENTS.md`.
@@ -30,9 +38,17 @@ Implement public Razor site, Bootstrap design system, responsive layouts and acc
 
 Document concrete files, code, tests and configuration produced during this phase.
 
+- LawyerProfile/PageContent/FaqItem, Application ports/DTOs/validators/services and Admin Razor modules.
+- Public profile/FAQ/legal templates, reviewed sitemap/FAQPage, dynamic footer and AA focus/components.
+- PublicSiteContent migration/SQL (three tables, no seeds), publication/security/contrast/route tests.
+- Browser-tested 390 px layouts and documented review/rollout instructions.
+
 ## Exit Criteria
 
 The phase is complete only when its implementation and verification criteria are satisfied.
+
+Local criteria verified in the report. Owner closure approved (2026-10-10); MySQL migration validation, approved
+real content and hosting checks are explicitly separate rollout gates. Baseline checks are not full WCAG certification.
 
 ## Specific tasks
 - Remaining profile/page-content/FAQ CMS is deferred here from original Phase 06 (ADR-019).

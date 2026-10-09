@@ -1,5 +1,14 @@
 # Security Baseline
 
+## Phase 08 reviewed content
+
+Profile/page/FAQ Admin mutations inherit role authorization, CSRF, explicit binding and transactional audit.
+Publish requires complete plain text plus review assertion; edits reset the review checkbox. Missing legal/profile
+content is noindex and CONTENT_REQUIRED. Production contact additionally requires reviewed published KVKK.
+Razor encoding and the default JSON serializer prevent legacy markup from executing in HTML/FAQ schema.
+Root source card photographs remain outside wwwroot; no identity/registry fields or content seeds are introduced.
+Human legal/content review remains mandatory before publication. See ADR-021 and PUBLIC_CONTENT_SETUP.md.
+
 ## Phase 07 private storage
 
 Private PDF documents live outside wwwroot, require fresh fail-closed Defender scan and download digest verification.

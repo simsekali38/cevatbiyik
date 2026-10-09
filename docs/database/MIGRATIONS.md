@@ -69,3 +69,11 @@ Generated/reviewed SQL: MEDIA_FILES.sql. No seeds or destructive Up commands. Do
 Do not regenerate the existing migration. Use artifacts/ef8/dotnet-ef.exe (8.0.29) for this EF 8 app.
 No database update was executed by the agent. Dedicated MySQL 8 validation and a combined DB/files backup precede rollout.
 Commands and operational gates: ../media/MEDIA_FILES.md and ../deployment/PLESK_MEDIA_RUNBOOK.md.
+
+## Phase 08 — PublicSiteContent
+
+20261009214118_PublicSiteContent adds LawyerProfiles, PageContents, FaqItems and three indexes.
+21 model entity types including Identity; shared UTC/soft-delete fields and explicit review flags.
+PUBLIC_SITE_CONTENT.sql generated with EF 8.0.29. No seeds, existing-data alteration or destructive Up commands.
+Down drops these tables and loses content. MySQL DDL is not fully atomic; validate on dedicated MySQL 8 first.
+No cevodb database update was performed. Commands/publication setup: ../cms/PUBLIC_CONTENT_SETUP.md.

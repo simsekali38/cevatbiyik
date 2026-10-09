@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.RateLimiting;
 namespace CevatBiyik.Web.Controllers;
 
 public sealed class ContactController(IContactService contacts, IValidator<CreateContactMessageDto> validator,
-    IWebHostEnvironment environment, IConfiguration configuration) : PublicController
+    IWebHostEnvironment environment, IConfiguration configuration, IPageContentService pages) : PublicController
 {
     [HttpPost("/iletisim")]
     [ValidateAntiForgeryToken]
@@ -20,6 +20,11 @@ public sealed class ContactController(IContactService contacts, IValidator<Creat
         CancellationToken cancellationToken)
     {
         var model = ContactFormPolicy.Create(form, environment, configuration);
+        if (environment.IsProduction() && await pages.PublishedAsync("/kvkk", cancellationToken) is null)
+        {
+            model = model with { CanSubmit = false };
+        }
+
         if (!model.CanSubmit)
         {
             return StatusCode(StatusCodes.Status503ServiceUnavailable);

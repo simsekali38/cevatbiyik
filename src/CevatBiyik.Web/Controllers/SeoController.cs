@@ -4,7 +4,7 @@ using CevatBiyik.Application.Interfaces;
 using CevatBiyik.Web.Seo;
 using Microsoft.AspNetCore.Mvc;
 namespace CevatBiyik.Web.Controllers;
-public sealed class SeoController(ISitemapService sitemap, IConfiguration configuration) : Controller
+public sealed class SeoController(ISitemapService sitemap, IConfiguration configuration, IProfileService profiles, IPageContentService pages, IFaqService faq) : Controller
 {
     private static readonly XNamespace Ns = "http://www.sitemaps.org/schemas/sitemap/0.9";
     private bool Indexing => configuration.GetValue<bool>("Site:AllowIndexing");
@@ -40,7 +40,34 @@ public sealed class SeoController(ISitemapService sitemap, IConfiguration config
         return Xml(root);
     }
     [HttpGet("/sitemaps/pages.xml")]
-    public IActionResult Pages() => Indexing ? UrlSet(new[] { new SitemapEntry("/", null), new SitemapEntry("/makaleler", null), new SitemapEntry("/uzmanlik-alanlari", null) }) : NotFound();
+    public async Task<IActionResult> Pages(CancellationToken ct)
+    {
+        if (!Indexing)
+        {
+            return NotFound();
+        }
+
+        var entries = new List<SitemapEntry> { new("/", null), new("/makaleler", null), new("/uzmanlik-alanlari", null) };
+        if (await profiles.GetAsync(true, ct) is not null)
+        {
+            entries.Add(new("/hakkimda", null));
+        }
+
+        foreach (var item in await pages.ListAsync(true, ct))
+        {
+            if (item.Path != "/")
+            {
+                entries.Add(new(item.Path, item.UpdatedAt));
+            }
+        }
+
+        if ((await faq.ListAsync(publicOnly: true, ct: ct)).Items.Count > 0)
+        {
+            entries.Add(new("/sss", null));
+        }
+
+        return UrlSet(entries);
+    }
     [HttpGet("/sitemaps/{kind}/{page:int}.xml")]
     public async Task<IActionResult> Entries(string kind, int page, CancellationToken cancellationToken)
     {

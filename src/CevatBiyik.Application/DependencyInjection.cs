@@ -34,6 +34,12 @@ public static class DependencyInjection
         services.AddScoped<IDocumentService, DocumentService>();
         services.AddScoped<IFileMaintenance, FileMaintenance>();
         services.AddScoped<IPageSeoService, PageSeoService>();
+        services.AddScoped<IProfileService, ProfileService>();
+        services.AddScoped<IPageContentService, PageContentService>();
+        services.AddScoped<IFaqService, FaqService>();
+        services.AddScoped<IValidator<ProfileInput>, ProfileValidator>();
+        services.AddScoped<IValidator<PageContentInput>, PageContentValidator>();
+        services.AddScoped<IValidator<FaqInput>, FaqValidator>();
         return services;
     }
 }

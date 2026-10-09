@@ -4,6 +4,17 @@ All notable project changes should be recorded here.
 
 ## [Unreleased]
 
+### Phase 08 — Public Razor site and reviewed CMS (2026-10-10)
+- Preserved ADR-017 navy/gold tokens and clean SVG; added shared FAQ/focus/footer/mobile components and article cover cards.
+- Added reviewed profile/vision/bar, homepage introduction, fixed legal pages and paged FAQ Admin CMS.
+- Publication requires complete plain text and explicit review; no lawyer facts, legal text, source photos or credentials seeded.
+- Added /sss and three legal routes, safe visible-content FAQPage JSON-LD, reviewed sitemap inclusion and metadata choices.
+- Production contact now additionally requires published reviewed KVKK; existing consent/feature gates remain.
+- Added PublicSiteContent migration/reviewed SQL, ADR-021, CMS instructions and Phase 08 verification report.
+- Verified Release build: 0 errors/0 warnings; 102 unit + 83 integration = 185 passed; 6 dedicated MySQL tests skipped.
+- Browser baseline: 14 outputs at 390 px without horizontal overflow; actual Tab/Enter skip/menu/FAQ focus and AA token contrast verified.
+- Owner approved Phase 08 closure and commit on 2026-10-10; no database update or deployment. User-owned appsettings.json edits preserved and excluded from the commit.
+
 ### Phase 07 — Media and private files (2026-10-10)
 - Preserved ADR-019 image pipeline; tightened filename/ADS/control-character/output-byte and filesystem reparse checks.
 - Added PrivateDocument, fail-closed Defender PDF storage outside wwwroot, SHA-256 verification and Admin-only audited attachment downloads.

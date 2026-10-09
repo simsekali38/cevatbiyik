@@ -1,0 +1,11 @@
+@model FaqInput
+@{ ViewData["Title"] = "SSS düzenle"; }
+<h1>@ViewData["Title"]</h1><p>Yalnızca kontrol edilmiş yanıtlar yayımlanır. İnceleme onayı her düzenlemede yeniden işaretlenir.</p>
+<form asp-action="Save" asp-route-id="@ViewData["EntityId"]" method="post" asp-antiforgery="false">
+@Html.AntiForgeryToken()<div asp-validation-summary="All" class="validation-summary-errors" role="alert"></div>
+<label asp-for="Question" class="form-label">Soru</label><input asp-for="Question" class="form-control mb-3" maxlength="250" required />
+<label asp-for="Answer" class="form-label">Yanıt</label><textarea asp-for="Answer" class="form-control mb-3" rows="8" maxlength="4000" required></textarea>
+<label asp-for="SortOrder" class="form-label">Sıralama</label><input asp-for="SortOrder" class="form-control mb-3" type="number" min="0" max="10000" />
+<div class="form-check mb-3"><input asp-for="IsReviewed" class="form-check-input" /><label asp-for="IsReviewed">Soru/yanıt ve yayın uygunluğu kontrol edilmiştir.</label></div>
+<div class="form-check mb-3"><input asp-for="IsActive" class="form-check-input" /><label asp-for="IsActive">Yayımla</label></div>
+<button class="btn btn-primary" type="submit">Kaydet</button> <a asp-action="Index">Listeye dön</a></form>

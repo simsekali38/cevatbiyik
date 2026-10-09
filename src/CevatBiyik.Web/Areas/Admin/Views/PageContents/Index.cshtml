@@ -1,0 +1,17 @@
+@model IReadOnlyList<PageContentDto>
+@{ ViewData["Title"] = "Sayfa içerikleri"; }
+<h1>Sayfa içerikleri</h1><p>Onaylanmamış metinler kamuya açık sayfalara aktarılmaz. Sabit sayfa yolları değiştirilemez.</p>
+<div class="table-responsive"><table class="table"><thead><tr><th>Sayfa</th><th>Durum</th><th>İşlem</th></tr></thead><tbody>
+@foreach (var route in CevatBiyik.Application.Validation.ContentPublication.Pages)
+{
+    var item = Model.FirstOrDefault(x => x.Path == route.Key);
+    <tr><td>@route.Value<br /><small>@route.Key</small></td><td>@(item is { IsActive: true, IsReviewed: true } ? "Yayında" : "Taslak / kapalı")</td><td>
+    @if (item is null) { <a asp-action="Edit" asp-route-path="@route.Key">İçerik oluştur</a> }
+    else
+    {
+        <a asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+        <form asp-action="Disable" asp-route-id="@item.Id" method="post" asp-antiforgery="false">@Html.AntiForgeryToken()<label><input type="checkbox" name="confirmed" value="true" required /> Yayından kaldırmayı onaylıyorum</label><button class="btn btn-outline-primary" type="submit">Yayından kaldır</button></form>
+    }
+    </td></tr>
+}
+</tbody></table></div>

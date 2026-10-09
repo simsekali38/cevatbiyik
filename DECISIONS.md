@@ -1,5 +1,40 @@
 # Architecture Decision Records
 
+## ADR-021 — Reviewed public content, native FAQ and shared Razor design
+
+Status: Implemented (2026-10-10, Phase 08); owner closure approved (2026-10-10).
+
+Preserve ADR-017 navy/gold tokens and the existing local SVG emblem. No source card photos, identity numbers,
+registry numbers or fabricated lawyer/legal facts are copied into public assets, seed data or schema.
+Preserve .NET 8/MySQL 8, one MVC app, linear references, local Bootstrap and filesystem media (ADR-019/020).
+
+Add LawyerProfile (one fixed primary key), PageContent (four allowlisted immutable paths) and FaqItem.
+Domain has no persistence/UI dependencies. Application owns DTOs, review/publication rules and repository-based
+services; Infrastructure maps three tables; Web owns Admin Areas/public controllers and encoded Razor views.
+No automatic seed or legal text generation. Inactive drafts may contain CONTENT_REQUIRED. Publication requires
+an explicit review flag and complete plain text. Each Admin edit resets the review checkbox so the editor must
+review the changed text again. Review is a human assertion, not automated legal validation.
+Public projections filter inactive/unreviewed/deleted records and reject incomplete placeholder text.
+Fixed pages are disabled/re-enabled; FAQ uses soft deletion. Profile is edited/deactivated through its single row.
+All Admin mutations reuse role authorization, antiforgery, explicit binding, validation and transactional audit.
+
+Paths: homepage introduction /, /kvkk, /cerez-politikasi, /yasal-uyari. Profile stays /hakkimda; FAQ stays /sss.
+No generic arbitrary route CMS or rich HTML editor. Dynamic footer labels/contact/bar information remain encoded.
+Production contact submission additionally requires a reviewed published /kvkk page, alongside existing feature
+and consent-notice gates. Missing profile/legal content stays CONTENT_REQUIRED and noindex; sitemap includes
+these routes only after reviewed publication. PageSeo metadata allowlist includes FAQ/legal routes.
+
+FAQ is ordered by SortOrder/Id, paged at 12 rows and uses native details/summary with visible focus.
+FAQPage JSON-LD represents only that page's visible reviewed questions/answers and uses the existing safe JSON
+encoder/CSP nonce. This does not promise Google rich results: Google restricts FAQ rich results to authoritative
+government/health sites. Source: [Google FAQ changes](https://developers.google.com/search/blog/2023/08/howto-faq-changes).
+Broader SEO/redirects remain Phase 09; full accessibility/performance audit remains Phase 14.
+
+PublicSiteContent adds three tables and three indexes, without credential/content seeds or destructive Up operations.
+SQL generation/model tests and SQLite MVC flow tests do not replace dedicated MySQL 8 migration validation.
+No migration was applied to cevodb, no deployment or automatic next-phase advancement occurred.
+Setup and evidence: docs/cms/PUBLIC_CONTENT_SETUP.md and docs/qa/PHASE_08_REVIEW.md.
+
 ## ADR-020 — Private documents, retained files and bounded reconciliation
 
 Status: Implemented (2026-10-10, requested Phase 07 scope); owner phase closure approved (2026-10-10).

@@ -19,6 +19,9 @@ public sealed class PublicWebFactory : WebApplicationFactory<Program>
     public PublicTestRepository<ArticleCategory> Categories { get; } = new();
     public PublicTestRepository<ArticleTag> Tags { get; } = new();
     public PublicTestRepository<MediaAsset> Media { get; } = new();
+    public PublicTestRepository<LawyerProfile> Profiles { get; } = new();
+    public PublicTestRepository<PageContent> Pages { get; } = new();
+    public PublicTestRepository<FaqItem> Faq { get; } = new();
     public PublicTestRepository<PageSeo> PageSeo { get; } = new();
 
     public PublicWebFactory()
@@ -57,6 +60,9 @@ public sealed class PublicWebFactory : WebApplicationFactory<Program>
             services.AddSingleton<IRepository<ArticleTag>>(Tags);
             services.AddSingleton<IRepository<MediaAsset>>(Media);
             services.AddSingleton<IRepository<PageSeo>>(PageSeo);
+            services.AddSingleton<IRepository<LawyerProfile>>(Profiles);
+            services.AddSingleton<IRepository<PageContent>>(Pages);
+            services.AddSingleton<IRepository<FaqItem>>(Faq);
         });
     }
 

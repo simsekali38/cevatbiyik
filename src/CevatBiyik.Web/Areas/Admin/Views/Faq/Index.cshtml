@@ -1,0 +1,13 @@
+@model PagedResult<FaqDto>
+@{ ViewData["Title"] = "SSS yönetimi"; }
+<h1>SSS yönetimi</h1><a asp-action="Edit" class="btn btn-primary mb-3">Soru ekle</a>
+<div class="table-responsive"><table class="table"><thead><tr><th>Soru</th><th>Sıra</th><th>Durum</th><th>İşlem</th></tr></thead><tbody>
+@foreach (var item in Model.Items)
+{
+    <tr><td>@item.Question</td><td>@item.SortOrder</td><td>@(item.IsActive && item.IsReviewed ? "Yayında" : "Taslak")</td><td><a asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+    <form asp-action="Delete" asp-route-id="@item.Id" method="post" asp-antiforgery="false">@Html.AntiForgeryToken()<label><input type="checkbox" name="confirmed" value="true" required /> Silmeyi onaylıyorum</label><button class="btn btn-outline-primary" type="submit">Sil</button></form></td></tr>
+}
+</tbody></table></div><nav class="page-links" aria-label="SSS yönetim sayfaları">
+@if (Model.HasPrevious) { <a asp-route-page="@(Model.Page - 1)">Önceki</a> }
+@if (Model.HasNext) { <a asp-route-page="@(Model.Page + 1)">Sonraki</a> }
+</nav>

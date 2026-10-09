@@ -4,6 +4,10 @@
     <div class="col-lg-7"><p class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span>AVUKAT · HUKUK BÜROSU</p><h1 class="hero-title">Av. Cevat<br /><span>Bıyık</span><span class="hero-period" aria-hidden="true">.</span></h1><p class="hero-copy">Yayımlanan makaleleri okuyabilir, çalışma alanlarını inceleyebilir ve iletişim formunu kullanabilirsiniz.</p><div class="d-flex flex-wrap gap-3"><a class="btn btn-primary" asp-controller="Home" asp-action="Contact">İletişime geç <span aria-hidden="true">↗</span></a><a class="btn btn-link" asp-controller="Home" asp-action="About">Hakkımda <span aria-hidden="true">→</span></a></div></div>
     <div class="col-lg-5"><aside class="hero-note" aria-labelledby="hero-note-title"><div class="note-ornament" aria-hidden="true"><img src="~/images/brand/cevat-biyik-emblem.svg" asp-append-version="true" width="120" height="120" alt="" /></div><p class="eyebrow">İLETİŞİM BİLGİLERİ</p><h2 id="hero-note-title">Bir mesajla<br />başlayın.</h2><dl class="contact-mini"><dt>E-posta</dt><dd>@site.Email</dd><dt>Telefon</dt><dd>@site.Phone</dd></dl><a class="text-link" asp-controller="Home" asp-action="Contact">İletişim sayfasına git <span aria-hidden="true">↗</span></a></aside></div>
 </div></div></section>
+@if (Model.Introduction is { } introduction)
+{
+    <section class="cms-introduction section-pad" aria-labelledby="intro-title"><div class="container reading-width"><h2 id="intro-title">@introduction.Title</h2><div class="plain-content">@introduction.Body</div></div></section>
+}
 <section class="section-pad" aria-labelledby="areas-title"><div class="container">
     <div class="section-heading"><div><p class="eyebrow">ÇALIŞMA ALANLARI</p><h2 id="areas-title">Uzmanlık alanları</h2></div><a class="text-link" asp-controller="PracticeAreas" asp-action="Index">Tüm alanlar <span aria-hidden="true">→</span></a></div>
     @if (Model.PracticeAreas.Count == 0) { <div class="empty-state"><p class="mb-0">Henüz yayımlanmış çalışma alanı bulunmuyor.</p></div> }

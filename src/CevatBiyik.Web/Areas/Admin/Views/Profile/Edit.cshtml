@@ -1,0 +1,11 @@
+@model ProfileInput
+@{ ViewData["Title"] = "Profil yönetimi"; }
+<h1>Profil yönetimi</h1><p>Yalnızca doğrulanmış biyografi, vizyon ve baro adı girin. T.C. kimlik veya sicil numarası eklemeyin. Her düzenlemede yayımlama onayı yeniden işaretlenmelidir.</p>
+<form asp-action="Save" method="post" asp-antiforgery="false">
+@Html.AntiForgeryToken()<div asp-validation-summary="All" class="validation-summary-errors" role="alert"></div>
+<label asp-for="Biography" class="form-label">Biyografi</label><textarea asp-for="Biography" class="form-control mb-3" rows="8" maxlength="5000" required></textarea>
+<label asp-for="Vision" class="form-label">Vizyon</label><textarea asp-for="Vision" class="form-control mb-3" rows="4" maxlength="2000" required></textarea>
+<label asp-for="BarAssociation" class="form-label">Baro adı</label><input asp-for="BarAssociation" class="form-control mb-3" maxlength="150" required />
+<div class="form-check mb-3"><input asp-for="IsReviewed" class="form-check-input" /><label asp-for="IsReviewed">İçeriği ve yayın uygunluğunu inceledim; bilgiler doğrulanmıştır.</label></div>
+<div class="form-check mb-3"><input asp-for="IsActive" class="form-check-input" /><label asp-for="IsActive">Yayımla</label></div>
+<button class="btn btn-primary" type="submit">Kaydet</button></form>

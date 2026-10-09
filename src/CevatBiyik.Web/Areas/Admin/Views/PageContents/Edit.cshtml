@@ -1,0 +1,11 @@
+@model PageContentInput
+@{ ViewData["Title"] = "Sayfa içeriği düzenle"; }
+<h1>@ViewData["Title"]</h1><p>Hukuki metinler avukat tarafından kontrol edilmelidir. HTML, kimlik/sicil numarası ve doğrulanmamış iddia eklemeyin. İnceleme onayı her düzenlemede yeniden verilir.</p>
+<form asp-action="Save" asp-route-id="@ViewData["EntityId"]" method="post" asp-antiforgery="false">
+@Html.AntiForgeryToken()<div asp-validation-summary="All" class="validation-summary-errors" role="alert"></div>
+<input asp-for="Path" type="hidden" /><p>Sayfa yolu: @Model.Path</p>
+<label asp-for="Title" class="form-label">Başlık</label><input asp-for="Title" class="form-control mb-3" maxlength="200" required />
+<label asp-for="Body" class="form-label">İçerik</label><textarea asp-for="Body" class="form-control mb-3" rows="14" maxlength="12000" required></textarea>
+<div class="form-check mb-3"><input asp-for="IsReviewed" class="form-check-input" /><label asp-for="IsReviewed">Metni ve hukuki/yayın uygunluğunu inceledim.</label></div>
+<div class="form-check mb-3"><input asp-for="IsActive" class="form-check-input" /><label asp-for="IsActive">Yayımla</label></div>
+<button class="btn btn-primary" type="submit">Kaydet</button> <a asp-action="Index">Listeye dön</a></form>

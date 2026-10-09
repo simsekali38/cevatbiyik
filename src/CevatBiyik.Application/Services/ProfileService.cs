@@ -1,0 +1,29 @@
+using CevatBiyik.Application.DTOs;
+using CevatBiyik.Application.Interfaces;
+using CevatBiyik.Application.Validation;
+using CevatBiyik.Domain.Entities;
+using FluentValidation;
+namespace CevatBiyik.Application.Services;
+public sealed class ProfileService(IRepository<LawyerProfile> profiles) : IProfileService
+{
+    public async Task<ProfileDto?> GetAsync(bool publicOnly = false, CancellationToken ct = default)
+    {
+        var rows = await profiles.ListAsync(x => x.Key == "primary" && (!publicOnly || (x.IsActive && x.IsReviewed)), 1, 1, ct);
+        return rows.Count == 0 || (publicOnly && !ContentPublication.Complete(rows[0].Biography, rows[0].Vision, rows[0].BarAssociation)) ? null : Map(rows[0]);
+    }
+    public async Task SaveAsync(ProfileInput input, CancellationToken ct = default)
+    {
+        await new ProfileValidator().ValidateAndThrowAsync(input, ct);
+        var rows = await profiles.ListAsync(x => x.Key == "primary", 1, 1, ct);
+        var item = rows.Count == 0 ? new LawyerProfile() : await ServiceRules.RequireAsync(profiles, rows[0].Id, ct);
+        item.Biography = input.Biography.Trim(); item.Vision = input.Vision.Trim(); item.BarAssociation = input.BarAssociation.Trim();
+        item.IsActive = input.IsActive; item.IsReviewed = input.IsReviewed;
+        if (rows.Count == 0)
+        {
+            profiles.Add(item);
+        }
+
+        await profiles.SaveAsync(ct);
+    }
+    private static ProfileDto Map(LawyerProfile x) => new(x.Id, x.Biography, x.Vision, x.BarAssociation, x.IsActive, x.IsReviewed);
+}

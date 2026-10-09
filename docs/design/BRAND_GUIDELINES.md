@@ -111,5 +111,9 @@ Uyarlamanın doğrulama adımları:
 4. Gerçek bileşenlerin kontrastı, form hata durumları ve public rota testleri doğrulanır.
 5. `dotnet build`, `dotnet test` ve ilgili format kontrolleri çalıştırılır.
 
-Faz 00–04 durumu değişmez. Sıradaki işlevsel faz 05 Identity/Admin Foundation'dır;
-görsel kimliğin kodda uygulanması ayrı, kayıtlı bir UI uyarlaması olarak ele alınır.
+İlk uyarlama Faz 04 sonrasında ayrı, kayıtlı bir UI çalışması olarak tamamlandı.
+2026-10-10 Faz 08: aynı SVG/tokenlar korunarak profil, SSS, hukuki sayfalar, dinamik footer
+ve mobil menü tamamlandı. 390 px/klavye/gerçek bileşen kontrast kontrolleri
+`../qa/PHASE_08_REVIEW.md` içinde kayıtlıdır. SSS ve formlarda sınır rengi #737B8C;
+metin altını #806020, koyu zemindeki marka altını #D6B36A olarak kalır.
+Kaynak kart fotoğrafları ve kişisel kimlik/sicil verileri public varlık değildir.

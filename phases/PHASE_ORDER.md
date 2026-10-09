@@ -1,8 +1,9 @@
 # Phase Order
 
-Completed phases: 00–07 (owner-approved closure). Database rollout execution and Plesk validation are not implied by code acceptance.
+Completed phases: 00–08 (owner-approved closure). Database rollout execution and Plesk validation are not implied by code acceptance.
 Phase 07 closure and commit approved by the owner; dedicated MySQL/Plesk checks remain rollout gates.
-Remaining implementation phases: 08–17. Numbering is unique; see ADR-016/018/019/020.
+Phase 08 implemented/locally verified; owner closure approved (2026-10-10). Remaining implementation phases: 09–17.
+Numbering is unique; see ADR-016/018/019/020/021.
 
 | Phase | Guide | Status |
 |---|---|---|
@@ -14,7 +15,7 @@ Remaining implementation phases: 08–17. Numbering is unique; see ADR-016/018/0
 | 05 | [05-identity-auth.md](05-identity-auth.md) | Completed (owner approved) |
 | 06 | [06-cms-features.md](06-cms-features.md) | Completed (owner approved) |
 | 07 | [07-media-files.md](07-media-files.md) | Completed (owner approved) |
-| 08 | [08-public-site.md](08-public-site.md) | Pending |
+| 08 | [08-public-site.md](08-public-site.md) | Implemented / owner approved |
 | 09 | [09-seo.md](09-seo.md) | Pending |
 | 10 | [10-local-seo.md](10-local-seo.md) | Pending |
 | 11 | [11-contact-analytics.md](11-contact-analytics.md) | Pending |

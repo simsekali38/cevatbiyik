@@ -1,5 +1,14 @@
 # Database Blueprint
 
+## Phase 08 implemented persistence
+
+PublicSiteContent adds LawyerProfiles, PageContents and FaqItems (21 model entity types including Identity).
+All three use shared UTC timestamps/soft-delete fields and IsReviewed; active defaults to false in storage.
+Unique indexes reserve primary profile Key and fixed page Path. FAQ has a composite visibility/order index.
+No personal identity/registry fields, seeds, blobs, existing-data changes or foreign-key cascades are added.
+SQL: docs/database/PUBLIC_SITE_CONTENT.sql. Migration has not been applied to cevodb by the agent.
+Setup: docs/cms/PUBLIC_CONTENT_SETUP.md; dedicated MySQL validation remains a rollout gate.
+
 ## DBMS
 
 MySQL 8.x.
