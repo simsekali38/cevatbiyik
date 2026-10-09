@@ -1,0 +1,26 @@
+using CevatBiyik.Application.DTOs;
+using FluentValidation;
+
+namespace CevatBiyik.Application.Validation;
+
+public abstract class ArticleValidator<T> : AbstractValidator<T> where T : CreateArticleDto
+{
+    protected ArticleValidator()
+    {
+        RuleFor(x => x.Title).NotEmpty().MaximumLength(250).Must(PlainText.IsSafe);
+        RuleFor(x => x.Excerpt).MaximumLength(1000).Must(PlainText.IsSafe);
+        RuleFor(x => x.Content).NotEmpty().MaximumLength(100000).Must(PlainText.IsSafe);
+        RuleFor(x => x.PracticeAreaId).GreaterThan(0).When(x => x.PracticeAreaId.HasValue);
+        RuleFor(x => x.PublishedAt).NotNull().When(x => x.IsActive);
+        RuleFor(x => x.PublishedAt).Must(x => !x.HasValue || x.Value.Kind == DateTimeKind.Utc)
+            .WithMessage("Yayın tarihi UTC olmalıdır.");
+        RuleFor(x => x).Must(x => !x.IsActive || !ContainsPlaceholder(x))
+            .WithMessage("CONTENT_REQUIRED içeriği yayımlanamaz.");
+    }
+
+    private static bool ContainsPlaceholder(T x) =>
+        string.Concat(x.Title, x.Excerpt, x.Content).Contains("CONTENT_REQUIRED", StringComparison.OrdinalIgnoreCase);
+}
+
+public sealed class CreateArticleValidator : ArticleValidator<CreateArticleDto>;
+public sealed class UpdateArticleValidator : ArticleValidator<UpdateArticleDto>;

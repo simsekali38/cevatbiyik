@@ -9,7 +9,8 @@ namespace CevatBiyik.Web.Controllers;
 [Route("hata")]
 public sealed class ErrorController : Controller
 {
-    [HttpGet("{statusCode:int?}")]
+    // Status-code re-execution preserves the original verb, including contact POST failures.
+    [Route("{statusCode:int?}")]
     [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
     public IActionResult Index(int? statusCode)
     {

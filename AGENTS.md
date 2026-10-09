@@ -27,3 +27,12 @@ Use `CONTENT_REQUIRED` for unknown facts.
 ## Production rule
 
 Never deploy untested migrations, secrets, debug settings, fake content, or unreviewed legal claims.
+
+## Phase workflow (owner-confirmed)
+
+- Root guides, project-manifest.json, docs/, phases/ and skills/ are the project contract.
+- For a phase-number request, first review Phase 00, current ADRs, accepted risks, dependency direction and technology/hosting constraints.
+- Resolve the guide using project-manifest.json and phases/PHASE_ORDER.md; a legacy guide with the same number is not automatically completed.
+- Inspect relevant skills/acceptance criteria, implement modular code/tests and update CHANGELOG.md and meaningful ADRs/docs.
+- Run build/test and applicable format/migration checks; report commands/results and environment-dependent skips explicitly.
+- Finish the active requested scope; wait for the owner's instruction before starting another phase.

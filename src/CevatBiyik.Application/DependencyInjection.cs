@@ -1,4 +1,10 @@
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using CevatBiyik.Application.DTOs;
+using CevatBiyik.Application.Interfaces;
+using CevatBiyik.Application.Services;
+using CevatBiyik.Application.Validation;
+using FluentValidation;
 
 namespace CevatBiyik.Application;
 
@@ -11,7 +17,17 @@ public static class DependencyInjection
     {
         ArgumentNullException.ThrowIfNull(services);
 
-        // Faz 04+ : use case / servis kayıtları
+        services.TryAddSingleton(TimeProvider.System);
+        services.AddSingleton<ISlugService, SlugService>();
+        services.AddScoped<IArticleService, ArticleService>();
+        services.AddScoped<IPracticeAreaService, PracticeAreaService>();
+        services.AddScoped<IContactService, ContactService>();
+        services.AddScoped<ISettingService, SettingService>();
+        services.AddScoped<IValidator<CreateArticleDto>, CreateArticleValidator>();
+        services.AddScoped<IValidator<UpdateArticleDto>, UpdateArticleValidator>();
+        services.AddScoped<IValidator<CreatePracticeAreaDto>, CreatePracticeAreaValidator>();
+        services.AddScoped<IValidator<CreateContactMessageDto>, CreateContactMessageValidator>();
+        services.AddScoped<IValidator<UpdateSiteSettingDto>, UpdateSiteSettingValidator>();
         return services;
     }
 }

@@ -1,7 +1,22 @@
-@{
-    ViewData["Title"] = "Av. Cevat Bıyık";
-}
-
-<h1>Av. Cevat Bıyık</h1>
-<p>Site yapım aşamasındadır.</p>
-@* Faz 01 iskeleti: gerçek içerik Faz 04/06'da eklenir. Bilinmeyen tüm bilgiler CONTENT_REQUIRED'dır. *@
+@model HomeViewModel
+@{ var site = ViewData["SiteSettings"] as PublicSiteSettings ?? PublicSiteSettings.Empty; }
+<section class="hero"><div class="container"><div class="row align-items-center g-5">
+    <div class="col-lg-7"><p class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span>AVUKAT · HUKUK BÜROSU</p><h1 class="hero-title">Av. Cevat<br /><span>Bıyık</span><span class="hero-period" aria-hidden="true">.</span></h1><p class="hero-copy">Yayımlanan makaleleri okuyabilir, çalışma alanlarını inceleyebilir ve iletişim formunu kullanabilirsiniz.</p><div class="d-flex flex-wrap gap-3"><a class="btn btn-primary" asp-controller="Home" asp-action="Contact">İletişime geç <span aria-hidden="true">↗</span></a><a class="btn btn-link" asp-controller="Home" asp-action="About">Hakkımda <span aria-hidden="true">→</span></a></div></div>
+    <div class="col-lg-5"><aside class="hero-note" aria-labelledby="hero-note-title"><div class="note-ornament" aria-hidden="true"><span>CB</span></div><p class="eyebrow">İLETİŞİM BİLGİLERİ</p><h2 id="hero-note-title">Bir mesajla<br />başlayın.</h2><dl class="contact-mini"><dt>E-posta</dt><dd>@site.Email</dd><dt>Telefon</dt><dd>@site.Phone</dd></dl><a class="text-link" asp-controller="Home" asp-action="Contact">İletişim sayfasına git <span aria-hidden="true">↗</span></a></aside></div>
+</div></div></section>
+<section class="section-pad" aria-labelledby="areas-title"><div class="container">
+    <div class="section-heading"><div><p class="eyebrow">ÇALIŞMA ALANLARI</p><h2 id="areas-title">Uzmanlık alanları</h2></div><a class="text-link" asp-controller="PracticeAreas" asp-action="Index">Tüm alanlar <span aria-hidden="true">→</span></a></div>
+    @if (Model.PracticeAreas.Count == 0) { <div class="empty-state"><p class="mb-0">Henüz yayımlanmış çalışma alanı bulunmuyor.</p></div> }
+    else
+    {
+        <div class="row g-4">@foreach (var area in Model.PracticeAreas) { <div class="col-md-4"><article class="content-card h-100"><p class="eyebrow">ÇALIŞMA ALANI</p><h3><a asp-controller="PracticeAreas" asp-action="Detail" asp-route-slug="@area.Slug">@area.Name</a></h3><p>@area.ShortDescription</p><a class="text-link" asp-controller="PracticeAreas" asp-action="Detail" asp-route-slug="@area.Slug">@area.Name hakkında <span aria-hidden="true">↗</span></a></article></div> }</div>
+    }
+</div></section>
+<section class="section-pad article-section" aria-labelledby="articles-title"><div class="container">
+    <div class="section-heading"><div><p class="eyebrow">YAYINLAR</p><h2 id="articles-title">Son makaleler</h2></div><a class="text-link" asp-controller="Articles" asp-action="Index">Tüm makaleler <span aria-hidden="true">→</span></a></div>
+    @if (Model.Articles.Count == 0) { <div class="empty-state"><p class="mb-0">Henüz yayımlanmış makale bulunmuyor.</p></div> }
+    else
+    {
+        <div class="row g-4">@foreach (var article in Model.Articles) { <div class="col-md-4"><article class="content-card h-100"><p class="eyebrow"><time datetime="@article.PublishedAt?.ToString("yyyy-MM-dd")">@article.PublishedAt?.ToString("dd.MM.yyyy")</time></p><h3><a asp-controller="Articles" asp-action="Detail" asp-route-slug="@article.Slug">@article.Title</a></h3><p>@article.Excerpt</p><a class="text-link" asp-controller="Articles" asp-action="Detail" asp-route-slug="@article.Slug">Makaleyi oku <span class="visually-hidden">: @article.Title</span><span aria-hidden="true">↗</span></a></article></div> }</div>
+    }
+</div></section>

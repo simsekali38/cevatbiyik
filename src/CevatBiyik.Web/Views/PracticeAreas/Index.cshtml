@@ -1,0 +1,13 @@
+@model PagedResult<PracticeAreaDto>
+<section class="page-heading"><div class="container"><p class="eyebrow">ÇALIŞMA ALANLARI</p><h1>Uzmanlık alanları</h1><p>Yayımlanan çalışma alanlarını inceleyin.</p></div></section>
+<section class="section-pad"><div class="container">
+    @if (Model.Items.Count == 0) { <div class="empty-state"><h2>Henüz yayımlanmış çalışma alanı bulunmuyor.</h2><p>Bilgi almak için iletişim formunu kullanabilirsiniz.</p><a asp-controller="Home" asp-action="Contact">İletişime geç</a></div> }
+    else
+    {
+        <div class="row g-4">@foreach (var area in Model.Items) { <div class="col-md-6 col-lg-4"><article class="content-card h-100"><p class="eyebrow">ÇALIŞMA ALANI</p><h2><a asp-action="Detail" asp-route-slug="@area.Slug">@area.Name</a></h2><p>@area.ShortDescription</p><a class="text-link" asp-action="Detail" asp-route-slug="@area.Slug">@area.Name hakkında <span aria-hidden="true">↗</span></a></article></div> }</div>
+    }
+    <nav class="page-links" aria-label="Çalışma alanı sayfaları">
+        @if (Model.HasPrevious) { <a class="btn btn-outline-primary" asp-action="Index" asp-route-page="@(Model.Page - 1)">Önceki sayfa</a> }
+        @if (Model.HasNext) { <a class="btn btn-outline-primary" asp-action="Index" asp-route-page="@(Model.Page + 1)">Sonraki sayfa</a> }
+    </nav>
+</div></section>

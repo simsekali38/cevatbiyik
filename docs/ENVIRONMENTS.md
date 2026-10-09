@@ -1,5 +1,13 @@
 # ENVIRONMENTS.md — Ortamlar ve Yapılandırma
 
+## Phase 04 public UI configuration
+
+`Site:AllowIndexing` defaults false. `Site:BaseUrl` supplies the trusted HTTPS canonical origin.
+Production contact POST is disabled until `Site:ContactFormEnabled=true` and a reviewed non-placeholder `Site:ContactNotice` is supplied.
+Both values belong in deployment configuration; the flag is confirmation of editorial review, not an automated legal compliance check.
+Development/test forms remain available for verification. Real contact/profile details still require approved content.
+Bootstrap is served locally; no CDN settings are required. Configure trusted proxies/HTTPS for actual Plesk/IIS topology before launch.
+
 > Faz 01 — Foundation (2026-10-09)
 > Bu doküman ortam ayarlarının **nerede** tutulduğunu anlatır. Gerçek sırlar (bağlantı dizeleri, şifreler, SMTP bilgileri) **hiçbir zaman** repoya yazılmaz.
 
@@ -10,7 +18,7 @@
 | Development | `Development` | Yerel makine (`https://localhost:7080`, `http://localhost:5080`) | Detaylı hata sayfası açık, `launchSettings.json` ile başlar |
 | Production | `Production` | Windows + Plesk | Detaylı hata kapalı, HSTS ve exception handler (`/hata`) açık |
 
-Staging ortamı şimdilik yoktur. Gerekirse Faz 13'te ayrı karar alınır.
+Staging ortamı şimdilik yoktur. Gerekirse Faz 15'te ayrı karar alınır.
 
 ## 2. Yapılandırma kaynakları (öncelik sırası: sondaki kazanır)
 
@@ -26,7 +34,7 @@ Staging ortamı şimdilik yoktur. Gerekirse Faz 13'te ayrı karar alınır.
 | `Site:Name` | `appsettings.json` | Site adı |
 | `Site:BaseUrl` | `appsettings.json` / `.Development.json` | Canonical taban URL. Production: `https://cevatbiyik.av.tr` (ADR-009). `www` yönlendirmesi `OPEN_QUESTIONS.md` Q16 |
 | `ConnectionStrings:DefaultConnection` | user-secrets / Plesk | Repoda boş bırakılır; değer asla commit edilmez |
-| `AllowedHosts` | `appsettings.json` | Şimdilik `*`. Domain kesinleşince Faz 10/13'te canonical host'lara daraltılacak |
+| `AllowedHosts` | `appsettings.json` | Şimdilik `*`. Domain kesinleşince Faz 12/15'te canonical host'lara daraltılacak |
 | `DetailedErrors` | `appsettings.Production.json` | `false` |
 | `Logging:*` | Tüm dosyalar | Production'da `Warning` |
 
@@ -66,8 +74,8 @@ Yerel MySQL kurulu değil; hosting'deki uzak MySQL kullanılacak. Dikkat edilece
 
 - Yol: `src/CevatBiyik.Web/wwwroot/uploads/` (ADR-004).
 - İçerik repoya girmez; yalnızca `.gitkeep` takip edilir.
-- Production'da uygulama havuzu kimliğinin bu klasöre **yazma** izni olmalı, başka yerlere olmamalı (Faz 05 ve 13).
-- `wwwroot` altındaki dosyalar herkese açık servis edilir; gizli belgeler burada tutulmamalıdır (Faz 05'te karar verilecek).
+- Production'da uygulama havuzu kimliğinin bu klasöre **yazma** izni olmalı, başka yerlere olmamalı (Faz 07 ve 13).
+- `wwwroot` altındaki dosyalar herkese açık servis edilir; gizli belgeler burada tutulmamalıdır (Faz 07'te karar verilecek).
 
 ## 7. Doğrulama komutları (yerel)
 

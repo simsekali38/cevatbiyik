@@ -6,11 +6,11 @@ namespace CevatBiyik.IntegrationTests;
 /// <summary>
 /// Faz 01 baseline smoke testleri: uygulama ayağa kalkar, ana sayfa döner, hata sayfası doğru çalışır.
 /// </summary>
-public class BaselineSmokeTests : IClassFixture<WebApplicationFactory<Program>>
+public class BaselineSmokeTests : IClassFixture<PublicWebFactory>
 {
     private readonly HttpClient _client;
 
-    public BaselineSmokeTests(WebApplicationFactory<Program> factory)
+    public BaselineSmokeTests(PublicWebFactory factory)
     {
         _client = factory.CreateClient(new WebApplicationFactoryClientOptions
         {

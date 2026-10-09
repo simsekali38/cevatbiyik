@@ -6,6 +6,10 @@ MySQL 8.x.
 
 ## Main entities
 
+Phase 02 implements only Article, PracticeArea, ContactMessage and SiteSetting plus shared BaseEntity fields.
+The sections below are the broader roadmap, not the implemented schema. ContactMessage is the implemented name for planned ContactSubmission.
+Current details: `docs/database/ERD.md`, ADR-013 and `docs/database/MIGRATIONS.md`.
+
 ### Profile
 
 id

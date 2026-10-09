@@ -2,7 +2,7 @@
 
   <!--
     Infrastructure: EF Core + MySQL (Faz 02), Identity persistence (Faz 03), dosya depolama (Faz 05),
-    e-posta (Faz 09). Application soyutlamalarını uygular. Henüz paket yok; sağlayıcı seçimi Faz 02 ADR'sinde.
+    e-posta (Faz 09). Application soyutlamalarını uygular. Sağlayıcı seçimi Faz 02 ADR'sinde.
   -->
   <PropertyGroup>
     <RootNamespace>CevatBiyik.Infrastructure</RootNamespace>
@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
   </ItemGroup>

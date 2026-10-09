@@ -60,3 +60,7 @@ dotnet_diagnostic.CA1303.severity = none
 # Test projelerinde isimlendirme (Metot_Senaryo_Beklenen) serbest
 [tests/**/*.cs]
 dotnet_diagnostic.CA1707.severity = none
+
+# EF CLI owns generated migrations and snapshots.
+[src/CevatBiyik.Infrastructure/Persistence/Migrations/*.cs]
+generated_code = true

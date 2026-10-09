@@ -1,0 +1,32 @@
+@model ArticleListViewModel
+<section class="page-heading"><div class="container"><p class="eyebrow">YAYINLAR</p><h1>Makaleler</h1><p>Yayımlanmış makaleleri inceleyin.</p></div></section>
+<section class="section-pad"><div class="container">
+    <form method="post" asp-controller="Articles" asp-action="Search" asp-antiforgery="false" class="filter-form" role="search" aria-label="Makale arama">
+        @Html.AntiForgeryToken()
+        <div class="row g-3 align-items-end">
+            <div class="col-md-6"><label for="q" class="form-label">Makale ara</label><input type="search" id="q" name="q" class="form-control" maxlength="100" value="@Model.Search" placeholder="Başlık veya kısa açıklama" /></div>
+            <div class="col-md-4"><label for="category" class="form-label">Çalışma alanı</label><select id="category" name="category" class="form-select"><option value="">Tüm çalışma alanları</option>
+                @if (Model.Category.HasValue && !Model.Categories.Items.Any(x => x.Id == Model.Category)) { <option value="@Model.Category" selected>Seçili çalışma alanı</option> }
+                @foreach (var category in Model.Categories.Items) { <option value="@category.Id" selected="@(Model.Category == category.Id)">@category.Name</option> }
+            </select><input type="hidden" name="categoryPage" value="@Model.CategoryPage" /></div>
+            <div class="col-md-2"><button type="submit" class="btn btn-primary w-100">Ara</button></div>
+        </div>
+    </form>
+    @if (Model.Categories.HasPrevious || Model.Categories.HasNext)
+    {
+        <nav class="filter-pages" aria-label="Çalışma alanı seçenekleri">
+            @if (Model.Categories.HasPrevious) { <a asp-action="Index" asp-route-categoryPage="@(Model.CategoryPage - 1)" asp-route-q="@Model.Search" asp-route-category="@Model.Category">Önceki çalışma alanları</a> }
+            @if (Model.Categories.HasNext) { <a asp-action="Index" asp-route-categoryPage="@(Model.CategoryPage + 1)" asp-route-q="@Model.Search" asp-route-category="@Model.Category">Diğer çalışma alanları</a> }
+        </nav>
+    }
+    <p class="result-count">@Model.Result.TotalCount makale</p>
+    @if (Model.Result.Items.Count == 0) { <div class="empty-state"><h2>Makale bulunamadı</h2><p>Henüz yayımlanmış makale bulunmuyor veya aramanızla eşleşen bir sonuç yok.</p><a asp-action="Index">Filtreleri temizle</a></div> }
+    else
+    {
+        <div class="row g-4">@foreach (var article in Model.Result.Items) { <div class="col-md-6 col-lg-4"><article class="content-card h-100"><p class="eyebrow"><time datetime="@article.PublishedAt?.ToString("yyyy-MM-dd")">@article.PublishedAt?.ToString("dd.MM.yyyy")</time></p><h2><a asp-action="Detail" asp-route-slug="@article.Slug">@article.Title</a></h2><p>@article.Excerpt</p><a class="text-link" asp-action="Detail" asp-route-slug="@article.Slug">Makaleyi oku <span class="visually-hidden">: @article.Title</span><span aria-hidden="true">↗</span></a></article></div> }</div>
+    }
+    <nav class="page-links" aria-label="Makale sayfaları">
+        @if (Model.Result.HasPrevious) { <a class="btn btn-outline-primary" asp-action="Index" asp-route-page="@(Model.Result.Page - 1)" asp-route-q="@Model.Search" asp-route-category="@Model.Category" asp-route-categoryPage="@Model.CategoryPage">Önceki sayfa</a> }
+        @if (Model.Result.HasNext) { <a class="btn btn-outline-primary" asp-action="Index" asp-route-page="@(Model.Result.Page + 1)" asp-route-q="@Model.Search" asp-route-category="@Model.Category" asp-route-categoryPage="@Model.CategoryPage">Sonraki sayfa</a> }
+    </nav>
+</div></section>

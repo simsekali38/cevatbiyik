@@ -20,3 +20,16 @@ Project references (ADR-012):
 `CevatBiyik.Web` → `CevatBiyik.Infrastructure` → `CevatBiyik.Application` → `CevatBiyik.Domain`
 
 Target framework is defined only in `Directory.Build.props` (`net8.0`). Package versions are defined only in `Directory.Packages.props`.
+
+Phase 03 layout:
+
+```text
+src/CevatBiyik.Application/
+  DTOs/         input and read models (no EF entities returned)
+  Interfaces/   business services, slug helper, IRepository<T> port
+  Services/     business rules and explicit soft deletion
+  Validation/   FluentValidation validators and plain-text input policy
+  Exceptions/   safe NotFoundException and ConflictException
+src/CevatBiyik.Infrastructure/Persistence/
+  EfRepository.cs   MySQL implementation of the Application port
+```

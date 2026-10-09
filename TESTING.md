@@ -4,7 +4,25 @@
 
 Domain rules, services, validation.
 
+Run `dotnet test CevatBiyik.sln` from the repository root. ApplicationServiceTests cover Turkish slugs,
+reserved/deleted URL collisions, stable URLs on edits, soft deletion, pagination bounds, publication timing/area visibility,
+contact markup/encoded-markup rejection, consent/email validation, read idempotency, setting-key conflicts and inactive placeholders.
+These use real validators and a small in-memory repository fake, not an EF InMemory substitute.
+PersistenceTests validate MySQL model/SQL and migration drift without opening a database connection.
+
+For real MySQL tests, set `CEVATBIYIK_TEST_MYSQL` to a dedicated empty MySQL 8 database named `cevatbiyik_test_*`.
+Run `dotnet test tests/CevatBiyik.IntegrationTests --filter FullyQualifiedName~MySqlPersistenceTests`.
+The tests apply migrations only after checking that database name, then roll back test data transactions.
+Without that variable they are explicitly skipped; passing unit tests does not imply live database coverage.
+Details and connection templates are in `docs/database/MIGRATIONS.md`.
+
 ## Integration
+
+PublicUiTests/ContactFlowTests exercise real MVC, Razor, Application and validation with isolated PublicWebFactory repositories.
+They cover 200 text/html public routes, detail/404, filter/400, encoded legacy markup, configured canonical host, local assets,
+CSRF/400, validation feedback, PRG/TempData, overposting prevention, rate limit/429 and production notice gates.
+PublicQueryTests cover filtering before paging, publication/SortOrder ordering and safe public settings.
+These UI tests never connect to the developer's database or insert test content into it.
 
 - database
 - Identity

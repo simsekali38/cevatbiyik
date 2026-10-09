@@ -1,0 +1,105 @@
+using CevatBiyik.Domain.Entities;
+using CevatBiyik.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
+using CevatBiyik.Application.DTOs;
+using CevatBiyik.Application.Exceptions;
+using CevatBiyik.Application.Interfaces;
+using CevatBiyik.Infrastructure;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace CevatBiyik.IntegrationTests;
+
+public sealed class MySqlFactAttribute : FactAttribute
+{
+    public MySqlFactAttribute()
+    {
+        if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("CEVATBIYIK_TEST_MYSQL")))
+        {
+            Skip = "Set CEVATBIYIK_TEST_MYSQL to a dedicated MySQL 8 test database connection string.";
+        }
+    }
+}
+
+public class MySqlPersistenceTests
+{
+    [MySqlFact]
+    public async Task ApplicationServices_WorkThroughMySqlRepository()
+    {
+        var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
+        {
+            ["ConnectionStrings:DefaultConnection"] = Environment.GetEnvironmentVariable("CEVATBIYIK_TEST_MYSQL")
+        }).Build();
+        var services = new ServiceCollection().AddInfrastructure(configuration);
+        await using var provider = services.BuildServiceProvider();
+        await using var scope = provider.CreateAsyncScope();
+        var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        Assert.StartsWith("cevatbiyik_test_", context.Database.GetDbConnection().Database, StringComparison.Ordinal);
+        await context.Database.MigrateAsync();
+        await using var transaction = await context.Database.BeginTransactionAsync();
+        var areas = scope.ServiceProvider.GetRequiredService<IPracticeAreaService>();
+        var articles = scope.ServiceProvider.GetRequiredService<IArticleService>();
+        var contacts = scope.ServiceProvider.GetRequiredService<IContactService>();
+        var settings = scope.ServiceProvider.GetRequiredService<ISettingService>();
+        var suffix = Guid.NewGuid().ToString("N");
+        var area = await areas.CreateAsync(new CreatePracticeAreaDto { Name = "Test " + suffix, Content = "Test metni", IsActive = true });
+        var article = await articles.CreateAsync(new CreateArticleDto
+        {
+            Title = "Test " + suffix, Content = "Test metni", PracticeAreaId = area.Id,
+            IsActive = true, PublishedAt = DateTime.UtcNow.AddMinutes(-1)
+        });
+        Assert.Contains(await articles.ListPublishedAsync(1, 100), x => x.Id == article.Id);
+        await areas.DeleteAsync(area.Id);
+        Assert.DoesNotContain(await articles.ListPublishedAsync(1, 100), x => x.Id == article.Id);
+        await articles.DeleteAsync(article.Id);
+        var replacement = await articles.CreateAsync(new CreateArticleDto { Title = article.Title, Content = "Test metni" });
+        Assert.Equal(article.Slug + "-2", replacement.Slug);
+        Assert.Null(await articles.GetAsync(article.Id));
+        var message = await contacts.CreateAsync(new CreateContactMessageDto
+        {
+            Name = "Test", Email = "test@example.com", Message = "Test mesajı", Consent = true
+        });
+        Assert.True((await contacts.MarkReadAsync(message.Id)).IsRead);
+        await contacts.DeleteAsync(message.Id);
+        Assert.Null(await contacts.GetAsync(message.Id));
+        var setting = await settings.CreateAsync(new UpdateSiteSettingDto { Key = "Site.Name", Value = "CONTENT_REQUIRED" });
+        await settings.DeleteAsync(setting.Id);
+        await Assert.ThrowsAsync<ConflictException>(() => settings.CreateAsync(new UpdateSiteSettingDto { Key = "Site.Name", Value = "CONTENT_REQUIRED" }));
+        await transaction.RollbackAsync();
+    }
+
+    [MySqlFact]
+    public async Task MigrationAndPersistence_EnforceConstraintsAndSoftDelete()
+    {
+        var options = new DbContextOptionsBuilder<AppDbContext>()
+            .UseMySql(Environment.GetEnvironmentVariable("CEVATBIYIK_TEST_MYSQL"),
+                new MySqlServerVersion(new Version(8, 0, 0))).Options;
+        await using var context = new AppDbContext(options);
+        // Never allow this test to migrate an ordinary application database.
+        Assert.StartsWith("cevatbiyik_test_", context.Database.GetDbConnection().Database, StringComparison.Ordinal);
+        await context.Database.MigrateAsync();
+        await using var transaction = await context.Database.BeginTransactionAsync();
+        var suffix = Guid.NewGuid().ToString("N");
+        var area = new PracticeArea { Name = "CONTENT_REQUIRED", Slug = suffix, Content = "CONTENT_REQUIRED" };
+        var article = new Article { Title = "CONTENT_REQUIRED", Slug = suffix, Content = "CONTENT_REQUIRED", PracticeArea = area };
+        context.Add(article);
+        await context.SaveChangesAsync();
+        Assert.NotEqual(0, article.Id);
+        Assert.True(article.CreatedAt > DateTime.UtcNow.AddMinutes(-1));
+        Assert.Null(article.UpdatedAt);
+        Assert.False(article.IsActive);
+        var createdAt = article.CreatedAt;
+        article.IsDeleted = true;
+        await context.SaveChangesAsync();
+        Assert.Equal(createdAt, article.CreatedAt);
+        Assert.NotNull(article.UpdatedAt);
+        Assert.False(await context.Articles.AnyAsync(a => a.Id == article.Id));
+        Assert.True(await context.Articles.IgnoreQueryFilters().AnyAsync(a => a.Id == article.Id));
+        context.Remove(area);
+        await Assert.ThrowsAsync<DbUpdateException>(() => context.SaveChangesAsync());
+        context.Entry(area).State = EntityState.Unchanged;
+        context.Add(new Article { Title = "CONTENT_REQUIRED", Slug = suffix, Content = "CONTENT_REQUIRED" });
+        await Assert.ThrowsAsync<DbUpdateException>(() => context.SaveChangesAsync());
+        await transaction.RollbackAsync();
+    }
+}

@@ -64,7 +64,7 @@ Faz 01'den itibaren build/test çıktıları **kendi makinende** çalıştırıl
 ## 4. Blueprint Tutarlılık Bulguları
 
 ### F-01 — Tek parça `.md` ile zip arasındaki çelişki
-`claude_free_ai_blueprint.md` genel bir şablondur; REST/GraphQL, JWT, CORS ve "Node.js / .NET / Next.js" seçeneklerinden söz eder. Zip'teki manifest ve `AGENTS.md` ise API'siz, tek domain, server-rendered Razor mimarisini zorunlu kılar. **Çözüm:** Zip esas alınır. Faz 10 (Security Hardening) içindeki "CORS" maddesi tek domain nedeniyle büyük ölçüde geçerli değildir.
+`claude_free_ai_blueprint.md` genel bir şablondur; REST/GraphQL, JWT, CORS ve "Node.js / .NET / Next.js" seçeneklerinden söz eder. Zip'teki manifest ve `AGENTS.md` ise API'siz, tek domain, server-rendered Razor mimarisini zorunlu kılar. **Çözüm:** Zip esas alınır. Faz 12 (Security Hardening) içindeki "CORS" maddesi tek domain nedeniyle büyük ölçüde geçerli değildir.
 
 ### F-02 — .NET 10 referansları güncellenmeli — ✅ ÇÖZÜLDÜ (Faz 01)
 .NET 8 kararı verildiği için `project-manifest.json`, `README.md`, `MASTER_PROMPT.md`, `DEPLOYMENT.md` güncellendi ve `DECISIONS.md` içine **ADR-008** eklendi (güncel metinler bu dosyalarda; burada ilk öneri korunmaktadır):
@@ -87,14 +87,14 @@ Faz 00 ve Faz 01 kayıtları `CHANGELOG.md` içine eklendi.
 
 | ID | Risk | Etki | Olasılık | Önlem |
 |---|---|---|---|---|
-| **R-01** | **.NET 8 desteği 10 Kasım 2026'da bitiyor.** Microsoft bu tarihten sonra güvenlik düzeltmesi ve teknik destek vermeyecek (uygulamalar çalışmaya devam eder). Site iletişim formu ve admin paneli içerdiğinden yamasız kalması kabul edilebilir bir durum değildir. **Durum: kullanıcı tarafından kabul edildi (.NET 8 ile devam).** | Yüksek | Kesin (tarih belli) | (1) `TargetFramework` tek yerden (`Directory.Build.props`) yönetilsin. (2) ADR-008'e **.NET 10 yükseltme planı** yazılsın; yükseltme, Faz 13 (Plesk Deployment) öncesinde veya en geç launch sonrası ilk bakım döneminde yapılsın. (3) Plesk'te .NET 10 Hosting Bundle kurulabilirliği hosting sağlayıcıya şimdiden sorulsun. (4) NuGet paketleri .NET 8 ve .NET 10 ile uyumlu seçilsin. |
+| **R-01** | **.NET 8 desteği 10 Kasım 2026'da bitiyor.** Microsoft bu tarihten sonra güvenlik düzeltmesi ve teknik destek vermeyecek (uygulamalar çalışmaya devam eder). Site iletişim formu ve admin paneli içerdiğinden yamasız kalması kabul edilebilir bir durum değildir. **Durum: kullanıcı tarafından kabul edildi (.NET 8 ile devam).** | Yüksek | Kesin (tarih belli) | (1) `TargetFramework` tek yerden (`Directory.Build.props`) yönetilsin. (2) ADR-008'e **.NET 10 yükseltme planı** yazılsın; yükseltme, Faz 15 (Plesk Deployment) öncesinde veya en geç launch sonrası ilk bakım döneminde yapılsın. (3) Plesk'te .NET 10 Hosting Bundle kurulabilirliği hosting sağlayıcıya şimdiden sorulsun. (4) NuGet paketleri .NET 8 ve .NET 10 ile uyumlu seçilsin. |
 | R-02 | Plesk/Windows hosting .NET 8 (veya 10) runtime'ını / Hosting Bundle'ı desteklemiyor olabilir | Yüksek | Orta | Faz 00'da hosting sağlayıcıdan yazılı teyit; gerekirse plan değişikliği |
 | R-03 | EF Core MySQL sağlayıcısı: seçilen sağlayıcının hedef .NET sürümüyle uyumu doğrulanmalı | Orta | Düşük | Faz 02'den önce sağlayıcı seçimi + sürüm uyumu ADR'ye yazılsın |
 | R-04 | Gerçek içerik (adres, baro, biyografi, uzmanlık alanları) yok | Orta | Kesin | `CONTENT_REQUIRED` kuralı; `docs/content/CONTENT_INTAKE.md` doldurulsun |
 | R-05 | Domain sahipliği/yönlendirmesi doğrulanmadı | Orta | Bilinmiyor | Domain kayıt sahibi ve DNS erişimi teyit edilsin |
 | R-06 | SMTP, yedekleme, depolama limiti ve yükleme limiti bilinmiyor | Orta | Bilinmiyor | `OPEN_QUESTIONS.md` madde 13-15 |
 | R-07 | Hukuki reklam/etik uygunluk ve KVKK metinleri | Yüksek | Kesin | Yayın öncesi **insan (avukat) incelemesi** zorunlu; metinler uydurulmayacak |
-| R-08 | Hosting filesystem'de yükleme dosyaları: yazma izni ve yedek eksikliği | Orta | Orta | ADR-004 önlemleri; Faz 05 ve 13 |
+| R-08 | Hosting filesystem'de yükleme dosyaları: yazma izni ve yedek eksikliği | Orta | Orta | ADR-004 önlemleri; Faz 07 ve 13 |
 | R-09 | Yerel geliştirme ortamı (SDK, MySQL, Git) henüz doğrulanmadı; Faz 01 build/test çıktıları buna bağlı | Orta | Bilinmiyor | Madde 20: SDK sürümü, MySQL 8, Git kurulumu teyit edilsin |
 
 ---

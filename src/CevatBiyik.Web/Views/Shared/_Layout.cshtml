@@ -1,22 +1,64 @@
+@inject IConfiguration Configuration
+@{
+    var site = ViewData["SiteSettings"] as PublicSiteSettings ?? PublicSiteSettings.Empty;
+    var title = ViewData["Title"]?.ToString() ?? site.Name;
+    var description = ViewData["MetaDescription"]?.ToString() ?? site.Description;
+    var robots = ViewData["Robots"]?.ToString() ?? (Configuration.GetValue<bool>("Site:AllowIndexing") ? "index, follow" : "noindex, nofollow");
+    var origin = Configuration["Site:BaseUrl"] ?? "https://cevatbiyik.av.tr";
+    if (!Uri.TryCreate(origin, UriKind.Absolute, out var baseUri) || baseUri.Scheme != "https" || !string.IsNullOrEmpty(baseUri.UserInfo))
+    {
+        baseUri = new Uri("https://cevatbiyik.av.tr");
+    }
+    var canonicalPath = ViewData["CanonicalPath"]?.ToString();
+    var canonical = canonicalPath is not null ? new Uri(baseUri.GetLeftPart(UriPartial.Authority) + canonicalPath).AbsoluteUri : null;
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+}
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    @* Faz 07'ye kadar site indexlenmez. SEO metadata CMS'i devreye girince bu değer yönetilebilir olacak. *@
-    <meta name="robots" content="@(ViewData["Robots"] ?? "noindex, nofollow")" />
-    <title>@(ViewData["Title"] ?? "Av. Cevat Bıyık")</title>
+    <meta name="robots" content="@robots" />
+    <title>@title | @site.Name</title>
+    <meta name="description" content="@description" />
+    @if (canonical is not null)
+    {
+        <link rel="canonical" href="@canonical" />
+        <meta property="og:url" content="@canonical" />
+    }
+    <meta property="og:title" content="@title | @site.Name" />
+    <meta property="og:description" content="@description" />
+    <meta property="og:type" content="@(ViewData["OpenGraphType"] ?? "website")" />
+    <meta property="og:site_name" content="@site.Name" />
+    <meta property="og:locale" content="tr_TR" />
+    <link rel="stylesheet" href="~/lib/bootstrap/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <script src="~/lib/bootstrap/bootstrap.bundle.min.js" asp-append-version="true" defer></script>
+    <script src="~/js/site.js" asp-append-version="true" defer></script>
 </head>
 <body>
-    <a href="#icerik">Ana içeriğe geç</a>
-    <header>
-        <p>Av. Cevat Bıyık</p>
-    </header>
-    <main id="icerik">
-        @RenderBody()
-    </main>
-    <footer>
-        @* Faz 06: gerçek footer (iletişim, KVKK, yasal bilgilendirme). Bilgiler CONTENT_REQUIRED. *@
-    </footer>
+    <a class="skip-link" href="#icerik">Ana içeriğe geç</a>
+    <header class="site-header"><div class="container">
+        <nav class="navbar navbar-expand-lg py-3" aria-label="Ana menü">
+            <a class="navbar-brand brand" asp-controller="Home" asp-action="Index" aria-label="@site.Name — ana sayfa"><span class="brand-mark" aria-hidden="true">CB<span class="brand-dot">.</span></span><span class="brand-name">@site.Name<span class="brand-caption">HUKUK BÜROSU</span></span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#ana-menu" aria-controls="ana-menu" aria-expanded="false" aria-label="Menüyü aç veya kapat"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="ana-menu"><ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+                <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="About" aria-current="@(currentAction == "About" ? "page" : null)">Hakkımda</a></li>
+                <li class="nav-item"><a class="nav-link" asp-controller="PracticeAreas" asp-action="Index" aria-current="@(currentController == "PracticeAreas" ? "page" : null)">Uzmanlık alanları</a></li>
+                <li class="nav-item"><a class="nav-link" asp-controller="Articles" asp-action="Index" aria-current="@(currentController == "Articles" ? "page" : null)">Makaleler</a></li>
+                <li class="nav-item ms-lg-3"><a class="btn btn-outline-primary" asp-controller="Home" asp-action="Contact" aria-current="@(currentAction == "Contact" ? "page" : null)">İletişim <span aria-hidden="true">↗</span></a></li>
+            </ul></div>
+        </nav>
+    </div></header>
+    <main id="icerik" tabindex="-1">@RenderBody()</main>
+    <footer class="site-footer"><div class="container">
+        <div class="row g-4 footer-top">
+            <div class="col-lg-5"><p class="footer-name">@site.Name</p><p class="footer-description">Makaleler, çalışma alanları ve iletişim.</p></div>
+            <div class="col-sm-6 col-lg-3"><h2 class="footer-heading">Keşfedin</h2><nav aria-label="Alt menü"><ul class="list-unstyled footer-links"><li><a asp-controller="Home" asp-action="About">Hakkımda</a></li><li><a asp-controller="PracticeAreas" asp-action="Index">Uzmanlık alanları</a></li><li><a asp-controller="Articles" asp-action="Index">Makaleler</a></li></ul></nav></div>
+            <div class="col-sm-6 col-lg-4"><h2 class="footer-heading">İletişim</h2><p class="mb-2">@site.Email</p><p class="mb-2">@site.Phone</p><a asp-controller="Home" asp-action="Contact">İletişim formuna git <span aria-hidden="true">↗</span></a></div>
+        </div>
+        <div class="footer-bottom"><span>© @DateTime.UtcNow.Year @site.Name</span><span>cevatbiyik.av.tr</span></div>
+    </div></footer>
 </body>
 </html>
