@@ -4,14 +4,11 @@
     var title = ViewData["Title"]?.ToString() ?? site.Name;
     var description = ViewData["MetaDescription"]?.ToString() ?? site.Description;
     var fullTitle = ViewData["SeoTitle"]?.ToString() ?? title + " | " + site.Name;
-    var robots = ViewData["Robots"]?.ToString() ?? (Configuration.GetValue<bool>("Site:AllowIndexing") ? "index, follow" : "noindex, nofollow");
-    var origin = Configuration["Site:BaseUrl"] ?? "https://cevatbiyik.av.tr";
-    if (!Uri.TryCreate(origin, UriKind.Absolute, out var baseUri) || baseUri.Scheme != "https" || !string.IsNullOrEmpty(baseUri.UserInfo))
-    {
-        baseUri = new Uri("https://cevatbiyik.av.tr");
-    }
+    var robots = CevatBiyik.Web.Seo.SeoPolicy.Robots(Configuration.GetValue<bool>("Site:AllowIndexing"), ViewData["Robots"]?.ToString()?.Contains("noindex", StringComparison.Ordinal) == true);
+    var origin = CevatBiyik.Web.Seo.SeoPresentation.Origin(Configuration);
+    var baseUri = new Uri(origin);
     var canonicalPath = ViewData["CanonicalPath"]?.ToString();
-    var canonical = canonicalPath is not null ? new Uri(baseUri.GetLeftPart(UriPartial.Authority) + canonicalPath).AbsoluteUri : null;
+    var canonical = CevatBiyik.Web.Seo.SeoPolicy.Canonical(origin, canonicalPath);
     var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
     var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
     var profile = ViewData["PublicProfile"] as ProfileDto;

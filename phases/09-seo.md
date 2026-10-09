@@ -47,3 +47,11 @@ The phase is complete only when its implementation and verification criteria are
 - redirect management
 - SEO admin warnings
 - automated checks
+
+## Implementation and local verification — 2026-10-10
+
+Implemented; owner closure approved (2026-10-10). ADR-022 records safe 301 management, bounded Admin warnings,
+PracticeArea SEO/OG, canonical/indexing policy and approved sitemap/schema coverage.
+Concrete files, migration commands and limits: ../docs/seo/SEO_SETUP.md.
+Verification: ../docs/qa/PHASE_09_REVIEW.md — 228 passed, 7 dedicated MySQL tests skipped; Release build 0 errors/0 warnings.
+390 px checks passed for three new Admin screens. No live migration/deployment/indexing activation or Phase 10 work.

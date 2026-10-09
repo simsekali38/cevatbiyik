@@ -77,3 +77,11 @@ Commands and operational gates: ../media/MEDIA_FILES.md and ../deployment/PLESK_
 PUBLIC_SITE_CONTENT.sql generated with EF 8.0.29. No seeds, existing-data alteration or destructive Up commands.
 Down drops these tables and loses content. MySQL DDL is not fully atomic; validate on dedicated MySQL 8 first.
 No cevodb database update was performed. Commands/publication setup: ../cms/PUBLIC_CONTENT_SETUP.md.
+
+## Phase 09 — SeoRedirects
+
+20261009221754_SeoRedirects adds RedirectRules, six nullable PracticeArea fields, unique source/media indexes
+and one restrictive media FK. 22 model entity types. SQL: SEO_REDIRECTS.sql, generated with EF 8.0.29.
+Up has no seeds/data drops; Down loses redirect/area SEO data. MySQL DDL is not fully atomic.
+No database update performed. Dedicated MySQL validation and coordinated backups precede application.
+Commands and indexing gates: ../seo/SEO_SETUP.md.

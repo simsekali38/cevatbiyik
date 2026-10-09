@@ -21,6 +21,8 @@ public sealed class SeoValidator : AbstractValidator<SeoInput>
         RuleFor(x => x.OpenGraphDescription).MaximumLength(320).Must(PlainText.IsSafe);
         RuleFor(x => x.OpenGraphMediaId).GreaterThan(0).When(x => x.OpenGraphMediaId.HasValue);
         RuleFor(x => x).Must(x => new[] { x.MetaTitle, x.MetaDescription, x.Keywords, x.OpenGraphTitle, x.OpenGraphDescription }
+            .All(v => v is null || !v.Any(char.IsControl))).WithMessage("SEO metinleri tek satır olmalıdır; kontrol karakterleri kullanılamaz.");
+        RuleFor(x => x).Must(x => new[] { x.MetaTitle, x.MetaDescription, x.Keywords, x.OpenGraphTitle, x.OpenGraphDescription }
             .All(v => v is null || !v.Contains("CONTENT_REQUIRED", StringComparison.OrdinalIgnoreCase)));
     }
 }

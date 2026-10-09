@@ -1,5 +1,6 @@
 @model SeoInput
 <fieldset><legend>SEO ve sosyal paylaşım</legend>
+<div class="alert alert-info"><p>Boş alanlar sayfanın varsayılan metinlerini kullanır. Karakter aralıkları zorunlu değildir; görsel isteğe bağlıdır.</p><ul class="mb-0">@foreach(var issue in CevatBiyik.Application.Services.SeoQuality.Check(Model)){<li>@issue.Message</li>}</ul><a href="/admin/seo">SEO kontrol paneli</a></div>
 <div class="mb-3"><label asp-for="MetaTitle" class="form-label">Meta başlık</label><input asp-for="MetaTitle" class="form-control" maxlength="120" /></div>
 <div class="mb-3"><label asp-for="MetaDescription" class="form-label">Meta açıklama</label><textarea asp-for="MetaDescription" class="form-control" maxlength="320" rows="3"></textarea></div>
 <div class="mb-3"><label asp-for="Keywords" class="form-label">Anahtar kelimeler</label><input asp-for="Keywords" class="form-control" maxlength="300" /></div>

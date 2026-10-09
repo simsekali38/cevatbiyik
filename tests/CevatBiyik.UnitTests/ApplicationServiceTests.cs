@@ -213,7 +213,7 @@ public class ApplicationServiceTests
     public async Task PracticeArea_CreateUpdateAndDeletePreserveSlug()
     {
         var repository = new FakeRepository<PracticeArea>();
-        var service = new PracticeAreaService(repository, new SlugService(), new CreatePracticeAreaValidator());
+        var service = new PracticeAreaService(repository, new SlugService(), new CreatePracticeAreaValidator(), new FakeRepository<MediaAsset>());
         var created = await service.CreateAsync(new CreatePracticeAreaDto { Name = "Çalışma Alanı", Content = "Taslak" });
         var updated = await service.UpdateAsync(created.Id, new CreatePracticeAreaDto { Name = "Yeni Alan", Content = "Taslak", SortOrder = 2 });
         Assert.Equal("calisma-alani", updated.Slug);
@@ -351,7 +351,7 @@ public class ApplicationServiceTests
         var settings = new FakeRepository<SiteSetting>();
         await Assert.ThrowsAsync<NotFoundException>(() => Articles(new FakeRepository<Article>()).UpdateAsync(42,
             new UpdateArticleDto { Title = "Başlık", Content = "Metin" }));
-        await Assert.ThrowsAsync<NotFoundException>(() => new PracticeAreaService(areas, new SlugService(), new CreatePracticeAreaValidator())
+        await Assert.ThrowsAsync<NotFoundException>(() => new PracticeAreaService(areas, new SlugService(), new CreatePracticeAreaValidator(), new FakeRepository<MediaAsset>())
             .UpdateAsync(42, new CreatePracticeAreaDto { Name = "Alan", Content = "Metin" }));
         await Assert.ThrowsAsync<NotFoundException>(() => Contacts(contacts).MarkReadAsync(42));
         await Assert.ThrowsAsync<NotFoundException>(() => new SettingService(settings, new UpdateSiteSettingValidator())

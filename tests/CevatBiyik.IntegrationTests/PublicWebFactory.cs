@@ -23,6 +23,7 @@ public sealed class PublicWebFactory : WebApplicationFactory<Program>
     public PublicTestRepository<PageContent> Pages { get; } = new();
     public PublicTestRepository<FaqItem> Faq { get; } = new();
     public PublicTestRepository<PageSeo> PageSeo { get; } = new();
+    public PublicTestRepository<RedirectRule> Redirects { get; } = new();
 
     public PublicWebFactory()
     {
@@ -60,6 +61,7 @@ public sealed class PublicWebFactory : WebApplicationFactory<Program>
             services.AddSingleton<IRepository<ArticleTag>>(Tags);
             services.AddSingleton<IRepository<MediaAsset>>(Media);
             services.AddSingleton<IRepository<PageSeo>>(PageSeo);
+            services.AddSingleton<IRepository<RedirectRule>>(Redirects);
             services.AddSingleton<IRepository<LawyerProfile>>(Profiles);
             services.AddSingleton<IRepository<PageContent>>(Pages);
             services.AddSingleton<IRepository<FaqItem>>(Faq);

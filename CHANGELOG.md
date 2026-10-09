@@ -4,6 +4,16 @@ All notable project changes should be recorded here.
 
 ## [Unreleased]
 
+### Phase 09 — SEO and redirect management (2026-10-10)
+- Added publication-aware safe same-site 301 rules and audited Admin management; rejected external/protected paths and chains.
+- Added PracticeArea SEO/OpenGraph and media reference protection; reused safe schema and existing sitemap/robots.
+- Centralized canonical origin and indexing precedence, aligned complete contact facts with sitemap/noindex/schema.
+- Added bounded Admin SEO warnings and automated metadata/canonical/schema/redirect/indexing regressions.
+- Added SeoRedirects migration/reviewed SQL, ADR-022, SEO setup and verification report; no new dependencies.
+- Release: 0 errors/0 warnings; 124 unit + 104 integration = 228 passed, 7 dedicated MySQL tests skipped.
+- Three Admin screens checked at 390 px without horizontal overflow. Owner closure approved (2026-10-10); commit authorized; no live migration/deploy.
+- Preserved user-owned appsettings.json edits.
+
 ### Phase 08 — Public Razor site and reviewed CMS (2026-10-10)
 - Preserved ADR-017 navy/gold tokens and clean SVG; added shared FAQ/focus/footer/mobile components and article cover cards.
 - Added reviewed profile/vision/bar, homepage introduction, fixed legal pages and paged FAQ Admin CMS.

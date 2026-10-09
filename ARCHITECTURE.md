@@ -93,3 +93,10 @@ Bootstrap assets live in wwwroot/lib/bootstrap; no runtime CDN dependency is req
 Not required initially.
 
 Future API can live at `/api/v1/` if required.
+
+## Phase 09 implemented SEO
+
+Application owns RedirectService, PublicRouteService and bounded SeoAuditService; Web owns HTTP middleware,
+central SeoPolicy and Razor Admin screens. Infrastructure persists RedirectRule and optional PracticeArea SEO.
+Existing metadata/JSON-LD/sitemap services are reused. No new dependency/API/application was introduced.
+Decision and operating limits: ADR-022 and docs/seo/SEO_SETUP.md.

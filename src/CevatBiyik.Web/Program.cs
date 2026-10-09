@@ -110,6 +110,15 @@ app.Use(async (context, next) =>
         context.Response.Headers.CacheControl = "no-store";
     }
     context.Response.Headers["X-Content-Type-Options"] = "nosniff";
+    context.Response.OnStarting(() =>
+    {
+        if (!app.Configuration.GetValue<bool>("Site:AllowIndexing") || context.Response.StatusCode >= 400)
+        {
+            context.Response.Headers["X-Robots-Tag"] = "noindex, nofollow";
+        }
+
+        return Task.CompletedTask;
+    });
     context.Response.Headers["Referrer-Policy"] = "strict-origin-when-cross-origin";
     context.Response.Headers["Content-Security-Policy"] = $"default-src 'self'; script-src 'self' 'nonce-{nonce}'; style-src 'self'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'";
     await next(context);
@@ -121,6 +130,7 @@ app.UseRateLimiter();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseMiddleware<CevatBiyik.Web.Seo.RedirectMiddleware>();
 
 app.MapControllerRoute(
     name: "default",

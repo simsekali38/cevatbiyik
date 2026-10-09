@@ -4,7 +4,7 @@ using CevatBiyik.Application.Interfaces;
 using CevatBiyik.Web.Seo;
 using Microsoft.AspNetCore.Mvc;
 namespace CevatBiyik.Web.Controllers;
-public sealed class SeoController(ISitemapService sitemap, IConfiguration configuration, IProfileService profiles, IPageContentService pages, IFaqService faq) : Controller
+public sealed class SeoController(ISitemapService sitemap, IConfiguration configuration, IProfileService profiles, IPageContentService pages, IFaqService faq, ISettingService settings) : Controller
 {
     private static readonly XNamespace Ns = "http://www.sitemaps.org/schemas/sitemap/0.9";
     private bool Indexing => configuration.GetValue<bool>("Site:AllowIndexing");
@@ -48,6 +48,12 @@ public sealed class SeoController(ISitemapService sitemap, IConfiguration config
         }
 
         var entries = new List<SitemapEntry> { new("/", null), new("/makaleler", null), new("/uzmanlik-alanlari", null) };
+        var values = await settings.ListPublicAsync(ct);
+        var site = new CevatBiyik.Web.Models.PublicSiteSettings(values.ToDictionary(x => x.Key, x => x.Value, StringComparer.Ordinal));
+        if (SeoPresentation.ContactFactsComplete(site))
+        {
+            entries.Add(new("/iletisim", null));
+        }
         if (await profiles.GetAsync(true, ct) is not null)
         {
             entries.Add(new("/hakkimda", null));

@@ -5,7 +5,7 @@ using CevatBiyik.Application.Validation;
 using CevatBiyik.Domain.Entities;
 using FluentValidation;
 namespace CevatBiyik.Application.Services;
-public sealed class MediaService(IRepository<MediaAsset> media, IRepository<Article> articles, IRepository<PageSeo> pages, IImageStorage storage) : IMediaService
+public sealed class MediaService(IRepository<MediaAsset> media, IRepository<Article> articles, IRepository<PageSeo> pages, IImageStorage storage, IRepository<PracticeArea> areas) : IMediaService
 {
     public async Task<MediaDto?> GetAsync(long id, CancellationToken cancellationToken = default)
     {
@@ -44,7 +44,8 @@ public sealed class MediaService(IRepository<MediaAsset> media, IRepository<Arti
     public async Task DeleteAsync(long id, CancellationToken cancellationToken = default)
     {
         if (await articles.ExistsAsync(x => x.CoverMediaId == id || x.OpenGraphMediaId == id, true, cancellationToken)
-            || await pages.ExistsAsync(x => x.OpenGraphMediaId == id, true, cancellationToken))
+            || await pages.ExistsAsync(x => x.OpenGraphMediaId == id, true, cancellationToken)
+            || await areas.ExistsAsync(x => x.OpenGraphMediaId == id, true, cancellationToken))
         {
             throw new ConflictException("Bu görsel içerikte kullanılıyor; önce içerikteki bağlantıyı kaldırın.");
         }

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CevatBiyik.Web.Areas.Admin.Controllers;
 
 [Route("admin/practice-areas")]
-public sealed class PracticeAreasController(IPracticeAreaService areas, IAdminOperation operations) : AdminControllerBase(operations)
+public sealed class PracticeAreasController(IPracticeAreaService areas, IMediaService media, IAdminOperation operations) : AdminControllerBase(operations)
 {
     [HttpGet("")]
     public async Task<IActionResult> Index(int page = 1, CancellationToken cancellationToken = default)
@@ -19,10 +19,25 @@ public sealed class PracticeAreasController(IPracticeAreaService areas, IAdminOp
         return View(await areas.ListAsync(page, 20, cancellationToken));
     }
     [HttpGet("create")]
-    public IActionResult Create() => View("Edit", new CreatePracticeAreaDto());
-    [HttpGet("edit/{id:long}")]
-    public async Task<IActionResult> Edit(long id, CancellationToken cancellationToken)
+    public async Task<IActionResult> Create(int choicesPage = 1, CancellationToken ct = default)
     {
+        if (!ModelState.IsValid || choicesPage is < 1 or > 100000)
+        {
+            return BadRequest();
+        }
+
+        ViewData["Media"] = await media.ListAsync(choicesPage, ct); ViewData["ChoicesPage"] = choicesPage;
+        return View("Edit", new CreatePracticeAreaDto());
+    }
+    [HttpGet("edit/{id:long}")]
+    public async Task<IActionResult> Edit(long id, int choicesPage = 1, CancellationToken cancellationToken = default)
+    {
+        if (!ModelState.IsValid || choicesPage is < 1 or > 100000)
+        {
+            return BadRequest();
+        }
+
+        ViewData["Media"] = await media.ListAsync(choicesPage, cancellationToken); ViewData["ChoicesPage"] = choicesPage;
         var item = await areas.GetAsync(id, cancellationToken);
         if (item is null)
         {
@@ -36,15 +51,17 @@ public sealed class PracticeAreasController(IPracticeAreaService areas, IAdminOp
             ShortDescription = item.ShortDescription,
             Content = item.Content,
             SortOrder = item.SortOrder,
-            IsActive = item.IsActive
+            IsActive = item.IsActive,
+            Seo = item.Seo
         });
     }
     [HttpPost("save/{id:long?}")]
-    public Task<IActionResult> Save([FromRoute] long? id, [Bind("Name,ShortDescription,Content,SortOrder,IsActive")] CreatePracticeAreaDto input,
+    public async Task<IActionResult> Save([FromRoute] long? id, [Bind("Name,ShortDescription,Content,SortOrder,IsActive,Seo")] CreatePracticeAreaDto input,
         CancellationToken cancellationToken)
     {
         ViewData["EntityId"] = id;
-        return SaveAsync(input, async () =>
+        ViewData["Media"] = await media.ListAsync(cancellationToken: cancellationToken);
+        return await SaveAsync(input, async () =>
         {
             if (id is null)
             {

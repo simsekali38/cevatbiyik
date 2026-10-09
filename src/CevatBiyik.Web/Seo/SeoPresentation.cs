@@ -16,11 +16,15 @@ public static class SeoPresentation
     public static string Origin(IConfiguration configuration)
     {
         var value = configuration["Site:BaseUrl"];
-        return Uri.TryCreate(value, UriKind.Absolute, out var uri) && uri.Scheme == "https" && string.IsNullOrEmpty(uri.UserInfo)
-            ? uri.GetLeftPart(UriPartial.Authority) : "https://cevatbiyik.av.tr";
+        return SeoPolicy.TryOrigin(value, out var uri) ? uri!.GetLeftPart(UriPartial.Authority) : "https://cevatbiyik.av.tr";
     }
     public static void Apply(ViewDataDictionary data, SeoInput seo, string? image)
     {
+        if (!new CevatBiyik.Application.Validation.SeoValidator().Validate(seo).IsValid)
+        {
+            return;
+        }
+
         if (!string.IsNullOrWhiteSpace(seo.MetaTitle))
         {
             data["SeoTitle"] = seo.MetaTitle;
@@ -46,11 +50,13 @@ public static class SeoPresentation
             data["OpenGraphDescription"] = seo.OpenGraphDescription;
         }
 
-        if (image is not null && image.StartsWith("/uploads/images/", StringComparison.Ordinal))
+        if (SafeImage(image))
         {
             data["OpenGraphImage"] = image;
         }
     }
+    private static bool SafeImage(string? image) => image is not null && System.Text.RegularExpressions.Regex.IsMatch(image,
+        "^/uploads/images/[a-f0-9]{32}\\.webp$", System.Text.RegularExpressions.RegexOptions.CultureInvariant);
     public static object Article(ArticleDto article, string origin) => new Dictionary<string, object?>
     {
         ["@context"] = "https://schema.org",
@@ -61,7 +67,7 @@ public static class SeoPresentation
         ["dateModified"] = (article.UpdatedAt ?? article.CreatedAt).ToString("O"),
         ["mainEntityOfPage"] = origin + "/makaleler/" + Uri.EscapeDataString(article.Slug),
         ["author"] = new Dictionary<string, string> { ["@type"] = "Person", ["name"] = "Av. Cevat Bıyık" },
-        ["image"] = article.Cover is null ? null : origin + article.Cover.Url
+        ["image"] = SafeImage(article.Cover?.Url) ? origin + article.Cover!.Url : null
     };
     public static object Breadcrumb(string origin, string section, string path, string title, string detail) => new Dictionary<string, object?>
     {
@@ -76,12 +82,10 @@ public static class SeoPresentation
     };
     public static object? LegalService(PublicSiteSettings site, IConfiguration configuration)
     {
-        if (!configuration.GetValue<bool>("Site:LegalServiceSchemaEnabled") || new[] { site.Name, site.Email, site.Phone, site.Address }.Any(x =>
-            string.IsNullOrWhiteSpace(x) || x.Contains("CONTENT_REQUIRED", StringComparison.OrdinalIgnoreCase)))
+        if (!configuration.GetValue<bool>("Site:LegalServiceSchemaEnabled") || !ContactFactsComplete(site))
         {
             return null;
         }
-
         return new Dictionary<string, object>
         {
             ["@context"] = "https://schema.org",
@@ -92,5 +96,17 @@ public static class SeoPresentation
             ["telephone"] = site.Phone,
             ["address"] = site.Address
         };
+    }
+    public static bool ContactFactsComplete(PublicSiteSettings site)
+    {
+        if (!CevatBiyik.Application.Validation.ContentPublication.Complete(site.Name, site.Email, site.Phone, site.Address) ||
+            !System.Net.Mail.MailAddress.TryCreate(site.Email, out var email) || email.Address != site.Email ||
+            site.Phone.Any(c => !char.IsAsciiDigit(c) && c is not '+' and not ' ' and not '(' and not ')' and not '-' and not '.'))
+        {
+            return false;
+        }
+        var phone = new string(site.Phone.Where(c => char.IsAsciiDigit(c) || c == '+').ToArray());
+        var digits = phone.StartsWith('+') ? phone[1..] : phone;
+        return digits.Length is >= 7 and <= 15 && digits.All(char.IsAsciiDigit);
     }
 }

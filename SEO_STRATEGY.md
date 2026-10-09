@@ -64,3 +64,12 @@ Potential examples:
 - mass thin AI pages
 - spam backlinks
 - fake locations
+
+## Phase 09 implementation
+
+Central SeoPolicy uses configured HTTPS origin rather than request Host. Site:AllowIndexing=false forces
+noindex,nofollow metadata/response headers; Admin and error responses remain excluded. Reviewed/public content
+controls sitemap inclusion; contact joins only after public contact facts are complete. LegalService retains opt-in.
+Practice areas now have SEO/OG and breadcrumbs. Admin SEO checks are bounded, advisory editorial heuristics;
+title/description lengths are not Google hard limits. Safe 301 management and automatic regression checks are implemented.
+See ADR-022, docs/seo/SEO_SETUP.md and docs/qa/PHASE_09_REVIEW.md.

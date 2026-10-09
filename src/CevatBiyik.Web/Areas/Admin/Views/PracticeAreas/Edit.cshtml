@@ -8,5 +8,8 @@
 <div class="mb-3"><label asp-for="Content" class="form-label">İçerik</label><textarea asp-for="Content" class="form-control" rows="8" required></textarea></div>
 <div class="mb-3"><label asp-for="SortOrder" class="form-label">Sıralama</label><input asp-for="SortOrder" type="number" min="0" class="form-control" /></div>
 <div class="form-check mb-3"><input asp-for="IsActive" class="form-check-input" /><label asp-for="IsActive" class="form-check-label">Etkin</label></div>
+@{ var choicesPage = (int)(ViewData["ChoicesPage"] ?? 1); var choices = ViewData["Media"] as IReadOnlyList<MediaDto> ?? Array.Empty<MediaDto>(); }
+<nav class="mb-3" aria-label="Görsel seçenekleri">@if(choicesPage > 1){<a asp-action="@(ViewData["EntityId"] is null ? "Create" : "Edit")" asp-route-id="@ViewData["EntityId"]" asp-route-choicesPage="@(choicesPage - 1)">Önceki görseller</a>} @if(choices.Count == 20){<a asp-action="@(ViewData["EntityId"] is null ? "Create" : "Edit")" asp-route-id="@ViewData["EntityId"]" asp-route-choicesPage="@(choicesPage + 1)">Diğer görseller</a>}</nav>
+<p class="form-text">Görsel seçenek sayfasını değiştirmeden önce kaydedin.</p>@Html.EditorFor(x => x.Seo)
 <button class="btn btn-primary" type="submit">Kaydet</button> <a asp-action="Index">Listeye dön</a>
 </form>

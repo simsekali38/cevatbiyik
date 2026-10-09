@@ -8,4 +8,5 @@ public sealed class CreatePracticeAreaDto
     public string Content { get; init; } = string.Empty;
     public int SortOrder { get; init; }
     public bool IsActive { get; init; }
+    public SeoInput Seo { get; init; } = new();
 }

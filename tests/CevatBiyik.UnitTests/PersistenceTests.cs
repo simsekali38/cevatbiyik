@@ -29,7 +29,7 @@ public class PersistenceTests
         Assert.Contains(article.GetIndexes(), i => i.IsUnique && i.Properties.Single().Name == "Slug");
         Assert.Equal(DeleteBehavior.Restrict, article.GetForeignKeys().Single(x => x.Properties.Any(p => p.Name == "PracticeAreaId")).DeleteBehavior);
         Assert.Equal(250, article.FindProperty(nameof(Article.Title))!.GetMaxLength());
-        Assert.Equal(21, context.Model.GetEntityTypes().Count());
+        Assert.Equal(22, context.Model.GetEntityTypes().Count());
         Assert.NotNull(context.Model.FindEntityType(typeof(AuditLog)));
         Assert.NotNull(context.Model.FindEntityType(typeof(CevatBiyik.Infrastructure.Identity.ApplicationUser)));
     }
@@ -53,6 +53,9 @@ public class PersistenceTests
         Assert.Contains("CREATE TABLE `LawyerProfiles`", sql, StringComparison.Ordinal);
         Assert.Contains("CREATE TABLE `PageContents`", sql, StringComparison.Ordinal);
         Assert.Contains("CREATE TABLE `FaqItems`", sql, StringComparison.Ordinal);
+        Assert.Contains("CREATE TABLE `RedirectRules`", sql, StringComparison.Ordinal);
+        Assert.Contains("CREATE UNIQUE INDEX `IX_RedirectRules_SourcePath`", sql, StringComparison.Ordinal);
+        Assert.Contains("FK_PracticeAreas_MediaAssets_OpenGraphMediaId", sql, StringComparison.Ordinal);
         Assert.Contains("CREATE UNIQUE INDEX `IX_Articles_Slug`", sql, StringComparison.Ordinal);
         Assert.Contains("ON DELETE RESTRICT", sql, StringComparison.Ordinal);
         Assert.Contains("utf8mb4", sql, StringComparison.Ordinal);

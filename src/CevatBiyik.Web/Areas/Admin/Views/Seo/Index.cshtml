@@ -1,0 +1,14 @@
+@model SeoAuditResult
+@{ ViewData["Title"] = "SEO kontrolü"; }
+<h1>SEO kontrolü</h1>
+<div class="alert alert-info"><p>İndeksleme: <strong>@(ViewData["AllowIndexing"] is true ? "Açık" : "Kapalı (noindex, nofollow)")</strong>. Ortam: @(ViewData["Production"] is true ? "Üretim" : "Üretim dışı").</p>
+<p>Canonical kök ayarı: @(ViewData["OriginValid"] is true ? "Geçerli HTTPS kökü" : "Eksik/geçersiz; güvenli varsayılan kullanılıyor"). LegalService: @(ViewData["LegalServiceEnabled"] is true ? "Açık; görünür iletişim bilgileri de doğrulanır" : "Kapalı").</p>
+<p class="mb-0">Bu göstergeler öneridir; sıralama veya indekslenme garantisi vermez. Başlık uzunluğu karakter tabanlı bir yardımcıdır. Gerçek içerik ve hukuki onay tamamlanmadan üretim indekslemesini açmayın.</p></div>
+<p><a href="/robots.txt">robots.txt çıktısı</a> · <a href="/sitemap.xml">Sitemap çıktısı</a> · <a href="/admin/redirects">Yönlendirmeler</a></p>
+<p>Taslaklar da bu kontrol listesinde yer alır. Liste, sabit sayfalar ile bu sayfadaki en fazla 12 makale ve 12 uzmanlık alanını inceler.</p>
+<div class="table-responsive"><table class="table"><thead><tr><th>İçerik / yol</th><th>Öneriler</th><th>İşlem</th></tr></thead><tbody>
+@foreach(var item in Model.Rows)
+{
+<tr><td>@item.Label<br /><small>@item.Path</small></td><td>@if(item.Issues.Count == 0){<span>Tanımlı metinler önerilen aralıkta</span>}else{<ul>@foreach(var issue in item.Issues){<li>@issue.Message</li>}</ul>}</td><td><a href="@item.EditPath">Düzenle</a></td></tr>
+}
+</tbody></table></div><nav class="page-links" aria-label="SEO kontrol sayfaları">@if(Model.Page > 1){<a asp-route-page="@(Model.Page - 1)">Önceki içerikler</a>} @if(Model.HasNext){<a asp-route-page="@(Model.Page + 1)">Sonraki içerikler</a>}</nav>

@@ -24,6 +24,24 @@ public sealed class MySqlFactAttribute : FactAttribute
 public class MySqlPersistenceTests
 {
     [MySqlFact]
+    public async Task SeoRedirects_UseMySqlUniqueSourcesAndAreaMetadata()
+    {
+        var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
+        { ["ConnectionStrings:DefaultConnection"] = Environment.GetEnvironmentVariable("CEVATBIYIK_TEST_MYSQL") }).Build();
+        await using var provider = new ServiceCollection().AddInfrastructure(configuration).BuildServiceProvider();
+        await using var scope = provider.CreateAsyncScope(); var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        Assert.StartsWith("cevatbiyik_test_", db.Database.GetDbConnection().Database, StringComparison.Ordinal);
+        await db.Database.MigrateAsync(); await using var transaction = await db.Database.BeginTransactionAsync();
+        var area = await scope.ServiceProvider.GetRequiredService<IPracticeAreaService>().CreateAsync(new CreatePracticeAreaDto
+        { Name = "TEST_ONLY " + Guid.NewGuid().ToString("N"), Content = "TEST_ONLY", IsActive = true, Seo = new SeoInput { MetaTitle = "TEST_ONLY SEO" } });
+        Assert.Equal("TEST_ONLY SEO", (await scope.ServiceProvider.GetRequiredService<IPracticeAreaService>().GetActiveBySlugAsync(area.Slug))!.Seo.MetaTitle);
+        var redirects = scope.ServiceProvider.GetRequiredService<IRedirectService>();
+        var input = new RedirectInput { SourcePath = "/test-old-" + Guid.NewGuid().ToString("N"), DestinationPath = "/uzmanlik-alanlari/" + area.Slug, IsActive = true };
+        await redirects.SaveAsync(null, input); Assert.Equal(input.DestinationPath, await redirects.ResolveAsync(input.SourcePath));
+        await Assert.ThrowsAsync<ConflictException>(() => redirects.SaveAsync(null, input));
+        await transaction.RollbackAsync();
+    }
+    [MySqlFact]
     public async Task ReviewedPublicContent_WorksThroughMySql8Repositories()
     {
         var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>

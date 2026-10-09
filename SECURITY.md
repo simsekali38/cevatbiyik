@@ -95,3 +95,11 @@ Never log:
 ## Dependency security
 
 Run package vulnerability checks before release.
+
+## Phase 09 redirect and metadata controls
+
+Admin role, explicit antiforgery and transactional audit protect redirect mutations. Only normalized same-site
+public paths are accepted; protected/static paths, external URLs, ambiguous encoding, chains and loops are rejected.
+GET/HEAD redirects discard queries and recheck publication; current content takes priority. Metadata stays encoded,
+JSON-LD keeps safe serialization/CSP, and global indexing denial overrides page settings. Robots is not access control.
+See ADR-022 and docs/seo/SEO_SETUP.md.

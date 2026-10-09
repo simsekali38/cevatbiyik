@@ -6,7 +6,7 @@ using FluentValidation;
 namespace CevatBiyik.Application.Services;
 
 public sealed class PracticeAreaService(IRepository<PracticeArea> areas, ISlugService slugs,
-    IValidator<CreatePracticeAreaDto> validator) : IPracticeAreaService
+    IValidator<CreatePracticeAreaDto> validator, IRepository<MediaAsset> media) : IPracticeAreaService
 {
     public async Task<PracticeAreaDto?> GetAsync(long id, CancellationToken cancellationToken = default)
     {
@@ -23,6 +23,7 @@ public sealed class PracticeAreaService(IRepository<PracticeArea> areas, ISlugSe
     public async Task<PracticeAreaDto> CreateAsync(CreatePracticeAreaDto input, CancellationToken cancellationToken = default)
     {
         await validator.ValidateAndThrowAsync(input, cancellationToken);
+        await ValidateMediaAsync(input, cancellationToken);
         var entity = new PracticeArea
         {
             Slug = await slugs.GenerateUniqueAsync(input.Name,
@@ -52,6 +53,7 @@ public sealed class PracticeAreaService(IRepository<PracticeArea> areas, ISlugSe
     public async Task<PracticeAreaDto> UpdateAsync(long id, CreatePracticeAreaDto input, CancellationToken cancellationToken = default)
     {
         await validator.ValidateAndThrowAsync(input, cancellationToken);
+        await ValidateMediaAsync(input, cancellationToken);
         var entity = await ServiceRules.RequireAsync(areas, id, cancellationToken);
         Apply(entity, input);
         await areas.SaveAsync(cancellationToken);
@@ -67,7 +69,21 @@ public sealed class PracticeAreaService(IRepository<PracticeArea> areas, ISlugSe
         entity.Content = input.Content.Trim();
         entity.SortOrder = input.SortOrder;
         entity.IsActive = input.IsActive;
+        entity.MetaTitle = input.Seo.MetaTitle; entity.MetaDescription = input.Seo.MetaDescription; entity.Keywords = input.Seo.Keywords;
+        entity.OpenGraphTitle = input.Seo.OpenGraphTitle; entity.OpenGraphDescription = input.Seo.OpenGraphDescription; entity.OpenGraphMediaId = input.Seo.OpenGraphMediaId;
     }
 
-    private static PracticeAreaDto Map(PracticeArea x) => new(x.Id, x.Name, x.Slug, x.ShortDescription, x.Content, x.SortOrder, x.IsActive);
+    private async Task ValidateMediaAsync(CreatePracticeAreaDto input, CancellationToken ct)
+    {
+        if (input.Seo.OpenGraphMediaId is { } id && !await media.ExistsAsync(x => x.Id == id && x.IsActive, cancellationToken: ct))
+        {
+            throw new CevatBiyik.Application.Exceptions.NotFoundException("Görsel bulunamadı.");
+        }
+    }
+    private static PracticeAreaDto Map(PracticeArea x) => new(x.Id, x.Name, x.Slug, x.ShortDescription, x.Content, x.SortOrder, x.IsActive)
+    {
+        Seo = new SeoInput { MetaTitle = x.MetaTitle, MetaDescription = x.MetaDescription, Keywords = x.Keywords,
+            OpenGraphTitle = x.OpenGraphTitle, OpenGraphDescription = x.OpenGraphDescription, OpenGraphMediaId = x.OpenGraphMediaId },
+        OpenGraphImageUrl = x.OpenGraphMedia is { IsActive: true, IsDeleted: false } m ? "/uploads/" + m.StoragePath : null
+    };
 }

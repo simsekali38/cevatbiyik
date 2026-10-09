@@ -31,6 +31,10 @@ public sealed class PublicSiteFilter(ISettingService settings, IPageSeoService s
 
             if (path == "/iletisim" && page.ViewData["SiteSettings"] is PublicSiteSettings site)
             {
+                if (!CevatBiyik.Web.Seo.SeoPresentation.ContactFactsComplete(site))
+                {
+                    page.ViewData["Robots"] = "noindex, follow";
+                }
                 page.ViewData["StructuredData"] = CevatBiyik.Web.Seo.SeoPresentation.LegalService(site, configuration);
             }
         }

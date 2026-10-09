@@ -1,5 +1,54 @@
 # Architecture Decision Records
 
+## ADR-022 — Local permanent redirects and consistent SEO publication policy
+
+Status: Implemented (2026-10-10, Phase 09); owner closure approved (2026-10-10).
+
+Preserve ADR-019/021 metadata, safe JSON-LD, bounded sitemap/robots, reviewed content and stable slugs.
+No new package, project reference, framework, API, app, domain, CDN or fabricated legal/contact content.
+
+RedirectRule stores unique immutable SourcePath and DestinationPath (200 each) with shared UTC/soft-delete fields.
+Admin edits/disable/re-enable reuse Identity, explicit binding, CSRF, confirmation and transactional audit.
+Sources are reserved by the unique index; no hard deletion. One indexed lookup per eligible GET/HEAD request,
+then bounded public-route checks. No unbounded redirect graph loading or per-row diagnostics queries.
+Allow only clean root-relative ASCII paths, normalized invariant lowercase; no external host, query, fragment,
+encoded separator, backslash, empty/dot segment or protected Admin/error/static/upload/sitemap/robots route.
+Fixed public roots cannot be redirect sources. A destination must be currently published public content.
+Published source content wins; chains/self loops/unpublished targets fail validation. Runtime revalidates persisted
+paths/publication, so direct legacy data cannot create open redirects or loops. GET/HEAD only; never redirect POST.
+Return relative 301 with no-store; discard source query strings. HTTP is handled by existing HTTPS middleware.
+This phase does not add wildcard/domain redirects, arbitrary Unicode/encoded legacy paths or automatic slug changes.
+
+PracticeArea gains six nullable SEO/OG fields, including a restricted MediaAsset FK, using existing SeoInput,
+validators/EditorTemplate and encoded rendering. Referenced media cannot be removed, including references from
+deleted areas. Area detail receives BreadcrumbList; no unsupported legal-service facts are invented.
+Metadata rejects HTML/placeholders/control characters; invalid legacy metadata falls back to ordinary page text.
+OG image paths are constrained to the existing GUID WebP pipeline. Safe JSON/CSP nonce remains unchanged.
+
+One canonical origin validator accepts an HTTPS root without credentials/path/query/fragment; invalid config
+falls back to the approved domain and appears as an Admin warning. Request Host never determines canonical/schema.
+Global AllowIndexing=false wins over every page-level policy: public meta + X-Robots-Tag are noindex/nofollow,
+robots disallows crawling and sitemap is empty/children absent. Errors/Admin stay noindex when indexing is enabled.
+Filtered pages, incomplete profile/legal/FAQ and incomplete contact remain noindex. Approved sitemap coverage
+includes contact only when visible name/email/phone/address are complete and syntactically valid, independently
+of optional LegalService schema. Human contact-data approval is still the existing CMS/intake responsibility.
+LegalService additionally requires its explicit reviewed configuration flag. Contact submission retains ADR-021 KVKK gates.
+
+Admin /admin/seo reads bounded fixed-page + 12 article + 12 area metadata and shows indexing/origin/schema settings.
+Missing/short/long/fallback/invalid fields are suggestions, not ranking guarantees or mandatory Google limits.
+The 30–60 title and 70–160 description character ranges are project editorial heuristics; search display is device-dependent.
+NoIndex/crawl restrictions do not secure a staging site or instantly remove already indexed URLs; use access control
+for staging and an explicit Search Console/removal workflow when needed, without silently enabling indexing here.
+
+SeoRedirects migration adds one table, six nullable columns, two indexes and one restrictive FK, with no content/credential seeds.
+Generated SQL/model/SQLite checks passed; dedicated MySQL 8/hosting validation remains a rollout gate. No cevodb update/deployment.
+Setup/evidence: docs/seo/SEO_SETUP.md and docs/qa/PHASE_09_REVIEW.md.
+Sources: [Google redirects](https://developers.google.com/search/docs/crawling-indexing/301-redirects),
+[Google titles](https://developers.google.com/search/docs/appearance/title-link),
+[Google snippets](https://developers.google.com/search/docs/appearance/snippet),
+[Google noindex](https://developers.google.com/search/docs/crawling-indexing/block-indexing),
+[Microsoft open redirects](https://learn.microsoft.com/en-us/aspnet/core/security/preventing-open-redirects?view=aspnetcore-8.0).
+
 ## ADR-021 — Reviewed public content, native FAQ and shared Razor design
 
 Status: Implemented (2026-10-10, Phase 08); owner closure approved (2026-10-10).

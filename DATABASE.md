@@ -205,3 +205,10 @@ Use foreign keys and cascading behavior intentionally.
 ## Phase 05 implemented persistence
 
 AppDbContext now derives from IdentityDbContext<ApplicationUser>. IdentityAdmin adds the seven standard AspNet Identity tables and AuditLogs. AuditLog stores Id, UTC CreatedAt, nullable ActorId (255) and Action (64), with a CreatedAt/Id index and no soft-delete. ApplicationUser adds IsActive. No credential seed or content-table alteration. See docs/security/ADMIN_SETUP.md and docs/database/IDENTITY_ADMIN.sql. Migration application to cevodb remains pending.
+
+## Phase 09 — SeoRedirects
+
+Adds RedirectRules with unique reserved SourcePath (200), DestinationPath (200), UTC and soft-delete fields.
+PracticeAreas gains six nullable SEO/OG fields; OpenGraphMediaId references MediaAssets with restrictive deletion.
+22 model entity types including Identity. No seed or existing-data drop in Up.
+Reviewed SQL: docs/database/SEO_REDIRECTS.sql. Migration has not been applied here.

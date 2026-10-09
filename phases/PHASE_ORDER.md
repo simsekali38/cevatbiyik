@@ -1,9 +1,9 @@
 # Phase Order
 
-Completed phases: 00–08 (owner-approved closure). Database rollout execution and Plesk validation are not implied by code acceptance.
+Completed phases: 00–09 (owner-approved closure). Database rollout execution and Plesk validation are not implied by code acceptance.
 Phase 07 closure and commit approved by the owner; dedicated MySQL/Plesk checks remain rollout gates.
-Phase 08 implemented/locally verified; owner closure approved (2026-10-10). Remaining implementation phases: 09–17.
-Numbering is unique; see ADR-016/018/019/020/021.
+Phase 08 implemented/locally verified; owner closure approved (2026-10-10). Phase 09 implemented/locally verified, owner closure approved (2026-10-10). Remaining implementation phases: 10–17.
+Numbering is unique; see ADR-016/018/019/020/021/022.
 
 | Phase | Guide | Status |
 |---|---|---|
@@ -16,7 +16,7 @@ Numbering is unique; see ADR-016/018/019/020/021.
 | 06 | [06-cms-features.md](06-cms-features.md) | Completed (owner approved) |
 | 07 | [07-media-files.md](07-media-files.md) | Completed (owner approved) |
 | 08 | [08-public-site.md](08-public-site.md) | Implemented / owner approved |
-| 09 | [09-seo.md](09-seo.md) | Pending |
+| 09 | [09-seo.md](09-seo.md) | Implemented / owner closure approved (2026-10-10) |
 | 10 | [10-local-seo.md](10-local-seo.md) | Pending |
 | 11 | [11-contact-analytics.md](11-contact-analytics.md) | Pending |
 | 12 | [12-security-hardening.md](12-security-hardening.md) | Pending |

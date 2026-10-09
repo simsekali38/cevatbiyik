@@ -7,6 +7,7 @@ namespace CevatBiyik.Infrastructure.Persistence;
 
 public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext<ApplicationUser>(options)
 {
+    public DbSet<RedirectRule> RedirectRules => Set<RedirectRule>();
     public DbSet<LawyerProfile> LawyerProfiles => Set<LawyerProfile>();
     public DbSet<PageContent> PageContents => Set<PageContent>();
     public DbSet<FaqItem> FaqItems => Set<FaqItem>();

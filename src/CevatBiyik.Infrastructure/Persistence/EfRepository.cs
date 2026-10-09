@@ -19,7 +19,7 @@ public sealed class EfRepository<T>(AppDbContext context) : IRepository<T> where
             return query.Include("Category").Include("CoverMedia").Include("OpenGraphMedia").Include("TagLinks.Tag").AsSplitQuery();
         }
 
-        if (typeof(T) == typeof(PageSeo))
+        if (typeof(T) == typeof(PageSeo) || typeof(T) == typeof(PracticeArea))
         {
             return query.Include("OpenGraphMedia");
         }

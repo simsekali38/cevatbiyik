@@ -68,7 +68,7 @@ public class PublicQueryTests
         repository.Seed(new PracticeArea { Id = 2, Slug = "second", IsActive = true, SortOrder = 1 });
         repository.Seed(new PracticeArea { Id = 3, Slug = "hidden", IsActive = false });
         repository.Seed(new PracticeArea { Id = 4, Slug = "deleted", IsActive = true, IsDeleted = true });
-        var service = new PracticeAreaService(repository, new SlugService(), new CreatePracticeAreaValidator());
+        var service = new PracticeAreaService(repository, new SlugService(), new CreatePracticeAreaValidator(), new FakeRepository<MediaAsset>());
         var result = await service.ListActiveAsync();
         Assert.Equal(2, result.TotalCount);
         Assert.Equal(new long[] { 2, 1 }, result.Items.Select(x => x.Id));

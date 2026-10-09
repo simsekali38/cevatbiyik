@@ -75,7 +75,7 @@ public sealed class CmsBusinessTests
     public async Task Media_InUseCannotBeDeleted_UnusedAssetIsSoftDeleted()
     {
         var media = new FakeRepository<MediaAsset>(); var articles = new FakeRepository<Article>(); var storage = new TestImageStorage();
-        var service = new MediaService(media, articles, new FakeRepository<PageSeo>(), storage);
+        var service = new MediaService(media, articles, new FakeRepository<PageSeo>(), storage, new FakeRepository<PracticeArea>());
         using var stream = new MemoryStream();
         var image = await service.UploadAsync(stream, "test.png", "image/png", "Görsel");
         articles.Seed(new Article { Id = 1, CoverMediaId = image.Id, IsDeleted = true });
@@ -102,7 +102,7 @@ public sealed class CmsBusinessTests
     public async Task Media_InvalidAltTextIsRejectedBeforeWritingFile()
     {
         var storage = new TestImageStorage();
-        var service = new MediaService(new FakeRepository<MediaAsset>(), new FakeRepository<Article>(), new FakeRepository<PageSeo>(), storage);
+        var service = new MediaService(new FakeRepository<MediaAsset>(), new FakeRepository<Article>(), new FakeRepository<PageSeo>(), storage, new FakeRepository<PracticeArea>());
         using var stream = new MemoryStream();
         await Assert.ThrowsAsync<ValidationException>(() => service.UploadAsync(stream, "test.png", "image/png", "<img onerror=x>"));
         Assert.Equal(0, storage.StoreCount);

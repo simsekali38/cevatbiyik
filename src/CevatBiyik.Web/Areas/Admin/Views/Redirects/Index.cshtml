@@ -1,0 +1,11 @@
+@model PagedResult<RedirectDto>
+@{ ViewData["Title"] = "Yönlendirmeler"; }
+<h1>Yönlendirmeler</h1><p>Eski yollar, yayımlanmış sayfalara 301 ile yönlenir. Kaynak URL sorgu parametreleri hedefe aktarılmaz.</p>
+<a asp-action="Edit" class="btn btn-primary mb-3">Yönlendirme ekle</a>
+<div class="table-responsive"><table class="table"><thead><tr><th>Kaynak</th><th>Hedef</th><th>Durum</th><th>İşlem</th></tr></thead><tbody>
+@foreach (var item in Model.Items)
+{
+<tr><td>@item.SourcePath</td><td>@item.DestinationPath</td><td>@(item.IsActive ? "Etkin" : "Kapalı")</td><td><a asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+<form asp-action="Disable" asp-route-id="@item.Id" method="post" asp-antiforgery="false">@Html.AntiForgeryToken()<label><input type="checkbox" name="confirmed" value="true" required /> Kapatmayı onaylıyorum</label><button class="btn btn-outline-primary" type="submit">Devre dışı bırak</button></form></td></tr>
+}
+</tbody></table></div><nav class="page-links" aria-label="Yönlendirme sayfaları">@if(Model.HasPrevious){<a asp-route-page="@(Model.Page - 1)">Önceki</a>} @if(Model.HasNext){<a asp-route-page="@(Model.Page + 1)">Sonraki</a>}</nav>

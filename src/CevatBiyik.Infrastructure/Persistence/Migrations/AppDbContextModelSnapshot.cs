@@ -603,10 +603,33 @@ namespace CevatBiyik.Infrastructure.Persistence.Migrations
                         .HasColumnType("tinyint(1)")
                         .HasDefaultValue(false);
 
+                    b.Property<string>("Keywords")
+                        .HasMaxLength(300)
+                        .HasColumnType("varchar(300)");
+
+                    b.Property<string>("MetaDescription")
+                        .HasMaxLength(320)
+                        .HasColumnType("varchar(320)");
+
+                    b.Property<string>("MetaTitle")
+                        .HasMaxLength(120)
+                        .HasColumnType("varchar(120)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
+
+                    b.Property<string>("OpenGraphDescription")
+                        .HasMaxLength(320)
+                        .HasColumnType("varchar(320)");
+
+                    b.Property<long?>("OpenGraphMediaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("OpenGraphTitle")
+                        .HasMaxLength(120)
+                        .HasColumnType("varchar(120)");
 
                     b.Property<string>("ShortDescription")
                         .HasMaxLength(1000)
@@ -624,6 +647,8 @@ namespace CevatBiyik.Infrastructure.Persistence.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OpenGraphMediaId");
 
                     b.HasIndex("Slug")
                         .IsUnique();
@@ -681,6 +706,48 @@ namespace CevatBiyik.Infrastructure.Persistence.Migrations
                         .IsUnique();
 
                     b.ToTable("PrivateDocuments", (string)null);
+                });
+
+            modelBuilder.Entity("CevatBiyik.Domain.Entities.RedirectRule", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("DestinationPath")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("SourcePath")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SourcePath")
+                        .IsUnique();
+
+                    b.ToTable("RedirectRules", (string)null);
                 });
 
             modelBuilder.Entity("CevatBiyik.Domain.Entities.SiteSetting", b =>
@@ -977,6 +1044,16 @@ namespace CevatBiyik.Infrastructure.Persistence.Migrations
                 });
 
             modelBuilder.Entity("CevatBiyik.Domain.Entities.PageSeo", b =>
+                {
+                    b.HasOne("CevatBiyik.Domain.Entities.MediaAsset", "OpenGraphMedia")
+                        .WithMany()
+                        .HasForeignKey("OpenGraphMediaId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("OpenGraphMedia");
+                });
+
+            modelBuilder.Entity("CevatBiyik.Domain.Entities.PracticeArea", b =>
                 {
                     b.HasOne("CevatBiyik.Domain.Entities.MediaAsset", "OpenGraphMedia")
                         .WithMany()

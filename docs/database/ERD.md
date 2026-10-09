@@ -76,3 +76,9 @@ AuditLog
 ```
 
 Use join tables for many-to-many relationships.
+
+## Phase 09 concrete relations
+
+PracticeAreas.OpenGraphMediaId -> MediaAssets.Id (nullable, Restrict).
+RedirectRules stores unique SourcePath -> DestinationPath; paths are validated by Application, not foreign keys.
+Sources remain reserved when disabled/deleted. Shared UTC/active/deleted columns apply.

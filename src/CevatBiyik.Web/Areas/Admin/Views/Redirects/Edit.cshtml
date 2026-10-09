@@ -1,0 +1,10 @@
+@model RedirectInput
+@{ ViewData["Title"] = "Yönlendirme düzenle"; }
+<h1>Yönlendirme düzenle</h1><p>Örneğin /eski-yazi → /makaleler/yayimlanan-yazi. Yalnızca site içi yollar; sorgu, fragment, dış URL, zincir veya korunan rota kullanılamaz. Mevcut kaynak yolu sabittir.</p>
+<form asp-action="Save" asp-route-id="@ViewData["EntityId"]" method="post" asp-antiforgery="false">@Html.AntiForgeryToken()
+<div asp-validation-summary="All" class="validation-summary-errors" role="alert"></div>
+<div class="mb-3"><label asp-for="SourcePath" class="form-label">Eski yol</label><input asp-for="SourcePath" class="form-control" maxlength="200" required readonly="@(ViewData["EntityId"] is not null)" /></div>
+<div class="mb-3"><label asp-for="DestinationPath" class="form-label">Yayımlanmış hedef yol</label><input asp-for="DestinationPath" class="form-control" maxlength="200" required /></div>
+<div class="form-check mb-3"><input asp-for="IsActive" class="form-check-input" /><label asp-for="IsActive" class="form-check-label">301 yönlendirmeyi etkinleştir</label></div>
+<p class="form-text">Hedef yayından kalkarsa kural çalışmaz. Etkin sayfanın URL'si yönlendirmeden önceliklidir. 301 yanıtları tarayıcılar/arama motorlarınca hatırlanabilir.</p>
+<button class="btn btn-primary" type="submit">Kaydet</button> <a asp-action="Index">Listeye dön</a></form>
