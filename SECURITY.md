@@ -1,5 +1,15 @@
 # Security Baseline
 
+## Phase 07 private storage
+
+Private PDF documents live outside wwwroot, require fresh fail-closed Defender scan and download digest verification.
+Admin role/policy, CSRF-protected mutations, attachment/no-store/nosniff/sandbox and append-only action audit apply.
+PDF content policy is conservative and is not a full parser/CDR or guarantee against unknown threats.
+Public images remain re-encoded WebP; filename/ADS/control-character/reparse checks are stricter.
+Deleted rows retain files; old public image URLs remain accessible. No confidential document may use public media storage.
+Orphan quarantine is private/reversible with 48h grace and current DB recheck; no automatic hard purge.
+Hosting ACL/Defender/real IIS/native/consistent restore checks: docs/deployment/PLESK_MEDIA_RUNBOOK.md.
+
 ## Phase 06 uploads and JSON-LD
 
 Public uploads accept decoded/re-encoded JPEG/PNG/WebP, byte/pixel limits, random paths and validated alt text.

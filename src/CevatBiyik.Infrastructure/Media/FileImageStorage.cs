@@ -10,7 +10,7 @@ public sealed class FileImageStorage(string uploadsRoot) : IImageStorage, IDispo
     private readonly SemaphoreSlim gate = new(2);
     public async Task<StoredImage> StoreAsync(Stream content, string fileName, string contentType, CancellationToken cancellationToken = default)
     {
-        var extension = Path.GetExtension(fileName).ToLowerInvariant();
+        var extension = SafeFilePaths.Extension(fileName);
         var declared = extension switch { ".jpg" or ".jpeg" => "image/jpeg", ".png" => "image/png", ".webp" => "image/webp", _ => "" };
         if (declared.Length == 0 || declared != contentType)
         {
@@ -53,7 +53,7 @@ public sealed class FileImageStorage(string uploadsRoot) : IImageStorage, IDispo
             using var resized = oriented.Resize(info, new SKSamplingOptions(SKFilterMode.Linear)) ?? throw new ValidationException("Görsel boyutlandırılamadı.");
             using var image = SKImage.FromBitmap(resized);
             using var encoded = image.Encode(SKEncodedImageFormat.Webp, 85);
-            if (encoded is null)
+            if (encoded is null || encoded.Size > MaxBytes)
             {
                 throw new ValidationException("Görsel kodlanamadı.");
             }
@@ -61,7 +61,9 @@ public sealed class FileImageStorage(string uploadsRoot) : IImageStorage, IDispo
             cancellationToken.ThrowIfCancellationRequested();
             var path = "images/" + Guid.NewGuid().ToString("N") + ".webp";
             var full = Resolve(path);
+            SafeFilePaths.NoLinks(full);
             Directory.CreateDirectory(Path.GetDirectoryName(full)!);
+            SafeFilePaths.NoLinks(full);
             var temporary = full + ".tmp";
             try
             {
@@ -111,6 +113,7 @@ public sealed class FileImageStorage(string uploadsRoot) : IImageStorage, IDispo
             throw new ArgumentException("Invalid media path.", nameof(path));
         }
 
+        SafeFilePaths.NoLinks(full);
         return full;
     }
     public Task DeleteAsync(string storagePath, CancellationToken cancellationToken = default)

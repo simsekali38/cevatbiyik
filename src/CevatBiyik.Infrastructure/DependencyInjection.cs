@@ -41,6 +41,24 @@ public static class DependencyInjection
         services.AddScoped<IAuditLogService, AuditLogService>();
         services.AddScoped<IAdminOperation, AdminOperation>();
         services.AddScoped<ISitemapService, SitemapService>();
+        services.AddScoped<IFileCatalog, FileCatalog>();
+        services.AddSingleton<IMalwareScanner>(_ => new DefenderScanner(configuration["Storage:DefenderExecutable"]));
+        services.AddSingleton<IDocumentStorage>(provider =>
+        {
+            var environment = provider.GetRequiredService<IWebHostEnvironment>();
+            var web = environment.WebRootPath ?? Path.Combine(environment.ContentRootPath, "wwwroot");
+            var privateRoot = configuration["Storage:PrivateRoot"] ?? Path.Combine(environment.ContentRootPath, "App_Data", "private-files");
+            return new FileDocumentStorage(privateRoot, web, provider.GetRequiredService<IMalwareScanner>());
+        });
+        services.AddSingleton<IManagedFiles>(provider =>
+        {
+            var environment = provider.GetRequiredService<IWebHostEnvironment>();
+            var web = environment.WebRootPath ?? Path.Combine(environment.ContentRootPath, "wwwroot");
+            var privateRoot = configuration["Storage:PrivateRoot"] ?? Path.Combine(environment.ContentRootPath, "App_Data", "private-files");
+            // Validate the private-root boundary even when only maintenance is resolved.
+            _ = new FileDocumentStorage(privateRoot, web, provider.GetRequiredService<IMalwareScanner>());
+            return new ManagedFiles(Path.Combine(web, "uploads"), privateRoot, provider.GetRequiredService<TimeProvider>());
+        });
         services.AddSingleton<IImageStorage>(provider =>
         {
             var environment = provider.GetRequiredService<IWebHostEnvironment>();
@@ -58,7 +76,7 @@ public static class DependencyInjection
 
             options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 0)));
         });
-        // Phase 07 extends image storage with retention/documents; Phase 11 adds email.
+        // Phase 11 adds email.
         return services;
     }
 }

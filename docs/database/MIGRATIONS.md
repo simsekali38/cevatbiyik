@@ -61,3 +61,11 @@ Reviewed SQL: CMS_FEATURES.sql. No content/admin seed or existing-data drop. Dow
 MySQL DDL is not fully atomic despite the transaction wrapper. Generation used EF 8.0.29 in artifacts/ef8,
 preserving existing EF 10 manifest edits. Compatible commands/MySQL test instructions: ../cms/CMS_SETUP.md.
 No database update was executed here.
+
+## Phase 07 — MediaFiles
+
+Adds PrivateDocuments (18 model entity types including Identity), unique StoragePath and digest/size/soft-delete metadata.
+Generated/reviewed SQL: MEDIA_FILES.sql. No seeds or destructive Up commands. Down drops document metadata.
+Do not regenerate the existing migration. Use artifacts/ef8/dotnet-ef.exe (8.0.29) for this EF 8 app.
+No database update was executed by the agent. Dedicated MySQL 8 validation and a combined DB/files backup precede rollout.
+Commands and operational gates: ../media/MEDIA_FILES.md and ../deployment/PLESK_MEDIA_RUNBOOK.md.

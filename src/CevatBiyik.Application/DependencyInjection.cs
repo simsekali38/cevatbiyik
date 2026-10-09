@@ -31,6 +31,8 @@ public static class DependencyInjection
         services.AddScoped<IAdminDashboardService, AdminDashboardService>();
         services.AddScoped<ITaxonomyService, TaxonomyService>();
         services.AddScoped<IMediaService, MediaService>();
+        services.AddScoped<IDocumentService, DocumentService>();
+        services.AddScoped<IFileMaintenance, FileMaintenance>();
         services.AddScoped<IPageSeoService, PageSeoService>();
         return services;
     }

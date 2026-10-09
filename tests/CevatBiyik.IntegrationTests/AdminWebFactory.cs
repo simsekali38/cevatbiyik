@@ -19,6 +19,9 @@ public sealed class AdminWebFactory : WebApplicationFactory<Program>
     private readonly SqliteConnection connection = new("Data Source=:memory:");
     public const string Password = "Test-Only_Strong9!";
     public string UploadRoot { get; } = Path.Combine(Path.GetTempPath(), "cevat-cms-tests-" + Guid.NewGuid().ToString("N"));
+    public string PrivateRoot { get; } = Path.Combine(Path.GetTempPath(), "cevat-doc-tests-" + Guid.NewGuid().ToString("N"));
+    public bool FailDocumentAudit { get; init; }
+    public bool RejectDocumentScan { get; init; }
     public bool AllowIndexing { get; init; }
     public bool LegalServiceSchemaEnabled { get; init; }
     public bool FailMediaAudit { get; init; }
@@ -30,6 +33,7 @@ public sealed class AdminWebFactory : WebApplicationFactory<Program>
         builder.ConfigureAppConfiguration((_, configuration) => configuration.AddInMemoryCollection(new Dictionary<string, string?>
         {
             ["ConnectionStrings:DefaultConnection"] = "Server=127.0.0.1;Database=unused;User ID=unused;",
+            ["Storage:PrivateRoot"] = PrivateRoot,
             ["Site:AllowIndexing"] = AllowIndexing ? "true" : "false",
             ["Site:LegalServiceSchemaEnabled"] = LegalServiceSchemaEnabled ? "true" : "false"
         }));
@@ -40,7 +44,11 @@ public sealed class AdminWebFactory : WebApplicationFactory<Program>
             services.AddDbContext<AppDbContext>(options => options.UseSqlite(connection));
             services.RemoveAll<IImageStorage>();
             services.AddSingleton<IImageStorage>(_ => new FileImageStorage(UploadRoot));
-            if (FailMediaAudit)
+            services.RemoveAll<IMalwareScanner>();
+            services.AddSingleton<IMalwareScanner>(new CleanTestScanner { Clean = !RejectDocumentScan });
+            services.RemoveAll<IManagedFiles>();
+            services.AddSingleton<IManagedFiles>(_ => new ManagedFiles(UploadRoot, PrivateRoot, TimeProvider.System));
+            if (FailMediaAudit || FailDocumentAudit)
             {
                 services.RemoveAll<IAuditLogService>();
                 services.AddScoped<IAuditLogService, FailingMediaAudit>();
@@ -83,6 +91,19 @@ public sealed class AdminWebFactory : WebApplicationFactory<Program>
         if (disposing)
         {
             connection.Dispose();
+            if (Directory.Exists(PrivateRoot))
+            {
+                foreach (var folder in Directory.GetDirectories(PrivateRoot))
+                {
+                    foreach (var file in Directory.GetFiles(folder))
+                    {
+                        File.Delete(file);
+                    }
+
+                    Directory.Delete(folder);
+                }
+                Directory.Delete(PrivateRoot);
+            }
             if (Directory.Exists(UploadRoot))
             {
                 foreach (var file in Directory.GetFiles(Path.Combine(UploadRoot, "images")))
@@ -100,7 +121,13 @@ public sealed class AdminWebFactory : WebApplicationFactory<Program>
 internal sealed class FailingMediaAudit(AppDbContext db) : IAuditLogService
 {
     public Task WriteAsync(SecurityEvent securityEvent, string? actorId, CancellationToken cancellationToken = default) =>
-        securityEvent == SecurityEvent.MediaUploaded ? throw new InvalidOperationException("Test-only audit failure.")
+        securityEvent is SecurityEvent.MediaUploaded or SecurityEvent.DocumentUploaded ? throw new InvalidOperationException("Test-only audit failure.")
         : new AuditLogService(db).WriteAsync(securityEvent, actorId, cancellationToken);
     public Task<IReadOnlyList<AuditLogDto>> RecentAsync(CancellationToken cancellationToken = default) => new AuditLogService(db).RecentAsync(cancellationToken);
+}
+
+internal sealed class CleanTestScanner : IMalwareScanner
+{
+    public bool Clean { get; init; } = true;
+    public Task<bool> IsCleanAsync(string fullPath, CancellationToken ct = default) => Task.FromResult(Clean);
 }

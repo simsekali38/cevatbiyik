@@ -1,5 +1,32 @@
 # Architecture Decision Records
 
+## ADR-020 — Private documents, retained files and bounded reconciliation
+
+Status: Implemented (2026-10-10, requested Phase 07 scope); owner phase closure pending.
+
+Preserve ADR-019 MediaAsset/IMediaService/FileImageStorage and filesystem storage, .NET 8/MySQL 8, one Razor app.
+Add separate PrivateDocument with SHA-256 and shared soft-delete fields; no client filename on disk.
+Application owns document/scan/catalog/maintenance ports; Infrastructure owns EF/filesystem/Defender adapters.
+Accept only conservative PDF documents outside wwwroot. Extension/MIME/signature/classic-xref/content-name checks,
+byte limit, mandatory fresh Defender scan on upload/download and digest validation precede release.
+Unsupported/active/encrypted/object-stream PDFs are rejected. The content gate is not a full parser or CDR;
+zero unknown malware is not guaranteed. Missing/failing scanner rejects operations; no production clean stub.
+No new package dependency; preserve tested SkiaSharp pipeline. Filesystem roots reject reparse points;
+NTFS ACL must exclude untrusted writers. Same-principal/local-operator TOCTOU is outside this boundary.
+
+Admin-only attachment endpoints with CSRF-protected mutations/audit. Upload DB/audit failure compensates files.
+Soft deletion retains files; private downloads immediately stop. Recovery verifies files before reactivation.
+Public image old URLs remain public as ADR-019 specifies; confidential content belongs only in private storage.
+Reconciliation uses 100-row keyset/scalar and 100-file bounded-memory batches, includes deleted DB rows and
+abandoned temporary files; one batch IN lookup avoids N+1 DB queries. Missing/corrupt records are reported.
+Orphans older than 48h can be moved, after a fresh DB/age check, into non-public quarantine without overwrite.
+Quarantine audit records intent before a non-transactional filesystem move. Crash/failure requires re-scan.
+No automatic hard purge: legal retention duration is CONTENT_REQUIRED; files remain recoverable for operator review.
+Backups freeze all writers and capture DB + uploads + entire private root under the same batch.
+Migration adds PrivateDocuments only. Generated SQL is reviewed; no cevodb update or deployment was run.
+Real MySQL/Plesk/Defender/ACL/restore drill remain rollout gates; see docs/media/MEDIA_FILES.md and PLESK_MEDIA_RUNBOOK.md.
+Source: [Microsoft Defender CLI](https://learn.microsoft.com/en-us/defender-endpoint/command-line-arguments-microsoft-defender-antivirus).
+
 ## ADR-019 — Revised Phase 06 CMS/media/SEO scope
 
 Status: Accepted (2026-10-09, owner's revised Phase 06 instructions).

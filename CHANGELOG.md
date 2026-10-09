@@ -4,6 +4,17 @@ All notable project changes should be recorded here.
 
 ## [Unreleased]
 
+### Phase 07 — Media and private files (2026-10-10)
+- Preserved ADR-019 image pipeline; tightened filename/ADS/control-character/output-byte and filesystem reparse checks.
+- Added PrivateDocument, fail-closed Defender PDF storage outside wwwroot, SHA-256 verification and Admin-only audited attachment downloads.
+- Added soft deletion/recovery, bounded reconciliation including deleted records and abandoned upload parts, 48h orphan grace and private reversible quarantine.
+- Added Admin document/files Razor modules, explicit CSRF/confirmation, IIS 6 MiB limit and private App_Data publish exclusion.
+- Added MediaFiles migration and reviewed SQL without applying it to cevodb; no new NuGet dependencies.
+- Added ADR-020, media setup, Plesk ACL/native/Defender gates and coordinated DB/public/private backup/restore runbook.
+- Verified Release build: 0 errors/0 warnings; 86 unit + 67 integration = 153 passed; 5 dedicated MySQL tests skipped (no test connection).
+- Local publish succeeded: Windows x64 Skia/native assets, IIS limit and private App_Data exclusion checked. No production deployment or hosting restore drill.
+- Owner closure pending; concurrent appsettings.json edits were preserved and are outside this phase's changes.
+
 ### Phase 06 — CMS Features & SEO Enhancements
 - Owner approved phase closure and commit after reviewing 129 passing tests and the 0-error/0-warning build.
 - Added separate categories/tags, join mapping, stable slugs, soft deletion and paged public/admin choices.

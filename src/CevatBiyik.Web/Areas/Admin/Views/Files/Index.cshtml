@@ -1,0 +1,45 @@
+@model CevatBiyik.Application.Interfaces.FileReport
+@{ ViewData["Title"] = "Dosya mutabakatı"; var documents = ViewData["Documents"] is true; }
+<h1>Dosya mutabakatı</h1>
+<p><a href="/admin/files">Görseller</a> · <a href="/admin/files?documents=true">Özel belgeler</a></p>
+<p>Her tarama en fazla 100 dosya ve 100 kayıt getirir. Silinen kayıtlar da eşleştirilir. Sahipsiz dosyalar 48 saat sonra özel karantinaya taşınabilir; kalıcı silme yapılmaz.</p>
+<h2>Sahipsiz dosyalar</h2>
+@foreach (var item in Model.Orphans)
+{
+    <form action="/admin/files/quarantine" method="post" class="mb-3">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="documents" value="@documents.ToString().ToLowerInvariant()" /><input type="hidden" name="path" value="@item.Path" />
+        <p>@item.Path — @item.ModifiedAt.ToString("u")</p>
+        <label><input type="checkbox" name="confirmed" value="true" required /> Karantinaya taşımayı onaylıyorum</label>
+        <button class="btn btn-outline-primary" type="submit">Karantinaya taşı</button>
+    </form>
+}
+<h2>Dosyası eksik kayıtlar</h2>
+<ul>@foreach (var item in Model.Missing) { <li>Kayıt @item.Id: @item.Path — yedekten kurtarma gerekir.</li> }</ul>
+<h2>Saklanan silinmiş kayıtlar</h2>
+@foreach (var item in Model.Retained)
+{
+    <p>Kayıt @item.Id — @item.Path</p>
+    @if (!documents)
+    {
+        <form action="/admin/files/restore-image" method="post">
+            @Html.AntiForgeryToken()
+            <input name="id" type="hidden" value="@item.Id" />
+            <label><input name="confirmed" type="checkbox" value="true" required /> Geri almayı onaylıyorum</label>
+            <button class="btn btn-outline-primary" type="submit">Görseli geri al</button>
+        </form>
+    }
+}
+@if (Model.HasMore)
+{
+    <a href="@Url.Action("Index", new { documents, afterId = Model.NextId, afterPath = Model.NextPath })">Sonraki tarama</a>
+}
+@if (!documents)
+{
+    <h2>Silinen görseli geri al</h2>
+    <form action="/admin/files/restore-image" method="post">
+        @Html.AntiForgeryToken()
+        <label for="imageId">Görsel kayıt numarası</label><input id="imageId" name="id" type="number" min="1" required class="form-control" />
+        <label><input name="confirmed" type="checkbox" value="true" required /> Geri almayı onaylıyorum</label><button class="btn btn-outline-primary" type="submit">Geri al</button>
+    </form>
+}

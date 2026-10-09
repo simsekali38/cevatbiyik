@@ -29,7 +29,7 @@ public class PersistenceTests
         Assert.Contains(article.GetIndexes(), i => i.IsUnique && i.Properties.Single().Name == "Slug");
         Assert.Equal(DeleteBehavior.Restrict, article.GetForeignKeys().Single(x => x.Properties.Any(p => p.Name == "PracticeAreaId")).DeleteBehavior);
         Assert.Equal(250, article.FindProperty(nameof(Article.Title))!.GetMaxLength());
-        Assert.Equal(17, context.Model.GetEntityTypes().Count());
+        Assert.Equal(18, context.Model.GetEntityTypes().Count());
         Assert.NotNull(context.Model.FindEntityType(typeof(AuditLog)));
         Assert.NotNull(context.Model.FindEntityType(typeof(CevatBiyik.Infrastructure.Identity.ApplicationUser)));
     }
@@ -56,6 +56,8 @@ public class PersistenceTests
         Assert.DoesNotContain("INSERT INTO `SiteSettings`", sql, StringComparison.Ordinal);
         Assert.Contains("CREATE TABLE `AspNetUsers`", sql, StringComparison.Ordinal);
         Assert.Contains("CREATE TABLE `AuditLogs`", sql, StringComparison.Ordinal);
+        Assert.Contains("CREATE TABLE `PrivateDocuments`", sql, StringComparison.Ordinal);
+        Assert.Contains("CREATE UNIQUE INDEX `IX_PrivateDocuments_StoragePath`", sql, StringComparison.Ordinal);
         Assert.DoesNotContain("INSERT INTO `AspNetUsers`", sql, StringComparison.Ordinal);
         Assert.False(context.Database.HasPendingModelChanges());
     }

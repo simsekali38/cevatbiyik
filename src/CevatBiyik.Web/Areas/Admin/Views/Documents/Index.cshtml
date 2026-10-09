@@ -1,0 +1,27 @@
+@model IReadOnlyList<CevatBiyik.Application.Interfaces.DocumentDto>
+@{ ViewData["Title"] = "Özel belgeler"; var deleted = ViewData["Deleted"] is true; var page = (int)(ViewData["Page"] ?? 1); }
+<h1>Özel belgeler</h1>
+<p>Belgeler herkese açık değildir. Yalnızca PDF, en fazla 5 MiB. Antivirüs doğrulaması zorunludur; aktif içerik, ekler ve şifreli belgeler kabul edilmez.</p>
+<p><a href="/admin/documents">Aktif belgeler</a> · <a href="/admin/documents?deleted=true">Silinen belgeler</a></p>
+<form action="/admin/documents/upload" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    <label for="title" class="form-label">Başlık</label><input id="title" name="title" class="form-control" maxlength="200" required />
+    <label for="file" class="form-label">PDF belge</label><input id="file" name="file" class="form-control" type="file" accept="application/pdf,.pdf" required />
+    <button class="btn btn-primary my-3" type="submit">Özel belge yükle</button>
+</form>
+<div class="table-responsive"><table class="table"><thead><tr><th>Başlık</th><th>Boyut</th><th>İşlem</th></tr></thead><tbody>
+@foreach (var item in Model)
+{
+    <tr><td>@item.Title</td><td>@item.Bytes byte</td><td>
+    @if (!deleted) { <a href="/admin/documents/download/@item.Id">İndir</a> }
+    <form action="/admin/documents/@(deleted ? "restore" : "delete")/@item.Id" method="post">
+        @Html.AntiForgeryToken()
+        <label><input type="checkbox" name="confirmed" value="true" required /> @(deleted ? "Geri almayı onaylıyorum" : "Silme işlemini onaylıyorum")</label>
+        <button class="btn btn-outline-primary" type="submit">@(deleted ? "Geri al" : "Sil")</button>
+    </form></td></tr>
+}
+</tbody></table></div>
+<nav aria-label="Belge sayfaları">
+@if (page > 1) { <a href="?deleted=@deleted.ToString().ToLowerInvariant()&page=@(page - 1)">Önceki</a> }
+@if (Model.Count == 20) { <a href="?deleted=@deleted.ToString().ToLowerInvariant()&page=@(page + 1)">Sonraki</a> }
+</nav>

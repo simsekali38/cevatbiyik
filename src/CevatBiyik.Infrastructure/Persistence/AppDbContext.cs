@@ -7,6 +7,7 @@ namespace CevatBiyik.Infrastructure.Persistence;
 
 public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext<ApplicationUser>(options)
 {
+    public DbSet<PrivateDocument> PrivateDocuments => Set<PrivateDocument>();
     public DbSet<Article> Articles => Set<Article>();
     public DbSet<PracticeArea> PracticeAreas => Set<PracticeArea>();
     public DbSet<ContactMessage> ContactMessages => Set<ContactMessage>();

@@ -25,4 +25,5 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup><Compile Include="..\Fixtures\PdfFixture.cs" Link="Fixtures\PdfFixture.cs" /></ItemGroup>
 </Project>

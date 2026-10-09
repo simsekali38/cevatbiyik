@@ -1,5 +1,14 @@
 # Architecture
 
+## Phase 07 file boundary
+
+PrivateDocument is distinct from public MediaAsset. Application defines IDocumentStorage, IMalwareScanner,
+IFileCatalog/IManagedFiles and use cases; Infrastructure implements private filesystem storage, Defender and bounded EF projections.
+Web owns Admin document/reconciliation Razor screens and protected attachment endpoints. See ADR-020 and docs/media/MEDIA_FILES.md.
+Soft deletion retains files; recovery verifies contents. Old public image URLs remain public. Private roots are outside wwwroot.
+Quarantine operations record audit intent and are not distributed transactions. DB + both storage trees require one frozen backup batch.
+No new package, API, app, subdomain or framework change.
+
 ## Phase 06 CMS and SEO boundary
 
 Domain owns taxonomy/join/media/page-SEO entities. Application owns CMS DTOs/validators/use cases and

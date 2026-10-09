@@ -24,6 +24,28 @@ public sealed class MySqlFactAttribute : FactAttribute
 public class MySqlPersistenceTests
 {
     [MySqlFact]
+    public async Task PrivateDocuments_EnforceUniqueStoragePath_AndReconcileDeletedRowsOnMySql()
+    {
+        var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
+        { ["ConnectionStrings:DefaultConnection"] = Environment.GetEnvironmentVariable("CEVATBIYIK_TEST_MYSQL") }).Build();
+        await using var provider = new ServiceCollection().AddLogging().AddInfrastructure(configuration).BuildServiceProvider();
+        await using var scope = provider.CreateAsyncScope();
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        Assert.StartsWith("cevatbiyik_test_", db.Database.GetDbConnection().Database, StringComparison.Ordinal);
+        await db.Database.MigrateAsync();
+        await using var transaction = await db.Database.BeginTransactionAsync();
+        var path = "documents/" + Guid.NewGuid().ToString("N") + ".pdf";
+        var item = new PrivateDocument { Title = "Test only", StoragePath = path, Sha256 = new string('A', 64), Bytes = 10, IsDeleted = true };
+        db.PrivateDocuments.Add(item); await db.SaveChangesAsync();
+        var catalog = scope.ServiceProvider.GetRequiredService<IFileCatalog>();
+        Assert.Contains(path, await catalog.KnownAsync(true, new[] { path }, default));
+        Assert.NotNull(await catalog.DocumentAsync(item.Id, default));
+        Assert.Empty(await db.PrivateDocuments.Where(x => x.Id == item.Id).ToArrayAsync());
+        db.PrivateDocuments.Add(new PrivateDocument { Title = "Duplicate", StoragePath = path, Sha256 = new string('B', 64), Bytes = 20 });
+        await Assert.ThrowsAsync<DbUpdateException>(() => db.SaveChangesAsync());
+        await transaction.RollbackAsync();
+    }
+    [MySqlFact]
     public async Task CmsTaxonomySeoAndSitemap_WorkOnMySql8()
     {
         var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
