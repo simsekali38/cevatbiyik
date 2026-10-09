@@ -77,4 +77,4 @@ dotnet build
 dotnet test
 ```
 
-Faz 01 sonunda proje sahibi tarafından çalıştırıldı ve başarılı olduğu bildirildi.
+Faz 01 doğrulama (2026-10-09): `dotnet build CevatBiyik.sln -c Release` 0 hata; `dotnet test` 11 unit + 3 integration test başarılı.

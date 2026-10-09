@@ -13,7 +13,7 @@ public class ArchitectureTests
             .Select(a => a.Name ?? string.Empty)
             .Where(n => n.StartsWith("CevatBiyik.", StringComparison.Ordinal));
 
-    private static IReadOnlyCollection<string> CsprojProjectReferences(string relativeCsproj)
+    private static string[] CsprojProjectReferences(string relativeCsproj)
     {
         string path = Path.Combine(RepoRoot.Find(), relativeCsproj);
         XDocument document = XDocument.Load(path);
