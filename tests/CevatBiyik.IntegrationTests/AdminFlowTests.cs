@@ -60,6 +60,8 @@ public sealed partial class AdminFlowTests
         Assert.Contains("secure", cookie, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("httponly", cookie, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("samesite=strict", cookie, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("path=/", cookie, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("domain=", cookie, StringComparison.OrdinalIgnoreCase);
         Assert.DoesNotContain("expires=", cookie, StringComparison.OrdinalIgnoreCase);
         foreach (var path in new[] { "/admin", "/admin/articles", "/admin/practice-areas", "/admin/contact-messages", "/admin/settings" })
         {
@@ -70,6 +72,40 @@ public sealed partial class AdminFlowTests
         Assert.Equal(HttpStatusCode.BadRequest, (await client.PostAsync("/admin/logout", new FormUrlEncodedContent(new Dictionary<string, string>()))).StatusCode);
         Assert.Equal(HttpStatusCode.Redirect, (await PostAsync(client, "/admin", "/admin/logout", new())).StatusCode);
         Assert.Equal(HttpStatusCode.Redirect, (await client.GetAsync("/admin")).StatusCode);
+    }
+
+    [Fact]
+    public async Task ExpiredOrDisabledAdminSession_CannotDownloadPrivateDocuments()
+    {
+        using var factory = new AdminWebFactory();
+        await factory.InitializeAsync();
+        using var client = factory.CreateHttpsClient();
+        using var login = await LoginAsync(client);
+        var cookie = login.Headers.GetValues("Set-Cookie").Single(x => x.StartsWith("__Host-CevatBiyik.Admin=", StringComparison.Ordinal));
+        var options = factory.Services.GetRequiredService<Microsoft.Extensions.Options.IOptionsMonitor<Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions>>()
+            .Get(IdentityConstants.ApplicationScheme);
+        var ticket = options.TicketDataFormat.Unprotect(cookie.Split(';')[0].Split('=', 2)[1])!;
+        Assert.Equal(TimeSpan.FromMinutes(30), ticket.Properties.ExpiresUtc - ticket.Properties.IssuedUtc);
+        Assert.False(options.SlidingExpiration);
+        ticket.Properties.ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(-1);
+        ticket.Properties.IssuedUtc = ticket.Properties.ExpiresUtc.Value.AddMinutes(-30);
+        using var expired = factory.CreateClient(new Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryClientOptions
+        { BaseAddress = new Uri("https://localhost"), AllowAutoRedirect = false, HandleCookies = false });
+        using var request = new HttpRequestMessage(HttpMethod.Get, "/admin/documents/download/1");
+        request.Headers.Add("Cookie", "__Host-CevatBiyik.Admin=" + options.TicketDataFormat.Protect(ticket));
+        using var rejected = await expired.SendAsync(request);
+        Assert.Equal(HttpStatusCode.Redirect, rejected.StatusCode);
+        Assert.StartsWith("https://localhost/admin/login", rejected.Headers.Location!.ToString(), StringComparison.Ordinal);
+        using (var scope = factory.Services.CreateScope())
+        {
+            var users = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            var user = (await users.FindByNameAsync("admin"))!;
+            user.IsActive = false;
+            Assert.True((await users.UpdateAsync(user)).Succeeded);
+        }
+        using var disabled = await client.GetAsync("/admin/documents/download/1");
+        Assert.Equal(HttpStatusCode.Redirect, disabled.StatusCode);
+        Assert.StartsWith("https://localhost/admin/login", disabled.Headers.Location!.ToString(), StringComparison.Ordinal);
     }
 
     [Theory]

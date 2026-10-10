@@ -40,3 +40,7 @@ Thumbs.db
 ## Geçici
 test.txt
 src/CevatBiyik.Web/App_Data/
+
+## Local security scanner cache
+__pycache__/
+*.pyc

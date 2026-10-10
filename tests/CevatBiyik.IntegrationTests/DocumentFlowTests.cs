@@ -67,6 +67,8 @@ public sealed partial class DocumentFlowTests
         Assert.Equal(HttpStatusCode.OK, download.StatusCode);
         Assert.Equal("attachment", download.Content.Headers.ContentDisposition!.DispositionType);
         Assert.Equal("application/pdf", download.Content.Headers.ContentType!.MediaType);
+        Assert.Equal("sandbox; default-src 'none'", download.Headers.GetValues("Content-Security-Policy").Single());
+        Assert.Equal("DENY", download.Headers.GetValues("X-Frame-Options").Single());
         Assert.True(download.Headers.CacheControl!.NoStore);
         Assert.Equal(Pdf, await download.Content.ReadAsByteArrayAsync());
         foreach (var action in new[] { "delete", "restore" })
@@ -99,7 +101,10 @@ public sealed partial class DocumentFlowTests
     public async Task FailedAudit_RollsBackDocumentAndCompensatesFilesystem()
     {
         using var factory = new AdminWebFactory { FailDocumentAudit = true }; await factory.InitializeAsync(); using var client = factory.CreateHttpsClient(); await Login(client);
-        Assert.Equal(HttpStatusCode.InternalServerError, (await Upload(client)).StatusCode);
+        using var failed = await Upload(client);
+        Assert.Equal(HttpStatusCode.InternalServerError, failed.StatusCode);
+        Assert.Equal("DENY", failed.Headers.GetValues("X-Frame-Options").Single());
+        Assert.Contains("default-src 'self'", failed.Headers.GetValues("Content-Security-Policy").Single(), StringComparison.Ordinal);
         using var scope = factory.Services.CreateScope();
         Assert.Empty(await scope.ServiceProvider.GetRequiredService<AppDbContext>().PrivateDocuments.ToArrayAsync());
         Assert.Empty(Directory.GetFiles(Path.Combine(factory.PrivateRoot, "documents")));

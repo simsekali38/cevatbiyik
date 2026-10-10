@@ -45,3 +45,12 @@ The phase is complete only when its implementation and verification criteria are
 - authorization review
 - dependency audit
 - secret scan
+
+## Phase 12 implementation record — 2026-10-10
+
+Implemented / locally verified; owner closure approved (2026-10-10); commit authorized. ADR-025, Web security/consent middleware, proxy allowlist/static
+limiter/path guards, expanded security tests and redacted tools/security_scan.py produced.
+Detailed files/results/commands: docs/qa/PHASE_12_REVIEW.md; hosting controls: docs/security/SECURITY_HARDENING.md.
+No migration/dependency/deployment. SH-12-01 unresolved: owner explicitly requested leave credential-bearing appsettings.json
+and Git history untouched, report only. This finding prevents a clean security scan/production release assertion.
+No Phase 13 started.

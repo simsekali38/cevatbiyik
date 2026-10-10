@@ -18,6 +18,7 @@ builder.Services.Configure<SecurityStampValidatorOptions>(options => options.Val
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.Name = "__Host-CevatBiyik.Admin";
+    options.Cookie.Path = "/";
     options.Cookie.HttpOnly = true;
     options.Cookie.SameSite = SameSiteMode.Strict;
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
@@ -53,6 +54,12 @@ builder.Services.AddAntiforgery(options =>
 });
 builder.Services.AddRateLimiter(options =>
 {
+    // Static files would otherwise short-circuit before endpoint limiters.
+    options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context =>
+        context.Request.Path.StartsWithSegments("/uploads", StringComparison.OrdinalIgnoreCase) || Path.HasExtension(context.Request.Path.Value)
+            ? RateLimitPartition.GetFixedWindowLimiter("static:" + (context.Connection.RemoteIpAddress?.MapToIPv6().ToString() ?? "unknown"),
+                _ => new FixedWindowRateLimiterOptions { PermitLimit = 120, Window = TimeSpan.FromMinutes(1), QueueLimit = 0, AutoReplenishment = true })
+            : RateLimitPartition.GetNoLimiter("public"));
     options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
     options.OnRejected = (context, _) =>
     {
@@ -63,7 +70,7 @@ builder.Services.AddRateLimiter(options =>
         context.Connection.RemoteIpAddress?.MapToIPv6().ToString() ?? "unknown", _ => new FixedWindowRateLimiterOptions
         { PermitLimit = 20, Window = TimeSpan.FromMinutes(1), QueueLimit = 0, AutoReplenishment = true }));
     options.AddPolicy("admin-login", context => RateLimitPartition.GetFixedWindowLimiter(
-        context.Connection.RemoteIpAddress?.ToString() ?? "unknown", _ => new FixedWindowRateLimiterOptions
+        context.Connection.RemoteIpAddress?.MapToIPv6().ToString() ?? "unknown", _ => new FixedWindowRateLimiterOptions
         {
             PermitLimit = 10,
             Window = TimeSpan.FromMinutes(1),
@@ -81,6 +88,40 @@ builder.Services.AddRateLimiter(options =>
         }));
 });
 
+builder.Services.Configure<Microsoft.AspNetCore.Builder.ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedFor
+        | Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedProto;
+    options.ForwardLimit = 1;
+    options.RequireHeaderSymmetry = true;
+    options.KnownNetworks.Clear();
+    options.KnownProxies.Clear();
+    options.KnownProxies.Add(System.Net.IPAddress.Loopback);
+    options.KnownProxies.Add(System.Net.IPAddress.IPv6Loopback);
+    var proxies = builder.Configuration.GetSection("Security:TrustedProxies").GetChildren().ToArray();
+    if (proxies.Length > 16) { throw new InvalidOperationException("At most 16 trusted proxy addresses are permitted."); }
+    foreach (var proxy in proxies)
+    {
+        if (!System.Net.IPAddress.TryParse(proxy.Value, out var address) || address.Equals(System.Net.IPAddress.Any)
+            || address.Equals(System.Net.IPAddress.IPv6Any))
+        {
+            throw new InvalidOperationException("Security:TrustedProxies must contain explicit IP addresses.");
+        }
+        options.KnownProxies.Add(address);
+    }
+});
+builder.Services.AddHsts(options =>
+{
+    options.MaxAge = TimeSpan.FromDays(180);
+    // No preload/subdomain assertion until hosting and every affected hostname are verified.
+    options.IncludeSubDomains = false;
+    options.Preload = false;
+});
+if (!builder.Environment.IsDevelopment())
+{
+    builder.Services.AddHttpsRedirection(options => options.HttpsPort = 443);
+}
+
 var app = builder.Build();
 
 if (provisionAdmin)
@@ -95,6 +136,9 @@ if (provisionAdmin)
     return;
 }
 
+app.UseForwardedHeaders();
+app.UseMiddleware<SecurityHeadersMiddleware>();
+
 // Hata yönetimi baseline'ı: production'da detaylı hata sayfası YOK.
 if (!app.Environment.IsDevelopment())
 {
@@ -105,52 +149,20 @@ if (!app.Environment.IsDevelopment())
 app.UseStatusCodePagesWithReExecute("/hata/{0}");
 
 app.UseHttpsRedirection();
+app.UseRouting();
+app.UseRateLimiter();
+app.UseMiddleware<ConsentCspMiddleware>();
 app.Use(async (context, next) =>
 {
-    if (context.Request.Path.StartsWithSegments("/uploads") &&
-        !System.Text.RegularExpressions.Regex.IsMatch(context.Request.Path.Value ?? "", "^/uploads/images/[a-f0-9]{32}\\.webp$", System.Text.RegularExpressions.RegexOptions.CultureInvariant))
+    if (context.Request.Path.StartsWithSegments("/uploads", StringComparison.OrdinalIgnoreCase) &&
+        !System.Text.RegularExpressions.Regex.IsMatch(context.Request.Path.Value ?? "", @"\A/uploads/images/[a-f0-9]{32}\.webp\z", System.Text.RegularExpressions.RegexOptions.CultureInvariant))
     {
-        context.Response.StatusCode = 404;
+        context.Response.StatusCode = StatusCodes.Status404NotFound;
         return;
-    }
-    var nonce = Convert.ToBase64String(System.Security.Cryptography.RandomNumberGenerator.GetBytes(24));
-    context.Items["CspNonce"] = nonce;
-    if (context.Request.Path.StartsWithSegments("/admin"))
-    {
-        context.Response.Headers["X-Robots-Tag"] = "noindex, nofollow";
-        context.Response.Headers.CacheControl = "no-store";
-    }
-    context.Response.Headers["X-Content-Type-Options"] = "nosniff";
-    context.Response.OnStarting(() =>
-    {
-        if (!app.Configuration.GetValue<bool>("Site:AllowIndexing") || context.Response.StatusCode >= 400)
-        {
-            context.Response.Headers["X-Robots-Tag"] = "noindex, nofollow";
-        }
-
-        return Task.CompletedTask;
-    });
-    context.Response.Headers["Referrer-Policy"] = "strict-origin-when-cross-origin";
-    context.Response.Headers["Content-Security-Policy"] = $"default-src 'self'; script-src 'self' 'nonce-{nonce}'; style-src 'self'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'";
-    // No external analytics origins on admin, errors, unknown consent or incomplete legal content.
-    if (!context.Request.Path.StartsWithSegments("/admin") && !context.Request.Path.StartsWithSegments("/hata") &&
-        !context.Request.Path.StartsWithSegments("/uploads") && !Path.HasExtension(context.Request.Path.Value))
-    {
-        var analytics = context.RequestServices.GetRequiredService<CevatBiyik.Web.Analytics.AnalyticsPolicy>();
-        var consent = context.RequestServices.GetRequiredService<CevatBiyik.Web.Analytics.AnalyticsConsent>();
-        if (analytics.Configured) { context.Response.Headers.CacheControl = "no-store"; }
-        if (analytics.Configured && consent.Read(context) == true && await analytics.AvailableAsync(context))
-        {
-            context.Response.Headers.CacheControl = "no-store";
-            context.Response.Headers["Content-Security-Policy"] = $"default-src 'self'; script-src 'self' 'nonce-{nonce}' https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com https://www.googletagmanager.com; style-src 'self'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'";
-        }
     }
     await next(context);
 });
 app.UseStaticFiles();
-
-app.UseRouting();
-app.UseRateLimiter();
 
 app.UseAuthentication();
 app.UseAuthorization();

@@ -1,5 +1,14 @@
 # Security Baseline
 
+## Phase 12 hardening and unresolved secret
+
+Final-response nonce CSP/DENY/nosniff/Permissions-Policy/referrer controls cover static, errors, limits and redirects.
+Explicit one-hop trusted proxy IPs, normalized buckets and static 120/IP/minute limiter are implemented; download sandbox
+and consent gating retained. HSTS HTTPS/nondevelopment 180 days, no preload/includeSubDomains. No migration/dependency.
+NuGet direct/transitive audit clean on 2026-10-10. Secret scan is **not clean**: SH-12-01, nonempty DB password in appsettings.json
+and reachable history. Owner requested leave config untouched/report only. Rotation/private config/history remediation remain
+production blockers; no value is included here. See ADR-025, docs/security/SECURITY_HARDENING.md and PHASE_12_REVIEW.
+
 ## Phase 08 reviewed content
 
 Profile/page/FAQ Admin mutations inherit role authorization, CSRF, explicit binding and transactional audit.

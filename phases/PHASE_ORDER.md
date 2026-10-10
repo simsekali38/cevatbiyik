@@ -1,9 +1,9 @@
 # Phase Order
 
-Completed phases: 00–11 (owner-approved closure). Database rollout execution and Plesk validation are not implied by code acceptance.
+Completed phases: 00–12 (owner-approved closure). Database rollout execution and Plesk validation are not implied by code acceptance.
 Phase 07 closure and commit approved by the owner; dedicated MySQL/Plesk checks remain rollout gates.
-Phase 08 implemented/locally verified; owner closure approved (2026-10-10). Phase 09 implemented/locally verified, owner closure approved (2026-10-10). Phase 10 implemented/locally verified, owner closure approved (2026-10-10). Phase 11 implemented/locally verified; owner closure approved. Remaining implementation phases: 12–17.
-Numbering is unique; see ADR-016/018/019/020/021/022/023/024.
+Phase 08 implemented/locally verified; owner closure approved (2026-10-10). Phase 09 implemented/locally verified, owner closure approved (2026-10-10). Phase 10 implemented/locally verified, owner closure approved (2026-10-10). Phase 11 implemented/locally verified; owner closure approved. Phase 12 owner closure approved (2026-10-10); SH-12-01 remains an unresolved production blocker. Remaining later phases: 13–17.
+Numbering is unique; see ADR-016/018/019/020/021/022/023/024/025.
 
 | Phase | Guide | Status |
 |---|---|---|
@@ -19,7 +19,7 @@ Numbering is unique; see ADR-016/018/019/020/021/022/023/024.
 | 09 | [09-seo.md](09-seo.md) | Implemented / owner closure approved (2026-10-10) |
 | 10 | [10-local-seo.md](10-local-seo.md) | Completed / owner-approved closure |
 | 11 | [11-contact-analytics.md](11-contact-analytics.md) | Completed / owner-approved closure |
-| 12 | [12-security-hardening.md](12-security-hardening.md) | Pending |
+| 12 | [12-security-hardening.md](12-security-hardening.md) | Completed / owner-approved closure; SH-12-01 production blocker open |
 | 13 | [13-testing.md](13-testing.md) | Pending |
 | 14 | [14-performance-accessibility.md](14-performance-accessibility.md) | Pending |
 | 15 | [15-plesk-deployment.md](15-plesk-deployment.md) | Pending |

@@ -49,3 +49,11 @@ Redirect alternative host to canonical host.
 - secure cookies
 - production logging
 - secrets outside source control
+
+## Phase 12 release blockers
+
+Follow docs/security/SECURITY_HARDENING.md for one-hop IP/proto trust, HTTPS/HSTS, headers on IIS-generated responses,
+exact host bindings, process-local/NAT rate limits, native/Defender/ACL/body-limit checks and patch/runtime verification.
+SH-12-01 must be resolved before deployment: rotate password, remove tracked config credential, use private user-secrets/Plesk
+and separately authorize any history remediation. Owner requested report-only in Phase 12; no credential was changed.
+Run redacted scanner and live transitive NuGet audit. Local tests do not substitute for actual IIS/Plesk/dedicated MySQL checks.

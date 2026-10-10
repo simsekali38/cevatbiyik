@@ -55,3 +55,10 @@
 3. **#19** — EF Core MySQL sağlayıcısı seçimi (.NET 8 ve .NET 10 uyumlu olmalı; ADR-008).
 
 Diğer sorular faz ilerledikçe, ilgili fazdan önce çözülebilir.
+
+## Phase 12 security release gate — 2026-10-10
+
+SH-12-01: nonempty database password found in tracked appsettings.json:10 and reachable Git history; value never reported.
+Owner instructed leave the file untouched/report only. Credential rotation, private configuration and separate authorized history
+remediation remain unresolved production blockers. Actual IIS/Plesk proxy/host/Defender/native/ACL/limits/restore verification
+and nine dedicated MySQL tests are also pending. See docs/qa/PHASE_12_REVIEW.md and docs/security/SECURITY_HARDENING.md.

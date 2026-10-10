@@ -1,5 +1,39 @@
 # Architecture Decision Records
 
+## ADR-025 — Final-response headers, bounded proxy trust and static resource throttling
+
+Status: Implemented / locally verified (Phase 12); owner closure approved (2026-10-10); commit authorized. SH-12-01 remains open by owner instruction.
+
+Keep .NET 8/MySQL 8, linear Clean Architecture references, one SSR application and existing image/private document storage.
+No package, migration, API, subdomain, production activation or invented content. Preserve ADR-019/020/021/024 upload/consent gates.
+
+Web owns SecurityHeadersMiddleware before redirects/error handling and ConsentCspMiddleware inside the exception handler.
+Generate 24-byte cryptographic nonce once per response. Restore baseline headers at OnStarting after error-response clearing;
+retain stricter private-download sandbox and explicit consent-approved Google policy. CSP forbids unsafe-inline/eval/object/frame;
+DENY, nosniff, restrictive Permissions-Policy and strict-origin-when-cross-origin apply also to static/404/429/redirect responses.
+Admin and errors no-store/noindex. HSTS nondevelopment HTTPS 180 days; localhost excluded, no unverified preload/subdomain claim.
+
+ForwardedHeaders consumes only For/Proto from explicit loopback plus <=16 configured immediate peer IPs, matching counts,
+one hop, no trusted networks/host forwarding/reverse-DNS lookup. Invalid/unspecified/CIDR settings fail startup.
+Actual IIS/Plesk topology and header stripping must be verified; trusting arbitrary client XFF is prohibited.
+
+Routing and rate middleware precede StaticFiles. Global static/extension-path bucket 120 normalized connection-IP/minute,
+no queue; invalid paths also count. Existing login10/contact5/consent20 minute limits retained; login now normalizes mapped IPv4.
+Upload allowlist uses strict end anchoring/case-insensitive directory detection. Identity cookie explicitly Path=/,
+secure/HttpOnly/Strict/no Domain, nonpersistent 30-minute non-sliding ticket and current role/active checks retained.
+Process-local/NAT/recycle limitations require hosting measurements and upstream abuse controls.
+
+No full parser/CDR/malware guarantee is claimed. Exercise encoded active PDF names, EXE/scripts/ADS/MIME/byte/pixel bombs,
+authorization/CSRF, tampered downloads, scan rejection, retained files/reconciliation and real Identity regression suites.
+Real Defender/Skia/IIS/MySQL checks remain environment rollout gates. Audit all NuGet dependencies with live advisory data;
+redacted standard-library scanner reviews reachable text/history, with explicit heuristic/ignored/binary limitations.
+
+SH-12-01: nonempty database password in tracked appsettings.json and reachable Git history. Never output the value;
+owner explicitly requested no file/history modification, report only. Credential rotation/private configuration and separately
+coordinated history remediation are production release blockers. Passing functional tests does not clear this finding.
+Details, commands and primary sources: docs/security/SECURITY_HARDENING.md and docs/qa/PHASE_12_REVIEW.md.
+
+
 ## ADR-024 — Durable contact notifications and basic consent-controlled analytics
 
 Status: Implemented and owner-approved (Phase 11); commit authorized.

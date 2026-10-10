@@ -97,3 +97,13 @@ Admin retry audit and one-time saved-message event markers. A dedicated opt-in M
 Node built-in event tests: `node --test tests/CevatBiyik.BrowserTests/analytics.test.cjs` (6 passing; no npm dependency).
 Measured full Release run: 155 unit + 127 integration = 282 passing, 9 MySQL skipped; build 0 errors/0 warnings.
 Fake transports/DOM and SQLite do not replace real provider/Plesk/browser tag-container rollout tests. See PHASE_11_REVIEW.
+
+## Phase 12 security verification
+
+SecurityHardeningTests exercise headers on HTML/static/404/authorization/HTTPS/429, fresh nonce, HSTS,
+unknown/trusted/asymmetric forwarding, fake forwarded-IP limiter bypass, IPv4-mapped login normalization, contact CSRF
+budget, all Admin modules, invalid proxy configuration, image MIME/EXE/script/ADS and pixel-product bombs.
+Existing Identity/session/lockout/revocation, private PDF malware-fake/tamper/audit/retention and SEO/consent regressions run.
+FileLibraryTests expand escaped active-PDF-name attacks; document tests assert stricter sandbox and headers after 500.
+`python tools/security_scan.py --self-test` verifies eight synthetic cases; `--history` intentionally exits 1 for open SH-12-01.
+No real malware/Defender/hosting/production database test was run. See docs/qa/PHASE_12_REVIEW.md.

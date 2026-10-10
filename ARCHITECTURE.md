@@ -1,5 +1,12 @@
 # Architecture
 
+## Phase 12 Web security boundary
+
+SecurityHeadersMiddleware owns final-response baseline/nonce and ConsentCspMiddleware performs legal/consent reads inside
+exception handling. Explicit proxy trust and pre-static throttling stay in Web; Application/Domain dependencies unchanged.
+Private attachments retain stricter CSP. No schema/package change. ADR-025 and SECURITY_HARDENING describe configuration,
+hosting gates and unresolved tracked/historical credential finding; no production readiness claim from local tests.
+
 ## Phase 08 public content boundary
 
 LawyerProfile/PageContent/FaqItem add review-gated content through Application ports and existing EF repositories.

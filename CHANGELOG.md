@@ -4,6 +4,16 @@ All notable project changes should be recorded here.
 
 ## [Unreleased]
 
+### Phase 12 — Security hardening (2026-10-10)
+- Added final-response nonce CSP, DENY/nosniff/Permissions-Policy/referrer enforcement on redirects/static/errors/429; preserved attachment sandbox and consent gates.
+- Added explicit bounded one-hop trusted proxy For/Proto processing, symmetric headers, nondevelopment HTTPS HSTS180d and strict upload path end anchors.
+- Added shared static-resource 120 normalized IP/minute limiter before StaticFiles; normalized login IP keys; explicitly fixed host-cookie Path=/.
+- Added 37 integration attack/security cases, 10 active-PDF unit cases, strengthened cookie/download/error assertions and redacted working-tree/history scanner (8 self-tests).
+- NuGet direct/transitive advisory audit: no vulnerable packages reported across six projects; no dependency or migration added.
+- Verification: 165 unit + 164 integration = 329 .NET tests passed, 9 dedicated MySQL skipped; 6 JS and 8 scanner self-tests passed.
+- Added ADR-025, security operations and Phase 12 report. SH-12-01 remains open: password-bearing config/history, owner instructed report-only; appsettings.json preserved.
+- Owner closure approved (2026-10-10); commit authorized. No deployment/DB update/provider activation/Phase 13 work; SH-12-01 remains open.
+
 ### Phase 11 — Contact / SMTP / consent-controlled analytics (2026-10-10)
 - Tightened contact email validation, added nonpersistent honeypot, sliding IP limiter and Retry-After while retaining CSRF/production legal gates.
 - Added durable contact notification metadata/migration, atomic leases/recovery/backoff, mandatory authenticated STARTTLS/587 and generic PII-free notices/logging.
