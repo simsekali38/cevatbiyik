@@ -17,7 +17,7 @@ public sealed class ContactController(IContactService contacts, IValidator<Creat
     [RequestFormLimits(ValueCountLimit = 16, KeyLengthLimit = 128, ValueLengthLimit = 20000)]
     [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
     public async Task<IActionResult> Submit([Bind("Name,Email,Phone,Subject,Message,Consent", Prefix = "Form")] CreateContactMessageDto form,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken, [FromForm(Name = "Website")] string? website = null)
     {
         var model = ContactFormPolicy.Create(form, environment, configuration);
         if (environment.IsProduction() && await pages.PublishedAsync("/kvkk", cancellationToken) is null)
@@ -30,6 +30,11 @@ public sealed class ContactController(IContactService contacts, IValidator<Creat
             return StatusCode(StatusCodes.Status503ServiceUnavailable);
         }
 
+        if (!string.IsNullOrEmpty(website))
+        {
+            TempData["ContactSuccess"] = "Mesajınız kaydedildi. Teşekkür ederiz.";
+            return RedirectToAction(nameof(HomeController.Contact), "Home");
+        }
         var result = await validator.ValidateAsync(form, cancellationToken);
         foreach (var error in result.Errors)
         {
@@ -43,6 +48,7 @@ public sealed class ContactController(IContactService contacts, IValidator<Creat
         }
 
         await contacts.CreateAsync(form, cancellationToken);
+        TempData["ContactRecorded"] = true;
         TempData["ContactSuccess"] = "Mesajınız kaydedildi. Teşekkür ederiz.";
         return RedirectToAction(nameof(HomeController.Contact), "Home");
     }

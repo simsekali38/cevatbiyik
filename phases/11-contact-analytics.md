@@ -44,3 +44,9 @@ The phase is complete only when its implementation and verification criteria are
 - analytics/GTM config
 - event hooks
 - cookie consent if needed
+
+## Implementation — 2026-10-10
+
+Implemented / locally verified; owner closure approved and commit authorized. ADR-024 covers bounded durable notifications and basic analytics consent.
+Modules/configuration: ../docs/contact/CONTACT_ANALYTICS_SETUP.md. Verification: ../docs/qa/PHASE_11_REVIEW.md.
+No live migration, mail delivery, analytics activation, deployment or Phase 12 work. User-owned config preserved.

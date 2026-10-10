@@ -1,5 +1,53 @@
 # Architecture Decision Records
 
+## ADR-024 — Durable contact notifications and basic consent-controlled analytics
+
+Status: Implemented and owner-approved (Phase 11); commit authorized.
+
+Preserve ADR-018/019/021/022/023, .NET 8, MySQL 8, linear references, one SSR Razor app, filesystem hosting and brand.
+No new package/API/application/subdomain, invented contact/legal facts or production activation.
+
+Contact remains explicitly bound, FluentValidation checked, Razor encoded and CSRF protected. Add Web-only honeypot
+and strict single-mailbox validation; tighten the existing limiter to five normalized connection-IP attempts/sliding
+minute (six segments), no queue, Retry-After. Do not trust arbitrary forwarded headers or persist client IPs.
+Existing reviewed production notice/KVKK gate, read/unread, soft delete and audited Admin flow remain.
+
+ContactMessage owns six durable notification metadata fields. Application policy sets pending only when SMTP enabled
+at creation; one SaveAsync persists message + eligibility without a second queue write or duplicate payload.
+Existing rows default false and are never retroactively queued. Application ports isolate sender/store/config policy.
+Infrastructure hosted worker atomically claims bounded indexed candidates with two-minute random-ID leases, processes
+one job/30 seconds with 30-second timeout and caps six attempts (2/4/8/16/32/60-minute backoff).
+Lease expiry enables recovery; stale completion cannot overwrite a new claim. Deleted records are rechecked before send;
+in-flight mail cannot be recalled. SMTP success then DB failure can replay: at-least-once, not exactly-once.
+Exhaustion is visible in Admin; a confirmed, CSRF-protected retry uses existing transaction/audit.
+Plesk process uptime/recycle and dedicated MySQL locking/provider delivery are explicit rollout gates.
+
+SMTP disabled by default; secrets in user-secrets/Plesk, never SiteSettings/Admin DTOs/logs/views.
+A narrow supported System.Net.Mail.SmtpClient adapter avoids a dependency: authenticated mandatory STARTTLS/587,
+default certificate validation, no TLS fallback/465/OAuth or user-derived recipient/headers.
+Microsoft discourages this client for new general-purpose mail code; this constrained compatibility tradeoff is recorded.
+Unsupported provider requirements require a new ADR and maintained mail library, not weakening TLS.
+Only fixed plain-text notice + message ID leave the app; no contact PII/message text or exception detail logs.
+
+Exactly one validated GTM or GA4 ID, Enabled, LegalReviewConfirmed, complete reviewed notice/version and published
+reviewed KVKK/cookie pages are prerequisites. They are human assertions, not proof of statutory compliance.
+Use basic consent mode: protected Secure/HttpOnly/Strict/host-only versioned 180-day choice, explicit allow/deny;
+unknown/expired/tampered/old consent means no external script or cookieless ping/event queue. Separate from contact consent.
+Native Razor details banner in normal flow avoids obscuring keyboard focus; equal-weight controls, no consent wall,
+change/withdraw through CSRF-protected bounded POST. Functional state broadcast updates other tabs after navigation.
+Withdrawal deletes common visible GA cookies and reloads; remote code already in flight cannot be recalled.
+Admin/errors excluded. Nonce copied to the Google loader, narrow opted-in CSP origins, no unsafe-inline/eval;
+configured public HTML no-store. Canonical/global noindex/safe schemas unchanged.
+
+Hooks emit only six allowlisted names; contact_submit requires one-time DB-save marker. No form/URL/text/customer
+values emitted. GA4 automatic pageview/signals disabled, clean location/blank referrer. GTM/GA4 property must disable
+automatic form/search/outbound capture/advertising and use clean event variables; arbitrary container tags are not
+sanitized by this architecture. Real provider/transfer/notice/container review precedes activation.
+No raw legal text/facts are fabricated. Setup and primary source links: docs/contact/CONTACT_ANALYTICS_SETUP.md.
+Verification and remaining rollout checks: docs/qa/PHASE_11_REVIEW.md.
+
+
+
 ## ADR-023 — Reviewed Kayseri hierarchy and bounded local content quality policy
 
 Status: Implemented and owner-approved (2026-10-10, Phase 10).

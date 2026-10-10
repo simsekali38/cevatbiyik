@@ -109,3 +109,11 @@ See ADR-022 and docs/seo/SEO_SETUP.md.
 Admin role/policy, explicit binding, antiforgery, confirmation and transaction/audit protect Location mutations. All text is
 validated/encoded; JSON-LD keeps the safe serializer/CSP. Review and verified-fact gates prevent placeholder schema/indexing.
 Soft deletion retains local content; referenced media is protected. Noindex is not access control. ADR-023 records safeguards.
+
+## Phase 11 contact and tracking controls
+
+Web-only trap, strict email mailbox check and normalized connection-IP sliding limit complement existing CSRF/encoding/limits.
+SMTP uses secrets outside CMS, fixed headers/recipient, mandatory validated STARTTLS/587, metadata-only notice and generic logs.
+Consent is protected/versioned/expiring, Secure/HttpOnly/Strict/host-only; scripts/CSP external origins require current explicit opt-in,
+complete reviewed legal pages and configuration. Admin/errors excluded; no pre-consent ping or PII in event hooks.
+GTM container/property/transfer/legal review, Plesk uptime/IP topology and real MySQL/SMTP checks remain rollout gates; see ADR-024.

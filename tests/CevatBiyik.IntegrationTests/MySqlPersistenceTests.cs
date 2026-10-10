@@ -24,6 +24,21 @@ public sealed class MySqlFactAttribute : FactAttribute
 public class MySqlPersistenceTests
 {
     [MySqlFact]
+    public async Task ContactNotifications_ClaimAndCompleteOnMySql()
+    {
+        var options = new DbContextOptionsBuilder<AppDbContext>().UseMySql(Environment.GetEnvironmentVariable("CEVATBIYIK_TEST_MYSQL"), new MySqlServerVersion(new Version(8, 0, 0))).Options;
+        await using var db = new AppDbContext(options);
+        Assert.StartsWith("cevatbiyik_test_", db.Database.GetDbConnection().Database, StringComparison.Ordinal);
+        await db.Database.MigrateAsync(); await using var transaction = await db.Database.BeginTransactionAsync();
+        var row = new ContactMessage { Name = "TEST_ONLY", Email = "test@example.test", Message = "TEST_ONLY", NotificationPending = true };
+        db.Add(row); await db.SaveChangesAsync();
+        var store = new CevatBiyik.Infrastructure.Email.ContactNotificationStore(db, TimeProvider.System);
+        var job = await store.ClaimAsync(default); Assert.NotNull(job);
+        Assert.Equal(row.Id, job.MessageId); Assert.True(await store.IsCurrentAsync(job, default));
+        await store.CompleteAsync(job, true, default); Assert.Null(await store.ClaimAsync(default));
+        await transaction.RollbackAsync();
+    }
+    [MySqlFact]
     public async Task LocalSeo_UsesMySqlHierarchyRelationsAndSoftDelete()
     {
         var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>

@@ -128,3 +128,11 @@ h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.2; l
 .faq-toggle:focus-visible { outline-offset: -4px; }
 @media (max-width: 1199.98px) { .navbar-collapse { padding-top: 1rem; } }
 @media (forced-colors: active) { :focus-visible { outline-color: Highlight !important; } .faq-accordion .accordion-item { border-color: CanvasText; } }
+
+/* Phase 11: trap is excluded from keyboard/assistive technology; consent uses brand tokens. */
+.contact-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.consent-panel { border: 1px solid #737B8C; border-radius: .5rem; padding: 1.25rem; }
+.consent-panel summary { cursor: pointer; font-weight: 600; margin-bottom: 1rem; }
+.consent-panel p { overflow-wrap: anywhere; }
+
+.consent-prompt { width: calc(100% - 2rem); max-height: 55vh; overflow-y: auto; background: var(--surface-paper); box-shadow: 0 4px 24px #18264B33; }

@@ -6,7 +6,7 @@ using FluentValidation;
 namespace CevatBiyik.Application.Services;
 
 public sealed class ContactService(IRepository<ContactMessage> messages, IValidator<CreateContactMessageDto> validator,
-    TimeProvider timeProvider) : IContactService
+    TimeProvider timeProvider, IContactNotificationPolicy? notifications = null) : IContactService
 {
     public async Task<ContactMessageDto?> GetAsync(long id, CancellationToken cancellationToken = default)
     {
@@ -30,7 +30,8 @@ public sealed class ContactService(IRepository<ContactMessage> messages, IValida
             Phone = input.Phone?.Trim(),
             Subject = input.Subject?.Trim(),
             Message = input.Message.Trim(),
-            Consent = input.Consent
+            Consent = input.Consent,
+            NotificationPending = notifications?.Enabled == true
         };
         messages.Add(entity);
         await messages.SaveAsync(cancellationToken);
@@ -64,6 +65,25 @@ public sealed class ContactService(IRepository<ContactMessage> messages, IValida
         return Map(entity);
     }
 
+    public async Task RetryNotificationAsync(long id, CancellationToken cancellationToken = default)
+    {
+        var entity = await ServiceRules.RequireAsync(messages, id, cancellationToken);
+        if (notifications?.Enabled != true || !entity.NotificationPending || entity.NotificationAttempts < 6 ||
+            entity.NotificationLeaseUntil > timeProvider.GetUtcNow().UtcDateTime)
+        {
+            throw new CevatBiyik.Application.Exceptions.ConflictException("Bildirim yeniden denemeye uygun değil.");
+        }
+        entity.NotificationAttempts = 0;
+        entity.NotificationNextAttemptAt = null;
+        entity.NotificationLeaseId = null;
+        entity.NotificationLeaseUntil = null;
+        await messages.SaveAsync(cancellationToken);
+    }
+
     private static ContactMessageDto Map(ContactMessage x) => new(x.Id, x.Name, x.Email, x.Phone, x.Subject,
-        x.Message, x.Consent, x.IsRead, ServiceRules.AsUtc(x.CreatedAt), ServiceRules.AsUtc(x.ProcessedAt));
+        x.Message, x.Consent, x.IsRead, ServiceRules.AsUtc(x.CreatedAt), ServiceRules.AsUtc(x.ProcessedAt))
+    {
+        NotificationStatus = x.NotificationSentAt is not null ? "Gönderildi"
+            : x.NotificationPending ? (x.NotificationAttempts >= 6 ? "Başarısız — yapılandırmayı kontrol edin" : "Bekliyor") : "Kapalı"
+    };
 }

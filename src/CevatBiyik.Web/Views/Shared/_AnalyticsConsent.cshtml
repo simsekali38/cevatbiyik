@@ -1,0 +1,24 @@
+@inject CevatBiyik.Web.Analytics.AnalyticsPolicy Analytics
+@inject CevatBiyik.Web.Analytics.AnalyticsConsent Consent
+@{ var contactRecorded = TempData["ContactRecorded"] is true; }
+@if (await Analytics.AvailableAsync(Context))
+{
+    var choice = Consent.Read(Context);
+    <section class="container consent-panel my-4 @(choice is null ? "consent-prompt" : "")" aria-labelledby="cookie-heading" data-consent-state="@(Analytics.Version + ":" + (choice is null ? "unknown" : choice.Value ? "allow" : "deny"))">
+        <details id="cookie-preferences" open="@(choice is null)">
+            <summary id="cookie-heading">Çerez tercihleri</summary>
+            <p>@Analytics.Notice</p><p><a href="/cerez-politikasi">Çerez politikası</a> · <a href="/kvkk">KVKK / Aydınlatma metni</a></p>
+            <p>Analitik izni isteğe bağlıdır. Reddetseniz de siteyi ve iletişim formunu kullanabilirsiniz. Tercihinizi buradan değiştirebilirsiniz.</p>
+            <form method="post" action="/cerez-tercihi" asp-antiforgery="false" data-consent-form>
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                <div class="d-flex flex-wrap gap-3"><button class="btn btn-outline-primary" name="choice" value="deny" type="submit">Analitiği reddet</button><button class="btn btn-outline-primary" name="choice" value="allow" type="submit">Analitiğe izin ver</button></div>
+            </form>
+            @if (choice is not null) { <p role="status">Geçerli tercih: @(choice.Value ? "Analitik açık" : "Analitik kapalı")</p> }
+        </details>
+    </section>
+    @if (choice == true)
+    {
+        <script src="~/js/analytics.js" asp-append-version="true" nonce="@Context.Items["CspNonce"]" data-provider="@(Analytics.GtmId is null or "" ? "ga4" : "gtm")" data-id="@(Analytics.GtmId is null or "" ? Analytics.Ga4Id : Analytics.GtmId)" data-contact-recorded="@(contactRecorded ? "true" : "false")" defer></script>
+    }
+}

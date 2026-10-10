@@ -54,3 +54,10 @@ For each proposed district/region, confirm its parent, actual service relevance,
 Review legal accuracy and verify any service-coverage/office claim before marking the two Admin flags. No office implied by a location.
 Current address/phone/email/profile approval precedes LegalService/Person opt-ins. Unknown facts stay CONTENT_REQUIRED.
 Do not replace place names in a generic page or pad it to meet a word count; inspect duplicate-content warnings. See ADR-023.
+
+## Phase 11 notice/provider intake
+
+Owner/lawyer supplies approved SMTP sender/recipient/provider and final contact/analytics notices; secrets are entered locally.
+Cookie notice must identify actual analytics purpose/provider/cookies/durations/third parties/transfers; reviewed KVKK and cookie
+pages plus deployment LegalReviewConfirmed are prerequisites. Choose GTM or GA4, review container/property automatic capture,
+record actual data-retention/transfer assessment and increment ConsentVersion for material scope changes. Unknowns CONTENT_REQUIRED.

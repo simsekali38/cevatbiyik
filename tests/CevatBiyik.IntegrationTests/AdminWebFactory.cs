@@ -35,6 +35,8 @@ public sealed class AdminWebFactory : WebApplicationFactory<Program>
         builder.UseEnvironment("Testing");
         builder.ConfigureAppConfiguration((_, configuration) => configuration.AddInMemoryCollection(new Dictionary<string, string?>
         {
+            ["Smtp:Enabled"] = "false",
+            ["Analytics:Enabled"] = "false",
             ["ConnectionStrings:DefaultConnection"] = "Server=127.0.0.1;Database=unused;User ID=unused;",
             ["Storage:PrivateRoot"] = PrivateRoot,
             ["Site:PersonSchemaEnabled"] = PersonSchemaEnabled ? "true" : "false",

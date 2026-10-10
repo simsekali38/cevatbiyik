@@ -10,4 +10,10 @@ public sealed class ContactMessage : BaseEntity
     public bool Consent { get; set; }
     public bool IsRead { get; set; }
     public DateTime? ProcessedAt { get; set; }
+    public bool NotificationPending { get; set; }
+    public int NotificationAttempts { get; set; }
+    public DateTime? NotificationNextAttemptAt { get; set; }
+    public DateTime? NotificationSentAt { get; set; }
+    public string? NotificationLeaseId { get; set; }
+    public DateTime? NotificationLeaseUntil { get; set; }
 }

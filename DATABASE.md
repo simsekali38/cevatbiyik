@@ -218,3 +218,9 @@ Reviewed SQL: docs/database/SEO_REDIRECTS.sql. Migration has not been applied he
 Locations, LocationPracticeAreas and LocationArticles bring the model to 25 entity types. Unique reserved Slug, unique
 association pairs, publication/parent/media indexes; eight new indexes and six FKs. Body longtext (12000 application chars),
 LocalDetails text (4000). No seeds or existing-table alteration. Reviewed unapplied SQL: docs/database/LOCAL_SEO.sql.
+
+## Phase 11 notification metadata
+
+ContactNotifications adds six fields and one pending-work index to ContactMessages. Old rows default not pending.
+Message + queue eligibility persist in one row/save. Conditional SQL lease claims and lease-ID completion allow bounded
+retry/recovery; soft deletion excludes work. No contact payload duplication/seeds. MySQL SQL and rollout notes in docs/database/.

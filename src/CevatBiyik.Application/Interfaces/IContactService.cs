@@ -9,5 +9,6 @@ public interface IContactService
     Task<ContactMessageDto> CreateAsync(CreateContactMessageDto input, CancellationToken cancellationToken = default);
     Task<ContactMessageDto> MarkReadAsync(long id, CancellationToken cancellationToken = default);
     Task<ContactMessageDto> SetReadAsync(long id, bool isRead, CancellationToken cancellationToken = default);
+    Task RetryNotificationAsync(long id, CancellationToken cancellationToken = default);
     Task DeleteAsync(long id, CancellationToken cancellationToken = default);
 }

@@ -47,6 +47,8 @@ public sealed class PublicWebFactory : WebApplicationFactory<Program>
         builder.UseEnvironment("Testing");
         builder.ConfigureAppConfiguration((_, configuration) => configuration.AddInMemoryCollection(new Dictionary<string, string?>
         {
+            ["Smtp:Enabled"] = "false",
+            ["Analytics:Enabled"] = "false",
             ["ConnectionStrings:DefaultConnection"] = "Server=127.0.0.1;Database=unused_web_tests;User ID=unused;",
             ["Site:BaseUrl"] = "https://cevatbiyik.av.tr",
             ["Site:AllowIndexing"] = "false"

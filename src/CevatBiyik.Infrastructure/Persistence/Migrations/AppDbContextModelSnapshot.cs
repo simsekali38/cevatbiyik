@@ -287,6 +287,25 @@ namespace CevatBiyik.Infrastructure.Persistence.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("varchar(150)");
 
+                    b.Property<int>("NotificationAttempts")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NotificationLeaseId")
+                        .HasMaxLength(32)
+                        .HasColumnType("varchar(32)");
+
+                    b.Property<DateTime?>("NotificationLeaseUntil")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("NotificationNextAttemptAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("NotificationPending")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime?>("NotificationSentAt")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("Phone")
                         .HasMaxLength(30)
                         .HasColumnType("varchar(30)");
@@ -304,6 +323,8 @@ namespace CevatBiyik.Infrastructure.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted", "IsRead", "CreatedAt");
+
+                    b.HasIndex("IsDeleted", "NotificationPending", "NotificationNextAttemptAt");
 
                     b.ToTable("ContactMessages", (string)null);
                 });

@@ -106,3 +106,10 @@ Decision and operating limits: ADR-022 and docs/seo/SEO_SETUP.md.
 Application owns bounded LocationService and LocalContentQuality; Domain owns Kayseri hierarchy and manual content associations.
 Infrastructure persists three tables with restricted target/parent/media FKs and split reads. Web owns encoded public/Admin Razor,
 links and optional fact-gated schemas. No new package/API/app/domain; see ADR-023 and docs/seo/LOCAL_SEO_SETUP.md.
+
+## Phase 11 contact/external integration boundary
+
+Application owns contact eligibility/retry and notification ports; Domain stores durable metadata on ContactMessage.
+Infrastructure owns atomic EF lease store, validated TLS SMTP adapter and bounded hosted processing. Web owns IP/trap/CSRF,
+protected consent, Razor preferences, nonce/CSP loader and minimal events. No new package/API/app/project reference.
+ADR-024 and docs/contact/CONTACT_ANALYTICS_SETUP.md describe delivery semantics and legal/hosting activation gates.

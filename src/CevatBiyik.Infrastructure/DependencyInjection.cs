@@ -76,7 +76,13 @@ public static class DependencyInjection
 
             options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 0)));
         });
-        // Phase 11 adds email.
+        var smtp = Email.SmtpNotificationOptions.Read(configuration);
+        smtp.Validate();
+        services.AddSingleton(smtp);
+        services.AddSingleton<IContactNotificationPolicy>(smtp);
+        services.AddScoped<IContactEmailSender, Email.SmtpContactEmailSender>();
+        services.AddScoped<IContactNotificationStore, Email.ContactNotificationStore>();
+        services.AddHostedService<Email.ContactNotificationWorker>();
         return services;
     }
 }

@@ -41,7 +41,8 @@ public abstract class AdminControllerBase(IAdminOperation operations) : Controll
         return View("Edit", input);
     }
 
-    protected async Task<IActionResult> ChangeAsync(Func<Task> mutation, SecurityEvent securityEvent, CancellationToken cancellationToken)
+    protected async Task<IActionResult> ChangeAsync(Func<Task> mutation, SecurityEvent securityEvent, CancellationToken cancellationToken,
+        string conflictMessage = "Bu kayıt içerikte kullanılıyor. Önce bağlı içerikleri düzenleyin.")
     {
         try
         {
@@ -52,7 +53,7 @@ public abstract class AdminControllerBase(IAdminOperation operations) : Controll
         catch (NotFoundException) { return NotFound(); }
         catch (ConflictException)
         {
-            TempData["AdminError"] = "Bu kayıt içerikte kullanılıyor. Önce bağlı içerikleri düzenleyin.";
+            TempData["AdminError"] = conflictMessage;
             return RedirectToAction("Index");
         }
     }

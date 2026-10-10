@@ -7,9 +7,9 @@ using CevatBiyik.Application.Interfaces;
 using CevatBiyik.Domain.Entities;
 using CevatBiyik.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Configuration;
 namespace CevatBiyik.IntegrationTests;
 public sealed partial class LocalSeoFlowTests
 {

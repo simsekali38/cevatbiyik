@@ -46,6 +46,7 @@
 </head>
 <body>
     <a class="skip-link" href="#icerik">Ana içeriğe geç</a>
+    <partial name="_AnalyticsConsent" />
     <header class="site-header"><div class="container">
         <nav class="navbar navbar-expand-xl py-3" data-bs-theme="dark" aria-label="Ana menü">
             <a class="navbar-brand brand" asp-controller="Home" asp-action="Index" aria-label="@site.Name — ana sayfa"><img class="brand-emblem" src="~/images/brand/cevat-biyik-emblem.svg" asp-append-version="true" width="72" height="72" alt="" /><span class="brand-name">@site.Name<span class="brand-caption">HUKUK &amp; DANIŞMANLIK</span></span></a>
@@ -55,7 +56,7 @@
                 <li class="nav-item"><a class="nav-link" asp-controller="PracticeAreas" asp-action="Index" aria-current="@(currentController == "PracticeAreas" ? "page" : null)">Uzmanlık alanları</a></li>
                 <li class="nav-item"><a class="nav-link" asp-controller="Articles" asp-action="Index" aria-current="@(currentController == "Articles" ? "page" : null)">Makaleler</a></li>
                 <li class="nav-item"><a class="nav-link" asp-controller="Faq" asp-action="Index" aria-current="@(currentController == "Faq" ? "page" : null)">SSS</a></li>
-                <li class="nav-item ms-lg-3"><a class="btn btn-outline-primary" asp-controller="Home" asp-action="Contact" aria-current="@(currentAction == "Contact" ? "page" : null)">İletişim <span aria-hidden="true">↗</span></a></li>
+                <li class="nav-item ms-lg-3"><a class="btn btn-outline-primary" data-analytics-event="cta_click" asp-controller="Home" asp-action="Contact" aria-current="@(currentAction == "Contact" ? "page" : null)">İletişim <span aria-hidden="true">↗</span></a></li>
             </ul></div>
         </nav>
     </div></header>

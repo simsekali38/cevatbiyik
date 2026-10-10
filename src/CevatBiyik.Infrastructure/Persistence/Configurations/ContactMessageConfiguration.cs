@@ -17,5 +17,10 @@ public sealed class ContactMessageConfiguration : IEntityTypeConfiguration<Conta
         builder.Property(e => e.Message).HasMaxLength(5000).IsRequired();
         builder.Property(e => e.ProcessedAt).HasColumnType("datetime(6)");
         builder.HasIndex(e => new { e.IsDeleted, e.IsRead, e.CreatedAt });
+        builder.Property(e => e.NotificationLeaseId).HasMaxLength(32);
+        builder.Property(e => e.NotificationNextAttemptAt).HasColumnType("datetime(6)");
+        builder.Property(e => e.NotificationLeaseUntil).HasColumnType("datetime(6)");
+        builder.Property(e => e.NotificationSentAt).HasColumnType("datetime(6)");
+        builder.HasIndex(e => new { e.IsDeleted, e.NotificationPending, e.NotificationNextAttemptAt });
     }
 }

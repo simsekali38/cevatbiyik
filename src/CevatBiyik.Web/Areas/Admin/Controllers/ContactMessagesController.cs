@@ -20,6 +20,10 @@ public sealed class ContactMessagesController(IContactService messages, IAdminOp
     [HttpPost("read/{id:long}")]
     public Task<IActionResult> Read(long id, bool isRead, CancellationToken cancellationToken) =>
         ChangeAsync(async () => { await messages.SetReadAsync(id, isRead, cancellationToken); }, SecurityEvent.ContactReadChanged, cancellationToken);
+    [HttpPost("retry-notification/{id:long}")]
+    public Task<IActionResult> RetryNotification(long id, bool confirmed, CancellationToken cancellationToken) =>
+        confirmed ? ChangeAsync(() => messages.RetryNotificationAsync(id, cancellationToken), SecurityEvent.ContactNotificationRetried, cancellationToken, "Bildirim yeniden denemeye uygun değil. SMTP etkinliğini ve bildirim durumunu kontrol edin.")
+            : Task.FromResult<IActionResult>(BadRequest());
     [HttpPost("delete/{id:long}")]
     public Task<IActionResult> Delete(long id, bool confirmed, CancellationToken cancellationToken) =>
         confirmed ? ChangeAsync(() => messages.DeleteAsync(id, cancellationToken), SecurityEvent.ContactDeleted, cancellationToken)

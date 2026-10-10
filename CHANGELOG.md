@@ -4,6 +4,17 @@ All notable project changes should be recorded here.
 
 ## [Unreleased]
 
+### Phase 11 — Contact / SMTP / consent-controlled analytics (2026-10-10)
+- Tightened contact email validation, added nonpersistent honeypot, sliding IP limiter and Retry-After while retaining CSRF/production legal gates.
+- Added durable contact notification metadata/migration, atomic leases/recovery/backoff, mandatory authenticated STARTTLS/587 and generic PII-free notices/logging.
+- Added Admin notification status and confirmed audited retry for exhausted jobs; existing read/unread/soft deletion preserved.
+- Added protected/versioned opt-in cookie, equal-weight changeable Razor preference banner, legal/config gates and nonce/CSP-compatible GTM or GA4 loading.
+- Added minimal allowlisted interaction hooks/one-time saved-contact marker, withdrawal/cross-tab refresh and no pre-consent remote requests.
+- Added business/relational/MVC and Node built-in event tests; normalized one existing integration-test import order for full style verification.
+- Release build: 0 errors/0 warnings. 155 unit + 127 integration = 282 passed, 9 dedicated MySQL skipped; 6 JavaScript tests passed.
+- ADR-024, migration SQL, configuration/operations guide and Phase 11 verification report added. Owner closure approved; commit authorized.
+- No live migration/provider delivery/Google activation/deployment; user-owned appsettings.json edits preserved.
+
 ### Phase 10 — Kayseri / local SEO (2026-10-10)
 - Added reviewed Location province/district/region hierarchy and manual practice-area/article association management.
 - Added encoded public/Admin Razor pages, hierarchical/reciprocal links, reserved slugs and audited protected soft deletion.

@@ -91,3 +91,10 @@ Commands and indexing gates: ../seo/SEO_SETUP.md.
 20261009224849_LocalSeo adds three local tables, eight indexes and six FKs (25 entity types). LOCAL_SEO.sql uses EF 8.0.29.
 Reviewed longtext/text provider types avoid utf8mb4 varchar row-size overflow. Up has no seeds/data drops; Down loses local data.
 No update to cevodb was performed. Dedicated MySQL 8 verification and coordinated backups precede rollout; see ../seo/LOCAL_SEO_SETUP.md.
+
+## Phase 11 — ContactNotifications
+
+Migration 20261010200603_ContactNotifications adds six contact notification fields and one index; defaults do not queue old rows.
+Reviewed SQL: CONTACT_NOTIFICATIONS.sql. No live database update performed. Run dedicated test DB first, backup/quiesce,
+keep SMTP disabled during migration and verify worker behavior before activation. MySQL DDL may implicitly commit.
+Down drops notification progress; contact messages remain. Setup commands: ../contact/CONTACT_ANALYTICS_SETUP.md.

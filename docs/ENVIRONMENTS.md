@@ -92,3 +92,11 @@ Faz 01 doğrulama (2026-10-09): `dotnet build CevatBiyik.sln -c Release` 0 hata;
 ## Phase 05 administrator provisioning
 
 AdminBootstrap:UserName/Email/Password are temporary user-secrets (Development) or protected environment variables (Production). They are read only by the explicit --provision-admin CLI. Remove bootstrap values afterward. Authentication cookies always require HTTPS, including Development. Database rollout, bootstrap commands and Data Protection/Plesk gates are in security/ADMIN_SETUP.md.
+
+## Phase 11 integration switches
+
+Absent Smtp:Enabled and Analytics:Enabled are false. SMTP is startup-bound mandatory STARTTLS/587;
+credentials belong in user-secrets/Plesk Smtp__... settings and never SiteSettings. Analytics selects one public GTM/GA4 ID,
+reviewed config/legal-page gate, versioned protected consent and per-request CSP. Persist private Data Protection keys.
+Complete key/command templates and AlwaysRunning/IP/container/legal checks: contact/CONTACT_ANALYTICS_SETUP.md.
+No agent changes to user-owned appsettings.json or activation of production external services.

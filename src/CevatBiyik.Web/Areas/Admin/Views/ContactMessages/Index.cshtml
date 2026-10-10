@@ -2,7 +2,11 @@
 @{ ViewData["Title"] = "İletişim mesajları"; ViewData["HasNext"] = Model.Count == 20; }
 <h1>İletişim mesajları</h1>
 @foreach(var item in Model) { <article class="content-card mb-3">
-<h2>@item.Name — @(item.IsRead ? "Okundu" : "Okunmadı")</h2><p>@item.Email · @item.Phone</p><p>@item.Subject</p><p class="admin-message">@item.Message</p>
+<h2>@item.Name — @(item.IsRead ? "Okundu" : "Okunmadı")</h2><p>@item.Email · @item.Phone</p><p>@item.Subject</p><p>Bildirim: @item.NotificationStatus</p><p class="admin-message">@item.Message</p>
 <form asp-action="Read" asp-route-id="@item.Id" method="post" asp-antiforgery="false">@Html.AntiForgeryToken()<input type="hidden" name="isRead" value="@((!item.IsRead).ToString().ToLowerInvariant())" /><button class="btn btn-primary" type="submit">@(item.IsRead ? "Okunmadı olarak işaretle" : "Okundu olarak işaretle")</button></form>
+@if (item.NotificationStatus.StartsWith("Başarısız", StringComparison.Ordinal))
+{
+    <form asp-action="RetryNotification" asp-route-id="@item.Id" method="post" asp-antiforgery="false">@Html.AntiForgeryToken()<label><input type="checkbox" name="confirmed" value="true" required /> SMTP yapılandırmasını kontrol ettim; yeniden denemeyi onaylıyorum</label><button class="btn btn-outline-primary" type="submit">Bildirimi yeniden dene</button></form>
+}
 <form asp-action="Delete" asp-route-id="@item.Id" method="post" asp-antiforgery="false" class="admin-delete">@Html.AntiForgeryToken()<label><input type="checkbox" name="confirmed" value="true" required /> Bu kaydı silmeyi onaylıyorum</label><button class="btn btn-outline-danger" type="submit">Sil</button></form></article> }
 <partial name="_Paging" />

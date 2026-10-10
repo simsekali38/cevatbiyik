@@ -43,6 +43,8 @@ builder.Services.ConfigureApplicationCookie(options =>
     };
 });
 builder.Services.AddScoped<PublicSiteFilter>();
+builder.Services.AddScoped<CevatBiyik.Web.Analytics.AnalyticsPolicy>();
+builder.Services.AddScoped<CevatBiyik.Web.Analytics.AnalyticsConsent>();
 builder.Services.AddAntiforgery(options =>
 {
     options.Cookie.HttpOnly = true;
@@ -52,6 +54,14 @@ builder.Services.AddAntiforgery(options =>
 builder.Services.AddRateLimiter(options =>
 {
     options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+    options.OnRejected = (context, _) =>
+    {
+        context.HttpContext.Response.Headers.RetryAfter = "60";
+        return ValueTask.CompletedTask;
+    };
+    options.AddPolicy("consent", context => RateLimitPartition.GetFixedWindowLimiter(
+        context.Connection.RemoteIpAddress?.MapToIPv6().ToString() ?? "unknown", _ => new FixedWindowRateLimiterOptions
+        { PermitLimit = 20, Window = TimeSpan.FromMinutes(1), QueueLimit = 0, AutoReplenishment = true }));
     options.AddPolicy("admin-login", context => RateLimitPartition.GetFixedWindowLimiter(
         context.Connection.RemoteIpAddress?.ToString() ?? "unknown", _ => new FixedWindowRateLimiterOptions
         {
@@ -60,9 +70,10 @@ builder.Services.AddRateLimiter(options =>
             QueueLimit = 0,
             AutoReplenishment = true
         }));
-    options.AddPolicy("contact", context => RateLimitPartition.GetFixedWindowLimiter(
-        context.Connection.RemoteIpAddress?.ToString() ?? "unknown", _ => new FixedWindowRateLimiterOptions
+    options.AddPolicy("contact", context => RateLimitPartition.GetSlidingWindowLimiter(
+        context.Connection.RemoteIpAddress?.MapToIPv6().ToString() ?? "unknown", _ => new SlidingWindowRateLimiterOptions
         {
+            SegmentsPerWindow = 6,
             PermitLimit = 5,
             Window = TimeSpan.FromMinutes(1),
             QueueLimit = 0,
@@ -121,6 +132,19 @@ app.Use(async (context, next) =>
     });
     context.Response.Headers["Referrer-Policy"] = "strict-origin-when-cross-origin";
     context.Response.Headers["Content-Security-Policy"] = $"default-src 'self'; script-src 'self' 'nonce-{nonce}'; style-src 'self'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'";
+    // No external analytics origins on admin, errors, unknown consent or incomplete legal content.
+    if (!context.Request.Path.StartsWithSegments("/admin") && !context.Request.Path.StartsWithSegments("/hata") &&
+        !context.Request.Path.StartsWithSegments("/uploads") && !Path.HasExtension(context.Request.Path.Value))
+    {
+        var analytics = context.RequestServices.GetRequiredService<CevatBiyik.Web.Analytics.AnalyticsPolicy>();
+        var consent = context.RequestServices.GetRequiredService<CevatBiyik.Web.Analytics.AnalyticsConsent>();
+        if (analytics.Configured) { context.Response.Headers.CacheControl = "no-store"; }
+        if (analytics.Configured && consent.Read(context) == true && await analytics.AvailableAsync(context))
+        {
+            context.Response.Headers.CacheControl = "no-store";
+            context.Response.Headers["Content-Security-Policy"] = $"default-src 'self'; script-src 'self' 'nonce-{nonce}' https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com https://www.googletagmanager.com; style-src 'self'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'";
+        }
+    }
     await next(context);
 });
 app.UseStaticFiles();
