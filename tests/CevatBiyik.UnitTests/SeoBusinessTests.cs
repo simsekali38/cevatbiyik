@@ -84,7 +84,7 @@ public sealed class SeoBusinessTests
     {
         var media = new FakeRepository<MediaAsset>(); media.Seed(new MediaAsset { Id = 1, IsActive = true });
         var areas = new FakeRepository<PracticeArea>(); areas.Seed(new PracticeArea { Id = 1, OpenGraphMediaId = 1, IsDeleted = true });
-        var service = new MediaService(media, new FakeRepository<Article>(), new FakeRepository<PageSeo>(), new TestImageStorage(), areas);
+        var service = new MediaService(media, new FakeRepository<Article>(), new FakeRepository<PageSeo>(), new TestImageStorage(), areas, new FakeRepository<Location>());
         await Assert.ThrowsAsync<ConflictException>(() => service.DeleteAsync(1)); Assert.False(media.Items[0].IsDeleted);
     }
 }

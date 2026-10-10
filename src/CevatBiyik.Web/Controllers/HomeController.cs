@@ -23,6 +23,10 @@ public sealed class HomeController(IArticleService articles, IPracticeAreaServic
     {
         var profile = await profiles.GetAsync(true, cancellationToken);
         SetPage("Hakkımda", "Av. Cevat Bıyık hakkında bilgiler.", "/hakkimda", profile is null);
+        if (ViewData["SiteSettings"] is PublicSiteSettings site)
+        {
+            ViewData["StructuredData"] = CevatBiyik.Web.Seo.SeoPresentation.Person(site, configuration, profile);
+        }
         return View(profile);
     }
 

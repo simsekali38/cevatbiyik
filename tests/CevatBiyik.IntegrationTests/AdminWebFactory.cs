@@ -25,6 +25,8 @@ public sealed class AdminWebFactory : WebApplicationFactory<Program>
     public bool AllowIndexing { get; init; }
     public bool LegalServiceSchemaEnabled { get; init; }
     public bool FailMediaAudit { get; init; }
+    public bool PersonSchemaEnabled { get; init; }
+    public bool FailLocationAudit { get; init; }
     public bool FailRedirectAudit { get; init; }
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -35,6 +37,7 @@ public sealed class AdminWebFactory : WebApplicationFactory<Program>
         {
             ["ConnectionStrings:DefaultConnection"] = "Server=127.0.0.1;Database=unused;User ID=unused;",
             ["Storage:PrivateRoot"] = PrivateRoot,
+            ["Site:PersonSchemaEnabled"] = PersonSchemaEnabled ? "true" : "false",
             ["Site:AllowIndexing"] = AllowIndexing ? "true" : "false",
             ["Site:LegalServiceSchemaEnabled"] = LegalServiceSchemaEnabled ? "true" : "false"
         }));
@@ -49,7 +52,7 @@ public sealed class AdminWebFactory : WebApplicationFactory<Program>
             services.AddSingleton<IMalwareScanner>(new CleanTestScanner { Clean = !RejectDocumentScan });
             services.RemoveAll<IManagedFiles>();
             services.AddSingleton<IManagedFiles>(_ => new ManagedFiles(UploadRoot, PrivateRoot, TimeProvider.System));
-            if (FailMediaAudit || FailDocumentAudit || FailRedirectAudit)
+            if (FailMediaAudit || FailDocumentAudit || FailRedirectAudit || FailLocationAudit)
             {
                 services.RemoveAll<IAuditLogService>();
                 services.AddScoped<IAuditLogService, FailingMediaAudit>();
@@ -122,7 +125,7 @@ public sealed class AdminWebFactory : WebApplicationFactory<Program>
 internal sealed class FailingMediaAudit(AppDbContext db) : IAuditLogService
 {
     public Task WriteAsync(SecurityEvent securityEvent, string? actorId, CancellationToken cancellationToken = default) =>
-        securityEvent is SecurityEvent.MediaUploaded or SecurityEvent.DocumentUploaded or SecurityEvent.RedirectSaved ? throw new InvalidOperationException("Test-only audit failure.")
+        securityEvent is SecurityEvent.LocationSaved or SecurityEvent.MediaUploaded or SecurityEvent.DocumentUploaded or SecurityEvent.RedirectSaved ? throw new InvalidOperationException("Test-only audit failure.")
         : new AuditLogService(db).WriteAsync(securityEvent, actorId, cancellationToken);
     public Task<IReadOnlyList<AuditLogDto>> RecentAsync(CancellationToken cancellationToken = default) => new AuditLogService(db).RecentAsync(cancellationToken);
 }

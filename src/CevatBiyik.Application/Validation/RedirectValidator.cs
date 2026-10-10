@@ -23,7 +23,7 @@ public static class RedirectPaths
         return segments.All(x => x.Length > 0 && x is not "." and not ".." && x[0] != '.') &&
             !ProtectedRoots.Contains(segments[0], StringComparer.OrdinalIgnoreCase);
     }
-    public static bool IsSource(string? path) => IsSafe(path) && !PageSeoValidator.Paths.Contains(Normalize(path!));
+    public static bool IsSource(string? path) => IsSafe(path) && Normalize(path!) != "/konumlar" && !PageSeoValidator.Paths.Contains(Normalize(path!));
 }
 public sealed class RedirectValidator : AbstractValidator<RedirectInput>
 {

@@ -1,0 +1,7 @@
+@model PagedResult<LocationDto>
+<section class="page-heading"><div class="container"><p class="eyebrow">Yerel bilgiler</p><h1>Kayseri yerel bilgiler</h1><p>İncelenmiş konum bilgileri ve ilgili içerikler.</p></div></section>
+<section class="section-pad"><div class="container">
+@if(Model.Items.Count == 0){<p>Yayımlanmış yerel içerik henüz bulunmuyor.</p>}
+<div class="row g-4">@foreach(var item in Model.Items){<div class="col-md-6"><article class="card h-100"><div class="card-body"><h2 class="h4"><a href="@item.Path">@item.Name</a></h2><p>@item.Input.Summary</p></div></article></div>}</div>
+<nav class="mt-4" aria-label="Konum sayfaları">@if(Model.HasPrevious){<a href="/konumlar?page=@(Model.Page-1)">Önceki</a>} @if(Model.HasNext){<a href="/konumlar?page=@(Model.Page+1)">Sonraki</a>}</nav>
+</div></section>

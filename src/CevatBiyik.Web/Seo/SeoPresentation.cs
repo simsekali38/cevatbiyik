@@ -97,6 +97,33 @@ public static class SeoPresentation
             ["address"] = site.Address
         };
     }
+    public static object LocationBreadcrumb(string origin, LocationDto location)
+    {
+        var links = new[] { new LocalLink(0, "Ana sayfa", "/"), new LocalLink(0, "Kayseri yerel bilgiler", "/konumlar") }
+            .Concat(location.Ancestors).Append(new(location.Id, location.Name, location.Path));
+        return new Dictionary<string, object> { ["@context"] = "https://schema.org", ["@type"] = "BreadcrumbList",
+            ["itemListElement"] = links.Select((x, i) => new Dictionary<string, object> { ["@type"] = "ListItem", ["position"] = i + 1, ["name"] = x.Title, ["item"] = origin + x.Path }).ToArray() };
+    }
+    public static object? LocalLegalService(PublicSiteSettings site, IConfiguration configuration, LocationDto location)
+    {
+        if (!location.Indexable || !location.Input.FactsVerified || LegalService(site, configuration) is not Dictionary<string, object> legal)
+        {
+            return null;
+        }
+        legal["@id"] = Origin(configuration) + "/#legal-service";
+        legal["areaServed"] = new Dictionary<string, object> { ["@type"] = "AdministrativeArea", ["name"] = location.Name };
+        return legal;
+    }
+    public static object? Person(PublicSiteSettings site, IConfiguration configuration, ProfileDto? profile)
+    {
+        if (!configuration.GetValue<bool>("Site:PersonSchemaEnabled") || profile is null || !profile.IsActive || !profile.IsReviewed || !ContactFactsComplete(site))
+        {
+            return null;
+        }
+        return new Dictionary<string, object> { ["@context"] = "https://schema.org", ["@type"] = "Person",
+            ["@id"] = Origin(configuration) + "/#person", ["name"] = "Av. Cevat Bıyık", ["url"] = Origin(configuration) + "/hakkimda",
+            ["description"] = profile.Biography, ["email"] = site.Email, ["telephone"] = site.Phone };
+    }
     public static bool ContactFactsComplete(PublicSiteSettings site)
     {
         if (!CevatBiyik.Application.Validation.ContentPublication.Complete(site.Name, site.Email, site.Phone, site.Address) ||

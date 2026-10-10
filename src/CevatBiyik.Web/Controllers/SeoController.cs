@@ -4,7 +4,7 @@ using CevatBiyik.Application.Interfaces;
 using CevatBiyik.Web.Seo;
 using Microsoft.AspNetCore.Mvc;
 namespace CevatBiyik.Web.Controllers;
-public sealed class SeoController(ISitemapService sitemap, IConfiguration configuration, IProfileService profiles, IPageContentService pages, IFaqService faq, ISettingService settings) : Controller
+public sealed class SeoController(ISitemapService sitemap, IConfiguration configuration, IProfileService profiles, IPageContentService pages, IFaqService faq, ISettingService settings, ILocationService locations) : Controller
 {
     private static readonly XNamespace Ns = "http://www.sitemaps.org/schemas/sitemap/0.9";
     private bool Indexing => configuration.GetValue<bool>("Site:AllowIndexing");
@@ -21,14 +21,19 @@ public sealed class SeoController(ISitemapService sitemap, IConfiguration config
         }
 
         var counts = await sitemap.CountAsync(cancellationToken);
-        var total = (counts.Articles + 999) / 1000 + (counts.PracticeAreas + 999) / 1000;
-        if (total >= 50000)
+        var local = await locations.IndexableAsync(cancellationToken);
+        var total = (counts.Articles + 999) / 1000 + (counts.PracticeAreas + 999) / 1000 + 1 + (local.Count > 0 ? 1 : 0);
+        if (total > 50000)
         {
             return StatusCode(503);
         }
 
         var origin = SeoPresentation.Origin(configuration);
         var root = new XElement(Ns + "sitemapindex", new XElement(Ns + "sitemap", new XElement(Ns + "loc", origin + "/sitemaps/pages.xml")));
+        if (local.Count > 0)
+        {
+            root.Add(new XElement(Ns + "sitemap", new XElement(Ns + "loc", origin + "/sitemaps/locations.xml")));
+        }
         foreach (var (kind, count) in new[] { ("articles", counts.Articles), ("practice-areas", counts.PracticeAreas) })
         {
             for (var page = 1L; page <= (count + 999) / 1000; page++)
@@ -72,7 +77,21 @@ public sealed class SeoController(ISitemapService sitemap, IConfiguration config
             entries.Add(new("/sss", null));
         }
 
+        if ((await locations.IndexableAsync(ct)).Count > 0)
+        {
+            entries.Add(new("/konumlar", null));
+        }
         return UrlSet(entries);
+    }
+    [HttpGet("/sitemaps/locations.xml")]
+    public async Task<IActionResult> Locations(CancellationToken ct)
+    {
+        if (!Indexing)
+        {
+            return NotFound();
+        }
+        var entries = await locations.IndexableAsync(ct);
+        return entries.Count == 0 ? NotFound() : UrlSet(entries.Select(x => new SitemapEntry(x.Path, x.ModifiedAt)));
     }
     [HttpGet("/sitemaps/{kind}/{page:int}.xml")]
     public async Task<IActionResult> Entries(string kind, int page, CancellationToken cancellationToken)

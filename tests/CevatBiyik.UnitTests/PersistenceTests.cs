@@ -29,7 +29,11 @@ public class PersistenceTests
         Assert.Contains(article.GetIndexes(), i => i.IsUnique && i.Properties.Single().Name == "Slug");
         Assert.Equal(DeleteBehavior.Restrict, article.GetForeignKeys().Single(x => x.Properties.Any(p => p.Name == "PracticeAreaId")).DeleteBehavior);
         Assert.Equal(250, article.FindProperty(nameof(Article.Title))!.GetMaxLength());
-        Assert.Equal(22, context.Model.GetEntityTypes().Count());
+        var location = context.Model.FindEntityType(typeof(Location))!;
+        Assert.Equal("longtext", location.FindProperty(nameof(Location.Body))!.GetColumnType());
+        Assert.Equal("text", location.FindProperty(nameof(Location.LocalDetails))!.GetColumnType());
+        Assert.Contains(location.GetIndexes(), x => x.IsUnique && x.Properties.Count == 1 && x.Properties[0].Name == nameof(Location.Slug));
+        Assert.Equal(25, context.Model.GetEntityTypes().Count());
         Assert.NotNull(context.Model.FindEntityType(typeof(AuditLog)));
         Assert.NotNull(context.Model.FindEntityType(typeof(CevatBiyik.Infrastructure.Identity.ApplicationUser)));
     }

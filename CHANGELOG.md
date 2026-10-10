@@ -4,6 +4,16 @@ All notable project changes should be recorded here.
 
 ## [Unreleased]
 
+### Phase 10 — Kayseri / local SEO (2026-10-10)
+- Added reviewed Location province/district/region hierarchy and manual practice-area/article association management.
+- Added encoded public/Admin Razor pages, hierarchical/reciprocal links, reserved slugs and audited protected soft deletion.
+- Added bounded runtime thin/similar/unverified/ancestor/related-publication checks; weak pages noindex and excluded from discovery/sitemaps.
+- Reused single-office LegalService with verified areaServed; optional reviewed Person, safe JSON-LD and existing global indexing policy.
+- Added LocalSeo migration/reviewed SQL with longtext/text MySQL safety, ADR-023, intake rules and verification/setup reports.
+- Release: 0 errors/0 warnings; 139 unit + 114 integration = 253 passed, 8 dedicated MySQL tests skipped.
+- Four new screens verified at 390 px without horizontal overflow; labels/Tab/Enter focus and desktop Admin checked.
+- Owner closure approved (2026-10-10); commit authorized. No live migration/deployment/schema or indexing activation. User-owned appsettings.json edits preserved.
+
 ### Phase 09 — SEO and redirect management (2026-10-10)
 - Added publication-aware safe same-site 301 rules and audited Admin management; rejected external/protected paths and chains.
 - Added PracticeArea SEO/OpenGraph and media reference protection; reused safe schema and existing sitemap/robots.

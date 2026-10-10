@@ -1,0 +1,2 @@
+@{var links = ViewData["RelatedLocations"] as IReadOnlyList<LocalLink> ?? Array.Empty<LocalLink>();}
+@if(links.Count > 0){<aside class="section-pad" aria-label="İlgili yerel bilgiler"><div class="container reading-width"><h2>İlgili yerel bilgiler</h2><ul>@foreach(var link in links){<li><a href="@link.Path">@link.Title</a></li>}</ul></div></aside>}

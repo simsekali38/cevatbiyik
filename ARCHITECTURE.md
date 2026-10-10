@@ -100,3 +100,9 @@ Application owns RedirectService, PublicRouteService and bounded SeoAuditService
 central SeoPolicy and Razor Admin screens. Infrastructure persists RedirectRule and optional PracticeArea SEO.
 Existing metadata/JSON-LD/sitemap services are reused. No new dependency/API/application was introduced.
 Decision and operating limits: ADR-022 and docs/seo/SEO_SETUP.md.
+
+## Phase 10 local content boundary
+
+Application owns bounded LocationService and LocalContentQuality; Domain owns Kayseri hierarchy and manual content associations.
+Infrastructure persists three tables with restricted target/parent/media FKs and split reads. Web owns encoded public/Admin Razor,
+links and optional fact-gated schemas. No new package/API/app/domain; see ADR-023 and docs/seo/LOCAL_SEO_SETUP.md.

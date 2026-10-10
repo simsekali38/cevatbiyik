@@ -103,3 +103,9 @@ public paths are accepted; protected/static paths, external URLs, ambiguous enco
 GET/HEAD redirects discard queries and recheck publication; current content takes priority. Metadata stays encoded,
 JSON-LD keeps safe serialization/CSP, and global indexing denial overrides page settings. Robots is not access control.
 See ADR-022 and docs/seo/SEO_SETUP.md.
+
+## Phase 10 local content controls
+
+Admin role/policy, explicit binding, antiforgery, confirmation and transaction/audit protect Location mutations. All text is
+validated/encoded; JSON-LD keeps the safe serializer/CSP. Review and verified-fact gates prevent placeholder schema/indexing.
+Soft deletion retains local content; referenced media is protected. Noindex is not access control. ADR-023 records safeguards.

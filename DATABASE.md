@@ -212,3 +212,9 @@ Adds RedirectRules with unique reserved SourcePath (200), DestinationPath (200),
 PracticeAreas gains six nullable SEO/OG fields; OpenGraphMediaId references MediaAssets with restrictive deletion.
 22 model entity types including Identity. No seed or existing-data drop in Up.
 Reviewed SQL: docs/database/SEO_REDIRECTS.sql. Migration has not been applied here.
+
+## Phase 10 — LocalSeo
+
+Locations, LocationPracticeAreas and LocationArticles bring the model to 25 entity types. Unique reserved Slug, unique
+association pairs, publication/parent/media indexes; eight new indexes and six FKs. Body longtext (12000 application chars),
+LocalDetails text (4000). No seeds or existing-table alteration. Reviewed unapplied SQL: docs/database/LOCAL_SEO.sql.

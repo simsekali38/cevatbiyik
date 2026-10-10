@@ -3,7 +3,7 @@ using CevatBiyik.Application.Validation;
 namespace CevatBiyik.Application.Services;
 
 public sealed class PublicRouteService(IArticleService articles, IPracticeAreaService areas, IProfileService profiles,
-    IPageContentService pages, IFaqService faq) : IPublicRouteService
+    IPageContentService pages, IFaqService faq, ILocationService locations) : IPublicRouteService
 {
     public async Task<bool> ExistsAsync(string path, CancellationToken ct = default)
     {
@@ -15,6 +15,15 @@ public sealed class PublicRouteService(IArticleService articles, IPracticeAreaSe
         if (path is "/" or "/makaleler" or "/uzmanlik-alanlari" or "/iletisim")
         {
             return true;
+        }
+
+        if (path == "/konumlar")
+        {
+            return (await locations.IndexableAsync(ct)).Count > 0;
+        }
+        if (path.StartsWith("/konumlar/", StringComparison.Ordinal))
+        {
+            return await locations.PublishedAsync(path["/konumlar/".Length..], ct) is not null;
         }
 
         if (path == "/hakkimda")

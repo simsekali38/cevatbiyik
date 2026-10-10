@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CevatBiyik.Web.Controllers;
 
 [Route("uzmanlik-alanlari")]
-public sealed class PracticeAreasController(IPracticeAreaService practiceAreas, IConfiguration configuration) : PublicController
+public sealed class PracticeAreasController(IPracticeAreaService practiceAreas, IConfiguration configuration, ILocationService locations) : PublicController
 {
     [HttpGet("")]
     public async Task<IActionResult> Index(int page = 1, CancellationToken cancellationToken = default)
@@ -42,6 +42,7 @@ public sealed class PracticeAreasController(IPracticeAreaService practiceAreas, 
         CevatBiyik.Web.Seo.SeoPresentation.Apply(ViewData, area.Seo, area.OpenGraphImageUrl);
         ViewData["StructuredData"] = CevatBiyik.Web.Seo.SeoPresentation.Breadcrumb(CevatBiyik.Web.Seo.SeoPresentation.Origin(configuration),
             "Uzmanlık alanları", "/uzmanlik-alanlari", area.Name, "/uzmanlik-alanlari/" + Uri.EscapeDataString(area.Slug));
+        ViewData["RelatedLocations"] = await locations.RelatedAsync(practiceAreaId: area.Id, ct: cancellationToken);
         return View(area);
     }
 }

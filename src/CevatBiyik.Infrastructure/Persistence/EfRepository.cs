@@ -14,6 +14,11 @@ public sealed class EfRepository<T>(AppDbContext context) : IRepository<T> where
 
     private static IQueryable<T> WithRelations(IQueryable<T> query)
     {
+        if (typeof(T) == typeof(Location))
+        {
+            return query.Include("OpenGraphMedia").Include("PracticeLinks.PracticeArea").Include("ArticleLinks.Article.PracticeArea").AsSplitQuery();
+        }
+
         if (typeof(T) == typeof(Article))
         {
             return query.Include("Category").Include("CoverMedia").Include("OpenGraphMedia").Include("TagLinks.Tag").AsSplitQuery();

@@ -85,3 +85,9 @@ and one restrictive media FK. 22 model entity types. SQL: SEO_REDIRECTS.sql, gen
 Up has no seeds/data drops; Down loses redirect/area SEO data. MySQL DDL is not fully atomic.
 No database update performed. Dedicated MySQL validation and coordinated backups precede application.
 Commands and indexing gates: ../seo/SEO_SETUP.md.
+
+## Phase 10 — LocalSeo
+
+20261009224849_LocalSeo adds three local tables, eight indexes and six FKs (25 entity types). LOCAL_SEO.sql uses EF 8.0.29.
+Reviewed longtext/text provider types avoid utf8mb4 varchar row-size overflow. Up has no seeds/data drops; Down loses local data.
+No update to cevodb was performed. Dedicated MySQL 8 verification and coordinated backups precede rollout; see ../seo/LOCAL_SEO_SETUP.md.

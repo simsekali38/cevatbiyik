@@ -82,3 +82,9 @@ Use join tables for many-to-many relationships.
 PracticeAreas.OpenGraphMediaId -> MediaAssets.Id (nullable, Restrict).
 RedirectRules stores unique SourcePath -> DestinationPath; paths are validated by Application, not foreign keys.
 Sources remain reserved when disabled/deleted. Shared UTC/active/deleted columns apply.
+
+## Phase 10 concrete relations
+
+Locations.ParentId -> Locations.Id (nullable Restrict); Locations.OpenGraphMediaId -> MediaAssets.Id (nullable Restrict).
+LocationPracticeAreas: unique (LocationId, PracticeAreaId), target Restrict. LocationArticles: unique (LocationId, ArticleId), target Restrict.
+Location-to-join FKs Cascade for relation orphan cleanup; location content itself is soft-deleted through Application.

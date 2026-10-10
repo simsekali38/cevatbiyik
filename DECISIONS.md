@@ -1,5 +1,60 @@
 # Architecture Decision Records
 
+## ADR-023 — Reviewed Kayseri hierarchy and bounded local content quality policy
+
+Status: Implemented and owner-approved (2026-10-10, Phase 10).
+
+Preserve ADR-019/021/022, .NET 8/MySQL 8, linear references, one Razor application, filesystem storage,
+existing brand and safe JSON-LD. No new package, API, subdomain, automated content generation or location seed.
+
+Location represents one Province (Kayseri), District under that province, or Region under a district.
+Type/parent/slug are immutable after creation; name/content can be edited. A unique slug remains reserved after
+soft deletion. Parent deletion is blocked while nondeleted children exist. No office-per-district implication.
+Explicit LocationPracticeArea and LocationArticle join tables link up to 20 selected currently public records each.
+Relation edits remove association rows only; location soft deletion retains remaining content/associations.
+FK-only assignment avoids attaching detached read projections as new content; EF loads split related queries.
+Parent/media and target-content FKs Restrict; location-to-association FKs Cascade for relational orphan cleanup.
+Referenced location OG media, including deleted locations, cannot be removed through MediaService.
+
+Application permits at most 100 nondeleted locations, including drafts, and reads the entire bounded cohort to
+re-evaluate quality symmetrically. Larger legacy cohorts fail closed and require an architecture review.
+List/admin/choice pages are bounded. Text tokens and five-word shingles are prepared once per cohort rather than
+reparsed per comparison; no DB query per row. Drafts and unreviewed/inactive records return public 404.
+Active reviewed weak content remains directly readable as noindex,follow (global denial still wins).
+Indexability requires complete safe plain text, active/reviewed/facts-verified flags, valid Kayseri ancestry,
+indexable ancestors and at least one selected currently published related area/article.
+Missing/disabled/deleted/future articles and inactive article practice areas are filtered on every read.
+Runtime policy means disabling ancestors/relations or adding a duplicate withdraws sitemap/internal discovery immediately.
+
+Editorial heuristics: body >=150 tokens with >=60 distinct tokens; local details >=40 with >=25 distinct tokens.
+Compare normalized Turkish case/diacritics and remove cohort location-name tokens; overlap >=75% of the smaller
+five-token shingle set marks both active reviewed pages as similar, even with appended padding/name swaps.
+These are project safeguards, NOT Google thresholds, factual/semantic verification or spam-penalty guarantees.
+The two explicit human review/fact flags remain essential; repetition/padding/paraphrase can evade algorithms.
+No service × district routes, mass combinations, wildcard copy templates, fabricated offices/reviews/results.
+
+Routes: /konumlar, /konumlar/{slug}; no service/location Cartesian product. Safe hierarchy breadcrumbs and
+manual related links connect published areas/articles/parents/children. Weak content is absent from those links,
+location listing and /sitemaps/locations.xml. Empty listing is noindex; out-of-range pagination is 404.
+The sitemap index/fixed-page sitemap include local children/listing only when eligible content exists.
+Current public local content wins over stored redirects; /konumlar is reserved as a fixed source path.
+
+LegalService inherits LocalBusiness; reuse the single verified visible office contact object and configured opt-in.
+A quality-approved FactsVerified location can add areaServed, never replace the office address or create another office.
+Person on /hakkimda additionally requires Site:PersonSchemaEnabled (default false), complete visible contacts and
+published reviewed profile; name comes from project identity, description from visible biography. No credential,
+review/rating, geo coordinates, opening hours, awards or source-card identity fields are invented.
+Production facts/coverage must be approved through content intake before enabling either schema flag.
+
+LocalSeo migration adds Locations, LocationPracticeAreas, LocationArticles, eight indexes and six FKs; no seed or
+existing-table/data drop. Body longtext and LocalDetails text avoid MySQL utf8mb4 row-size overflow; Application
+lengths remain 12000/4000. SQL/model checks and isolated SQLite do not replace dedicated MySQL 8 rollout tests.
+No migration update, indexing/schema activation or deployment by the agent. Setup: docs/seo/LOCAL_SEO_SETUP.md.
+Evidence: docs/qa/PHASE_10_REVIEW.md.
+Sources: [Google spam policies](https://developers.google.com/search/docs/essentials/spam-policies#doorways),
+[Schema.org LegalService](https://schema.org/LegalService), [Schema.org Person](https://schema.org/Person).
+
+
 ## ADR-022 — Local permanent redirects and consistent SEO publication policy
 
 Status: Implemented (2026-10-10, Phase 09); owner closure approved (2026-10-10).

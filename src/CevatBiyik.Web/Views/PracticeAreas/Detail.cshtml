@@ -1,2 +1,4 @@
 @model PracticeAreaDto
 <article><header class="page-heading"><div class="container reading-width"><nav aria-label="İçerik yolu"><ol class="breadcrumb"><li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Ana sayfa</a></li><li class="breadcrumb-item"><a asp-action="Index">Uzmanlık alanları</a></li></ol></nav><p class="eyebrow">ÇALIŞMA ALANI</p><h1>@Model.Name</h1><p>@Model.ShortDescription</p></div></header><div class="section-pad"><div class="container reading-width"><div class="plain-content">@Model.Content</div><div class="detail-contact"><h2>İletişim</h2><p>Mesajınızı iletişim formu üzerinden iletebilirsiniz.</p><a class="btn btn-primary" asp-controller="Home" asp-action="Contact">İletişime geç <span aria-hidden="true">↗</span></a></div></div></div></article>
+
+<partial name="_RelatedLocations" />

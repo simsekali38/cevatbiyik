@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CevatBiyik.Web.Controllers;
 
 [Route("makaleler")]
-public sealed class ArticlesController(IArticleService articles, IPracticeAreaService practiceAreas, ITaxonomyService taxonomy, IConfiguration configuration) : PublicController
+public sealed class ArticlesController(IArticleService articles, IPracticeAreaService practiceAreas, ITaxonomyService taxonomy, IConfiguration configuration, ILocationService locations) : PublicController
 {
     [HttpGet("")]
     public async Task<IActionResult> Index(string? q, long? category, long? topic, string? tag, int page = 1, int categoryPage = 1, int metadataPage = 1, CancellationToken cancellationToken = default)
@@ -54,6 +54,7 @@ public sealed class ArticlesController(IArticleService articles, IPracticeAreaSe
         var origin = CevatBiyik.Web.Seo.SeoPresentation.Origin(configuration);
         ViewData["StructuredData"] = new[] { CevatBiyik.Web.Seo.SeoPresentation.Article(article, origin),
             CevatBiyik.Web.Seo.SeoPresentation.Breadcrumb(origin, "Makaleler", "/makaleler", article.Title, "/makaleler/" + Uri.EscapeDataString(article.Slug)) };
+        ViewData["RelatedLocations"] = await locations.RelatedAsync(articleId: article.Id, ct: cancellationToken);
         return View(article);
     }
 

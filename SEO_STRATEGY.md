@@ -73,3 +73,10 @@ controls sitemap inclusion; contact joins only after public contact facts are co
 Practice areas now have SEO/OG and breadcrumbs. Admin SEO checks are bounded, advisory editorial heuristics;
 title/description lengths are not Google hard limits. Safe 301 management and automatic regression checks are implemented.
 See ADR-022, docs/seo/SEO_SETUP.md and docs/qa/PHASE_09_REVIEW.md.
+
+## Phase 10 local content implementation
+
+One reviewed Kayseri hierarchy with manual links replaces automatic district/service combinations. Bounded local quality checks
+withdraw thin/similar/unverified/ancestor-invalid content from indexing and discovery at runtime. Editorial token/similarity limits
+are not search-engine thresholds or factual guarantees. Only visible verified contacts/profile feed optional LegalService/Person.
+Operational rules and content intake: docs/seo/LOCAL_SEO_SETUP.md and ADR-023.

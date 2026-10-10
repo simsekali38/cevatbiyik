@@ -47,3 +47,10 @@ Brand reference is available; see ../design/BRAND_GUIDELINES.md. A clean logo we
 Contact details are source-backed but must be checked for current publication use.
 Do not transcribe the personal identity number or publish the full source photos.
 Biography, bar registration, hours and practice claims remain CONTENT_REQUIRED.
+
+## Phase 10 local content intake
+
+For each proposed district/region, confirm its parent, actual service relevance, original useful local explanation and source/date.
+Review legal accuracy and verify any service-coverage/office claim before marking the two Admin flags. No office implied by a location.
+Current address/phone/email/profile approval precedes LegalService/Person opt-ins. Unknown facts stay CONTENT_REQUIRED.
+Do not replace place names in a generic page or pad it to meet a word count; inspect duplicate-content warnings. See ADR-023.

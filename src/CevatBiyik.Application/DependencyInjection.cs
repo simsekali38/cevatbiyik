@@ -34,6 +34,8 @@ public static class DependencyInjection
         services.AddScoped<IDocumentService, DocumentService>();
         services.AddScoped<IFileMaintenance, FileMaintenance>();
         services.AddScoped<IPageSeoService, PageSeoService>();
+        services.AddScoped<ILocationService, LocationService>();
+        services.AddScoped<IValidator<LocationInput>, LocationValidator>();
         services.AddScoped<IRedirectService, RedirectService>();
         services.AddScoped<ISeoAuditService, SeoAuditService>();
         services.AddScoped<IPublicRouteService, PublicRouteService>();

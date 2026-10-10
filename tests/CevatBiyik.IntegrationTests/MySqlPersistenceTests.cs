@@ -24,6 +24,26 @@ public sealed class MySqlFactAttribute : FactAttribute
 public class MySqlPersistenceTests
 {
     [MySqlFact]
+    public async Task LocalSeo_UsesMySqlHierarchyRelationsAndSoftDelete()
+    {
+        var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
+        { ["ConnectionStrings:DefaultConnection"] = Environment.GetEnvironmentVariable("CEVATBIYIK_TEST_MYSQL") }).Build();
+        await using var provider = new ServiceCollection().AddInfrastructure(configuration).BuildServiceProvider();
+        await using var scope = provider.CreateAsyncScope(); var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        Assert.StartsWith("cevatbiyik_test_", db.Database.GetDbConnection().Database, StringComparison.Ordinal);
+        await db.Database.MigrateAsync(); await using var transaction = await db.Database.BeginTransactionAsync();
+        var area = await scope.ServiceProvider.GetRequiredService<IPracticeAreaService>().CreateAsync(new CreatePracticeAreaDto
+        { Name = "TEST_ONLY " + Guid.NewGuid().ToString("N"), Content = "TEST_ONLY", IsActive = true });
+        var service = scope.ServiceProvider.GetRequiredService<ILocationService>();
+        await service.SaveAsync(null, new LocationInput { Name = "Kayseri", PracticeAreaIds = [area.Id] });
+        var location = await db.Locations.SingleAsync(x => x.Slug == "kayseri");
+        Assert.Equal(area.Id, (await db.LocationPracticeAreas.SingleAsync(x => x.LocationId == location.Id)).PracticeAreaId);
+        await Assert.ThrowsAsync<ConflictException>(() => service.SaveAsync(null, new LocationInput { Name = "Kayseri" }));
+        await service.DeleteAsync(location.Id); Assert.Null(await service.GetAsync(location.Id));
+        Assert.True((await db.Locations.IgnoreQueryFilters().SingleAsync(x => x.Id == location.Id)).IsDeleted);
+        await transaction.RollbackAsync();
+    }
+    [MySqlFact]
     public async Task SeoRedirects_UseMySqlUniqueSourcesAndAreaMetadata()
     {
         var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
