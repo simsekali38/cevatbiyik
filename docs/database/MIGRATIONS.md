@@ -1,5 +1,13 @@
 # Migration Policy
 
+Phase 13 adds guarded opt-in MySQL targets and a separate **empty** `cevatbiyik_test_migrations_*`
+Up/Down/Up test. No production migration is added or applied. Read
+[test database commands and safety](../testing/TEST_SUITE.md#explicit-mysql-8-opt-in) before enabling either test target.
+
+Owner-approved hosted `cevodbtest` exception: 8 migrations and legacy-contact Up/Down/Up passed on MariaDB 10.3.39,
+not MySQL8. Final inspection found no synthetic data rows; schema remains for owner cleanup.
+Hosted credentials are only in the test project's local user-secrets; production connection/provider unchanged.
+
 - EF Core migrations are source-controlled.
 - Review generated SQL for destructive changes.
 - Production migrations are applied in controlled deployment.

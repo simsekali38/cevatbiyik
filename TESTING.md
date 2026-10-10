@@ -1,5 +1,14 @@
 # Testing Strategy
 
+## Phase 13 repeatable suite
+
+`pwsh -NoProfile -File tools/test.ps1` runs Release build, .NET/TRX, JS, scanner self-tests and style checks.
+Add `-Browser` for isolated HTTPS Edge journeys, or explicit `-MySql` / `-MigrationMySql` for disposable schemas.
+`-HostedMySql` reads the integration project's local user-secrets for the owner-approved temporary hosting target;
+this is explicitly MariaDB compatibility diagnosis, not genuine MySQL8 evidence. Run its empty-schema migration stage first.
+Prerequisites, coverage and limits: [TEST_SUITE.md](docs/testing/TEST_SUITE.md).
+`-SecurityScan` remains a failing release gate while SH-12-01 is open; default regression success does not waive it.
+
 ## Unit
 
 Domain rules, services, validation.

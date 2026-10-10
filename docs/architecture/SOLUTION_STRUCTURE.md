@@ -9,7 +9,9 @@ CevatBiyik.sln
 │   └── CevatBiyik.Infrastructure
 ├── tests
 │   ├── CevatBiyik.UnitTests
-│   └── CevatBiyik.IntegrationTests
+│   ├── CevatBiyik.IntegrationTests
+│   ├── CevatBiyik.E2EHost       test-only loopback HTTPS gateway
+│   └── CevatBiyik.BrowserTests  Node/Playwright development-only tests
 ├── docs
 ├── skills
 └── phases
@@ -20,6 +22,9 @@ Project references (ADR-012):
 `CevatBiyik.Web` → `CevatBiyik.Infrastructure` → `CevatBiyik.Application` → `CevatBiyik.Domain`
 
 Target framework is defined only in `Directory.Build.props` (`net8.0`). Package versions are defined only in `Directory.Packages.props`.
+
+ADR-026: E2EHost references the existing integration fixture solely under tests; production references remain unchanged.
+Node development dependencies are pinned in BrowserTests/package.json and package-lock.json, not deployed to Plesk.
 
 Phase 03 layout:
 

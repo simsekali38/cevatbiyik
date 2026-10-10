@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Logging;
 
 namespace CevatBiyik.IntegrationTests;
 
@@ -20,6 +21,7 @@ public sealed class AdminWebFactory : WebApplicationFactory<Program>
     public const string Password = "Test-Only_Strong9!";
     public string UploadRoot { get; } = Path.Combine(Path.GetTempPath(), "cevat-cms-tests-" + Guid.NewGuid().ToString("N"));
     public string PrivateRoot { get; } = Path.Combine(Path.GetTempPath(), "cevat-doc-tests-" + Guid.NewGuid().ToString("N"));
+    public string? FixtureContentRoot { get; init; }
     public bool FailDocumentAudit { get; init; }
     public bool RejectDocumentScan { get; init; }
     public bool AllowIndexing { get; init; }
@@ -31,6 +33,7 @@ public sealed class AdminWebFactory : WebApplicationFactory<Program>
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
+        if (FixtureContentRoot is not null) { builder.UseContentRoot(FixtureContentRoot); builder.ConfigureLogging(log => log.ClearProviders()); }
         connection.Open();
         builder.UseEnvironment("Testing");
         builder.ConfigureAppConfiguration((_, configuration) => configuration.AddInMemoryCollection(new Dictionary<string, string?>

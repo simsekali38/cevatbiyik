@@ -1,5 +1,31 @@
 # Architecture Decision Records
 
+## ADR-026 — Isolated browser journeys and explicit migration regression
+
+Status: Implemented / local verification in Phase 13 (2026-10-11); owner closure approved (2026-10-11).
+
+Reuse unit and MVC/relational/Identity fixtures, adding linked contact/notification/admin and article lifecycle tests.
+A tests-only loopback HTTPS gateway and pinned Playwright 1.62.1 development dependency/lockfile exercise browsers,
+Secure host cookies, JS consent, navigation and mobile overflow. Production references/.NET8/MySQL8/Plesk/one SSR app stay unchanged.
+The gateway requires --fixture-only, clears config, uses temporary SQLite/fake scanner and synthetic content.
+Certificate trust is bypassed only for the fixture, not installed system-wide. Fresh contexts and test-only connection IPs isolate
+sessions/limiter buckets. External browser traffic is aborted. Never deploy the gateway or tests.
+
+Provider tests require strict explicit cevatbiyik_test_* connections with no appsettings fallback. A separate empty
+cevatbiyik_test_migrations_* schema permits ContactNotifications Up/Down/Up and checks legacy preservation/nonqueued defaults.
+No schema deletion or production migration rollback. Offline SQL and skipped tests are not live provider evidence.
+The PowerShell runner propagates failures, restores environment, rejects occupied fixture ports and stops its own process.
+Secret scanning is a separate release gate; preserve report-only SH-12-01 owner decision.
+No production API/domain/migration/provider activation added. Operations: docs/testing/TEST_SUITE.md;
+verification: docs/qa/PHASE_13_REVIEW.md.
+
+Phase 13 owner-authorized hosting addendum (2026-10-11): `cevodbtest` is an exact additional test target, scoped by host/account.
+Inspection found MariaDB 10.3.39 and no SSL support. Keep production MySQL8/provider settings unchanged; run explicitly labelled
+hosted compatibility diagnostics, not claim genuine MySQL8 coverage. Default Preferred SSL from the supplied connection applies
+only to this synthetic temporary target. Ordinary tests check server version before migration; hosted compatibility is explicit opt-in.
+Test connection lives in the integration project's separate local user-secrets, never appsettings/Git. Run empty-schema transitions
+before persistence, remove only the transition's synthetic row, and retain schema until owner cleanup. Actual MySQL8 remains a rollout gate.
+
 ## ADR-025 — Final-response headers, bounded proxy trust and static resource throttling
 
 Status: Implemented / locally verified (Phase 12); owner closure approved (2026-10-10); commit authorized. SH-12-01 remains open by owner instruction.

@@ -58,6 +58,10 @@ Diğer sorular faz ilerledikçe, ilgili fazdan önce çözülebilir.
 
 ## Phase 12 security release gate — 2026-10-10
 
+Phase 13 hosting update (2026-10-11): owner-provided `cevodbtest` passed 10 persistence and one migration-transition case
+as **MariaDB 10.3.39 compatibility**. It is not MySQL8 and does not support SSL. Genuine MySQL8 and encrypted hosting DB
+transport remain unresolved rollout checks; production provider/config was not changed. See docs/qa/PHASE_13_REVIEW.md.
+
 SH-12-01: nonempty database password found in tracked appsettings.json:10 and reachable Git history; value never reported.
 Owner instructed leave the file untouched/report only. Credential rotation, private configuration and separate authorized history
 remediation remain unresolved production blockers. Actual IIS/Plesk proxy/host/Defender/native/ACL/limits/restore verification

@@ -4,6 +4,7 @@
     <RootNamespace>CevatBiyik.IntegrationTests</RootNamespace>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <UserSecretsId>cevat-biyik-integration-tests</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

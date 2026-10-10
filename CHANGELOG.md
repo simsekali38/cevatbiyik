@@ -4,6 +4,17 @@ All notable project changes should be recorded here.
 
 ## [Unreleased]
 
+### Phase 13 — Test suite and regression journeys (2026-10-11)
+- Owner supplied hosted cevodbtest; isolated local test user-secrets, exact target guard (+5 cases), explicit hosted mode and server-version checks added.
+- Hosted server is MariaDB 10.3.39 without SSL; 11 DB cases passed as compatibility diagnostics, not genuine MySQL8 coverage. Latest full run: 362 passed; migration passed separately; 363 distinct .NET cases verified.
+- Corrected tracked-optional-FK test setup; final hosted inspection: 26 tables, 8 migrations and zero data rows. Schema retained for owner cleanup; production config/provider unchanged.
+- Added 18 passing unit/integration gap cases, guarded explicit MySQL targets and two new opt-in rollback/migration-transition cases.
+- Added four real isolated HTTPS Edge journeys reusing MVC/SQLite/Identity, fresh sessions and blocked external providers.
+- Added locked development-only Playwright 1.62.1 and repeatable PowerShell build/test/JS/style/browser/optional security runner.
+- Release build: 0 errors/0 warnings; 173 unit + 174 integration = 347 passed, 11 live MySQL skipped; 4 browser, 6 JS and 8 scanner self-tests passed.
+- npm audit: zero vulnerabilities. Redacted secret scan still fails SH-12-01 as expected; user-owned config/history preserved.
+- Added ADR-026, coverage/operations guide and Phase 13 review. Owner closure approved; commit authorized; no production migration/deployment/Phase 14 work.
+
 ### Phase 12 — Security hardening (2026-10-10)
 - Added final-response nonce CSP, DENY/nosniff/Permissions-Policy/referrer enforcement on redirects/static/errors/429; preserved attachment sandbox and consent gates.
 - Added explicit bounded one-hop trusted proxy For/Proto processing, symmetric headers, nondevelopment HTTPS HSTS180d and strict upload path end anchors.

@@ -1,0 +1,6 @@
+{
+  "name": "cevat-biyik-browser-tests",
+  "private": true,
+  "scripts": { "test": "node --test analytics.test.cjs", "test:e2e": "node --test --test-concurrency=1 e2e.test.cjs" },
+  "devDependencies": { "playwright": "1.62.1" }
+}

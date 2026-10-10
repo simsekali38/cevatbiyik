@@ -44,3 +44,6 @@ src/CevatBiyik.Web/App_Data/
 ## Local security scanner cache
 __pycache__/
 *.pyc
+
+## Test-only Node dependencies
+node_modules/

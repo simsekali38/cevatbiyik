@@ -1,5 +1,13 @@
 # Phase 13: Implement unit/integration/E2E tests and regression suite.
 
+Status: Implemented / locally verified (2026-10-11), owner closure approved (2026-10-11).
+363 distinct .NET cases passed across sequential local/hosted runs (latest run: 362 passed, migration verified separately).
+4 actual browser E2E + 6 JS + 8 scanner self-tests passed; build 0 errors/0 warnings.
+Hosted target is MariaDB 10.3.39 without SSL, not genuine MySQL8; actual MySQL8 verification remains a rollout gate.
+SH-12-01 remains an open production blocker; no config/history edit, production migration or Phase 14 advance.
+Concrete deliverables/results: [PHASE_13_REVIEW.md](../docs/qa/PHASE_13_REVIEW.md).
+Repeatable commands/coverage/safe MySQL opt-in: [TEST_SUITE.md](../docs/testing/TEST_SUITE.md).
+
 ## Objective
 
 Implement unit/integration/E2E tests and regression suite.

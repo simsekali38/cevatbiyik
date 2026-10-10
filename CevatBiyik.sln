@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CevatBiyik.UnitTests", "tests\CevatBiyik.UnitTests\CevatBiyik.UnitTests.csproj", "{6F3A1C52-8B7D-4E21-9A44-0C1D2E3F4A05}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CevatBiyik.IntegrationTests", "tests\CevatBiyik.IntegrationTests\CevatBiyik.IntegrationTests.csproj", "{6F3A1C52-8B7D-4E21-9A44-0C1D2E3F4A06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CevatBiyik.E2EHost", "tests\CevatBiyik.E2EHost\CevatBiyik.E2EHost.csproj", "{DE4BD60D-51A0-42BC-94F8-556CF46752B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{6F3A1C52-8B7D-4E21-9A44-0C1D2E3F4A06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F3A1C52-8B7D-4E21-9A44-0C1D2E3F4A06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F3A1C52-8B7D-4E21-9A44-0C1D2E3F4A06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE4BD60D-51A0-42BC-94F8-556CF46752B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE4BD60D-51A0-42BC-94F8-556CF46752B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE4BD60D-51A0-42BC-94F8-556CF46752B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE4BD60D-51A0-42BC-94F8-556CF46752B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{6F3A1C52-8B7D-4E21-9A44-0C1D2E3F4A04} = {6F3A1C52-8B7D-4E21-9A44-0C1D2E3F4AA0}
 		{6F3A1C52-8B7D-4E21-9A44-0C1D2E3F4A05} = {6F3A1C52-8B7D-4E21-9A44-0C1D2E3F4AA1}
 		{6F3A1C52-8B7D-4E21-9A44-0C1D2E3F4A06} = {6F3A1C52-8B7D-4E21-9A44-0C1D2E3F4AA1}
+		{DE4BD60D-51A0-42BC-94F8-556CF46752B7} = {6F3A1C52-8B7D-4E21-9A44-0C1D2E3F4AA1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6F3A1C52-8B7D-4E21-9A44-0C1D2E3F4AFF}

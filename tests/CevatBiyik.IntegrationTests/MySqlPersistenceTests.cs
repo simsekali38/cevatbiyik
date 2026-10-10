@@ -21,15 +21,15 @@ public sealed class MySqlFactAttribute : FactAttribute
     }
 }
 
-public class MySqlPersistenceTests
+public partial class MySqlPersistenceTests
 {
     [MySqlFact]
     public async Task ContactNotifications_ClaimAndCompleteOnMySql()
     {
-        var options = new DbContextOptionsBuilder<AppDbContext>().UseMySql(Environment.GetEnvironmentVariable("CEVATBIYIK_TEST_MYSQL"), new MySqlServerVersion(new Version(8, 0, 0))).Options;
+        var options = new DbContextOptionsBuilder<AppDbContext>().UseMySql(MySqlTestGuard.Connection(), new MySqlServerVersion(new Version(8, 0, 0))).Options;
         await using var db = new AppDbContext(options);
-        Assert.StartsWith("cevatbiyik_test_", db.Database.GetDbConnection().Database, StringComparison.Ordinal);
-        await db.Database.MigrateAsync(); await using var transaction = await db.Database.BeginTransactionAsync();
+        Assert.True(MySqlTestGuard.IsDatabase(db.Database.GetDbConnection().Database));
+        await MySqlTestGuard.VerifyServerAsync(db); await db.Database.MigrateAsync(); await using var transaction = await db.Database.BeginTransactionAsync();
         var row = new ContactMessage { Name = "TEST_ONLY", Email = "test@example.test", Message = "TEST_ONLY", NotificationPending = true };
         db.Add(row); await db.SaveChangesAsync();
         var store = new CevatBiyik.Infrastructure.Email.ContactNotificationStore(db, TimeProvider.System);
@@ -42,11 +42,11 @@ public class MySqlPersistenceTests
     public async Task LocalSeo_UsesMySqlHierarchyRelationsAndSoftDelete()
     {
         var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
-        { ["ConnectionStrings:DefaultConnection"] = Environment.GetEnvironmentVariable("CEVATBIYIK_TEST_MYSQL") }).Build();
+        { ["ConnectionStrings:DefaultConnection"] = MySqlTestGuard.Connection() }).Build();
         await using var provider = new ServiceCollection().AddInfrastructure(configuration).BuildServiceProvider();
         await using var scope = provider.CreateAsyncScope(); var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        Assert.StartsWith("cevatbiyik_test_", db.Database.GetDbConnection().Database, StringComparison.Ordinal);
-        await db.Database.MigrateAsync(); await using var transaction = await db.Database.BeginTransactionAsync();
+        Assert.True(MySqlTestGuard.IsDatabase(db.Database.GetDbConnection().Database));
+        await MySqlTestGuard.VerifyServerAsync(db); await db.Database.MigrateAsync(); await using var transaction = await db.Database.BeginTransactionAsync();
         var area = await scope.ServiceProvider.GetRequiredService<IPracticeAreaService>().CreateAsync(new CreatePracticeAreaDto
         { Name = "TEST_ONLY " + Guid.NewGuid().ToString("N"), Content = "TEST_ONLY", IsActive = true });
         var service = scope.ServiceProvider.GetRequiredService<ILocationService>();
@@ -62,11 +62,11 @@ public class MySqlPersistenceTests
     public async Task SeoRedirects_UseMySqlUniqueSourcesAndAreaMetadata()
     {
         var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
-        { ["ConnectionStrings:DefaultConnection"] = Environment.GetEnvironmentVariable("CEVATBIYIK_TEST_MYSQL") }).Build();
+        { ["ConnectionStrings:DefaultConnection"] = MySqlTestGuard.Connection() }).Build();
         await using var provider = new ServiceCollection().AddInfrastructure(configuration).BuildServiceProvider();
         await using var scope = provider.CreateAsyncScope(); var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        Assert.StartsWith("cevatbiyik_test_", db.Database.GetDbConnection().Database, StringComparison.Ordinal);
-        await db.Database.MigrateAsync(); await using var transaction = await db.Database.BeginTransactionAsync();
+        Assert.True(MySqlTestGuard.IsDatabase(db.Database.GetDbConnection().Database));
+        await MySqlTestGuard.VerifyServerAsync(db); await db.Database.MigrateAsync(); await using var transaction = await db.Database.BeginTransactionAsync();
         var area = await scope.ServiceProvider.GetRequiredService<IPracticeAreaService>().CreateAsync(new CreatePracticeAreaDto
         { Name = "TEST_ONLY " + Guid.NewGuid().ToString("N"), Content = "TEST_ONLY", IsActive = true, Seo = new SeoInput { MetaTitle = "TEST_ONLY SEO" } });
         Assert.Equal("TEST_ONLY SEO", (await scope.ServiceProvider.GetRequiredService<IPracticeAreaService>().GetActiveBySlugAsync(area.Slug))!.Seo.MetaTitle);
@@ -80,12 +80,12 @@ public class MySqlPersistenceTests
     public async Task ReviewedPublicContent_WorksThroughMySql8Repositories()
     {
         var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
-        { ["ConnectionStrings:DefaultConnection"] = Environment.GetEnvironmentVariable("CEVATBIYIK_TEST_MYSQL") }).Build();
+        { ["ConnectionStrings:DefaultConnection"] = MySqlTestGuard.Connection() }).Build();
         await using var provider = new ServiceCollection().AddInfrastructure(configuration).BuildServiceProvider();
         await using var scope = provider.CreateAsyncScope();
         var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        Assert.StartsWith("cevatbiyik_test_", db.Database.GetDbConnection().Database, StringComparison.Ordinal);
-        await db.Database.MigrateAsync();
+        Assert.True(MySqlTestGuard.IsDatabase(db.Database.GetDbConnection().Database));
+        await MySqlTestGuard.VerifyServerAsync(db); await db.Database.MigrateAsync();
         await using var transaction = await db.Database.BeginTransactionAsync();
         var profile = scope.ServiceProvider.GetRequiredService<IProfileService>();
         await profile.SaveAsync(new ProfileInput { Biography = "TEST_ONLY", Vision = "TEST_ONLY", BarAssociation = "TEST_ONLY", IsActive = true, IsReviewed = true });
@@ -103,12 +103,12 @@ public class MySqlPersistenceTests
     public async Task PrivateDocuments_EnforceUniqueStoragePath_AndReconcileDeletedRowsOnMySql()
     {
         var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
-        { ["ConnectionStrings:DefaultConnection"] = Environment.GetEnvironmentVariable("CEVATBIYIK_TEST_MYSQL") }).Build();
+        { ["ConnectionStrings:DefaultConnection"] = MySqlTestGuard.Connection() }).Build();
         await using var provider = new ServiceCollection().AddLogging().AddInfrastructure(configuration).BuildServiceProvider();
         await using var scope = provider.CreateAsyncScope();
         var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        Assert.StartsWith("cevatbiyik_test_", db.Database.GetDbConnection().Database, StringComparison.Ordinal);
-        await db.Database.MigrateAsync();
+        Assert.True(MySqlTestGuard.IsDatabase(db.Database.GetDbConnection().Database));
+        await MySqlTestGuard.VerifyServerAsync(db); await db.Database.MigrateAsync();
         await using var transaction = await db.Database.BeginTransactionAsync();
         var path = "documents/" + Guid.NewGuid().ToString("N") + ".pdf";
         var item = new PrivateDocument { Title = "Test only", StoragePath = path, Sha256 = new string('A', 64), Bytes = 10, IsDeleted = true };
@@ -125,12 +125,12 @@ public class MySqlPersistenceTests
     public async Task CmsTaxonomySeoAndSitemap_WorkOnMySql8()
     {
         var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
-        { ["ConnectionStrings:DefaultConnection"] = Environment.GetEnvironmentVariable("CEVATBIYIK_TEST_MYSQL") }).Build();
+        { ["ConnectionStrings:DefaultConnection"] = MySqlTestGuard.Connection() }).Build();
         await using var provider = new ServiceCollection().AddInfrastructure(configuration).BuildServiceProvider();
         await using var scope = provider.CreateAsyncScope();
         var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        Assert.StartsWith("cevatbiyik_test_", db.Database.GetDbConnection().Database, StringComparison.Ordinal);
-        await db.Database.MigrateAsync(); await using var transaction = await db.Database.BeginTransactionAsync();
+        Assert.True(MySqlTestGuard.IsDatabase(db.Database.GetDbConnection().Database));
+        await MySqlTestGuard.VerifyServerAsync(db); await db.Database.MigrateAsync(); await using var transaction = await db.Database.BeginTransactionAsync();
         var taxonomy = scope.ServiceProvider.GetRequiredService<ITaxonomyService>();
         var name = "Test " + Guid.NewGuid().ToString("N");
         var category = await taxonomy.SaveAsync(false, null, new TaxonomyInput { Name = name, IsActive = true });
@@ -149,14 +149,14 @@ public class MySqlPersistenceTests
     {
         var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
         {
-            ["ConnectionStrings:DefaultConnection"] = Environment.GetEnvironmentVariable("CEVATBIYIK_TEST_MYSQL")
+            ["ConnectionStrings:DefaultConnection"] = MySqlTestGuard.Connection()
         }).Build();
         var services = new ServiceCollection().AddLogging().AddInfrastructure(configuration);
         await using var provider = services.BuildServiceProvider();
         await using var scope = provider.CreateAsyncScope();
         var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        Assert.StartsWith("cevatbiyik_test_", db.Database.GetDbConnection().Database, StringComparison.Ordinal);
-        await db.Database.MigrateAsync();
+        Assert.True(MySqlTestGuard.IsDatabase(db.Database.GetDbConnection().Database));
+        await MySqlTestGuard.VerifyServerAsync(db); await db.Database.MigrateAsync();
         await using var transaction = await db.Database.BeginTransactionAsync();
         var users = scope.ServiceProvider.GetRequiredService<Microsoft.AspNetCore.Identity.UserManager<CevatBiyik.Infrastructure.Identity.ApplicationUser>>();
         var roles = scope.ServiceProvider.GetRequiredService<Microsoft.AspNetCore.Identity.RoleManager<Microsoft.AspNetCore.Identity.IdentityRole>>();
@@ -181,14 +181,14 @@ public class MySqlPersistenceTests
     {
         var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
         {
-            ["ConnectionStrings:DefaultConnection"] = Environment.GetEnvironmentVariable("CEVATBIYIK_TEST_MYSQL")
+            ["ConnectionStrings:DefaultConnection"] = MySqlTestGuard.Connection()
         }).Build();
         var services = new ServiceCollection().AddInfrastructure(configuration);
         await using var provider = services.BuildServiceProvider();
         await using var scope = provider.CreateAsyncScope();
         var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        Assert.StartsWith("cevatbiyik_test_", context.Database.GetDbConnection().Database, StringComparison.Ordinal);
-        await context.Database.MigrateAsync();
+        Assert.True(MySqlTestGuard.IsDatabase(context.Database.GetDbConnection().Database));
+        await MySqlTestGuard.VerifyServerAsync(context); await context.Database.MigrateAsync();
         await using var transaction = await context.Database.BeginTransactionAsync();
         var areas = scope.ServiceProvider.GetRequiredService<IPracticeAreaService>();
         var articles = scope.ServiceProvider.GetRequiredService<IArticleService>();
@@ -231,12 +231,12 @@ public class MySqlPersistenceTests
     public async Task MigrationAndPersistence_EnforceConstraintsAndSoftDelete()
     {
         var options = new DbContextOptionsBuilder<AppDbContext>()
-            .UseMySql(Environment.GetEnvironmentVariable("CEVATBIYIK_TEST_MYSQL"),
+            .UseMySql(MySqlTestGuard.Connection(),
                 new MySqlServerVersion(new Version(8, 0, 0))).Options;
         await using var context = new AppDbContext(options);
         // Never allow this test to migrate an ordinary application database.
-        Assert.StartsWith("cevatbiyik_test_", context.Database.GetDbConnection().Database, StringComparison.Ordinal);
-        await context.Database.MigrateAsync();
+        Assert.True(MySqlTestGuard.IsDatabase(context.Database.GetDbConnection().Database));
+        await MySqlTestGuard.VerifyServerAsync(context); await context.Database.MigrateAsync();
         await using var transaction = await context.Database.BeginTransactionAsync();
         var suffix = Guid.NewGuid().ToString("N");
         var area = new PracticeArea { Name = "CONTENT_REQUIRED", Slug = suffix, Content = "CONTENT_REQUIRED" };
@@ -254,9 +254,11 @@ public class MySqlPersistenceTests
         Assert.NotNull(article.UpdatedAt);
         Assert.False(await context.Articles.AnyAsync(a => a.Id == article.Id));
         Assert.True(await context.Articles.IgnoreQueryFilters().AnyAsync(a => a.Id == article.Id));
-        context.Remove(area);
+        // Test the database FK, not EF's optional tracked-navigation nulling before a delete.
+        context.ChangeTracker.Clear();
+        context.Remove(new PracticeArea { Id = area.Id });
         await Assert.ThrowsAsync<DbUpdateException>(() => context.SaveChangesAsync());
-        context.Entry(area).State = EntityState.Unchanged;
+        context.ChangeTracker.Clear();
         context.Add(new Article { Title = "CONTENT_REQUIRED", Slug = suffix, Content = "CONTENT_REQUIRED" });
         await Assert.ThrowsAsync<DbUpdateException>(() => context.SaveChangesAsync());
         await transaction.RollbackAsync();

@@ -1,5 +1,12 @@
 # Architecture
 
+## Phase 13 test-only boundary
+
+Production remains one Web → Infrastructure → Application → Domain application.
+`tests/CevatBiyik.E2EHost` is a loopback HTTPS gateway around the existing MVC/SQLite/Identity fixture, never deployed.
+Playwright is a locked development-only dependency; no production NuGet changes. See ADR-026 and
+[test suite operations](docs/testing/TEST_SUITE.md).
+
 ## Phase 12 Web security boundary
 
 SecurityHeadersMiddleware owns final-response baseline/nonce and ConsentCspMiddleware performs legal/consent reads inside
