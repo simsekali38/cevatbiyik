@@ -221,10 +221,25 @@ public partial class MySqlPersistenceTests
         Assert.True((await contacts.MarkReadAsync(message.Id)).IsRead);
         await contacts.DeleteAsync(message.Id);
         Assert.Null(await contacts.GetAsync(message.Id));
-        var setting = await settings.CreateAsync(new UpdateSiteSettingDto { Key = "Site.Name", Value = "CONTENT_REQUIRED" });
-        await settings.DeleteAsync(setting.Id);
+        // The owner-approved hosted test database may contain the complete demo dataset.
+        // Exercise changes only inside the rollback transaction, preserving any existing setting.
+        var originalSetting = await context.SiteSettings.IgnoreQueryFilters().AsNoTracking()
+            .SingleOrDefaultAsync(x => x.Key == "Site.Name");
+        if (originalSetting is not { IsDeleted: true })
+        {
+            var input = new UpdateSiteSettingDto { Key = "Site.Name", Value = "CONTENT_REQUIRED" };
+            var setting = originalSetting is null
+                ? await settings.CreateAsync(input)
+                : await settings.UpdateAsync(originalSetting.Id, input);
+            await settings.DeleteAsync(setting.Id);
+        }
         await Assert.ThrowsAsync<ConflictException>(() => settings.CreateAsync(new UpdateSiteSettingDto { Key = "Site.Name", Value = "CONTENT_REQUIRED" }));
         await transaction.RollbackAsync();
+        var restoredSetting = await context.SiteSettings.IgnoreQueryFilters().AsNoTracking()
+            .SingleOrDefaultAsync(x => x.Key == "Site.Name");
+        Assert.Equal(originalSetting?.Value, restoredSetting?.Value);
+        Assert.Equal(originalSetting?.IsActive, restoredSetting?.IsActive);
+        Assert.Equal(originalSetting?.IsDeleted, restoredSetting?.IsDeleted);
     }
 
     [MySqlFact]

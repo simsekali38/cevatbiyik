@@ -1,5 +1,39 @@
 # Architecture Decision Records
 
+## ADR-028 — Extended SQL fixtures without national publication
+
+Status: Implemented (2026-10-11, owner-requested SQL fixture follow-up).
+
+At the owner's follow-up request, fill every application/Identity table with a complete synthetic fixture,
+exclusively in qualified cevodbtest tables. Published/draft/scheduled and reviewed flags simulate populated
+test screens; they are not actual legal/editorial approval. Locations stay FactsVerified=false/noindex.
+Kayseri-only Application validation, Domain, migrations and production configuration are not changed by this fixture.
+Use real ParentId, string LocationKind and plain-text contracts; FAQ has no relationship FK.
+
+Data writes are INSERT-only and transactional. A short-lived INVOKER stored procedure supplies rollback/session
+restoration; routine DDL stays outside the data transaction. Check InnoDB tables and inserted FK references.
+An independent ownership manifest rejects repeat execution without adopting existing records; it is separate
+from ADR-027 cleanup. Live tests rollback fixtures and remove their separately named temporary routine.
+
+Reason: Test multi-location persistence without enabling unreviewed national doorway pages, inventing legal
+facts or altering production architecture. Identity fixtures are inactive and locked with undisclosed random
+passwords; demo claims/logins/tokens have no real provider behavior. Contact notifications are not queued.
+Eight real WebP and three policy-validated PDF companions use exact path/size/hash metadata; private PDFs
+remain outside wwwroot and existing authorization/malware checks remain. EF history is preserved, not seeded.
+All 25 data tables/264 rows and rollback failures are live-verified. MySQL8 execution remains separate.
+
+## ADR-027 — Explicit test-only demo data and ownership cleanup
+
+Status: Implemented, owner-requested follow-up after Phase 13 closure (2026-10-11).
+
+Reuse the existing tests-only executable for a manual --demo seed/cleanup/status command, exact hosted cevodbtest target and confirmation.
+No production DI/startup/Admin route, model seed, Domain/migration or application configuration changes.
+Serializable DML writes demo IDs to an inactive SiteSetting manifest; idempotent seed never adopts unowned data.
+Cleanup validates identities and link ownership, deletes by exact bounded IDs in FK order and rolls back on changes/restrictive references.
+Unknown lawyer facts remain CONTENT_REQUIRED/unreviewed; active demo profile does not replace primary. Media are inactive metadata only.
+Use MariaDbServerVersion(10.3.39) only in this tool and strict SQL mode only in its connection; production engine/SSL review remains unresolved.
+Commands, limitations, evidence and sources: docs/testing/DEMO_DATA.md. Phase 14 has not started.
+
 ## ADR-026 — Isolated browser journeys and explicit migration regression
 
 Status: Implemented / local verification in Phase 13 (2026-10-11); owner closure approved (2026-10-11).

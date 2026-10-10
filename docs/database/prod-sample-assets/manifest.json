@@ -1,0 +1,84 @@
+[
+  {
+    "kind": "image",
+    "path": "images/ded00000000000000000000000000000.webp",
+    "bytes": 14508,
+    "sha256": "C8511660F550645AE7B5F9F9FAC65AD3F11FC53A40B0C98E77FE38F8F1E63607",
+    "width": 1200,
+    "height": 630
+  },
+  {
+    "kind": "image",
+    "path": "images/ded00000000000000000000000000001.webp",
+    "bytes": 15596,
+    "sha256": "AFADCBD6C45DBB0320A7ECD8D66BDF784C8688585E375A0C76D8DA2B0FCA772F",
+    "width": 1200,
+    "height": 630
+  },
+  {
+    "kind": "image",
+    "path": "images/ded00000000000000000000000000002.webp",
+    "bytes": 13840,
+    "sha256": "3DFEB78F4F37F7674AA2B6D5C6938D664D1825C8B6E4877ABC90948A8BDCA542",
+    "width": 1200,
+    "height": 630
+  },
+  {
+    "kind": "image",
+    "path": "images/ded00000000000000000000000000003.webp",
+    "bytes": 14706,
+    "sha256": "614296BE432577D6B3578FB79E65FD0FA369DC18210768A778077F8B14A0A3E5",
+    "width": 1200,
+    "height": 630
+  },
+  {
+    "kind": "image",
+    "path": "images/ded00000000000000000000000000004.webp",
+    "bytes": 15048,
+    "sha256": "9611F337B52F96E7DEF00626D7830C3E7CFA8ECC8E0B957FA03F5C1D56955E14",
+    "width": 1200,
+    "height": 630
+  },
+  {
+    "kind": "image",
+    "path": "images/ded00000000000000000000000000005.webp",
+    "bytes": 14460,
+    "sha256": "763F147D44A7C74A5A30268750A3FE27657741F850ED0434D63576FB2868FEC5",
+    "width": 1200,
+    "height": 630
+  },
+  {
+    "kind": "image",
+    "path": "images/ded00000000000000000000000000006.webp",
+    "bytes": 15568,
+    "sha256": "797843B784598CE3DDBC671413588B8109D0D76AF7C85D57B3F42F4E258B89D9",
+    "width": 1200,
+    "height": 630
+  },
+  {
+    "kind": "image",
+    "path": "images/ded00000000000000000000000000007.webp",
+    "bytes": 15568,
+    "sha256": "797843B784598CE3DDBC671413588B8109D0D76AF7C85D57B3F42F4E258B89D9",
+    "width": 1200,
+    "height": 630
+  },
+  {
+    "kind": "document",
+    "path": "documents/ded10000000000000000000000000000.pdf",
+    "bytes": 614,
+    "sha256": "6A621C6CA37E35ABAA2C5308A375757CEE8881C7625D61B3F2818AAE16ABC92A"
+  },
+  {
+    "kind": "document",
+    "path": "documents/ded10000000000000000000000000001.pdf",
+    "bytes": 614,
+    "sha256": "8FF17D9374EDA7B7B6C21305A4F5280F9E4F5B10867491C33AEF435771438BF1"
+  },
+  {
+    "kind": "document",
+    "path": "documents/ded10000000000000000000000000002.pdf",
+    "bytes": 614,
+    "sha256": "5A6AC46041C608589E1A0AE041D38629B7700E4DD1D13BBFD05998BE7F7BEC4B"
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "CevatBiyik.E2EHost": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:11728;http://localhost:11729"
+    }
+  }
+}

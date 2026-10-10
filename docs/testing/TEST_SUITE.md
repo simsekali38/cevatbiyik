@@ -1,5 +1,8 @@
 # Repeatable test suite — Phase 13
 
+Manual, isolated `cevodbtest` demo data commands and safe cleanup: [DEMO_DATA.md](DEMO_DATA.md).
+Clean demo records before running persistence tests; no automatic demo seeding is performed by this runner.
+
 Run from the repository root with PowerShell 7, the pinned .NET 8 SDK, Node >=20 and Python 3.
 
 ```powershell

@@ -4,6 +4,23 @@ All notable project changes should be recorded here.
 
 ## [Unreleased]
 
+### Extended test-only SQL dataset (2026-10-11)
+- Final commit validation: Release build 0 errors/0 warnings; 173 unit + 197 integration = 370 passing .NET tests, 1 empty-schema migration skip; 6 JS/8 scanner self-tests and style checks passed. Existing SH-12-01 config excluded from commit.
+- Hosted service regression now handles pre-existing Site.Name demo data within a rollback transaction and verifies its original value/publication/deletion flags are restored.
+- Marked PDF/ZIP artifacts binary so Git newline conversion cannot invalidate file hashes or PDF cross-reference offsets.
+- Expanded PROD_SAMPLE_DATA.sql at the owner's request: all 25 application/Identity tables, 264 INSERTs, 24 articles (18 published/3 draft/3 scheduled), complete taxonomy/media/profile/pages/SEO/contacts/audit and Identity relationships.
+- INSERT-only data transaction, strict mode, InnoDB/target/FK checks, rollback handler and independent ownership settings; no model, migration or production configuration changes.
+- Published and synthetic reviewed states demonstrate a filled test site; national locations remain noindex fixtures, not an expansion of Kayseri-only Application validation. Demo Identity accounts inactive/locked; notification queue disabled.
+- Added 8 real WebP/3 PDF companion files, exact bytes/hashes, ZIP and all-table count manifest. PDFs pass application policy; images decoded; production settings untouched.
+- Guarded live MariaDB10.3 verification passes all-table counts, hierarchy/FKs, CMS states, assets, forced failure and duplicate-key rollback. No lasting sample rows; existing migration count preserved. Genuine MySQL8 execution remains unverified.
+
+### Test-only demo data follow-up (2026-10-11)
+- Phase 13 committed as 27b03f0. Added guarded manual cevodbtest demo seed/status/cleanup under existing test tools, separate from Phase 14.
+- Dataset covers articles/statuses, practice areas, Kayseri districts/links, FAQ, active unreviewed nonprimary profile and inactive metadata-only media.
+- Serializable ownership manifest, exact-ID cleanup, rollback/idempotency and target checks; no Domain/model/migration/production configuration changes.
+- Eight new demo tests and live seed/seed/cleanup/cleanup passed; strict session mode rejects silent field truncation. ADR-027 and DEMO_DATA guide added.
+- Follow-up suite: 173 unit + 197 integration = 370 passed, 1 previously verified empty-schema migration skipped; 6 JS/8 scanner self-tests passed; build 0 errors/0 warnings. Eight migrations preserved, no demo data remains.
+
 ### Phase 13 — Test suite and regression journeys (2026-10-11)
 - Owner supplied hosted cevodbtest; isolated local test user-secrets, exact target guard (+5 cases), explicit hosted mode and server-version checks added.
 - Hosted server is MariaDB 10.3.39 without SSL; 11 DB cases passed as compatibility diagnostics, not genuine MySQL8 coverage. Latest full run: 362 passed; migration passed separately; 363 distinct .NET cases verified.

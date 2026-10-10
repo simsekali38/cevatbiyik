@@ -12,6 +12,7 @@ internal static class FixtureGateway
 {
     public static async Task Main(string[] args)
     {
+        if (args.Length > 0 && args[0] == "--demo") { await DemoCommand.RunAsync(args); return; }
         if (args.Length != 1 || args[0] != "--fixture-only")
         { throw new InvalidOperationException("Test-only loopback host requires --fixture-only."); }
         var root = new DirectoryInfo(AppContext.BaseDirectory);

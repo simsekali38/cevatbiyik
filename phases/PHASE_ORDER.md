@@ -1,6 +1,6 @@
 # Phase Order
 
-Completed phases: 00–12 (owner-approved closure). Database rollout execution and Plesk validation are not implied by code acceptance.
+Completed phases: 00–13 (owner-approved closure). Database rollout execution and Plesk validation are not implied by code acceptance.
 Phase 07 closure and commit approved by the owner; dedicated MySQL/Plesk checks remain rollout gates.
 Phase 08 implemented/locally verified; owner closure approved (2026-10-10). Phase 09 implemented/locally verified, owner closure approved (2026-10-10). Phase 10 implemented/locally verified, owner closure approved (2026-10-10). Phase 11 implemented/locally verified; owner closure approved. Phase 12 owner closure approved (2026-10-10); SH-12-01 remains an unresolved production blocker. Remaining later phases: 13–17.
 Phase 13 implemented / locally verified (2026-10-11); owner closure approved (2026-10-11). Hosted MariaDB compatibility passed; genuine MySQL8 pending. Later unstarted phases: 14–17.
