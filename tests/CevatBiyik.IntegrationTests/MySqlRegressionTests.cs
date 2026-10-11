@@ -12,7 +12,7 @@ public partial class MySqlPersistenceTests
     public async Task TransactionRollback_LeavesNoContactOrQueueJob()
     {
         await using var db = new AppDbContext(new DbContextOptionsBuilder<AppDbContext>()
-            .UseMySql(MySqlTestGuard.Connection(), new MySqlServerVersion(new Version(8, 0, 0))).Options);
+            .UseMySql(MySqlTestGuard.Connection(), MySqlTestGuard.ServerVersion()).Options);
         await MySqlTestGuard.VerifyServerAsync(db);
         await db.Database.MigrateAsync();
         long id;
@@ -47,7 +47,7 @@ public sealed class MySqlMigrationRegressionTests
     {
         var connection = MySqlTestGuard.Connection("CEVATBIYIK_TEST_MYSQL_MIGRATIONS");
         await using var db = new AppDbContext(new DbContextOptionsBuilder<AppDbContext>()
-            .UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 0))).Options);
+            .UseMySql(connection, MySqlTestGuard.ServerVersion()).Options);
         Assert.True(MySqlTestGuard.IsDatabase(db.Database.GetDbConnection().Database, migration: true));
         await MySqlTestGuard.VerifyServerAsync(db);
         Assert.Equal(0, await db.Database.SqlQueryRaw<int>("SELECT COUNT(*) AS Value FROM information_schema.tables WHERE table_schema = DATABASE()").SingleAsync());

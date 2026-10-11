@@ -4,6 +4,25 @@ All notable project changes should be recorded here.
 
 ## [Unreleased]
 
+### Phase 15 — production publish and Plesk preparation (2026-10-11)
+- Owner-approved closure and commit; unresolved hosting gates carried into Phase 16.
+- Server-owned base/Production JSON removed from Git index without changing local
+  contents; placeholder templates and publish exclusions (ADR-032). SH-12-01 rotation
+  remains an operator/hosting gate; Git history unchanged.
+- IIS out-of-process/Production, hidden config segments, directory browsing disabled;
+  preserve 6 MiB body limit and public WebP filtering.
+- Explicit offline MySQL8/MariaDB server dialect, hosted MariaDB test alignment and
+  EF8 tool manifest. Optional private DPAPI-encrypted persistent hosting key ring.
+- Verified publish script, forbidden-content/native/IIS artifact checks and release
+  hash manifest; Plesk/config/rotation/migration/ACL/HTTPS/backups/restore runbook and checklist.
+- Verification: 425 .NET (10 hosted MariaDB included), 6 JS + 15 browser, 4 publish-boundary
+  tests, 8 scanner self-tests; Release 0 errors/warnings, NuGet audit clean. Publish,
+  offline MariaDB SQL/bundle and no-pending-model check passed; one empty-schema skip.
+- Current-tree secret scan clean; historical credential + synthetic fixture still
+  reported (exit 1). No historical scan clean claim; live rotation pending.
+- Actual Plesk rollout, production password rotation/migration, restore drill, MySQL8,
+  MariaDB EOL/TLS and .NET8 upgrade decisions remain explicitly pending.
+
 ### Guided admin UX and editable HTML (2026-10-11)
 - Committed owner-approved Phase 14 as 7ccf8c8 before this follow-up.
 - Refined navy/gold admin navigation, cards, tables, responsive spacing and labeled

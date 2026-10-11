@@ -29,7 +29,7 @@ Example environment key (replace before use, never leave the placeholder):
 $env:Security__TrustedProxies__0 = "<VERIFIED_IMMEDIATE_PROXY_IP>"
 ```
 
-Current web.config uses IIS inprocess. Native IIS server normally supplies connection IP/scheme. An additional proxy must
+Phase 15 web.config uses IIS outofprocess (ADR-032). IIS integration supplies forwarded IP/scheme. An additional proxy must
 strip/overwrite incoming client X-Forwarded-* and append a consistent validated pair. Confirm inprocess/outofprocess mode,
 header behavior, direct backend access restrictions and exact AllowedHosts/IIS domain bindings with hosting staff.
 Do not log real form data, cookies, credentials or persistent IP identifiers during checks. Trusted-IP lookup is a bounded
@@ -89,7 +89,11 @@ Usability/external exposure was not tested. Owner instructed on 2026-10-10: leav
 Do not copy values into logs/commands/reports. Owner must rotate the credential, move the replacement into user-secrets/Plesk,
 clean tracked config and coordinate separate authorized history remediation if necessary. Deleting current text alone cannot
 revoke a historical credential. Preserve unrelated owner config edits; never silently rewrite Git history or remote refs.
-Until resolved, the scan intentionally exits 1. No production deployment approved by local test success.
+Phase 15 update (2026-10-11): owner now authorizes server-owned JSON and Git exclusion.
+Base/Production JSON tracking removed without changing local contents; publish excludes all local appsettings.
+Current-tree scan can now pass; history still contains the credential and rotation has not been performed.
+SH-12-01 remains open until operator rotation/revocation evidence; see deployment/PRODUCTION_RUNBOOK.md.
+Historical scan can still exit 1. No production deployment approved by local test success.
 
 ## Primary references reviewed
 

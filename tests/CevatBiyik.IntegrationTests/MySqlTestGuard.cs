@@ -1,11 +1,16 @@
 using CevatBiyik.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using MySqlConnector;
 
 namespace CevatBiyik.IntegrationTests;
 
 public static class MySqlTestGuard
 {
+    public static ServerVersion ServerVersion() => DatabaseServerConfiguration.Read(new ConfigurationBuilder()
+        .AddInMemoryCollection(Environment.GetEnvironmentVariable("CEVATBIYIK_TEST_HOSTED_COMPATIBILITY") == "1"
+            ? new Dictionary<string, string?> { ["Database:Provider"] = "MariaDb", ["Database:ServerVersion"] = "10.3.39" }
+            : new Dictionary<string, string?>()).Build());
     public static string Connection(string variable = "CEVATBIYIK_TEST_MYSQL") => Validate(Environment.GetEnvironmentVariable(variable));
 
     public static string Validate(string? connection)

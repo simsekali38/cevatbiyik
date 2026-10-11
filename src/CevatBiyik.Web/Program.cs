@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.RateLimiting;
 
 var provisionAdmin = args.Contains("--provision-admin", StringComparer.Ordinal);
 var builder = WebApplication.CreateBuilder(args.Where(x => x != "--provision-admin").ToArray());
+builder.Services.AddHostingDataProtection(builder.Configuration, builder.Environment);
 
 builder.Services.AddControllersWithViews(options => options.Conventions.Add(new AdminAreaConvention()));
 builder.Services.AddInfrastructure(builder.Configuration);

@@ -8,7 +8,7 @@ const terser = require(require.resolve('terser', {paths: [dependencies]}));
 (async () => {
   for (const relative of ['css/site.css', 'css/admin.css', 'js/site.js', 'js/admin.js', 'js/analytics.js']) {
     const source = path.join(root, 'src/CevatBiyik.Web/wwwroot', relative);
-    const text = await fs.readFile(source, 'utf8');
+    const text = (await fs.readFile(source, 'utf8')).replace(/\r\n/g, '\n');
     const result = relative.endsWith('.css')
       ? new CleanCSS({level: 1}).minify(text)
       : await terser.minify(text, {compress: true, mangle: true, format: {comments: false}});
@@ -16,7 +16,7 @@ const terser = require(require.resolve('terser', {paths: [dependencies]}));
     const output = (result.styles ?? result.code) + '\n';
     const target = source.replace(/\.(css|js)$/, '.min.$1');
     if (process.argv.includes('--check')) {
-      if (await fs.readFile(target, 'utf8') !== output) throw new Error(`Stale generated asset: ${relative}`);
+      if ((await fs.readFile(target, 'utf8')).replace(/\r\n/g, '\n') !== output) throw new Error(`Stale generated asset: ${relative}`);
     } else await fs.writeFile(target, output);
     console.log(`${relative}: ${Buffer.byteLength(text)} -> ${Buffer.byteLength(output)} bytes`);
   }

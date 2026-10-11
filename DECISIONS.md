@@ -1,5 +1,43 @@
 # Architecture Decision Records
 
+## ADR-032 — Server-owned configuration and verified Plesk release boundary
+
+Status: Implemented locally (2026-10-11, Phase 15 preparation); hosting rollout pending.
+
+Owner explicitly chose server-side appsettings.json/appsettings.Production.json for
+production credentials. Remove these files from Git index without modifying their
+local contents, ignore them and never publish local appsettings files. Track only
+placeholder templates under docs/deployment/templates. Restrict server JSON ACLs to
+app read and authorized operator access, block config URLs and preserve files on
+deployment. This supersedes ENVIRONMENTS' prior environment-only production-secret
+guidance and the Phase 12 report-only remediation scope. No history rewrite or actual
+credential rotation is performed; SH-12-01 remains open until rotation/revocation evidence.
+
+Use IIS/ANCM V2 out-of-process as owner requested, framework-dependent .NET 8 package,
+Production environment and existing 6 MiB filtering. Runtime/native/ACL/HTTPS/proxy
+behavior still requires real Plesk smoke. tools/publish.ps1 produces a fresh release,
+rejects server config/uploads/private/SQL content and verifies Windows Skia/ANCM;
+write SHA-256 manifest with commit/dirty-state metadata. Never sync/delete persistent
+hosting storage or run production migrations as part of publish.
+
+Infrastructure chooses explicit Database:Provider / Database:ServerVersion offline.
+Default remains MySql 8.0.0; verified hosting compatibility uses MariaDb 10.3.39.
+No AutoDetect or startup Migrate/seed. Hosted opt-in tests use the same MariaDB dialect;
+genuine MySQL8 and empty-schema migration verification remain distinct rollout gates.
+No schema/snapshot change. Align local dotnet-ef tool to EF Core 8.0.29.
+
+Optional private DataProtection:KeysPath persists keys with Windows machine DPAPI
+and fixed app discriminator. Keep key ring outside wwwroot and separate ACL; include
+it in protected backup. Cross-machine restore requires a deliberate rekey/session
+renewal plan. Default development/test hosting persistence remains unchanged.
+
+MySQL 8 remains the project target. Actual MariaDB 10.3 EOL and unencrypted DB link
+are explicit unresolved rollout risks, not a silently accepted production technology
+change. Production template uses VerifyFull; disabled TLS requires verified local/private
+topology and owner decision. .NET 8 EOL re-evaluation per ADR-008 is a release gate.
+Document maintenance, separate migration identity, consistent DB/files/config/key backups,
+rollback and restore drill. Do not claim hosting completion from local build/tests.
+
 ## ADR-031 — Guided admin workspace and editable allowlisted HTML
 
 Status: Implemented (2026-10-11, owner-requested admin UX follow-up).

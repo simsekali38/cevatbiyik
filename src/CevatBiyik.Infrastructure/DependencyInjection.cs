@@ -13,7 +13,7 @@ namespace CevatBiyik.Infrastructure;
 
 /// <summary>
 /// Infrastructure katmanı servis kaydı. Bağlantı dizesi ve diğer sırlar kaynak kodda tutulmaz;
-/// IConfiguration üzerinden (user-secrets / ortam değişkeni) okunur.
+/// IConfiguration üzerinden (yerel user-secrets / sunucuda ACL korumalı JSON / ortam değişkeni) okunur.
 /// Application kayıtları da buradan çağrılır (Web yalnızca Infrastructure'a referans verir).
 /// </summary>
 public static class DependencyInjection
@@ -71,10 +71,10 @@ public static class DependencyInjection
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             if (string.IsNullOrWhiteSpace(connectionString))
             {
-                throw new InvalidOperationException("ConnectionStrings:DefaultConnection must be configured via user-secrets or environment variables.");
+                throw new InvalidOperationException("ConnectionStrings:DefaultConnection must be configured through a private configuration source.");
             }
 
-            options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 0)));
+            options.UseMySql(connectionString, DatabaseServerConfiguration.Read(configuration));
         });
         var smtp = Email.SmtpNotificationOptions.Read(configuration);
         smtp.Validate();

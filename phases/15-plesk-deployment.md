@@ -4,6 +4,15 @@
 
 Prepare production publish, Plesk configuration, environment, MySQL, uploads, HTTPS and backups.
 
+## Current status — 2026-10-11
+
+Owner-approved phase closure (2026-10-11): local production preparation verified (ADR-032).
+Real Plesk rollout/rotation, production migration and restore drill remain pending
+and are carried into Phase 16 readiness review. This is not launch approval.
+Runbook: docs/deployment/PRODUCTION_RUNBOOK.md; checklist: docs/deployment/PLESK_CHECKLIST.md;
+evidence and skips: docs/qa/PHASE_15_REVIEW.md. MySQL8 remains the target; actual reported
+MariaDB10.3 EOL/DB TLS and .NET8 support deadline remain hosting decision gates.
+
 ## Mandatory process
 
 1. Read `AGENTS.md`.

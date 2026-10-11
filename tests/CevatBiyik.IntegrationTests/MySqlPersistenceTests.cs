@@ -26,7 +26,7 @@ public partial class MySqlPersistenceTests
     [MySqlFact]
     public async Task ContactNotifications_ClaimAndCompleteOnMySql()
     {
-        var options = new DbContextOptionsBuilder<AppDbContext>().UseMySql(MySqlTestGuard.Connection(), new MySqlServerVersion(new Version(8, 0, 0))).Options;
+        var options = new DbContextOptionsBuilder<AppDbContext>().UseMySql(MySqlTestGuard.Connection(), MySqlTestGuard.ServerVersion()).Options;
         await using var db = new AppDbContext(options);
         Assert.True(MySqlTestGuard.IsDatabase(db.Database.GetDbConnection().Database));
         await MySqlTestGuard.VerifyServerAsync(db); await db.Database.MigrateAsync(); await using var transaction = await db.Database.BeginTransactionAsync();
@@ -247,7 +247,7 @@ public partial class MySqlPersistenceTests
     {
         var options = new DbContextOptionsBuilder<AppDbContext>()
             .UseMySql(MySqlTestGuard.Connection(),
-                new MySqlServerVersion(new Version(8, 0, 0))).Options;
+                MySqlTestGuard.ServerVersion()).Options;
         await using var context = new AppDbContext(options);
         // Never allow this test to migrate an ordinary application database.
         Assert.True(MySqlTestGuard.IsDatabase(context.Database.GetDbConnection().Database));

@@ -1,5 +1,15 @@
 # ENVIRONMENTS.md — Ortamlar ve Yapılandırma
 
+## Phase 15 güncel karar (ADR-032)
+
+Üretim sırları owner talimatıyla sunucuda ACL korumalı `appsettings.json` /
+`appsettings.Production.json` içinde tutulur. Bu iki gerçek Web dosyası Git ve publish
+paketi dışındadır; yerel mevcut içerik değiştirilmeden takibi kaldırılmıştır.
+Sır içermeyen şablonlar `docs/deployment/templates/` altında tutulur.
+Yeni clone için temel şablonu `src/CevatBiyik.Web/appsettings.json` olarak kopyalayın;
+Development bağlantısını user-secrets ile verin. Production JSON sadece sunucuda
+oluşturulur. Ayrıntı: [Üretim rehberi](deployment/PRODUCTION_RUNBOOK.md).
+
 ## Phase 04 public UI configuration
 
 `Site:AllowIndexing` defaults false. `Site:BaseUrl` supplies the trusted HTTPS canonical origin.
@@ -23,9 +33,9 @@ Staging ortamı şimdilik yoktur. Gerekirse Faz 15'te ayrı karar alınır.
 ## 2. Yapılandırma kaynakları (öncelik sırası: sondaki kazanır)
 
 1. `appsettings.json` — tüm ortamlar için güvenli varsayılanlar
-2. `appsettings.{Environment}.json` — ortama özel, **sır içermeyen** ayarlar
+2. `appsettings.{Environment}.json` — ortama özel ayarlar; Production gerçek dosyası ACL korumalı, Git dışında
 3. User Secrets — yalnızca Development, repo dışında (`%APPDATA%\Microsoft\UserSecrets\`)
-4. Ortam değişkenleri — Production'da sırlar için (Plesk üzerinden)
+4. Ortam değişkenleri — Plesk/CLI environment; JSON'u ezebilir, eski değerler denetlenir
 
 ## 3. Mevcut ayarlar
 
@@ -33,8 +43,8 @@ Staging ortamı şimdilik yoktur. Gerekirse Faz 15'te ayrı karar alınır.
 |---|---|---|
 | `Site:Name` | `appsettings.json` | Site adı |
 | `Site:BaseUrl` | `appsettings.json` / `.Development.json` | Canonical taban URL. Production: `https://cevatbiyik.av.tr` (ADR-009). `www` yönlendirmesi `OPEN_QUESTIONS.md` Q16 |
-| `ConnectionStrings:DefaultConnection` | user-secrets / Plesk | Repoda boş bırakılır; değer asla commit edilmez |
-| `AllowedHosts` | `appsettings.json` | Şimdilik `*`. Domain kesinleşince Faz 12/15'te canonical host'lara daraltılacak |
+| `ConnectionStrings:DefaultConnection` | Yerel user-secrets / sunucu Production JSON | Gerçek dosyalar Git/publish dışında; değer commit edilmez |
+| `AllowedHosts` | temel config şablonu | `cevatbiyik.av.tr;www.cevatbiyik.av.tr`; hosting binding/redirect ayrıca doğrulanır |
 | `DetailedErrors` | `appsettings.Production.json` | `false` |
 | `Logging:*` | Tüm dosyalar | Production'da `Warning` |
 
@@ -50,7 +60,8 @@ dotnet user-secrets set "ConnectionStrings:DefaultConnection" "<bağlantı dizes
 dotnet user-secrets list
 ```
 
-**Production** (Plesk ortam değişkeni; iç içe anahtarlar `__` ile yazılır):
+**Production**: birincil kaynak korumalı sunucu JSON'dur. Alternatif ortam değişkeni
+anahtarı (JSON'u ezer; gerçek değeri kaynak koduna veya terminale koymayın):
 
 ```
 ConnectionStrings__DefaultConnection=<bağlantı dizesi>

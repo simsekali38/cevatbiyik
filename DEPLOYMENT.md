@@ -1,5 +1,14 @@
 # Plesk Deployment
 
+## Phase 15 current procedure
+
+Follow [PRODUCTION_RUNBOOK](docs/deployment/PRODUCTION_RUNBOOK.md) and
+[PLESK_CHECKLIST](docs/deployment/PLESK_CHECKLIST.md). Generate local release with
+`tools/publish.ps1`; server-owned JSON/uploads/private data are excluded. ASP.NET Core
+hosting model is now **out-of-process** (ADR-032). Configuration templates are in
+docs/deployment/templates; actual JSON lives only locally/on the server under restricted ACL.
+Preparation does not perform production migration or claim hosting validation.
+
 ## Target
 
 Windows Server + Plesk.
@@ -54,6 +63,7 @@ Redirect alternative host to canonical host.
 
 Follow docs/security/SECURITY_HARDENING.md for one-hop IP/proto trust, HTTPS/HSTS, headers on IIS-generated responses,
 exact host bindings, process-local/NAT rate limits, native/Defender/ACL/body-limit checks and patch/runtime verification.
-SH-12-01 must be resolved before deployment: rotate password, remove tracked config credential, use private user-secrets/Plesk
-and separately authorize any history remediation. Owner requested report-only in Phase 12; no credential was changed.
+SH-12-01 must be resolved before deployment: rotate password and prove revocation. Phase 15 removed base/Production JSON
+from Git tracking while preserving local content; new server credentials use ACL-protected JSON per owner instruction.
+History remediation requires separate authorization. Production rotation has not been performed.
 Run redacted scanner and live transitive NuGet audit. Local tests do not substitute for actual IIS/Plesk/dedicated MySQL checks.

@@ -2,6 +2,7 @@
   <PropertyGroup>
     <!-- Runtime private files belong to the coordinated backup, never to a publish artifact. -->
     <DefaultItemExcludes>$(DefaultItemExcludes);App_Data/**</DefaultItemExcludes>
+    <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
   <!--
@@ -16,6 +17,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CevatBiyik.Infrastructure\CevatBiyik.Infrastructure.csproj" />
+    <!-- Server-owned JSON and uploaded data must never be overwritten by a release. -->
+    <Content Update="appsettings*.json" CopyToPublishDirectory="Never" />
+    <Content Update="secrets.json;*.local.json" CopyToPublishDirectory="Never" />
+    <Content Update="wwwroot/uploads/**" CopyToPublishDirectory="Never" />
+    <Content Update="wwwroot/uploads/web.config" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>

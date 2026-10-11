@@ -30,7 +30,7 @@ public sealed class RichTextTests
     [InlineData("<a href=\"javascript:alert(1)\">Metin</a>")]
     [InlineData("<a href=\"&#106;avascript:alert(1)\">Metin</a>")]
     [InlineData("<a href=\"//example.test\">Metin</a>")]
-    [InlineData("<a href=\"https://user:pass@example.test\">Metin</a>")]
+    [InlineData("<a href=\"https://TEST_ONLY:TEST_ONLY@example.test\">Metin</a>")]
     [InlineData("<p id=\"location\" style=\"color:red\">Metin</p>")]
     [InlineData("<p class=\"ql-align-center\">Metin</p>")]
     [InlineData("<p class=\"content-align-center evil\">Metin</p>")]

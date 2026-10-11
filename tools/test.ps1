@@ -49,6 +49,7 @@ try {
     Invoke-Check node @('--test', 'tests/CevatBiyik.BrowserTests/analytics.test.cjs')
     Invoke-Check node @('tools/build-assets.cjs', '--check')
     Invoke-Check python @('tools/security_scan.py', '--self-test')
+    Invoke-Check python @('tools/test_publish.py')
     Invoke-Check dotnet @('format', 'style', 'CevatBiyik.sln', '--verify-no-changes', '--no-restore', '--diagnostics', 'IDE0011')
     if ($Browser) {
         Invoke-Check node @('-e', "require(require.resolve('playwright', {paths:['./tests/CevatBiyik.BrowserTests']}))")

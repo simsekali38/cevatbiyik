@@ -1,6 +1,7 @@
 # Windows/Plesk dosya operasyonları — Faz 07
 
 Bu bir uygulama rehberidir; gerçek Plesk üzerinde çalıştırıldığı anlamına gelmez.
+Phase 15 ortak publish/config/DPAPI/migration adımları için [Üretim rehberi](PRODUCTION_RUNBOOK.md).
 Hosting kimliği, özel kök, yedek konumu, retention onaylayanı ve RPO/RTO: **CONTENT_REQUIRED**.
 
 ## Yayına çıkış kapıları

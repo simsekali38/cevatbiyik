@@ -1,5 +1,14 @@
 # OPEN_QUESTIONS.md
 
+## Phase 15 hosting gate update — 2026-10-11
+
+Yerel release/config hazırlığı tamam; gerçek Windows/IIS/Plesk sürümü, pool kimliği,
+fiziksel site/private/key yolları ve erişim kanıtı henüz yok. .NET8 → destekli runtime
+geçiş planı, actual MariaDB10.3 EOL/SSL kapalı DB topolojisi ve MySQL8 hedef farkı açık.
+SH-12-01 için Git exclusion uygulandı; live password rotation/revocation kanıtı yok.
+Production migration, persistent ACL/Defender smoke, backup sıklığı/retention/RPO/RTO
+ve izole restore drill operatör kanıtı bekliyor. Detay: docs/deployment/PRODUCTION_RUNBOOK.md.
+
 > **Faz 00 kapanış / Faz 01 güncellemesi — 2026-10-09**
 > Bu liste mimariyi bloke etmez; ancak production içeriği ve deployment öncesinde çözülmelidir.
 > Durumlar: ✅ Cevaplandı · ⚠️ Kısmen · ❓ Açık · 🔴 Faz 01'i etkiler
