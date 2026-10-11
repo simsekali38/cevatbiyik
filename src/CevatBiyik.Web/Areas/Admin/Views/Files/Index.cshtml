@@ -1,7 +1,7 @@
 @model CevatBiyik.Application.Interfaces.FileReport
 @{ ViewData["Title"] = "Dosya mutabakatı"; var documents = ViewData["Documents"] is true; }
 <h1>Dosya mutabakatı</h1>
-<p><a href="/admin/files">Görseller</a> · <a href="/admin/files?documents=true">Özel belgeler</a></p>
+<p>Görsel kütüphanesindeki dosyaların kontrolü.</p>
 <p>Her tarama en fazla 100 dosya ve 100 kayıt getirir. Silinen kayıtlar da eşleştirilir. Sahipsiz dosyalar 48 saat sonra özel karantinaya taşınabilir; kalıcı silme yapılmaz.</p>
 <h2>Sahipsiz dosyalar</h2>
 @foreach (var item in Model.Orphans)

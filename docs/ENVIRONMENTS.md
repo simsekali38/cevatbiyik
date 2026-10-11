@@ -1,13 +1,40 @@
 # ENVIRONMENTS.md — Ortamlar ve Yapılandırma
 
+## Yerel JSON yapılandırması (ADR-034, 2026-10-11)
+
+Yerel Web uygulaması artık user-secrets yüklemez. `https` çalıştırma profili hem
+`ASPNETCORE_ENVIRONMENT` hem `DOTNET_ENVIRONMENT` için `Development` kullanır.
+Önce `appsettings.json`, ardından `appsettings.Development.json` yüklenir; ortam
+JSON'u temel dosyadaki aynı anahtarları ezer. Ortam değişkenleri ve CLI seçenekleri
+JSON'dan daha önceliklidir; eski `ConnectionStrings__DefaultConnection` gibi ortam
+anahtarları varsa yerel JSON değerini ezebilir.
+
+Gerçek `appsettings.Development.json` da Git/publish dışındadır. Yeni clone'da
+`docs/deployment/templates/appsettings.Development.template.json` dosyasını
+`src/CevatBiyik.Web/appsettings.Development.json` olarak kopyalayıp
+`ConnectionStrings:DefaultConnection` alanına yalnızca geliştirme/test bağlantısını yazın.
+Temel `appsettings.json` dosyasını temel şablondan oluşturun. Mevcut yerel bağlantı,
+owner isteğiyle temel JSON'dan Development JSON'una değer gösterilmeden aktarılmıştır.
+Eski user-secrets dosyaları silinmez; Web artık onları otomatik okumaz.
+Integration testlerinin ayrı opt-in test secret kaynağı bu karardan etkilenmez.
+
+Yerelde başlatma:
+
+```powershell
+dotnet run --project src/CevatBiyik.Web --launch-profile https
+```
+
+Adres: `https://localhost:7080`. İzinli hostlar localhost/loopback ile sınırlıdır;
+Development'da `Site:AllowIndexing=false`. Hosting JSON dosyaları değişmemiştir.
+
 ## Phase 15 güncel karar (ADR-032)
 
 Üretim sırları owner talimatıyla sunucuda ACL korumalı `appsettings.json` /
-`appsettings.Production.json` içinde tutulur. Bu iki gerçek Web dosyası Git ve publish
+`appsettings.Production.json` içinde tutulur. Bu iki üretim Web dosyası Git ve publish
 paketi dışındadır; yerel mevcut içerik değiştirilmeden takibi kaldırılmıştır.
 Sır içermeyen şablonlar `docs/deployment/templates/` altında tutulur.
 Yeni clone için temel şablonu `src/CevatBiyik.Web/appsettings.json` olarak kopyalayın;
-Development bağlantısını user-secrets ile verin. Production JSON sadece sunucuda
+Development bağlantısını Git dışında tutulan `appsettings.Development.json` ile verin. Production JSON sadece sunucuda
 oluşturulur. Ayrıntı: [Üretim rehberi](deployment/PRODUCTION_RUNBOOK.md).
 
 ## Phase 04 public UI configuration
@@ -34,8 +61,8 @@ Staging ortamı şimdilik yoktur. Gerekirse Faz 15'te ayrı karar alınır.
 
 1. `appsettings.json` — tüm ortamlar için güvenli varsayılanlar
 2. `appsettings.{Environment}.json` — ortama özel ayarlar; Production gerçek dosyası ACL korumalı, Git dışında
-3. User Secrets — yalnızca Development, repo dışında (`%APPDATA%\Microsoft\UserSecrets\`)
-4. Ortam değişkenleri — Plesk/CLI environment; JSON'u ezebilir, eski değerler denetlenir
+3. Ortam değişkenleri — Plesk/CLI environment; JSON'u ezebilir, eski değerler denetlenir
+4. CLI seçenekleri — açıkça verilirse önceki kaynakları ezer; komut satırında sır kullanmayın
 
 ## 3. Mevcut ayarlar
 
@@ -43,7 +70,7 @@ Staging ortamı şimdilik yoktur. Gerekirse Faz 15'te ayrı karar alınır.
 |---|---|---|
 | `Site:Name` | `appsettings.json` | Site adı |
 | `Site:BaseUrl` | `appsettings.json` / `.Development.json` | Canonical taban URL. Production: `https://cevatbiyik.av.tr` (ADR-009). `www` yönlendirmesi `OPEN_QUESTIONS.md` Q16 |
-| `ConnectionStrings:DefaultConnection` | Yerel user-secrets / sunucu Production JSON | Gerçek dosyalar Git/publish dışında; değer commit edilmez |
+| `ConnectionStrings:DefaultConnection` | Yerel Development JSON / sunucu Production JSON | Gerçek dosyalar Git/publish dışında; değer commit edilmez |
 | `AllowedHosts` | temel config şablonu | `cevatbiyik.av.tr;www.cevatbiyik.av.tr`; hosting binding/redirect ayrıca doğrulanır |
 | `DetailedErrors` | `appsettings.Production.json` | `false` |
 | `Logging:*` | Tüm dosyalar | Production'da `Warning` |
@@ -52,13 +79,9 @@ Staging ortamı şimdilik yoktur. Gerekirse Faz 15'te ayrı karar alınır.
 
 Bağlantı dizesi anahtarı Faz 02'de netleşecektir; önerilen: `ConnectionStrings:DefaultConnection`.
 
-**Development** (User Secrets, `CevatBiyik.Web` içinde `UserSecretsId` tanımlıdır):
-
-```powershell
-cd src\CevatBiyik.Web
-dotnet user-secrets set "ConnectionStrings:DefaultConnection" "<bağlantı dizesi>"
-dotnet user-secrets list
-```
+**Development**: bağlantıyı Git dışında tutulan `appsettings.Development.json` dosyasına yazın.
+Şablon `docs/deployment/templates/appsettings.Development.template.json` altındadır.
+Web'de `UserSecretsId` artık tanımlı değildir. Gerçek bağlantı değerini terminale yazdırmayın.
 
 **Production**: birincil kaynak korumalı sunucu JSON'dur. Alternatif ortam değişkeni
 anahtarı (JSON'u ezer; gerçek değeri kaynak koduna veya terminale koymayın):
@@ -102,12 +125,12 @@ Faz 01 doğrulama (2026-10-09): `dotnet build CevatBiyik.sln -c Release` 0 hata;
 
 ## Phase 05 administrator provisioning
 
-AdminBootstrap:UserName/Email/Password are temporary user-secrets (Development) or protected environment variables (Production). They are read only by the explicit --provision-admin CLI. Remove bootstrap values afterward. Authentication cookies always require HTTPS, including Development. Database rollout, bootstrap commands and Data Protection/Plesk gates are in security/ADMIN_SETUP.md.
+AdminBootstrap:UserName/Email/Password are temporary keys in ignored Development JSON (Development) or protected server configuration (Production), per ADR-034/032. They are read only by the explicit --provision-admin CLI. Remove bootstrap values afterward. Authentication cookies always require HTTPS, including Development. Database rollout, bootstrap commands and Data Protection/Plesk gates are in security/ADMIN_SETUP.md.
 
 ## Phase 11 integration switches
 
 Absent Smtp:Enabled and Analytics:Enabled are false. SMTP is startup-bound mandatory STARTTLS/587;
-credentials belong in user-secrets/Plesk Smtp__... settings and never SiteSettings. Analytics selects one public GTM/GA4 ID,
+credentials belong in ignored local/server JSON (or explicit environment overrides) and never SiteSettings. Analytics selects one public GTM/GA4 ID,
 reviewed config/legal-page gate, versioned protected consent and per-request CSP. Persist private Data Protection keys.
 Complete key/command templates and AlwaysRunning/IP/container/legal checks: contact/CONTACT_ANALYTICS_SETUP.md.
 No agent changes to user-owned appsettings.json or activation of production external services.

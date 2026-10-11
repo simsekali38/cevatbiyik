@@ -6,11 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CevatBiyik.Web.Areas.Admin.Controllers;
 [Route("admin/files")]
-public sealed class FilesController(IFileMaintenance files, IAdminOperation operations, IAuditLogService audit) : AdminControllerBase(operations)
+public sealed class FilesController(IFileMaintenance files, IAdminOperation operations, IAuditLogService audit, IConfiguration configuration) : AdminControllerBase(operations)
 {
     [HttpGet("")]
     public async Task<IActionResult> Index(bool documents = false, long afterId = 0, string? afterPath = null, CancellationToken ct = default)
     {
+        if (documents && !configuration.GetValue<bool>("Features:PrivateDocuments")) { return NotFound(); }
         ViewData["Documents"] = documents;
         try { return View(await files.ReportAsync(documents, afterId, afterPath, ct)); }
         catch (ValidationException) { return BadRequest(); }
@@ -18,6 +19,7 @@ public sealed class FilesController(IFileMaintenance files, IAdminOperation oper
     [HttpPost("quarantine")]
     public async Task<IActionResult> Quarantine(bool documents, string path, bool confirmed, CancellationToken ct)
     {
+        if (documents && !configuration.GetValue<bool>("Features:PrivateDocuments")) { return NotFound(); }
         if (!confirmed || !ModelState.IsValid || string.IsNullOrWhiteSpace(path) || path.Length > 100)
         {
             return BadRequest();

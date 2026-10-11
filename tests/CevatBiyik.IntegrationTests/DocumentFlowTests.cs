@@ -37,7 +37,7 @@ public sealed partial class DocumentFlowTests
     [Fact]
     public async Task Documents_RequireAdminAndCsrf_AndNeverExposePrivateFiles()
     {
-        using var factory = new AdminWebFactory(); await factory.InitializeAsync(); using var client = factory.CreateHttpsClient();
+        using var factory = new AdminWebFactory { PrivateDocumentsEnabled = true }; await factory.InitializeAsync(); using var client = factory.CreateHttpsClient();
         foreach (var path in new[] { "/admin/documents", "/admin/documents/download/1", "/admin/files" })
         {
             Assert.Equal(HttpStatusCode.Redirect, (await client.GetAsync(path)).StatusCode);
@@ -53,7 +53,7 @@ public sealed partial class DocumentFlowTests
     [Fact]
     public async Task UploadDownloadDeleteRestore_AreAuditedAndIntegrityChecked()
     {
-        using var factory = new AdminWebFactory(); await factory.InitializeAsync(); using var client = factory.CreateHttpsClient(); await Login(client);
+        using var factory = new AdminWebFactory { PrivateDocumentsEnabled = true }; await factory.InitializeAsync(); using var client = factory.CreateHttpsClient(); await Login(client);
         Assert.Equal(HttpStatusCode.Redirect, (await Upload(client)).StatusCode);
         string storagePath;
         using (var scope = factory.Services.CreateScope())
@@ -92,7 +92,7 @@ public sealed partial class DocumentFlowTests
     [InlineData("bad.pdf", "image/png")]
     public async Task InvalidUploads_DoNotCreateDatabaseRows(string name, string mime)
     {
-        using var factory = new AdminWebFactory(); await factory.InitializeAsync(); using var client = factory.CreateHttpsClient(); await Login(client);
+        using var factory = new AdminWebFactory { PrivateDocumentsEnabled = true }; await factory.InitializeAsync(); using var client = factory.CreateHttpsClient(); await Login(client);
         Assert.Equal(HttpStatusCode.Redirect, (await Upload(client, name, mime)).StatusCode);
         using var scope = factory.Services.CreateScope();
         Assert.Empty(await scope.ServiceProvider.GetRequiredService<AppDbContext>().PrivateDocuments.ToArrayAsync());
@@ -100,7 +100,7 @@ public sealed partial class DocumentFlowTests
     [Fact]
     public async Task FailedAudit_RollsBackDocumentAndCompensatesFilesystem()
     {
-        using var factory = new AdminWebFactory { FailDocumentAudit = true }; await factory.InitializeAsync(); using var client = factory.CreateHttpsClient(); await Login(client);
+        using var factory = new AdminWebFactory { PrivateDocumentsEnabled = true, FailDocumentAudit = true }; await factory.InitializeAsync(); using var client = factory.CreateHttpsClient(); await Login(client);
         using var failed = await Upload(client);
         Assert.Equal(HttpStatusCode.InternalServerError, failed.StatusCode);
         Assert.Equal("DENY", failed.Headers.GetValues("X-Frame-Options").Single());
@@ -112,7 +112,7 @@ public sealed partial class DocumentFlowTests
     [Fact]
     public async Task FailedMalwareScan_LeavesNeitherStoredDocumentNorDatabaseRecord()
     {
-        using var factory = new AdminWebFactory { RejectDocumentScan = true }; await factory.InitializeAsync(); using var client = factory.CreateHttpsClient(); await Login(client);
+        using var factory = new AdminWebFactory { PrivateDocumentsEnabled = true, RejectDocumentScan = true }; await factory.InitializeAsync(); using var client = factory.CreateHttpsClient(); await Login(client);
         Assert.Equal(HttpStatusCode.Redirect, (await Upload(client)).StatusCode);
         using var scope = factory.Services.CreateScope();
         Assert.Empty(await scope.ServiceProvider.GetRequiredService<AppDbContext>().PrivateDocuments.ToArrayAsync());
@@ -121,7 +121,7 @@ public sealed partial class DocumentFlowTests
     [Fact]
     public async Task Reconciliation_IncludesDeletedRows_AndReportsMissingAndOrphanFiles()
     {
-        using var factory = new AdminWebFactory(); await factory.InitializeAsync(); using var client = factory.CreateHttpsClient(); await Login(client);
+        using var factory = new AdminWebFactory { PrivateDocumentsEnabled = true }; await factory.InitializeAsync(); using var client = factory.CreateHttpsClient(); await Login(client);
         await Upload(client);
         using var scope = factory.Services.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();

@@ -105,3 +105,30 @@ test('editor dialogs meet AA checks, trap focus natively and return focus on Esc
   await page.keyboard.press('Tab');
   assert.equal(await page.evaluate(() => getComputedStyle(document.activeElement).outlineStyle), 'solid');
 }));
+
+// Approved homepage shell: retain working navigation at narrow and wide viewports.
+test('homepage design reflows, keeps local assets and preserves navigation', async () => session(async page => {
+  await goto(page, '/');
+  assert.equal(await page.locator('main').innerText().then(text => text.includes('CONTENT_REQUIRED')), false);
+  const homeLink = page.locator('#ana-menu').getByRole('link', {name:'Ana sayfa', exact:true, includeHidden:true});
+  assert.equal(await homeLink.getAttribute('aria-current'), 'page');
+  assert.equal(await homeLink.getAttribute('href'), '/');
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({width, height:900});
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `${width}px homepage overflow`);
+    for (const section of ['yaklasim', 'calisma-alanlari', 'gorusme-sureci', 'iletisim']) {
+      assert.equal(await page.locator('#' + section).count(), 1);
+    }
+    const columns = await page.locator('.home-hero-grid').evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length);
+    assert.equal(columns, width < 992 ? 1 : 2);
+    await page.screenshot({path:`artifacts/test-runs/home-refined-${width}.png`, fullPage:true});
+    await audit(page);
+  }
+  assert.equal(await page.locator('.home-hero-visual img').evaluate(el => el.complete && el.naturalWidth > 0), true);
+  assert.equal(await page.locator('script[src*="tailwind"], script[src*="iconify"], link[href*="fonts.googleapis"]').count(), 0);
+  await page.setViewportSize({width:390, height:900});
+  await page.locator('.navbar-toggler').click();
+  assert.equal(await page.locator('.navbar-toggler').getAttribute('aria-expanded'), 'true');
+  await page.locator('#ana-menu').getByRole('link', {name:'Görüşme talebi'}).click();
+  assert.equal(new URL(page.url()).pathname, '/iletisim');
+}));

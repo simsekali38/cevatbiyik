@@ -20,8 +20,6 @@ artifacts/
 
 ## Sırlar ve ortam dosyaları (ASLA commit'leme)
 secrets.json
-src/CevatBiyik.Web/appsettings.json
-src/CevatBiyik.Web/appsettings.Production.json
 appsettings.*.local.json
 appsettings.Secrets.json
 *.pfx

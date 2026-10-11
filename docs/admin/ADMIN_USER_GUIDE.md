@@ -103,25 +103,6 @@ normal araç çubuğunu kullanabilirsiniz. Tablo, video, iframe, serbest CSS ve 
 görsel desteklenmez. Görseller kapak seçiminden yönetilir. Ayrıntılar:
 [Zengin metin rehberi](RICH_TEXT_GUIDE.md).
 
-## Özel belgeler: amacı ve çalışma şekli
-
-**Özel belgeler**, yöneticinin tekrar erişmek istediği PDF'leri sakladığı özel alandır.
-Müvekkil portalı değildir; ziyaretçiler belgeyi göremez, kendileri dosya yükleyemez
-ve herkese açık paylaşım bağlantısı oluşturulmaz. İndirme yönetici girişi gerektirir.
-
-1. Anlaşılır başlık ve PDF seçip **Özel belge yükle** düğmesine basın.
-2. En fazla 5 MiB PDF kabul edilir; güvenlik ve antivirüs doğrulaması zorunludur.
-   Aktif içerik, ekli dosya veya şifreleme içeren PDF reddedilir.
-3. Başarılı kayıt listede görünür. **İndir** dosyayı bilgisayarınıza kaydeder.
-4. **Sil** onayı kaydı aktif listeden kaldırır. **Silinen belgeler → Geri al**
-   saklama süresi içinde dosya mevcut ve doğrulanabilir olduğunda geri getirir.
-5. Dosya yoksa, karantinadaysa veya doğrulama başarısızsa teknik sorumluya başvurun.
-
-Dosyalar ziyaretçilere sunulan klasörün dışında saklanır. Antivirüs hizmeti hazır
-değilse yükleme reddedilir; kontrol atlatılmamalıdır. Saklama süresi sunucu ayarına
-bağlıdır; panelde sabit süre vaat edilmez. Silme ve geri alma yedekleme yerine geçmez.
-Gizli belgelerin uygunluğu ve saklama yükümlülükleri ayrıca değerlendirilmelidir.
-
 ## Diğer bölümler
 
 | Bölüm | Ne zaman kullanılır? |
@@ -138,8 +119,6 @@ Gizli belgelerin uygunluğu ve saklama yükümlülükleri ayrıca değerlendiril
   inceleme onayını kontrol edin. İlgili sayfayı ziyaretçi görünümünde açın.
 - **Hata çıktı:** Kırmızı alan mesajını okuyun. Kaydetmeden ayrılmayın; parolaları
   veya kişisel mesaj içeriğini destek kaydına kopyalamayın.
-- **PDF yüklenmedi:** Tür/boyut ve güvenlik mesajını kontrol edin. Antivirüs veya
-  sunucu sorunuysa teknik sorumluya bildirin; dosya uzantısını değiştirerek denemeyin.
 - **Bildirim e-postası gelmedi:** Önce mesajın panelde kaydedildiğini kontrol edin;
   SMTP ve bildirim kuyruğu teknik sorumlu tarafından incelenir.
 - **KVKK bağlantısı:** İletişim formunda metin pencere içinde açılır. Kapat veya

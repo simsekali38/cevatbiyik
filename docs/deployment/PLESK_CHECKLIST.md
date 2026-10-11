@@ -1,5 +1,9 @@
 # Phase 15 — Plesk yayın kontrol listesi
 
+ADR-033 scope: özel belge modülü kapalı; belge URL'leri admin dahil 404.
+PDF/Defender kontrolleri owner kapsam kararıyla N-A; görsel/Skia kontrolleri ve varsa
+önceden saklanmış özel dosyaların backup kapsamı korunur.
+
 Hazırlık: [Üretim rehberi](PRODUCTION_RUNBOOK.md), ADR-032.
 Kutular gerçek operatör kanıtıyla işaretlenir; yerel test sonuçları hosting kutularını kapatmaz.
 

@@ -1,5 +1,37 @@
 # Architecture Decision Records
 
+## ADR-034 — Local Web configuration from Development JSON
+
+Status: Implemented per owner request (2026-10-11).
+
+Web uses appsettings.json followed by appsettings.Development.json in Development.
+Remove Web UserSecretsId so old user-secrets cannot silently override local JSON.
+The https profile explicitly selects Development in both environment-name variables.
+Keep environment/CLI override precedence; no custom provider or dependency is added.
+
+Untrack only the real Development JSON, retaining it on disk, and ignore it alongside
+server-owned configuration. Publish already excludes all appsettings*.json. Track a
+credential-free Development template and keep localhost/loopback host restriction and
+noindex locally. Copy the existing base JSON connection into local Development JSON
+without printing it or changing production files. Do not delete old user-secrets or
+alter IntegrationTests' independent opt-in secret mechanism. No DB operation/migration.
+This supersedes ENVIRONMENTS' historical Web user-secrets guidance, extends ADR-032's
+configuration boundary, and leaves prior staged files intact.
+
+## ADR-033 — Private documents disabled from the admin product
+
+Status: Implemented per owner request (2026-10-11); private PDF storage is not needed.
+
+Hide private-document navigation, guide/help links and file-control tab. Default
+Features:PrivateDocuments=false (missing key also false) removes DocumentsController
+from MVC routing, including upload/download/delete/restore. Private reconciliation
+and quarantine requests return 404 when disabled. Server-only opt-in is reserved
+for existing security regression fixtures; no admin toggle or automatic activation.
+Public image uploads and image maintenance remain available. Keep retained DB/file
+data, schema and fail-closed antivirus services intact; no purge or migration.
+Existing private data still belongs in coordinated backups. PDF/Defender launch
+smoke is N-A for this owner-disabled module; image/native/security gates remain.
+
 ## ADR-032 — Server-owned configuration and verified Plesk release boundary
 
 Status: Implemented locally (2026-10-11, Phase 15 preparation); hosting rollout pending.

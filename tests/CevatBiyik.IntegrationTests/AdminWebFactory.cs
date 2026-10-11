@@ -24,6 +24,7 @@ public sealed class AdminWebFactory : WebApplicationFactory<Program>
     public string? FixtureContentRoot { get; init; }
     public bool FailDocumentAudit { get; init; }
     public bool RejectDocumentScan { get; init; }
+    public bool PrivateDocumentsEnabled { get; init; }
     public bool AllowIndexing { get; init; }
     public bool LegalServiceSchemaEnabled { get; init; }
     public bool FailMediaAudit { get; init; }
@@ -39,6 +40,7 @@ public sealed class AdminWebFactory : WebApplicationFactory<Program>
         builder.ConfigureAppConfiguration((_, configuration) => configuration.AddInMemoryCollection(new Dictionary<string, string?>
         {
             ["Smtp:Enabled"] = "false",
+            ["Features:PrivateDocuments"] = PrivateDocumentsEnabled ? "true" : "false",
             ["Analytics:Enabled"] = "false",
             ["ConnectionStrings:DefaultConnection"] = "Server=127.0.0.1;Database=unused;User ID=unused;",
             ["Storage:PrivateRoot"] = PrivateRoot,

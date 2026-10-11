@@ -1,0 +1,4 @@
+# Local/server configuration contains credentials; templates live in docs/deployment/templates.
+/appsettings.json
+/appsettings.Development.json
+/appsettings.Production.json

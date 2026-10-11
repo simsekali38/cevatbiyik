@@ -66,12 +66,12 @@ test('row actions sit together, cancel makes no change and confirmed delete send
   await remove.click();await navigate(page,()=>page.locator('.admin-confirm-dialog').getByRole('button',{name:'Sil',exact:true}).click());
   assert.equal(await page.locator('tr').filter({hasText:'TEST_ONLY browser article'}).count(),0);
 }));
-test('guided setup and private-document explanation are usable on desktop and mobile',async()=>session(async page=>{
+test('guided setup without private-document links are usable on desktop and mobile',async()=>session(async page=>{
   await login(page);await goto(page,'/admin/guide');assert.equal(await page.locator('.admin-guide-steps li').count(),8);
   await axe(page);await page.screenshot({path:'artifacts/test-runs/admin-guide-mobile.png',fullPage:true});
   await page.setViewportSize({width:1440,height:1000});await page.screenshot({path:'artifacts/test-runs/admin-guide-desktop.png',fullPage:true});
   await goto(page,'/admin/guide?step=6');assert.match(await page.locator('.admin-guide-card').first().textContent(),/taslak/);
-  await goto(page,'/admin/documents');assert.match(await page.locator('main').textContent(),/Müvekkiller için hesap/);await axe(page);
+  assert.equal(await page.locator('a[href^="/admin/documents"]').count(),0);assert.equal((await page.goto(base+'/admin/documents')).status(),404);
 }));
 test('contact privacy modal keeps the URL and typed form values and returns focus',async()=>session(async page=>{
   await goto(page,'/iletisim');await page.locator('#Form_Name').fill('TEST_ONLY modal visitor');

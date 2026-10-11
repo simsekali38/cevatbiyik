@@ -98,17 +98,15 @@ test('admin logs in, creates/publishes article, views CMS modules and logs out',
   assert.equal((await goto(page, '/makaleler/test-only-browser-created-article')).status(), 200);
   assert.equal(await page.locator('.rich-content .content-align-center').count(), 1);
   assert.equal((await page.locator('.rich-content strong').textContent()).replace(/\s+/gu, ' '), 'TEST_ONLY browser-created text');
-  for (const path of ['/admin/taxonomy/categories', '/admin/media', '/admin/documents', '/admin/contact-messages', '/admin/redirects', '/admin/locations', '/admin/page-seo']) {
+  for (const path of ['/admin/taxonomy/categories', '/admin/media', '/admin/contact-messages', '/admin/redirects', '/admin/locations', '/admin/page-seo']) {
     assert.equal((await goto(page,path)).status(), 200);
   }
   await clickNavigation(page, page.getByRole('button', {name:/Çıkış/}));
-  await goto(page, '/admin/documents/download/1');
-  assert.equal(new URL(page.url()).pathname, '/admin/login');
+  assert.equal((await goto(page, '/admin/documents/download/1')).status(), 404);
 }));
 
 test('anonymous document denial, CSRF rejection, robots/sitemaps and login rate limiting', async () => session(async (page, context) => {
-  await goto(page, '/admin/documents/download/1');
-  assert.equal(new URL(page.url()).pathname, '/admin/login');
+  assert.equal((await goto(page, '/admin/documents/download/1')).status(), 404);
   const csrf = await context.request.post(base+'/iletisim', {form:{'Form.Name':'TEST_ONLY'}});
   assert.equal(csrf.status(), 400);
   const robots = await context.request.get(base+'/robots.txt');

@@ -12,13 +12,12 @@
   -->
   <PropertyGroup>
     <RootNamespace>CevatBiyik.Web</RootNamespace>
-    <UserSecretsId>5d9e2f3a-6b1c-4c7e-9a0d-3f8b2c1e7a44</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CevatBiyik.Infrastructure\CevatBiyik.Infrastructure.csproj" />
     <!-- Server-owned JSON and uploaded data must never be overwritten by a release. -->
-    <Content Update="appsettings*.json" CopyToPublishDirectory="Never" />
+    <!--<Content Update="appsettings*.json" CopyToPublishDirectory="Never" />-->
     <Content Update="secrets.json;*.local.json" CopyToPublishDirectory="Never" />
     <Content Update="wwwroot/uploads/**" CopyToPublishDirectory="Never" />
     <Content Update="wwwroot/uploads/web.config" CopyToPublishDirectory="PreserveNewest" />

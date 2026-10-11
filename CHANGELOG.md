@@ -4,6 +4,44 @@ All notable project changes should be recorded here.
 
 ## [Unreleased]
 
+### Public homepage refinement and local JSON configuration (2026-10-11)
+- Balanced the 600px desktop hero with an ivory brand placeholder, consistent type,
+  section spacing, card borders/padding and aligned public header/footer marks.
+- Added Ana sayfa navigation with current-page state; retained routes and reviewed CMS.
+- Suppressed raw CONTENT_REQUIRED contact/profile/process placeholders in the homepage
+  and shared footer; show factual empty states instead of invented lawyer information.
+- Web now uses local Development JSON rather than automatic user-secrets (ADR-034).
+  Real Development JSON is retained locally, ignored/untracked and excluded from publish;
+  an inert template is tracked. Existing hosting configurations are unchanged.
+- Added Development-provider/localhost and placeholder/navigation regression coverage.
+- Comparison screenshots and final verification: docs/design/PUBLIC_HOME_REFINEMENT_REVIEW.md.
+
+### Local development hostname fix (2026-10-11)
+- Explicit localhost/loopback AllowedHosts override in Development only; hosting-only
+  base configuration no longer rejects local preview requests. Production files unchanged.
+
+### Public layout and homepage — UXMagic transfer (2026-10-11)
+- Applied the explicitly approved export (3) homepage composition with local Bootstrap,
+  existing navy/gold tokens, system fonts and the unchanged local SVG emblem.
+- Added a light navigation shell/information strip, two-column hero, approach cards,
+  reviewed CMS profile, process placeholder and contact CTA; retained published articles.
+- Preserved metadata, canonical, JSON-LD/CSP, consent and existing contact submission flow.
+- No schema, package, Admin or inner-page view changes. Unapproved hero photography and
+  legal/process copy remain CONTENT_REQUIRED; no remote UXMagic runtime/assets copied.
+- Added four-width homepage reflow/navigation/Axe checks and screenshots to browser tests.
+- Verification and remaining content gates: docs/design/PUBLIC_HOME_TRANSFER_REVIEW.md.
+
+### Admin — hide private documents (2026-10-11)
+- Owner-disabled private PDF module: removed navigation/help/manual references;
+  document routes and private reconciliation/quarantine unavailable by default.
+- Preserved stored files/records and image uploads; no migration or antivirus bypass.
+- Added disabled-route/UI regression and retained explicit test-only opt-in for
+  existing PDF security cases (ADR-033). Updated browser journeys and launch scope.
+- Verification: 414 .NET passed (11 database opt-in skips), 54 targeted auth/document
+  regressions passed after warning cleanup; 6 JS and final 15/15 browser checks passed.
+  Final Release build 0 errors/warnings; initial browser helper expecting 200 was
+  corrected for the intended disabled-route 404 and rerun. Publish verification passed.
+
 ### Phase 17 — final launch operational templates (2026-10-11)
 - Owner-approved closure and commit for requested documentation/templates scope;
   actual production launch and operational evidence remain pending.

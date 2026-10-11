@@ -91,7 +91,7 @@ public sealed partial class AdminFlowTests
         ticket.Properties.IssuedUtc = ticket.Properties.ExpiresUtc.Value.AddMinutes(-30);
         using var expired = factory.CreateClient(new Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryClientOptions
         { BaseAddress = new Uri("https://localhost"), AllowAutoRedirect = false, HandleCookies = false });
-        using var request = new HttpRequestMessage(HttpMethod.Get, "/admin/documents/download/1");
+        using var request = new HttpRequestMessage(HttpMethod.Get, "/admin/settings");
         request.Headers.Add("Cookie", "__Host-CevatBiyik.Admin=" + options.TicketDataFormat.Protect(ticket));
         using var rejected = await expired.SendAsync(request);
         Assert.Equal(HttpStatusCode.Redirect, rejected.StatusCode);
@@ -103,7 +103,7 @@ public sealed partial class AdminFlowTests
             user.IsActive = false;
             Assert.True((await users.UpdateAsync(user)).Succeeded);
         }
-        using var disabled = await client.GetAsync("/admin/documents/download/1");
+        using var disabled = await client.GetAsync("/admin/settings");
         Assert.Equal(HttpStatusCode.Redirect, disabled.StatusCode);
         Assert.StartsWith("https://localhost/admin/login", disabled.Headers.Location!.ToString(), StringComparison.Ordinal);
     }

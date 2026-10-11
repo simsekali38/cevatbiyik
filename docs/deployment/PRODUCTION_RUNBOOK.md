@@ -1,5 +1,11 @@
 # Phase 15 — Windows/Plesk üretim yayın rehberi
 
+Current product scope (ADR-033): private PDF admin module is disabled by default
+(Features:PrivateDocuments=false/absent). Its routes return 404. PDF/Defender smoke
+is N-A; public image/Skia requirements stay active. Preserve any retained private
+files/DB records in backups. Older PDF setup instructions below are retained for
+maintenance history and do not require enabling the unused module for launch.
+
 Bu rehber hazırlık ve operatör uygulama adımlarını ayırır. Gerçek hosting kontrolü,
 parola rotasyonu, üretim migration ve restore drill yapılmadan “üretime hazır” onayı
 verilmez. Phase 16 denetimi ve Phase 17 yayın kararı ayrıdır. Sunucu yolu, pool kimliği,

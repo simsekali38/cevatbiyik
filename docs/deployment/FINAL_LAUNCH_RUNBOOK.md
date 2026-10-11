@@ -1,6 +1,10 @@
 # Phase 17 — Canlıya alma operatör rehberi
 
 Durum: **Belge/şablon hazır; gerçek yayın yapılmadı. NO-GO korunuyor.**
+
+Owner scope update (ADR-033): private PDF module is disabled. Features:PrivateDocuments
+stays false/absent; PDF/Defender-specific gates are N-A. Image/Skia, existing private
+data backup, and all other release gates remain applicable. Do not enable PDF to run smoke.
 Phase 16 commit'i `581a8c0` kapanış onayıdır; açık production kapılarının kapandığı
 anlamına gelmez. Bu rehberdeki adımlar yalnızca yetkili hosting/DB operatörünce,
 kanıt ve owner yayın kararıyla uygulanır. Bilinmeyenler **CONTENT_REQUIRED**.

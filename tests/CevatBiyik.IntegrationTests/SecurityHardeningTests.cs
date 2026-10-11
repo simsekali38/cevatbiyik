@@ -34,7 +34,7 @@ public sealed class SecurityHardeningTests
     [InlineData("/uploads/attack.aspx", 404)]
     [InlineData("/UPLOADS/web.config", 404)]
     [InlineData("/uploads/images/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.webp%0A", 404)]
-    [InlineData("/admin/documents/download/1", 302)]
+    [InlineData("/admin/documents/download/1", 404)]
     public async Task Headers_ProtectHtmlStaticDeniedUploadsAndAuthorizationRedirects(string path, int status)
     {
         using var factory = new PublicWebFactory();
@@ -162,10 +162,8 @@ public sealed class SecurityHardeningTests
     [InlineData("/admin/practice-areas")]
     [InlineData("/admin/contact-messages")]
     [InlineData("/admin/settings")]
-    [InlineData("/admin/documents")]
-    [InlineData("/admin/documents/download/1")]
-    [InlineData("/admin/files")]
     [InlineData("/admin/media")]
+    [InlineData("/admin/files")]
     [InlineData("/admin/redirects")]
     [InlineData("/admin/locations")]
     public async Task EveryAdminModule_RejectsAnonymousRequests(string path)

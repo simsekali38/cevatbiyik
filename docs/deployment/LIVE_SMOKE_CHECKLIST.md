@@ -1,5 +1,9 @@
 # Phase 17 — Canlı smoke test ve yayın teslim kaydı
 
+ADR-033 owner scope: private PDF upload/download is disabled. Document URLs must
+return 404, even for Admin. FILE-02/PDF portions of FILE-03/04 and Defender-specific
+checks are N-A; retain image/Skia checks and backups of any existing private files.
+
 Durum: **Çalıştırılmadı.** Release/batch: CONTENT_REQUIRED · Tarih/UTC:
 CONTENT_REQUIRED · Operatör: CONTENT_REQUIRED · Site: https://cevatbiyik.av.tr.
 Yetkili operatör her satır için sonuç (PASS/FAIL/BLOCKED/N-A), zaman ve redakte kanıt
