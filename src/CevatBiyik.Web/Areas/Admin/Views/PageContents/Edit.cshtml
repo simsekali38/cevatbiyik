@@ -1,11 +1,11 @@
 @model PageContentInput
 @{ ViewData["Title"] = "Sayfa içeriği düzenle"; }
-<h1>@ViewData["Title"]</h1><p>Hukuki metinler avukat tarafından kontrol edilmelidir. HTML, kimlik/sicil numarası ve doğrulanmamış iddia eklemeyin. İnceleme onayı her düzenlemede yeniden verilir.</p>
-<form asp-action="Save" asp-route-id="@ViewData["EntityId"]" method="post" asp-antiforgery="false">
-@Html.AntiForgeryToken()<div asp-validation-summary="All" class="validation-summary-errors" role="alert"></div>
+<h1>@ViewData["Title"]</h1><p>Hukuki metinler avukat tarafından kontrol edilmelidir. Editörün sunduğu biçimlendirmeleri kullanın; kimlik/sicil numarası ve doğrulanmamış iddia eklemeyin. İnceleme onayı her düzenlemede yeniden verilir.</p>
+<form data-admin-form asp-action="Save" asp-route-id="@ViewData["EntityId"]" method="post" asp-antiforgery="false">
+@Html.AntiForgeryToken()@if (!ViewData.ModelState.IsValid) { <div asp-validation-summary="All" class="validation-summary-errors" role="alert"></div> }
 <input asp-for="Path" type="hidden" /><p>Sayfa yolu: @Model.Path</p>
-<label asp-for="Title" class="form-label">Başlık</label><input asp-for="Title" class="form-control mb-3" maxlength="200" required />
-<label asp-for="Body" class="form-label">İçerik</label><textarea asp-for="Body" class="form-control mb-3" rows="14" maxlength="12000" required></textarea>
-<div class="form-check mb-3"><input asp-for="IsReviewed" class="form-check-input" /><label asp-for="IsReviewed">Metni ve hukuki/yayın uygunluğunu inceledim.</label></div>
-<div class="form-check mb-3"><input asp-for="IsActive" class="form-check-input" /><label asp-for="IsActive">Yayımla</label></div>
-<button class="btn btn-primary" type="submit">Kaydet</button> <a asp-action="Index">Listeye dön</a></form>
+<label asp-for="Title" class="form-label">Başlık</label><input asp-for="Title" class="form-control mb-3" maxlength="200" required /><span asp-validation-for="Title" class="field-error"></span>
+<label asp-for="Body" class="form-label">İçerik</label><textarea data-rich-editor asp-for="Body" class="form-control mb-3" rows="14" maxlength="12000" required></textarea><span asp-validation-for="Body" class="field-error"></span>
+<div class="form-check mb-3"><input asp-for="IsReviewed" class="form-check-input" /><span asp-validation-for="IsReviewed" class="field-error"></span><label asp-for="IsReviewed">Metni ve hukuki/yayın uygunluğunu inceledim.</label></div>
+<div class="form-check mb-3"><input asp-for="IsActive" class="form-check-input" /><span asp-validation-for="IsActive" class="field-error"></span><label asp-for="IsActive">Yayımla</label></div>
+<div class="admin-save-bar"><button class="btn btn-primary" type="submit">Değişiklikleri kaydet</button> <a asp-action="Index">Listeye dön</a><span class="admin-save-state" data-save-state role="status">Henüz değişiklik yapılmadı</span></div></form>

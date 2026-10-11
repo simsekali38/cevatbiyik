@@ -1,3 +1,14 @@
+@{
+    var signedIn = User.IsInRole("Admin");
+    var currentPath = Context.Request.Path.Value?.TrimEnd('/') ?? "";
+    (string Title, (string Path, string Label)[] Links)[] groups =
+    [
+        ("Genel", [("/admin", "Yönetim özeti"), ("/admin/contact-messages", "İletişim mesajları")]),
+        ("İçerik", [("/admin/articles", "Makaleler"), ("/admin/practice-areas", "Uzmanlık alanları"), ("/admin/taxonomy/categories", "Kategoriler"), ("/admin/taxonomy/tags", "Etiketler"), ("/admin/profile", "Avukat profili"), ("/admin/page-contents", "Sayfa içerikleri"), ("/admin/faq", "Sıkça sorulan sorular")]),
+        ("Medya ve dosyalar", [("/admin/media", "Görsel kütüphanesi"), ("/admin/documents", "Özel belgeler"), ("/admin/files", "Dosya kontrolü")]),
+        ("SEO ve yapılandırma", [("/admin/page-seo", "Sayfa SEO ayarları"), ("/admin/locations", "Yerel içerikler"), ("/admin/seo", "SEO kontrolü"), ("/admin/redirects", "Yönlendirmeler"), ("/admin/settings", "Site ayarları")])
+    ];
+}
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -5,26 +16,56 @@
     <meta name="robots" content="noindex, nofollow" /><title>@ViewData["Title"] | Yönetim</title>
     <link rel="stylesheet" href="~/lib/bootstrap/bootstrap.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/quill/quill.core.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+    <script src="~/lib/bootstrap/bootstrap.bundle.min.js" asp-append-version="true" defer></script>
+    <script src="~/lib/quill/quill.js" asp-append-version="true" defer></script>
+    <script src="~/js/admin.js" asp-append-version="true" defer></script>
 </head>
-<body>
+<body class="admin-body admin-no-js @(signedIn ? "" : "admin-auth")">
     <a class="skip-link" href="#icerik">Ana içeriğe geç</a>
-    <header class="site-header"><div class="container py-3 d-flex flex-wrap align-items-center gap-3">
-        <a class="brand text-decoration-none" href="/admin"><img class="brand-emblem" src="~/images/brand/cevat-biyik-emblem.svg" width="72" height="72" alt="" /><span class="brand-name">Av. Cevat Bıyık<span class="brand-caption">YÖNETİM PANELİ</span></span></a>
-        <a class="admin-public-link ms-auto" href="/">Siteyi görüntüle</a>
-        @if (User.IsInRole("Admin"))
+    <header class="site-header admin-header"><div class="admin-header-inner">
+        @if (signedIn)
+        {
+            <button type="button" class="btn admin-menu-toggle d-lg-none" data-bs-toggle="offcanvas" data-bs-target="#admin-navigation" aria-controls="admin-navigation" aria-label="Yönetim menüsünü aç">Menü</button>
+        }
+        <a class="brand text-decoration-none" href="/admin"><img class="brand-emblem" src="~/images/brand/cevat-biyik-emblem.svg" width="52" height="52" alt="" /><span class="brand-name">Av. Cevat Bıyık<span class="brand-caption">YÖNETİM PANELİ</span></span></a>
+        <div class="admin-header-actions"><a class="admin-public-link" href="/" target="_blank" rel="noopener noreferrer">Siteyi görüntüle <span class="visually-hidden">(yeni sekme)</span></a>
+        @if (signedIn)
         {
             <form asp-area="Admin" asp-controller="Account" asp-action="Logout" method="post" asp-antiforgery="false">@Html.AntiForgeryToken()<button class="btn btn-outline-primary" type="submit">Çıkış yap</button></form>
         }
+        </div>
     </div></header>
-    @if (User.IsInRole("Admin"))
+    <div class="admin-shell">
+    @if (signedIn)
     {
-        <nav class="container py-3 admin-navigation" aria-label="Yönetim menüsü"><a href="/admin">Özet</a><a href="/admin/profile">Profil</a><a href="/admin/page-contents">Sayfa içerikleri</a><a href="/admin/faq">SSS</a><a href="/admin/articles">Makaleler</a><a href="/admin/practice-areas">Uzmanlık alanları</a><a href="/admin/taxonomy/categories">Kategoriler</a><a href="/admin/taxonomy/tags">Etiketler</a><a href="/admin/media">Görseller</a><a href="/admin/documents">Özel belgeler</a><a href="/admin/files">Dosya mutabakatı</a><a href="/admin/page-seo">Sayfa SEO</a><a href="/admin/locations">Yerel içerikler</a><a href="/admin/seo">SEO kontrolü</a><a href="/admin/redirects">Yönlendirmeler</a><a href="/admin/contact-messages">İletişim mesajları</a><a href="/admin/settings">Site ayarları</a></nav>
+        <aside class="offcanvas-lg offcanvas-start admin-sidebar" tabindex="-1" id="admin-navigation" aria-labelledby="admin-menu-title">
+            <div class="offcanvas-header"><h2 class="h5" id="admin-menu-title">Yönetim menüsü</h2><button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#admin-navigation" aria-label="Menüyü kapat"></button></div>
+            <nav class="offcanvas-body admin-navigation" aria-label="Yönetim menüsü">
+                @foreach (var group in groups)
+                {
+                    <div class="admin-nav-group"><p class="admin-nav-heading">@group.Title</p>
+                    @foreach (var link in group.Links)
+                    {
+                        var active = currentPath == link.Path || (link.Path != "/admin" && currentPath.StartsWith(link.Path + "/", StringComparison.OrdinalIgnoreCase));
+                        <a href="@link.Path" class="admin-nav-link @(active ? "is-active" : "")" aria-current="@(active ? "page" : null)">@link.Label</a>
+                    }
+                    </div>
+                }
+            </nav>
+        </aside>
     }
-    <main class="container py-4" id="icerik" tabindex="-1">
+    <main class="admin-main" id="icerik" tabindex="-1">
+        @if (signedIn && currentPath != "/admin")
+        {
+            <nav class="admin-breadcrumb" aria-label="İçerik yolu"><a href="/admin">Yönetim</a><span aria-hidden="true">/</span><span aria-current="page">@ViewData["Title"]</span></nav>
+        }
         @if (TempData["AdminSuccess"] is string success) { <p class="alert alert-success" role="status">@success</p> }
         @if (TempData["AdminError"] is string error) { <p class="alert alert-danger" role="alert">@error</p> }
         @RenderBody()
+        <footer class="admin-footer">Av. Cevat Bıyık · Yönetim paneli</footer>
     </main>
+    </div>
 </body>
 </html>

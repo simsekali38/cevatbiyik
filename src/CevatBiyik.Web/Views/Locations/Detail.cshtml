@@ -1,6 +1,6 @@
 @model LocationDto
 <section class="page-heading"><div class="container"><nav aria-label="İçerik yolu"><a href="/">Ana sayfa</a> / <a href="/konumlar">Yerel bilgiler</a>@foreach(var link in Model.Ancestors){<span> / </span><a href="@link.Path">@link.Title</a>}</nav><h1>@Model.Name</h1><p>@Model.Input.Summary</p></div></section>
-<section class="section-pad"><div class="container reading-width"><article><div class="plain-content">@Model.Input.Body</div><h2>Yerel bilgiler</h2><div class="plain-content">@Model.Input.LocalDetails</div>
+<section class="section-pad"><div class="container reading-width"><article><rich-content value="@Model.Input.Body"></rich-content><h2>Yerel bilgiler</h2><div class="plain-content">@Model.Input.LocalDetails</div>
 @if(Model.PracticeAreas.Count > 0){<h2>İlgili çalışma alanları</h2><ul>@foreach(var link in Model.PracticeAreas){<li><a href="@link.Path">@link.Title</a></li>}</ul>}
 @if(Model.Articles.Count > 0){<h2>İlgili makaleler</h2><ul>@foreach(var link in Model.Articles){<li><a href="@link.Path">@link.Title</a></li>}</ul>}
 @{var children=ViewData["Children"] as IReadOnlyList<LocalLink> ?? Array.Empty<LocalLink>();}

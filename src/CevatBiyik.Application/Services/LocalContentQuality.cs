@@ -13,7 +13,7 @@ public static class LocalContentQuality
     {
         var result = new Dictionary<long, IReadOnlyList<string>>();
         var names = peers.SelectMany(x => Tokens(x.Name)).Append("kayseri").ToHashSet(StringComparer.Ordinal);
-        var bodies = peers.ToDictionary(x => x.Id, x => Tokens(x.Body));
+        var bodies = peers.ToDictionary(x => x.Id, x => Tokens(RichText.ToPlainText(x.Body)));
         var details = peers.ToDictionary(x => x.Id, x => Tokens(x.LocalDetails));
         var shingles = peers.ToDictionary(x => x.Id, x => Shingles(bodies[x.Id].Concat(details[x.Id]).Where(w => !names.Contains(w)).ToArray()));
         foreach (var item in peers)
@@ -24,7 +24,7 @@ public static class LocalContentQuality
                 warnings.Add("Yayın, inceleme ve yerel bilgi doğrulaması gerekli.");
             }
             if (!ContentPublication.Complete(item.Name, item.Summary, item.Body, item.LocalDetails) ||
-                !PlainText.IsSafe(item.Body) || !PlainText.IsSafe(item.LocalDetails) || !PlainText.IsSafe(item.Summary) || !PlainText.IsSafe(item.Name))
+                !RichText.IsSafe(item.Body) || !PlainText.IsSafe(item.LocalDetails) || !PlainText.IsSafe(item.Summary) || !PlainText.IsSafe(item.Name))
             {
                 warnings.Add("Eksik veya güvenli olmayan içerik.");
             }

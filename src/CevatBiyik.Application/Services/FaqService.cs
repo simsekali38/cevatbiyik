@@ -21,7 +21,7 @@ public sealed class FaqService(IRepository<FaqItem> items) : IFaqService
     {
         await new FaqValidator().ValidateAndThrowAsync(input, ct);
         var item = id.HasValue ? await ServiceRules.RequireAsync(items, id.Value, ct) : new FaqItem();
-        item.Question = input.Question.Trim(); item.Answer = input.Answer.Trim(); item.SortOrder = input.SortOrder;
+        item.Question = input.Question.Trim(); item.Answer = RichText.Normalize(input.Answer); item.SortOrder = input.SortOrder;
         item.IsActive = input.IsActive; item.IsReviewed = input.IsReviewed;
         if (!id.HasValue)
         {

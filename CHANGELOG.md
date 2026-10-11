@@ -4,6 +4,18 @@ All notable project changes should be recorded here.
 
 ## [Unreleased]
 
+### UX/UI and safe rich content (2026-10-11)
+- Grouped responsive admin navigation, dashboard cards, split article editing, inline validation,
+  save/dirty feedback, current-page list filtering, explicit deletion and upload feedback.
+- Local Quill 2.0.3 editor for long CMS fields; Application HTML allowlist and safe Razor rendering;
+  plain legacy text and plain contact/metadata preserved, no migration required (ADR-029).
+- Collapsible SEO fields with live result preview, character/word counters and UTC/Türkiye preview.
+- Owner reference image adapted into Turkish editor menus and grouped SVG icons, paragraph alignment,
+  safe content preview and read-only source view; no additional editor dependency.
+- Public rich typography and FAQ plain-text schema; security and browser regression coverage.
+- Verification: 394 .NET tests across local/hosted runs, 6 analytics JS + 6 browser journeys, 8 scanner self-tests; Release 0 errors/warnings. Empty-schema migration case skipped; NuGet audit clean.
+- No production configuration/secret change; SH-12-01 remains open. Phase 14 not started.
+
 ### Extended test-only SQL dataset (2026-10-11)
 - Final commit validation: Release build 0 errors/0 warnings; 173 unit + 197 integration = 370 passing .NET tests, 1 empty-schema migration skip; 6 JS/8 scanner self-tests and style checks passed. Existing SH-12-01 config excluded from commit.
 - Hosted service regression now handles pre-existing Site.Name demo data within a rollback transaction and verifies its original value/publication/deletion flags are restored.

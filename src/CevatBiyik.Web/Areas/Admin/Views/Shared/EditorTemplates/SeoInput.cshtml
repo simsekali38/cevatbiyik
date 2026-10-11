@@ -1,10 +1,11 @@
 @model SeoInput
-<fieldset><legend>SEO ve sosyal paylaşım</legend>
+<details class="admin-seo" data-seo-editor><summary>SEO ve sosyal paylaşım</summary><div>
+<div class="admin-seo-preview" aria-label="Arama sonucu önizlemesi"><p class="admin-seo-preview-path">cevatbiyik.av.tr</p><p class="admin-seo-preview-title" data-seo-preview-title>Sayfa başlığı</p><p data-seo-preview-description>Meta açıklaması</p><small>Yaklaşık önizlemedir; arama motorları farklı metin gösterebilir.</small></div>
 <div class="alert alert-info"><p>Boş alanlar sayfanın varsayılan metinlerini kullanır. Karakter aralıkları zorunlu değildir; görsel isteğe bağlıdır.</p><ul class="mb-0">@foreach(var issue in CevatBiyik.Application.Services.SeoQuality.Check(Model)){<li>@issue.Message</li>}</ul><a href="/admin/seo">SEO kontrol paneli</a></div>
-<div class="mb-3"><label asp-for="MetaTitle" class="form-label">Meta başlık</label><input asp-for="MetaTitle" class="form-control" maxlength="120" /></div>
-<div class="mb-3"><label asp-for="MetaDescription" class="form-label">Meta açıklama</label><textarea asp-for="MetaDescription" class="form-control" maxlength="320" rows="3"></textarea></div>
+<div class="mb-3"><label asp-for="MetaTitle" class="form-label">Meta başlık</label><input asp-for="MetaTitle" data-seo="title" class="form-control" maxlength="120" /></div>
+<div class="mb-3"><label asp-for="MetaDescription" class="form-label">Meta açıklama</label><textarea asp-for="MetaDescription" data-seo="description" class="form-control" maxlength="320" rows="3"></textarea></div>
 <div class="mb-3"><label asp-for="Keywords" class="form-label">Anahtar kelimeler</label><input asp-for="Keywords" class="form-control" maxlength="300" /></div>
 <div class="mb-3"><label asp-for="OpenGraphTitle" class="form-label">Paylaşım başlığı</label><input asp-for="OpenGraphTitle" class="form-control" maxlength="120" /></div>
 <div class="mb-3"><label asp-for="OpenGraphDescription" class="form-label">Paylaşım açıklaması</label><textarea asp-for="OpenGraphDescription" class="form-control" maxlength="320" rows="3"></textarea></div>
 <div class="mb-3"><label asp-for="OpenGraphMediaId" class="form-label">Paylaşım görseli</label><select asp-for="OpenGraphMediaId" class="form-select"><option value="">Varsayılan</option>@if(Model.OpenGraphMediaId.HasValue && (ViewData["Media"] as IReadOnlyList<MediaDto> ?? Array.Empty<MediaDto>()).All(x => x.Id != Model.OpenGraphMediaId)){<option value="@Model.OpenGraphMediaId">Mevcut görsel</option>}@foreach(var image in ViewData["Media"] as IReadOnlyList<MediaDto> ?? Array.Empty<MediaDto>()){<option value="@image.Id">@image.AltText</option>}</select></div>
-</fieldset>
+</div></details>

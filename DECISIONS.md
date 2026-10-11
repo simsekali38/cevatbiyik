@@ -1,5 +1,36 @@
 # Architecture Decision Records
 
+## ADR-029 — Allowlisted rich CMS content and progressive admin UX
+
+Status: Implemented (2026-10-11, owner-requested UX follow-up; owner explicitly chose rich text and safe HTML).
+
+Extend ADR-019/021 plain-content handling only for Article.Content, PracticeArea.Content,
+LawyerProfile.Biography/Vision, PageContent.Body, FaqItem.Answer and Location.Body.
+Titles, excerpts, SEO metadata, local facts, settings and contact messages remain plain text.
+Existing string columns and legacy plain text are preserved; no schema migration or data rewrite.
+
+Application owns a single RichText policy. HtmlSanitizer 9.2.1039 (MIT, AngleSharp parser)
+is the one necessary dependency: browser parsing rules cannot safely be implemented with regular expressions.
+Validation rejects disallowed input before writes, normalization persists canonical allowlisted HTML,
+and a dedicated Razor TagHelper sanitizes again at the rendering boundary. Only that controlled sink
+emits HTML; normal Razor encoding remains elsewhere. Canonical length checks include serialization expansion.
+Allowed tags: p/br/h2/h3/strong/b/em/i/u/ul/ol/li/blockquote/a. Only href and tightly validated alignment classes are allowed,
+with HTTP/HTTPS, rooted internal paths and fragment URLs; no protocol-relative URLs, credentials,
+styles, IDs, scripts, event handlers, embeds or editor images. Class values are exclusively content-align-center/right/justify on p/h2/h3/li/blockquote; arbitrary classes are rejected. Covers stored legacy HTML defensively.
+Local quality comparisons and FAQ JSON-LD extract visible plain text; CONTENT_REQUIRED gates remain.
+
+Quill 2.0.3 (BSD-3-Clause) is vendored from its official npm distribution, with its license;
+no external CDN, API or runtime package download. A native labelled toolbar exposes the restricted formats,
+link dialog, undo/redo and semantic list export under the existing CSP. Owner screenshot follow-up adds Turkish menu strip, grouped SVG icon controls, paragraph alignment, preview and read-only HTML view without a new editor dependency. Screenshot is a visual reference, not permission to add unsupported media/table/color tools. Server validation is authoritative.
+JavaScript is progressive: plain textarea editing, form posts, navigation and CSRF work without it.
+Drafts stay in the current document; beforeunload warns without storing potentially sensitive content.
+Client search clearly filters only the current page. Bootstrap mobile navigation and shared form feedback
+serve existing controllers; authorization, audit and retention rules are preserved.
+
+Phase 14 is not started or closed by this follow-up. SH-12-01 remains open; production configuration and
+secrets are untouched. See docs/qa/UX_UI_REVIEW.md and docs/admin/RICH_TEXT_GUIDE.md.
+
+
 ## ADR-028 — Extended SQL fixtures without national publication
 
 Status: Implemented (2026-10-11, owner-requested SQL fixture follow-up).

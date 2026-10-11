@@ -113,12 +113,18 @@ public sealed partial class PublicContentFlowTests
         Assert.True((await finalScope.ServiceProvider.GetRequiredService<AppDbContext>().FaqItems.IgnoreQueryFilters().SingleAsync(x => x.Id == 1)).IsDeleted);
     }
     [Fact]
-    public async Task LegacyFaqMarkup_IsEncodedInHtmlAndJsonLd()
+    public async Task LegacyFaqMarkup_IsSanitized_WithPlainSchemaAnswer()
     {
-        using var factory = new PublicWebFactory(); factory.Faq.Seed(new FaqItem { Id = 1, Question = "<script>alert(1)</script>", Answer = "</script><img src=x onerror=alert(2)>", IsActive = true, IsReviewed = true });
+        using var factory = new PublicWebFactory();
+        factory.Faq.Seed(new FaqItem { Id = 1, Question = "Test sorusu", Answer = "<p><strong>Test yanıtı</strong></p></script><img src=x onerror=alert(2)>", IsActive = true, IsReviewed = true });
+        factory.Faq.Seed(new FaqItem { Id = 2, Question = "<script>alert(1)</script>", Answer = "Test", IsActive = true, IsReviewed = true });
         using var client = factory.CreateHttpsClient(); var html = await client.GetStringAsync("/sss");
-        Assert.DoesNotContain("<script>alert", html, StringComparison.Ordinal); Assert.DoesNotContain("<img src=x", html, StringComparison.Ordinal); Assert.Contains("&lt;script&gt;", html, StringComparison.Ordinal);
-        using var json = JsonDocument.Parse(JsonPattern().Match(html).Groups[1].Value); Assert.Contains("<script>", json.RootElement.GetProperty("mainEntity")[0].GetProperty("name").GetString()!, StringComparison.Ordinal);
+        Assert.DoesNotContain("<script>alert", html, StringComparison.Ordinal);
+        Assert.DoesNotContain("<img src=x", html, StringComparison.Ordinal);
+        Assert.DoesNotContain("onerror=alert", html, StringComparison.Ordinal);
+        using var json = JsonDocument.Parse(JsonPattern().Match(html).Groups[1].Value);
+        Assert.Equal(1, json.RootElement.GetProperty("mainEntity").GetArrayLength());
+        Assert.Equal("Test yanıtı", json.RootElement.GetProperty("mainEntity")[0].GetProperty("acceptedAnswer").GetProperty("text").GetString());
     }
     [Theory]
     [InlineData(false)]

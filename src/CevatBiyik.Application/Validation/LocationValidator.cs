@@ -11,7 +11,7 @@ public sealed class LocationValidator : AbstractValidator<LocationInput>
         RuleFor(x => x.Kind).IsInEnum();
         RuleFor(x => x.ParentId).GreaterThan(0).When(x => x.ParentId.HasValue);
         RuleFor(x => x.Summary).NotEmpty().MaximumLength(500).Must(PlainText.IsSafe);
-        RuleFor(x => x.Body).NotEmpty().MaximumLength(12000).Must(PlainText.IsSafe);
+        RuleFor(x => x.Body).NotEmpty().MaximumLength(12000).Must(RichText.IsSafe).Must(value => RichText.Fits(value, 12000)).WithMessage("Biçimlendirme dahil içerik karakter sınırını aşıyor.");
         RuleFor(x => x.LocalDetails).NotEmpty().MaximumLength(4000).Must(PlainText.IsSafe);
         RuleFor(x => x.Seo).NotNull().SetValidator(new SeoValidator());
         RuleFor(x => x.PracticeAreaIds).NotNull().Must(x => x is not null && x.Length <= 20 && x.All(i => i > 0) && x.Distinct().Count() == x.Length);

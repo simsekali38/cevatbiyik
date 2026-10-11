@@ -3,7 +3,7 @@
 <h1>Özel belgeler</h1>
 <p>Belgeler herkese açık değildir. Yalnızca PDF, en fazla 5 MiB. Antivirüs doğrulaması zorunludur; aktif içerik, ekler ve şifreli belgeler kabul edilmez.</p>
 <p><a href="/admin/documents">Aktif belgeler</a> · <a href="/admin/documents?deleted=true">Silinen belgeler</a></p>
-<form action="/admin/documents/upload" method="post" enctype="multipart/form-data">
+<form data-admin-form action="/admin/documents/upload" method="post" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
     <label for="title" class="form-label">Başlık</label><input id="title" name="title" class="form-control" maxlength="200" required />
     <label for="file" class="form-label">PDF belge</label><input id="file" name="file" class="form-control" type="file" accept="application/pdf,.pdf" required />

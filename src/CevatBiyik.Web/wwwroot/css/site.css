@@ -136,3 +136,18 @@ h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.2; l
 .consent-panel p { overflow-wrap: anywhere; }
 
 .consent-prompt { width: calc(100% - 2rem); max-height: 55vh; overflow-y: auto; background: var(--surface-paper); box-shadow: 0 4px 24px #18264B33; }
+
+/* Only server-sanitized CMS fragments receive rich typography. */
+.rich-content { line-height: 1.85; overflow-wrap: anywhere; }
+.rich-content > :last-child { margin-bottom: 0; }
+.rich-content p { margin-bottom: 1.15rem; }
+.rich-content h2, .rich-content h3 { margin-block: 1.75rem .75rem; line-height: 1.35; }
+.rich-content h2 { font-size: 1.5rem; }
+.rich-content h3 { font-size: 1.2rem; }
+.rich-content li { margin-block: .35rem; }
+.rich-content blockquote { margin: 1.25rem 0; padding: .75rem 1.25rem; border-left: 3px solid var(--brand-gold-ink); background: var(--surface-paper); }
+.rich-content a { text-decoration: underline; text-underline-offset: .2em; }
+
+.rich-content .content-align-center { text-align: center; }
+.rich-content .content-align-right { text-align: right; }
+.rich-content .content-align-justify { text-align: justify; }

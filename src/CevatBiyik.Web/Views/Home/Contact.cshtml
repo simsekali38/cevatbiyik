@@ -13,7 +13,7 @@
         <form method="post" asp-controller="Contact" asp-action="Submit" asp-antiforgery="false" aria-describedby="form-help">
             @Html.AntiForgeryToken()
             <div class="contact-trap" aria-hidden="true"><label for="contact-website">Web sitesi (boş bırakın)</label><input id="contact-website" name="Website" type="text" tabindex="-1" autocomplete="off" maxlength="200" /></div>
-            <div asp-validation-summary="All" class="validation-summary" id="validation-summary" tabindex="-1" role="alert" aria-label="Form hataları"></div>
+            @if (!ViewData.ModelState.IsValid) { <div asp-validation-summary="All" class="validation-summary" id="validation-summary" tabindex="-1" role="alert" aria-label="Form hataları"></div> }
             <div class="row g-4">
                 <div class="col-md-6"><label asp-for="Form.Name" class="form-label">Ad soyad <span aria-hidden="true">*</span></label><input asp-for="Form.Name" class="form-control" autocomplete="name" maxlength="150" required aria-describedby="name-error" aria-invalid="@(HasError("Name") ? "true" : "false")" /><span asp-validation-for="Form.Name" class="field-error" id="name-error"></span></div>
                 <div class="col-md-6"><label asp-for="Form.Email" class="form-label">E-posta <span aria-hidden="true">*</span></label><input asp-for="Form.Email" type="email" class="form-control" autocomplete="email" maxlength="254" required aria-describedby="email-error" aria-invalid="@(HasError("Email") ? "true" : "false")" /><span asp-validation-for="Form.Email" class="field-error" id="email-error"></span></div>

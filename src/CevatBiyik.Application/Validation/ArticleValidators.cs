@@ -9,7 +9,7 @@ public abstract class ArticleValidator<T> : AbstractValidator<T> where T : Creat
     {
         RuleFor(x => x.Title).NotEmpty().MaximumLength(250).Must(PlainText.IsSafe);
         RuleFor(x => x.Excerpt).MaximumLength(1000).Must(PlainText.IsSafe);
-        RuleFor(x => x.Content).NotEmpty().MaximumLength(100000).Must(PlainText.IsSafe);
+        RuleFor(x => x.Content).NotEmpty().MaximumLength(100000).Must(RichText.IsSafe).WithMessage("İçerikte yalnızca güvenli başlık, paragraf, liste ve bağlantılar kullanılabilir.").Must(value => RichText.Fits(value, 100000));
         RuleFor(x => x.PracticeAreaId).GreaterThan(0).When(x => x.PracticeAreaId.HasValue);
         RuleFor(x => x.CategoryId).GreaterThan(0).When(x => x.CategoryId.HasValue);
         RuleFor(x => x.CoverMediaId).GreaterThan(0).When(x => x.CoverMediaId.HasValue);
@@ -22,7 +22,7 @@ public abstract class ArticleValidator<T> : AbstractValidator<T> where T : Creat
     }
 
     private static bool ContainsPlaceholder(T x) =>
-        string.Concat(x.Title, x.Excerpt, x.Content).Contains("CONTENT_REQUIRED", StringComparison.OrdinalIgnoreCase);
+        string.Concat(x.Title, x.Excerpt, RichText.ToPlainText(x.Content)).Contains("CONTENT_REQUIRED", StringComparison.OrdinalIgnoreCase);
 }
 
 public sealed class CreateArticleValidator : ArticleValidator<CreateArticleDto>;

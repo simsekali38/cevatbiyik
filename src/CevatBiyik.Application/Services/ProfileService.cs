@@ -16,7 +16,7 @@ public sealed class ProfileService(IRepository<LawyerProfile> profiles) : IProfi
         await new ProfileValidator().ValidateAndThrowAsync(input, ct);
         var rows = await profiles.ListAsync(x => x.Key == "primary", 1, 1, ct);
         var item = rows.Count == 0 ? new LawyerProfile() : await ServiceRules.RequireAsync(profiles, rows[0].Id, ct);
-        item.Biography = input.Biography.Trim(); item.Vision = input.Vision.Trim(); item.BarAssociation = input.BarAssociation.Trim();
+        item.Biography = RichText.Normalize(input.Biography); item.Vision = RichText.Normalize(input.Vision); item.BarAssociation = input.BarAssociation.Trim();
         item.IsActive = input.IsActive; item.IsReviewed = input.IsReviewed;
         if (rows.Count == 0)
         {

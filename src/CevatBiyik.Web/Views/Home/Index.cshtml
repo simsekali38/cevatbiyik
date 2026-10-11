@@ -6,7 +6,7 @@
 </div></div></section>
 @if (Model.Introduction is { } introduction)
 {
-    <section class="cms-introduction section-pad" aria-labelledby="intro-title"><div class="container reading-width"><h2 id="intro-title">@introduction.Title</h2><div class="plain-content">@introduction.Body</div></div></section>
+    <section class="cms-introduction section-pad" aria-labelledby="intro-title"><div class="container reading-width"><h2 id="intro-title">@introduction.Title</h2><rich-content value="@introduction.Body"></rich-content></div></section>
 }
 <section class="section-pad" aria-labelledby="areas-title"><div class="container">
     <div class="section-heading"><div><p class="eyebrow">ÇALIŞMA ALANLARI</p><h2 id="areas-title">Uzmanlık alanları</h2></div><a class="text-link" asp-controller="PracticeAreas" asp-action="Index">Tüm alanlar <span aria-hidden="true">→</span></a></div>

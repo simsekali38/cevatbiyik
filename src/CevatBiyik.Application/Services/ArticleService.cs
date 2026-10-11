@@ -2,6 +2,7 @@ using System.Linq.Expressions;
 using CevatBiyik.Application.DTOs;
 using CevatBiyik.Application.Exceptions;
 using CevatBiyik.Application.Interfaces;
+using CevatBiyik.Application.Validation;
 using CevatBiyik.Domain.Entities;
 using FluentValidation;
 
@@ -139,7 +140,7 @@ public sealed class ArticleService(IRepository<Article> articles, IRepository<Pr
     {
         entity.Title = input.Title.Trim();
         entity.Excerpt = input.Excerpt?.Trim();
-        entity.Content = input.Content.Trim();
+        entity.Content = RichText.Normalize(input.Content);
         entity.PublishedAt = input.PublishedAt;
         entity.PracticeAreaId = input.PracticeAreaId;
         entity.IsActive = input.IsActive;

@@ -74,7 +74,7 @@ public sealed class LocationService(IRepository<Location> locations, IRepository
             throw new ValidationException("OpenGraph görseli aktif medya olmalıdır.");
         }
         item.Name = input.Name.Trim(); item.Slug = slug; item.Kind = input.Kind; item.ParentId = input.ParentId;
-        item.Summary = input.Summary.Trim(); item.Body = input.Body.Trim(); item.LocalDetails = input.LocalDetails.Trim();
+        item.Summary = input.Summary.Trim(); item.Body = RichText.Normalize(input.Body); item.LocalDetails = input.LocalDetails.Trim();
         item.IsActive = input.IsActive; item.IsReviewed = input.IsReviewed; item.FactsVerified = input.FactsVerified;
         item.MetaTitle = input.Seo.MetaTitle; item.MetaDescription = input.Seo.MetaDescription; item.Keywords = input.Seo.Keywords;
         item.OpenGraphTitle = input.Seo.OpenGraphTitle; item.OpenGraphDescription = input.Seo.OpenGraphDescription; item.OpenGraphMediaId = input.Seo.OpenGraphMediaId;

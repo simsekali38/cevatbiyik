@@ -66,7 +66,7 @@ public sealed class PracticeAreaService(IRepository<PracticeArea> areas, ISlugSe
     {
         entity.Name = input.Name.Trim();
         entity.ShortDescription = input.ShortDescription?.Trim();
-        entity.Content = input.Content.Trim();
+        entity.Content = CevatBiyik.Application.Validation.RichText.Normalize(input.Content);
         entity.SortOrder = input.SortOrder;
         entity.IsActive = input.IsActive;
         entity.MetaTitle = input.Seo.MetaTitle; entity.MetaDescription = input.Seo.MetaDescription; entity.Keywords = input.Seo.Keywords;

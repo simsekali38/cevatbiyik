@@ -88,11 +88,16 @@ test('admin logs in, creates/publishes article, views CMS modules and logs out',
   assert.ok(admin.secure && admin.httpOnly && admin.sameSite === 'Strict' && admin.path === '/');
   await goto(page, '/admin/articles/create');
   await page.locator('#Title').fill('TEST_ONLY browser created article');
-  await page.locator('#Content').fill('TEST_ONLY browser-created text');
+  await page.locator('#Content-editor').fill('TEST_ONLY browser-created text');
+  await page.locator('#Content-editor').press('Control+a');
+  await page.getByRole('button', {name:'Kalın', exact:true}).click();
+  await page.getByRole('button', {name:'Ortala', exact:true}).click();
   await page.locator('#PublishedAt').fill('2020-01-01T12:00');
   await page.locator('#IsActive').check();
-  await clickNavigation(page, page.getByRole('button', {name:'Kaydet', exact:true}));
+  await clickNavigation(page, page.getByRole('button', {name:'Değişiklikleri kaydet', exact:true}));
   assert.equal((await goto(page, '/makaleler/test-only-browser-created-article')).status(), 200);
+  assert.equal(await page.locator('.rich-content .content-align-center').count(), 1);
+  assert.equal((await page.locator('.rich-content strong').textContent()).replace(/\s+/gu, ' '), 'TEST_ONLY browser-created text');
   for (const path of ['/admin/taxonomy/categories', '/admin/media', '/admin/documents', '/admin/contact-messages', '/admin/redirects', '/admin/locations', '/admin/page-seo']) {
     assert.equal((await goto(page,path)).status(), 200);
   }
@@ -116,3 +121,63 @@ test('anonymous document denial, CSRF rejection, robots/sitemaps and login rate 
   for(let i=0;i<11;i++) { response = await context.request.post(base+'/admin/login', {form:{UserName:'missing'}}); }
   assert.equal(response.status(),429); assert.equal(response.headers()['retry-after'],'60');
 }));
+
+
+test('rich editor mobile navigation, keyboard exit, empty validation and safe link dialog', async () => session(async (page) => {
+  const failures = []; page.on('pageerror', error => failures.push(error.message));
+  await page.addInitScript(() => { window.testCspViolations = []; document.addEventListener('securitypolicyviolation', e => window.testCspViolations.push({directive:e.violatedDirective,source:e.sourceFile,line:e.lineNumber,sample:e.sample})); });
+  await login(page);
+  await page.getByRole('button', {name:'Yönetim menüsünü aç', exact:true}).click();
+  assert.ok(await page.locator('#admin-navigation').isVisible());
+  await page.locator('#admin-navigation button[data-bs-dismiss]').click();
+  await goto(page, '/admin/articles/create');
+  assert.ok(await page.locator('#Content-editor').isVisible());
+  assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth));
+  await page.locator('#Title').fill('TEST_ONLY empty editor');
+  assert.equal(await page.locator('[data-seo-preview-title]').textContent(), 'TEST_ONLY empty editor');
+  await page.getByRole('button', {name:'Değişiklikleri kaydet', exact:true}).click();
+  assert.match(await page.locator('.field-error[role=alert]').textContent(), /doldurun/);
+  await page.locator('#Content-editor').fill('TEST_ONLY link text');
+  await page.locator('#Content-editor').press('Control+a');
+  await page.getByRole('button', {name:'Bağlantı', exact:true}).click();
+  await page.locator('dialog[open] input').fill('javascript:alert(1)');
+  await page.getByRole('button', {name:'Bağlantıyı ekle', exact:true}).click();
+  assert.match(await page.locator('dialog[open] [role=alert]').textContent(), /HTTPS/);
+  await page.locator('dialog[open] input').fill('/makaleler');
+  await page.getByRole('button', {name:'Bağlantıyı ekle', exact:true}).click();
+  assert.match(await page.locator('#Content').inputValue(), /href="\/makaleler"/);
+  await page.locator('#Content-editor').press('Tab');
+  assert.equal(await page.locator('#Content-editor').evaluate(x => x.contains(document.activeElement)), false);
+  assert.equal(await page.locator('.admin-editor-menubar summary').count(), 6);
+  await page.getByRole('button', {name:'Önizleme', exact:true}).click();
+  assert.equal(await page.locator('dialog[open] .rich-content a').getAttribute('href'), '/makaleler');
+  await page.getByRole('button', {name:'Kapat', exact:true}).click();
+  await page.getByRole('button', {name:'Kaynak görünümü', exact:true}).click();
+  assert.match(await page.getByRole('textbox', {name:'Güvenli HTML kaynağı'}).inputValue(), /href="\/makaleler"/);
+  await page.getByRole('button', {name:'Kapat', exact:true}).click();
+  await page.locator('.admin-editor-menubar summary').filter({hasText:'Düzen'}).click();
+  assert.ok(await page.getByRole('button', {name:'Tümünü seç', exact:true}).isVisible());
+  await page.getByRole('button', {name:'Tümünü seç', exact:true}).click();
+  await page.locator('.admin-editor-menubar summary').filter({hasText:'Araçlar'}).click();
+  await page.locator('.admin-editor-menu[open] summary').press('Escape');
+  assert.equal(await page.locator('.admin-editor-menu[open]').count(), 0);
+  assert.deepEqual(failures, []);
+  assert.deepEqual(await page.evaluate(() => window.testCspViolations), []);
+  assert.equal(await page.evaluate(() => { const event = new Event('beforeunload', {cancelable:true}); window.dispatchEvent(event); return event.defaultPrevented; }), true);
+  await page.evaluate(() => { window.getSelection().removeAllRanges(); document.activeElement.blur(); window.scrollTo(0,0); });
+  await page.screenshot({path:'artifacts/test-runs/admin-editor-mobile.png', fullPage:true});
+  await page.setViewportSize({width:1440,height:1000});
+  await page.evaluate(() => window.scrollTo(0,0));
+  await page.screenshot({path:'artifacts/test-runs/admin-editor-desktop.png', fullPage:true});
+}));
+
+
+test('admin form and navigation stay usable without JavaScript', async () => {
+  const context = await browser.newContext({ignoreHTTPSErrors:true, javaScriptEnabled:false, extraHTTPHeaders:{'X-Test-Connection-IP':'198.18.0.'+(++sessionId)}, viewport:{width:390,height:844}});
+  try {
+    const page = await context.newPage(); await login(page); await goto(page,'/admin/articles/create');
+    assert.ok(await page.locator('#Content').isVisible());
+    assert.ok(await page.locator('#admin-navigation a[href="/admin/articles"]').isVisible());
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth));
+  } finally { await context.close(); }
+});

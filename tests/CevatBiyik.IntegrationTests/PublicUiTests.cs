@@ -77,7 +77,7 @@ public partial class PublicUiTests(PublicWebFactory factory) : IClassFixture<Pub
     }
 
     [Fact]
-    public async Task LegacyArticleContent_IsEncodedInBodyAndMetaTags()
+    public async Task LegacyArticleContent_IsSanitized_WhileMetaTagsRemainEncoded()
     {
         using var isolated = new PublicWebFactory();
         isolated.Articles.Seed(new CevatBiyik.Domain.Entities.Article
@@ -94,7 +94,7 @@ public partial class PublicUiTests(PublicWebFactory factory) : IClassFixture<Pub
         var html = await client.GetStringAsync("/makaleler/encoding-test");
         Assert.DoesNotContain("<script>alert", html, StringComparison.Ordinal);
         Assert.DoesNotContain("<img src=x", html, StringComparison.Ordinal);
-        Assert.Contains("&lt;img", html, StringComparison.Ordinal);
+        Assert.DoesNotContain("onerror=alert(3)", html, StringComparison.Ordinal);
         Assert.Contains("&lt;script&gt;", html, StringComparison.Ordinal);
     }
 

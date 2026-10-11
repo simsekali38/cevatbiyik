@@ -39,7 +39,7 @@ public sealed class PageContentService(IRepository<PageContent> pages) : IPageCo
             throw new ValidationException("Mevcut sayfanın yolu değiştirilemez.");
         }
 
-        item.Path = input.Path; item.Title = input.Title.Trim(); item.Body = input.Body.Trim(); item.IsActive = input.IsActive; item.IsReviewed = input.IsReviewed;
+        item.Path = input.Path; item.Title = input.Title.Trim(); item.Body = RichText.Normalize(input.Body); item.IsActive = input.IsActive; item.IsReviewed = input.IsReviewed;
         if (!id.HasValue)
         {
             pages.Add(item);

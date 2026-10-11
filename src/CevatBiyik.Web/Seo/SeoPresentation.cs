@@ -10,7 +10,7 @@ public static class SeoPresentation
         ["mainEntity"] = items.Select(x => new Dictionary<string, object>
         {
             ["@type"] = "Question", ["name"] = x.Question,
-            ["acceptedAnswer"] = new Dictionary<string, string> { ["@type"] = "Answer", ["text"] = x.Answer }
+            ["acceptedAnswer"] = new Dictionary<string, string> { ["@type"] = "Answer", ["text"] = CevatBiyik.Application.Validation.RichText.ToPlainText(x.Answer) }
         }).ToArray()
     };
     public static string Origin(IConfiguration configuration)

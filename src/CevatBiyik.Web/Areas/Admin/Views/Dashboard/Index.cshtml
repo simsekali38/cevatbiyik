@@ -2,10 +2,10 @@
 @{ ViewData["Title"] = "Yönetim özeti"; }
 <h1>Yönetim özeti</h1>
 <div class="row g-3 my-3">
-    <div class="col-sm-6 col-lg-3"><div class="content-card"><h2>Makaleler</h2><p>@Model.Articles toplam · @Model.PublishedArticles yayında</p><a href="/admin/articles">Makaleleri yönet</a></div></div>
-    <div class="col-sm-6 col-lg-3"><div class="content-card"><h2>Uzmanlık alanları</h2><p>@Model.PracticeAreas kayıt</p><a href="/admin/practice-areas">Alanları yönet</a></div></div>
-    <div class="col-sm-6 col-lg-3"><div class="content-card"><h2>Okunmamış mesajlar</h2><p>@Model.UnreadMessages mesaj</p><a href="/admin/contact-messages">Mesajları incele</a></div></div>
-    <div class="col-sm-6 col-lg-3"><div class="content-card"><h2>Site ayarları</h2><p>İletişim ve site açıklaması</p><a href="/admin/settings">Ayarları yönet</a></div></div>
+    <div class="col-sm-6 col-lg-3"><div class="admin-stat"><h2>Makaleler</h2><div class="admin-stat-number">@Model.Articles</div><p>@Model.PublishedArticles yayında</p><a href="/admin/articles">Makaleleri yönet</a></div></div>
+    <div class="col-sm-6 col-lg-3"><div class="admin-stat"><h2>Uzmanlık alanları</h2><div class="admin-stat-number">@Model.PracticeAreas</div><p>Uzmanlık alanı</p><a href="/admin/practice-areas">Alanları yönet</a></div></div>
+    <div class="col-sm-6 col-lg-3"><div class="admin-stat"><h2>Okunmamış mesajlar</h2><div class="admin-stat-number">@Model.UnreadMessages</div><p>Yanıt bekleyen mesaj</p><a href="/admin/contact-messages">Mesajları incele</a></div></div>
+    <div class="col-sm-6 col-lg-3"><div class="admin-stat"><h2>Site ayarları</h2><p>İletişim ve site açıklaması</p><a href="/admin/settings">Ayarları yönet</a></div></div>
 </div>
 <h2>Son yönetim işlemleri</h2>
 <ul>@foreach (var entry in ViewData["RecentAudit"] as IReadOnlyList<AuditLogDto> ?? Array.Empty<AuditLogDto>())

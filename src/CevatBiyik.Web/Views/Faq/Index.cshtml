@@ -7,7 +7,7 @@ else
     <div class="accordion faq-accordion">
     @foreach (var item in Model.Items)
     {
-        <details class="accordion-item"><summary class="faq-toggle" id="faq-question-@item.Id">@item.Question</summary><div class="accordion-body plain-content" role="region" aria-labelledby="faq-question-@item.Id">@item.Answer</div></details>
+        <details class="accordion-item"><summary class="faq-toggle" id="faq-question-@item.Id">@item.Question</summary><rich-content value="@item.Answer" class="accordion-body" role="region" aria-labelledby="faq-question-@item.Id"></rich-content></details>
     }
     </div>
 }
