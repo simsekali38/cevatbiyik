@@ -1,6 +1,6 @@
-#requires -Version 7.0
+﻿#requires -Version 7.0
 [CmdletBinding()]
-param([ValidateSet('baseline', 'after', 'phase16')][string]$Stage = 'after', [switch]$NoBuild, [switch]$BrowserChecksOnly)
+param([ValidateSet('baseline', 'after', 'phase16', 'remaining')][string]$Stage = 'after', [switch]$NoBuild, [switch]$BrowserChecksOnly)
 $ErrorActionPreference = 'Stop'
 $taskRoot = Split-Path $PSScriptRoot -Parent
 $fixture = $null

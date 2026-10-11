@@ -1,6 +1,28 @@
 @model ProfileDto
-<section class="page-heading"><div class="container"><p class="eyebrow">AV. CEVAT BIYIK</p><h1>Hakkımda</h1></div></section>
-<section class="section-pad"><div class="container"><div class="row g-5">
-<div class="col-lg-8"><section aria-labelledby="biography-title"><h2 id="biography-title">Av. Cevat Bıyık</h2><rich-content value="@(Model?.Biography ?? "CONTENT_REQUIRED")"></rich-content></section><section class="profile-section" aria-labelledby="vision-title"><h2 id="vision-title">Vizyon</h2><rich-content value="@(Model?.Vision ?? "CONTENT_REQUIRED")"></rich-content></section></div>
-<div class="col-lg-4"><aside class="content-card" aria-labelledby="bar-title"><img class="profile-emblem mb-4" src="~/images/brand/cevat-biyik-emblem.svg" width="120" height="120" alt="" /><h2 id="bar-title">Baro bilgisi</h2><p>@(Model?.BarAssociation ?? "CONTENT_REQUIRED")</p><a class="text-link" asp-action="Contact">İletişim <span aria-hidden="true">↗</span></a></aside></div>
-</div></div></section>
+<div class="public-content-page about-public">
+    <div class="container">
+        <nav class="content-breadcrumb" aria-label="İçerik yolu"><ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index">Ana sayfa</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Hakkımda</li>
+        </ol></nav>
+        <div class="about-grid">
+            <aside class="about-portrait" aria-label="Profil görseli">
+                <div class="about-portrait-placeholder"><img src="~/images/brand/cevat-biyik-emblem.svg" width="144" height="144" alt="" /><p>Onaylı portre henüz yayımlanmadı.</p></div>
+            </aside>
+            <div class="about-copy">
+                <header class="content-heading"><h1>Hakkımda</h1></header>
+                @if (Model is null)
+                {
+                    <div class="empty-state"><p class="mb-0">Profil bilgileri henüz yayımlanmadı.</p></div>
+                }
+                else
+                {
+                    <section class="about-section" aria-labelledby="biography-title"><h2 id="biography-title">Biyografi</h2><rich-content value="@Model.Biography"></rich-content></section>
+                    <section class="about-section" aria-labelledby="vision-title"><h2 id="vision-title">Vizyon</h2><rich-content value="@Model.Vision"></rich-content></section>
+                    <section class="about-section" aria-labelledby="bar-title"><h2 id="bar-title">Baro bilgisi</h2><p>@Model.BarAssociation</p></section>
+                }
+                <div class="content-contact"><a class="btn btn-light" asp-action="Contact">İletişime geç <span aria-hidden="true">↗</span></a></div>
+            </div>
+        </div>
+    </div>
+</div>

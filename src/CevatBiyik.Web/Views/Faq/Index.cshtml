@@ -1,7 +1,8 @@
 @model PagedResult<FaqDto>
-<section class="page-heading"><div class="container reading-width"><p class="eyebrow">SORULAR VE YANITLAR</p><h1>Sıkça Sorulan Sorular</h1><p>Yanıtı görmek için soruyu açın.</p></div></section>
-<section class="section-pad"><div class="container reading-width">
-@if (Model.Items.Count == 0) { <div class="empty-state"><h2>Henüz yayımlanmış soru bulunmuyor</h2><p class="mb-0">CONTENT_REQUIRED</p></div> }
+<div class="public-content-page faq-public">
+<header class="container reading-width content-heading"><nav class="content-breadcrumb" aria-label="İçerik yolu"><ol class="breadcrumb"><li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Ana sayfa</a></li><li class="breadcrumb-item active" aria-current="page">Sıkça Sorulan Sorular</li></ol></nav><h1>Sıkça Sorulan Sorular</h1><p>Yanıtı görmek için soruyu açın.</p></header>
+<section class="faq-content"><div class="container reading-width">
+@if (Model.Items.Count == 0) { <div class="empty-state"><h2>Henüz yayımlanmış soru bulunmuyor</h2><a asp-controller="Home" asp-action="Contact">İletişime geç</a></div> }
 else
 {
     <div class="accordion faq-accordion">
@@ -16,3 +17,4 @@ else
 @if (Model.HasNext) { <a class="btn btn-outline-primary" asp-route-page="@(Model.Page + 1)">Sonraki sayfa</a> }
 </nav>
 </div></section>
+</div>

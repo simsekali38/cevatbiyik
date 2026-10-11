@@ -1,4 +1,18 @@
-# Architecture Decision Records
+﻿# Architecture Decision Records
+
+## ADR-035 — Public metadata uses complete, visible CMS content
+
+Status: Implemented (2026-10-12), remaining-work SEO review.
+
+Keep existing reviewed-publication gates, configured canonical origin and safe JSON-LD.
+At the Web presentation boundary, ignore legacy CONTENT_REQUIRED metadata values;
+retain the page default instead of publishing placeholders in title/description/OG.
+Convert rich-text excerpts and profile descriptions to plain text for metadata/schema.
+Reviewed legal-page bodies provide the default description; valid Admin PageSeo still
+wins. Optional absent article excerpts remain null in schema. Site identity defaults
+remain available when legacy settings contain placeholders; contact facts are never
+invented. No CMS data, validation/publication policy, schema or migration is changed.
+This extends ADR-022/023 presentation safety and does not authorize indexing or launch.
 
 ## ADR-034 — Local Web configuration from Development JSON
 

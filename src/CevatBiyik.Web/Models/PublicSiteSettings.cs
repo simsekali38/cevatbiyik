@@ -1,4 +1,4 @@
-namespace CevatBiyik.Web.Models;
+﻿namespace CevatBiyik.Web.Models;
 
 public sealed class PublicSiteSettings(IReadOnlyDictionary<string, string> values)
 {
@@ -10,7 +10,7 @@ public sealed class PublicSiteSettings(IReadOnlyDictionary<string, string> value
     public string WorkingHours => Get("Contact.WorkingHours");
 
     private string Get(string key, string fallback = "CONTENT_REQUIRED") =>
-        values.TryGetValue(key, out var value) && !string.IsNullOrWhiteSpace(value) ? value : fallback;
+        values.TryGetValue(key, out var value) && CevatBiyik.Application.Validation.ContentPublication.Complete(value) ? value : fallback;
 
     public static PublicSiteSettings Empty { get; } = new(new Dictionary<string, string>());
 }

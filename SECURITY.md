@@ -1,4 +1,15 @@
-# Security Baseline
+﻿# Security Baseline
+
+## Remaining-work audit update (2026-10-12)
+
+Owner reports password rotation completed. This is owner evidence; independent old
+credential revocation is not tested. Current configuration remains ignored/untracked
+and excluded from publish. Git history still contains the historical credential;
+no rewrite is authorized. Keep SH-12-01 operational evidence pending in the launch
+record rather than treating a clean current-tree scan as clean history.
+Read-only cevodbtest diagnosis confirms MariaDB 10.3.39 with no session TLS. No DB
+writes, production login, server configuration change or password action was performed.
+Final evidence and remaining launch gates: docs/qa/REMAINING_WORK_REVIEW.md.
 
 ## Phase 16 current configuration status
 

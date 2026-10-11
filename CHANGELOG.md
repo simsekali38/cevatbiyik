@@ -1,8 +1,38 @@
-# Changelog
+﻿# Changelog
 
 All notable project changes should be recorded here.
 
 ## [Unreleased]
+
+### Remaining public UI and readiness audit (2026-10-11–12)
+- Adapted About, contact, FAQ and legal pages to the existing public design system.
+- Kept reviewed CMS fields and neutral missing-content states, native FAQ/consent
+  controls, contact CSRF/validation/anti-spam and legal approval gates.
+- Fixed contact tablet gutter overflow and active navigation/contact focus contrast;
+  removed three unused legacy public selectors and regenerated assets using the builder.
+- Added placeholder-safe plain-text metadata/schema fallbacks (ADR-035), regression
+  coverage and four-width public browser checks; Admin/data/migrations unchanged.
+- Added opt-in, fixed-query read-only cevodbtest diagnosis and separate remaining-work
+  Lighthouse/axe evidence, without running persistence/migration writes or deploying.
+- Restored the commented server-owned JSON publish exclusion after actual release
+  verification rejected config copies; a fresh package now passes the boundary audit.
+- Final findings, metrics, skips and operator gates: docs/qa/REMAINING_WORK_REVIEW.md.
+
+### Public practice-area design transfer (2026-10-11)
+- Adapted practice-area list/detail views to the navy/gold shell with balanced cards,
+  complete breadcrumbs, readable CMS headings and contact actions.
+- Suppressed missing optional descriptions/content without changing publication services.
+- Added narrow/tablet/desktop browser and placeholder/sanitization regression coverage.
+- No model, service, controller, migration, package or Admin changes.
+- Review: docs/design/PRACTICE_AREAS_TRANSFER_REVIEW.md.
+
+### Public article design transfer (2026-10-11)
+- Applied the approved navy/gold system to article list cards, labeled filters,
+  numeric paging, detail breadcrumbs, dates and readable sanitized CMS content.
+- Added conditional related links from existing published article queries and a contact action.
+- Kept editorial copy in CMS; preserved SEO, publication gates, PRG/CSRF and shared shell.
+- Added article regression and 390/1440px browser checks.
+- Review and verification: docs/design/ARTICLES_TRANSFER_REVIEW.md.
 
 ### Public homepage refinement and local JSON configuration (2026-10-11)
 - Balanced the 600px desktop hero with an ivory brand placeholder, consistent type,

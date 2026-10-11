@@ -6,7 +6,7 @@ import {mkdir, writeFile} from 'node:fs/promises';
 import https from 'node:https';
 const base = 'https://localhost:57413';
 const stage = process.argv[2];
-if (!['baseline', 'after', 'phase16'].includes(stage)) throw new Error('Use baseline, after or phase16.');
+if (!['baseline', 'after', 'phase16', 'remaining'].includes(stage)) throw new Error('Use baseline, after, phase16 or remaining.');
 await new Promise((resolve, reject) => {
   const req = https.get(base, {rejectUnauthorized: false}, res => {
     res.resume();

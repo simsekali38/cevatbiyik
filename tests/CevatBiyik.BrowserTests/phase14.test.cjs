@@ -132,3 +132,70 @@ test('homepage design reflows, keeps local assets and preserves navigation', asy
   await page.locator('#ana-menu').getByRole('link', {name:'Görüşme talebi'}).click();
   assert.equal(new URL(page.url()).pathname, '/iletisim');
 }));
+
+test('article designs reflow at mobile and desktop with accessible filters and reading structure', async () => session(async page => {
+  for (const [path, name] of [['/makaleler', 'articles-list'], ['/makaleler/test-browser', 'article-detail']]) {
+    await goto(page, path);
+    for (const width of [390, 1440]) {
+      await page.setViewportSize({width, height:900});
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `${path} ${width}px overflow`);
+      assert.equal(await page.locator('h1').count(), 1);
+      await audit(page);
+      await page.screenshot({path:`artifacts/test-runs/${name}-${width}.png`, fullPage:true});
+    }
+    if (name === 'articles-list') {
+      for (const id of ['q', 'category', 'topic', 'tag']) assert.equal(await page.locator('#' + id).evaluate(el => !!el.labels?.length), true);
+      assert.equal(await page.locator('.article-card').count() > 0, true);
+    } else {
+      assert.equal(await page.locator('.breadcrumb [aria-current="page"]').count(), 1);
+      assert.equal(await page.locator('.article-contact a').getAttribute('href'), '/iletisim');
+      assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), 'https://cevatbiyik.av.tr/makaleler/test-browser');
+    }
+  }
+}));
+
+test('practice-area list and detail reflow with safe content, links and accessible structure', async () => session(async page => {
+  for (const [path, name] of [['/uzmanlik-alanlari', 'practice-list'], ['/uzmanlik-alanlari/test-area', 'practice-detail']]) {
+    await goto(page, path);
+    for (const width of [320, 390, 768, 1440]) {
+      await page.setViewportSize({width, height:900});
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `${path} ${width}px overflow`);
+      assert.equal(await page.locator('h1').count(), 1);
+      assert.equal(await page.locator('.breadcrumb [aria-current="page"]').count(), 1);
+      assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), 'https://cevatbiyik.av.tr' + path);
+      await audit(page);
+      await page.screenshot({path:`artifacts/test-runs/${name}-${width}.png`, fullPage:true});
+    }
+    assert.equal(await page.locator('.practice-contact a').getAttribute('href'), '/iletisim');
+    if (name === 'practice-list') assert.equal(await page.locator('.practice-card h2 a').first().getAttribute('href'), '/uzmanlik-alanlari/test-area');
+  }
+}));
+
+test('remaining public pages preserve accessible mobile layouts, CMS states and native controls', async () => {
+  for (const [path, name] of [['/hakkimda','about'], ['/iletisim','contact'], ['/sss','faq'], ['/kvkk','legal'], ['/cerez-politikasi','cookies'], ['/yasal-uyari','disclaimer']]) {
+    await session(async page => {
+      for (const width of [320,390,768,1440]) {
+        await page.setViewportSize({width,height:900});
+        await goto(page,path);
+        assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),true, `${path} ${width}px overflow`);
+        assert.equal(await page.locator('h1').count(),1);
+        assert.equal(await page.locator('.content-breadcrumb [aria-current="page"]').count(),1);
+        assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://cevatbiyik.av.tr'+path);
+        await audit(page);
+        await page.screenshot({path:`artifacts/test-runs/remaining-after-${name}-${width}.png`,fullPage:true});
+      }
+      if (path === '/hakkimda') {
+        assert.equal(await page.locator('.about-portrait img').evaluate(el=>el.complete&&el.naturalWidth>0),true);
+        const cta=page.locator('.content-contact a'); await cta.focus(); await page.keyboard.press('Tab'); await page.keyboard.press('Shift+Tab');
+        assert.equal(await cta.evaluate(el=>getComputedStyle(el).outlineColor),'rgb(214, 179, 106)');
+      }
+      if (path === '/sss') {
+        const disclosure=page.locator('.faq-accordion details').first(); await disclosure.locator('summary').focus(); await page.keyboard.press('Enter');
+        assert.equal(await disclosure.getAttribute('open') !== null,true);
+      }
+      if (path === '/iletisim') {
+        for (const id of ['Form_Name','Form_Email','Form_Phone','Form_Subject','Form_Message','Form_Consent']) assert.equal(await page.locator('#'+id).evaluate(el=>!!el.labels?.length),true);
+      }
+    });
+  }
+});

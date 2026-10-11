@@ -1,4 +1,4 @@
-using CevatBiyik.Web.Filters;
+﻿using CevatBiyik.Web.Filters;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CevatBiyik.Web.Controllers;
@@ -22,11 +22,12 @@ public abstract class PublicController : Controller
     protected static bool ValidPage(int page) => page is >= 1 and <= int.MaxValue / 12;
     protected static string Description(string? text, string fallback)
     {
-        if (string.IsNullOrWhiteSpace(text))
+        if (!CevatBiyik.Application.Validation.ContentPublication.Complete(text))
         {
             return fallback;
         }
 
+        text = CevatBiyik.Application.Validation.RichText.ToPlainText(text!);
         return text.Length > 160 ? text[..157] + "…" : text;
     }
 }

@@ -1,4 +1,4 @@
-using CevatBiyik.Application.Interfaces;
+﻿using CevatBiyik.Application.Interfaces;
 using CevatBiyik.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -55,6 +55,12 @@ public sealed class ArticlesController(IArticleService articles, IPracticeAreaSe
         ViewData["StructuredData"] = new[] { CevatBiyik.Web.Seo.SeoPresentation.Article(article, origin),
             CevatBiyik.Web.Seo.SeoPresentation.Breadcrumb(origin, "Makaleler", "/makaleler", article.Title, "/makaleler/" + Uri.EscapeDataString(article.Slug)) };
         ViewData["RelatedLocations"] = await locations.RelatedAsync(articleId: article.Id, ct: cancellationToken);
+        if (article.CategoryId.HasValue || article.PracticeAreaId.HasValue)
+        {
+            var related = await articles.SearchCmsPublishedAsync(null, article.PracticeAreaId, article.CategoryId, null, cancellationToken: cancellationToken);
+            ViewData["RelatedArticles"] = related.Items.Where(x => x.Id != article.Id).Take(3).ToArray();
+        }
+
         return View(article);
     }
 

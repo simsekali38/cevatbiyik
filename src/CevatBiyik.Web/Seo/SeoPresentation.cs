@@ -1,4 +1,4 @@
-using CevatBiyik.Application.DTOs;
+﻿using CevatBiyik.Application.DTOs;
 using CevatBiyik.Web.Models;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 namespace CevatBiyik.Web.Seo;
@@ -25,27 +25,27 @@ public static class SeoPresentation
             return;
         }
 
-        if (!string.IsNullOrWhiteSpace(seo.MetaTitle))
+        if (CevatBiyik.Application.Validation.ContentPublication.Complete(seo.MetaTitle))
         {
             data["SeoTitle"] = seo.MetaTitle;
         }
 
-        if (!string.IsNullOrWhiteSpace(seo.MetaDescription))
+        if (CevatBiyik.Application.Validation.ContentPublication.Complete(seo.MetaDescription))
         {
             data["MetaDescription"] = seo.MetaDescription;
         }
 
-        if (!string.IsNullOrWhiteSpace(seo.Keywords))
+        if (CevatBiyik.Application.Validation.ContentPublication.Complete(seo.Keywords))
         {
             data["Keywords"] = seo.Keywords;
         }
 
-        if (!string.IsNullOrWhiteSpace(seo.OpenGraphTitle))
+        if (CevatBiyik.Application.Validation.ContentPublication.Complete(seo.OpenGraphTitle))
         {
             data["OpenGraphTitle"] = seo.OpenGraphTitle;
         }
 
-        if (!string.IsNullOrWhiteSpace(seo.OpenGraphDescription))
+        if (CevatBiyik.Application.Validation.ContentPublication.Complete(seo.OpenGraphDescription))
         {
             data["OpenGraphDescription"] = seo.OpenGraphDescription;
         }
@@ -62,7 +62,8 @@ public static class SeoPresentation
         ["@context"] = "https://schema.org",
         ["@type"] = "Article",
         ["headline"] = article.Title,
-        ["description"] = article.Excerpt,
+        ["description"] = CevatBiyik.Application.Validation.ContentPublication.Complete(article.Excerpt)
+            ? CevatBiyik.Application.Validation.RichText.ToPlainText(article.Excerpt!) : null,
         ["datePublished"] = article.PublishedAt?.ToString("O"),
         ["dateModified"] = (article.UpdatedAt ?? article.CreatedAt).ToString("O"),
         ["mainEntityOfPage"] = origin + "/makaleler/" + Uri.EscapeDataString(article.Slug),
@@ -122,7 +123,7 @@ public static class SeoPresentation
         }
         return new Dictionary<string, object> { ["@context"] = "https://schema.org", ["@type"] = "Person",
             ["@id"] = Origin(configuration) + "/#person", ["name"] = "Av. Cevat Bıyık", ["url"] = Origin(configuration) + "/hakkimda",
-            ["description"] = profile.Biography, ["email"] = site.Email, ["telephone"] = site.Phone };
+            ["description"] = CevatBiyik.Application.Validation.RichText.ToPlainText(profile.Biography), ["email"] = site.Email, ["telephone"] = site.Phone };
     }
     public static bool ContactFactsComplete(PublicSiteSettings site)
     {

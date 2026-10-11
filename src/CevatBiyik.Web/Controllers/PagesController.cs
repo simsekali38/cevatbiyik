@@ -1,4 +1,4 @@
-using CevatBiyik.Application.Interfaces;
+﻿using CevatBiyik.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 namespace CevatBiyik.Web.Controllers;
 public sealed class PagesController(IPageContentService pages) : PublicController
@@ -12,7 +12,7 @@ public sealed class PagesController(IPageContentService pages) : PublicControlle
     private async Task<IActionResult> Render(string path, string title, CancellationToken ct)
     {
         var item = await pages.PublishedAsync(path, ct);
-        SetPage(item?.Title ?? title, title, path, item is null);
+        SetPage(item?.Title ?? title, Description(item?.Body, title), path, item is null);
         ViewData["FallbackTitle"] = title;
         return View("Detail", item);
     }

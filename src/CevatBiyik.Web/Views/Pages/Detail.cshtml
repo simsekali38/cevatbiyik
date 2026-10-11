@@ -1,6 +1,8 @@
 @model PageContentDto
-<section class="page-heading"><div class="container reading-width"><p class="eyebrow">BİLGİLENDİRME</p><h1>@(Model?.Title ?? ViewData["FallbackTitle"])</h1></div></section>
-<section class="section-pad"><div class="container reading-width">
+<div class="public-content-page legal-public">
+<header class="container reading-width content-heading"><nav class="content-breadcrumb" aria-label="İçerik yolu"><ol class="breadcrumb"><li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Ana sayfa</a></li><li class="breadcrumb-item active" aria-current="page">@(Model?.Title ?? ViewData["FallbackTitle"])</li></ol></nav><h1>@(Model?.Title ?? ViewData["FallbackTitle"])</h1></header>
+<section class="legal-content"><div class="container reading-width">
 @if (Model is null) { <div class="empty-state"><p>Bu sayfanın metni henüz yayımlanmamıştır.</p><p class="mb-0">CONTENT_REQUIRED</p></div> }
 else { <rich-content value="@Model.Body"></rich-content> }
 </div></section>
+</div>

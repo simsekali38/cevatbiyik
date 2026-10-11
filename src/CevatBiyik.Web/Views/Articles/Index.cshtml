@@ -1,11 +1,25 @@
 @model ArticleListViewModel
-<section class="page-heading"><div class="container"><p class="eyebrow">YAYINLAR</p><h1>Makaleler</h1><p>Yayımlanmış makaleleri inceleyin.</p></div></section>
-<section class="section-pad"><div class="container">
+@{
+    var totalPages = Math.Max(1L, (long)Math.Ceiling((decimal)Model.Result.TotalCount / Model.Result.PageSize));
+}
+<div class="articles-public">
+    <header class="page-heading">
+        <div class="container">
+            <nav aria-label="İçerik yolu">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Ana sayfa</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Makaleler</li>
+                </ol>
+            </nav>
+            <h1>Makaleler</h1>
+        </div>
+    </header>
+<section class="section-pad articles-results"><div class="container">
     <form method="post" asp-controller="Articles" asp-action="Search" asp-antiforgery="false" class="filter-form" role="search" aria-label="Makale arama">
         @Html.AntiForgeryToken()
         <div class="row g-3 align-items-end">
-            <div class="col-md-6"><label for="q" class="form-label">Makale ara</label><input type="search" id="q" name="q" class="form-control" maxlength="100" value="@Model.Search" placeholder="Başlık veya kısa açıklama" /></div>
-            <div class="col-md-4"><label for="category" class="form-label">Çalışma alanı</label><select id="category" name="category" class="form-select"><option value="">Tüm çalışma alanları</option>
+            <div class="col-md-12 col-lg-6"><label for="q" class="form-label">Makale ara</label><input type="search" id="q" name="q" class="form-control" maxlength="100" value="@Model.Search" placeholder="Başlık veya kısa açıklama" /></div>
+            <div class="col-md-6 col-lg-6"><label for="category" class="form-label">Çalışma alanı</label><select id="category" name="category" class="form-select"><option value="">Tüm çalışma alanları</option>
                 @if (Model.Category.HasValue && !Model.Categories.Items.Any(x => x.Id == Model.Category)) { <option value="@Model.Category" selected>Seçili çalışma alanı</option> }
                 @foreach (var category in Model.Categories.Items) { <option value="@category.Id" selected="@(Model.Category == category.Id)">@category.Name</option> }
             </select><input type="hidden" name="categoryPage" value="@Model.CategoryPage" /></div>
@@ -20,13 +34,52 @@
         </nav>
     }
     <nav class="filter-pages" aria-label="Kategori ve etiket seçenekleri">@if(Model.MetadataPage > 1){<a asp-action="Index" asp-route-metadataPage="@(Model.MetadataPage - 1)" asp-route-q="@Model.Search" asp-route-category="@Model.Category" asp-route-topic="@Model.Topic" asp-route-tag="@Model.Tag">Önceki seçenekler</a>}@if(Model.Topics.Count == 20 || Model.Labels.Count == 20){<a asp-action="Index" asp-route-metadataPage="@(Model.MetadataPage + 1)" asp-route-q="@Model.Search" asp-route-category="@Model.Category" asp-route-topic="@Model.Topic" asp-route-tag="@Model.Tag">Diğer seçenekler</a>}</nav><p class="result-count">@Model.Result.TotalCount makale</p>
-    @if (Model.Result.Items.Count == 0) { <div class="empty-state"><h2>Makale bulunamadı</h2><p>Henüz yayımlanmış makale bulunmuyor veya aramanızla eşleşen bir sonuç yok.</p><a asp-action="Index">Filtreleri temizle</a></div> }
+    @if (Model.Result.Items.Count == 0) { <div class="empty-state"><h2>Makale bulunamadı</h2><a asp-action="Index">Filtreleri temizle</a></div> }
     else
     {
-        <div class="row g-4">@foreach (var article in Model.Result.Items) { <div class="col-md-6 col-lg-4"><article class="content-card h-100">@if(article.Cover is { } cover){<img src="@cover.Url" alt="@cover.AltText" width="@cover.Width" height="@cover.Height" class="card-cover" loading="lazy" decoding="async" />}<p class="eyebrow"><time datetime="@article.PublishedAt?.ToString("yyyy-MM-dd")">@article.PublishedAt?.ToString("dd.MM.yyyy")</time></p><h2><a asp-action="Detail" asp-route-slug="@article.Slug">@article.Title</a></h2><p>@article.Excerpt</p><a class="text-link" asp-action="Detail" asp-route-slug="@article.Slug">Makaleyi oku <span class="visually-hidden">: @article.Title</span><span aria-hidden="true">↗</span></a></article></div> }</div>
+        <div class="row g-4 article-grid">
+            @foreach (var article in Model.Result.Items)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <article class="content-card article-card h-100">
+                        @if (article.Cover is { } cover)
+                        {
+                            <img src="@cover.Url" alt="@cover.AltText" width="@cover.Width" height="@cover.Height" class="card-cover" loading="lazy" decoding="async" />
+                        }
+                        <div class="article-card-body">
+                            @if (CevatBiyik.Application.Validation.ContentPublication.Complete(article.CategoryName))
+                            {
+                                <a class="article-category" asp-action="Index" asp-route-topic="@article.CategoryId">@article.CategoryName</a>
+                            }
+                            <h2><a asp-action="Detail" asp-route-slug="@article.Slug">@article.Title</a></h2>
+                            @if (CevatBiyik.Application.Validation.ContentPublication.Complete(article.Excerpt))
+                            {
+                                <p>@article.Excerpt</p>
+                            }
+                            <div class="article-card-footer">
+                                <time datetime="@article.PublishedAt?.ToString("yyyy-MM-dd")">@article.PublishedAt?.ToString("dd.MM.yyyy")</time>
+                                <a class="text-link" asp-action="Detail" asp-route-slug="@article.Slug">Makaleyi oku <span class="visually-hidden">: @article.Title</span><span aria-hidden="true">↗</span></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            }
+        </div>
     }
-    <nav class="page-links" aria-label="Makale sayfaları"><span>Sayfa @Model.Result.Page</span>
+    <nav class="page-links" aria-label="Makale sayfaları"><span class="visually-hidden">Sayfa @Model.Result.Page</span>
+        @for (var number = Math.Max(1L, Model.Result.Page - 2L); number <= Math.Min(totalPages, Model.Result.Page + 2L); number++)
+        {
+            @if (number == Model.Result.Page)
+            {
+                <span class="article-current-page" aria-current="page">@number</span>
+            }
+            else
+            {
+                <a class="btn btn-outline-primary" aria-label="Sayfa @number" asp-action="Index" asp-route-page="@number" asp-route-q="@Model.Search" asp-route-category="@Model.Category" asp-route-categoryPage="@Model.CategoryPage" asp-route-topic="@Model.Topic" asp-route-tag="@Model.Tag" asp-route-metadataPage="@Model.MetadataPage">@number</a>
+            }
+        }
         @if (Model.Result.HasPrevious) { <a class="btn btn-outline-primary" asp-action="Index" asp-route-page="@(Model.Result.Page - 1)" asp-route-q="@Model.Search" asp-route-category="@Model.Category" asp-route-categoryPage="@Model.CategoryPage" asp-route-topic="@Model.Topic" asp-route-tag="@Model.Tag" asp-route-metadataPage="@Model.MetadataPage">Önceki sayfa</a> }
         @if (Model.Result.HasNext) { <a class="btn btn-outline-primary" asp-action="Index" asp-route-page="@(Model.Result.Page + 1)" asp-route-q="@Model.Search" asp-route-category="@Model.Category" asp-route-categoryPage="@Model.CategoryPage" asp-route-topic="@Model.Topic" asp-route-tag="@Model.Tag" asp-route-metadataPage="@Model.MetadataPage">Sonraki sayfa</a> }
     </nav>
 </div></section>
+</div>
