@@ -1,5 +1,14 @@
 # Plesk Deployment
 
+## Phase 17 launch operations
+
+Use [FINAL_LAUNCH_RUNBOOK](docs/deployment/FINAL_LAUNCH_RUNBOOK.md),
+[LIVE_SMOKE_CHECKLIST](docs/deployment/LIVE_SMOKE_CHECKLIST.md),
+[ROLLBACK_MONITORING](docs/deployment/ROLLBACK_MONITORING.md) and
+[RESTORE_DRILL_RECORD](docs/deployment/RESTORE_DRILL_RECORD.md).
+These are operator templates; actual launch remains NO-GO until production evidence
+and owner GO are recorded. Documentation verification: [PHASE_17_REVIEW](docs/qa/PHASE_17_REVIEW.md).
+
 ## Phase 15 current procedure
 
 Follow [PRODUCTION_RUNBOOK](docs/deployment/PRODUCTION_RUNBOOK.md) and

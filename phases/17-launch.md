@@ -4,6 +4,15 @@
 
 Final launch checklist, monitoring, backup/restore verification and post-launch documentation.
 
+## Current status — 2026-10-11
+
+Owner requested documentation/templates only. Final launch runbook, live smoke
+checklist, rollback/monitoring and restore evidence guidance prepared under
+docs/deployment/. No deployment, rotation, migration apply, restore or external
+notification performed. Production remains NO-GO pending real evidence/owner GO.
+See docs/qa/PHASE_17_REVIEW.md. Owner approved closure of the requested
+documentation/templates scope (2026-10-11); actual production launch remains pending.
+
 ## Mandatory process
 
 1. Read `AGENTS.md`.

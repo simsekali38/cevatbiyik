@@ -1,9 +1,9 @@
 # Phase Order
 
-Completed phases: 00–16 (owner-approved closure). Database rollout execution and Plesk validation are not implied by code acceptance.
+Completed phases: 00–17 (owner-approved closure; Phase 17 documentation/templates scope). Database rollout execution and Plesk validation are not implied by code acceptance.
 Phase 07 closure and commit approved by the owner; dedicated MySQL/Plesk checks remain rollout gates.
-Phase 08 implemented/locally verified; owner closure approved (2026-10-10). Phase 09 implemented/locally verified, owner closure approved (2026-10-10). Phase 10 implemented/locally verified, owner closure approved (2026-10-10). Phase 11 implemented/locally verified; owner closure approved. Phase 12 owner closure approved (2026-10-10); SH-12-01 remains an unresolved production blocker. Remaining later phases: 16–17.
-Phase 13 implemented / locally verified (2026-10-11); owner closure approved (2026-10-11). Hosted MariaDB compatibility passed; genuine MySQL8 pending. Phase 14 implemented / locally measured and regression verified; owner closure approved (2026-10-11). Phase 15 owner closure approved (2026-10-11); local preparation verified, real hosting exit gates carried into Phase 16. Phase 16 local audit verified with production evidence gates open; later unstarted phase: 17.
+Phase 08 implemented/locally verified; owner closure approved (2026-10-10). Phase 09 implemented/locally verified, owner closure approved (2026-10-10). Phase 10 implemented/locally verified, owner closure approved (2026-10-10). Phase 11 implemented/locally verified; owner closure approved. Phase 12 owner closure approved (2026-10-10); SH-12-01 remains an unresolved production blocker. No further numbered phase in the manifest; actual production operations remain pending.
+Phase 13 implemented / locally verified (2026-10-11); owner closure approved (2026-10-11). Hosted MariaDB compatibility passed; genuine MySQL8 pending. Phase 14 implemented / locally measured and regression verified; owner closure approved (2026-10-11). Phase 15 owner closure approved (2026-10-11); local preparation verified, real hosting exit gates carried into Phase 16. Phase 16 owner closure approved; production evidence gates remain open. Phase 17 documentation/templates closure owner-approved; actual launch not performed.
 Numbering is unique; see ADR-016/018/019/020/021/022/023/024/025/026.
 
 | Phase | Guide | Status |
@@ -25,7 +25,7 @@ Numbering is unique; see ADR-016/018/019/020/021/022/023/024/025/026.
 | 14 | [14-performance-accessibility.md](14-performance-accessibility.md) | Implemented / measured; owner closure approved (2026-10-11); field CWV and complete assistive-technology audit are rollout gates |
 | 15 | [15-plesk-deployment.md](15-plesk-deployment.md) | Owner closure approved (2026-10-11); local preparation verified; Plesk/rotation/migration/restore and support/TLS gates carried into Phase 16 |
 | 16 | [16-production-audit.md](16-production-audit.md) | Owner closure approved (2026-10-11); local audit verified; open production gates carried into Phase 17; launch remains NO-GO |
-| 17 | [17-launch.md](17-launch.md) | Pending |
+| 17 | [17-launch.md](17-launch.md) | Owner closure approved (2026-10-11) for documentation/templates; actual launch not performed; NO-GO pending production evidence |
 
 Phase 08 covers remaining profile/page-content/FAQ CMS and FAQ/legal/location/public-site completion (ADR-019).
 Phase 07 retains document/private-file, retention/recovery and hosting checks; Phase 09 retains redirects/broader SEO/indexing review.

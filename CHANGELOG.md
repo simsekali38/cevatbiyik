@@ -4,6 +4,17 @@ All notable project changes should be recorded here.
 
 ## [Unreleased]
 
+### Phase 17 — final launch operational templates (2026-10-11)
+- Owner-approved closure and commit for requested documentation/templates scope;
+  actual production launch and operational evidence remain pending.
+- Added FINAL_LAUNCH_RUNBOOK, LIVE_SMOKE_CHECKLIST and ROLLBACK_MONITORING under
+  docs/deployment; preserved ADR-032 server-owned config and separate migration identity.
+- Extended RESTORE_DRILL_RECORD with UTC timeline, RPO/RTO calculation, explicitly
+  synthetic example, per-component hash/count reconciliation and private evidence rules.
+- Added Phase 17 review and updated guide/order links; no runtime/schema/dependency change.
+- Documentation-only scope: no live deploy, credential rotation, DB migration apply,
+  restore, monitoring setup or external notification. Production remains NO-GO.
+
 ### Phase 16 — production readiness audit (2026-10-11)
 - Owner-approved closure and commit; open production gates carried into Phase 17
   pre-launch checks without claiming rotation, hosting or restore completion.

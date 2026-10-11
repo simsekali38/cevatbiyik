@@ -5,6 +5,11 @@ parola rotasyonu, üretim migration ve restore drill yapılmadan “üretime haz
 verilmez. Phase 16 denetimi ve Phase 17 yayın kararı ayrıdır. Sunucu yolu, pool kimliği,
 Windows/IIS sürümü, backup saklama süresi ve RPO/RTO: **CONTENT_REQUIRED**.
 
+Phase 17 operasyon akışı: [Final launch rehberi](FINAL_LAUNCH_RUNBOOK.md),
+[Canlı smoke checklist](LIVE_SMOKE_CHECKLIST.md), [Rollback/izleme](ROLLBACK_MONITORING.md)
+ve [Restore kayıt örneği](RESTORE_DRILL_RECORD.md). Bunlar hazırlanmış şablonlardır;
+gerçek operasyonun yapıldığı anlamına gelmez.
+
 ## 1. Runtime, veritabanı ve yayın kapıları
 
 - .NET 8 Hosting Bundle + ASP.NET Core Module V2, x64 Windows Server/IIS gerekir.
