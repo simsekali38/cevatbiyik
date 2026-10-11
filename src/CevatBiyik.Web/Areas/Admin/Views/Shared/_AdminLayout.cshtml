@@ -15,12 +15,15 @@
     <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" /><title>@ViewData["Title"] | Yönetim</title>
     <link rel="stylesheet" href="~/lib/bootstrap/bootstrap.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lib/quill/quill.core.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    @if (ViewData["UseRichEditor"] is true)
+    {
+        <link rel="stylesheet" href="~/lib/quill/quill.core.css" asp-append-version="true" />
+        <script src="~/lib/quill/quill.js" asp-append-version="true" defer></script>
+    }
+    <link rel="stylesheet" href="~/css/admin.min.css" asp-append-version="true" />
     <script src="~/lib/bootstrap/bootstrap.bundle.min.js" asp-append-version="true" defer></script>
-    <script src="~/lib/quill/quill.js" asp-append-version="true" defer></script>
-    <script src="~/js/admin.js" asp-append-version="true" defer></script>
+    <script src="~/js/admin.min.js" asp-append-version="true" defer></script>
 </head>
 <body class="admin-body admin-no-js @(signedIn ? "" : "admin-auth")">
     <a class="skip-link" href="#icerik">Ana içeriğe geç</a>

@@ -1,5 +1,39 @@
 # Architecture Decision Records
 
+## ADR-030 — Measured asset delivery and request-scoped public snapshots
+
+Status: Implemented (2026-10-11, Phase 14); verification in docs/qa/PHASE_14_REVIEW.md.
+
+Keep SSR/MVC, .NET 8, the existing Bootstrap/navy-gold design and strict per-response CSP nonce.
+Use built-in ASP.NET Core Brotli/Gzip only for public CSS/JS/SVG MIME types over HTTPS;
+HTML and private/dynamic payloads are excluded to avoid compression of CSRF/session secrets.
+Verify the IIS/Plesk upstream follows the same restriction at deployment (Phase 15).
+
+Fingerprint-qualified static files receive one-year immutable caching only when MVC's actual
+content hash matches the single v query parameter. GUID WebP uploads are immutable by storage
+contract; unversioned/forged fingerprints receive one-hour must-revalidate caching. Retain ETag/304,
+Vary and security/rate-limit/error gates. All HTML is no-store. Do not enable full-page OutputCache
+or ResponseCaching: shared HTML can carry antiforgery/consent/TempData and nonce-bound scripts;
+safe invalidation and user partitioning would add complexity without evidence of need.
+
+PageContentService, ProfileService and SettingService remain scoped. Reuse immutable public DTO
+snapshots within that scope only (including missing profile), invalidate after successful writes,
+and respect cancellation. No cross-request legal/consent staleness, cached EF entities or tracking
+changes. Public repository reads already use AsNoTracking and bounded split eager loading;
+regression proves one/ten articles both use two SQL reads. Keep tracked mutation reads unchanged.
+
+Generate and commit application minified assets with pinned build-only CleanCSS 5.3.3 / Terser
+5.51.2; Node is not a hosting requirement. Load self-hosted Quill only on six rich-edit views.
+Keep system fonts; reserve image dimensions, prioritize article-detail covers and lazy-load list
+covers/footer emblem. Do not asynchronously hide blocking CSS or purge Bootstrap without coverage.
+
+Pinned Lighthouse 13.5.0 and axe-core/playwright 4.13.0 are dev-only measurement dependencies.
+Use fixed loopback HTTPS/SQLite synthetic fixture; never send private pages to remote audit tools.
+Record three-run mobile medians and AA automated/manual/keyboard evidence separately. Passing
+lab thresholds/zero axe violations is not field INP/CrUX certification or a full WCAG conformance
+statement. Follow-up real-content, real-hosting and assistive-technology audits remain rollout gates.
+No schema change, production config change, external analytics activation or secret remediation.
+
 ## ADR-029 — Allowlisted rich CMS content and progressive admin UX
 
 Status: Implemented (2026-10-11, owner-requested UX follow-up; owner explicitly chose rich text and safe HTML).

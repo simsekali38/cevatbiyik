@@ -19,6 +19,6 @@
     </section>
     @if (choice == true)
     {
-        <script src="~/js/analytics.js" asp-append-version="true" nonce="@Context.Items["CspNonce"]" data-provider="@(Analytics.GtmId is null or "" ? "ga4" : "gtm")" data-id="@(Analytics.GtmId is null or "" ? Analytics.Ga4Id : Analytics.GtmId)" data-contact-recorded="@(contactRecorded ? "true" : "false")" defer></script>
+        <script src="~/js/analytics.min.js" asp-append-version="true" nonce="@Context.Items["CspNonce"]" data-provider="@(Analytics.GtmId is null or "" ? "ga4" : "gtm")" data-id="@(Analytics.GtmId is null or "" ? Analytics.Ga4Id : Analytics.GtmId)" data-contact-recorded="@(contactRecorded ? "true" : "false")" defer></script>
     }
 }

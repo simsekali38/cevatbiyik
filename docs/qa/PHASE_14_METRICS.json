@@ -1,0 +1,460 @@
+{
+  "recordedAt": "2026-10-11T17:05:50.802Z",
+  "environment": "Loopback HTTPS synthetic fixture; simulated mobile; no field INP",
+  "lighthouseVersion": "13.5.0",
+  "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+  "throttling": {
+    "rttMs": 150,
+    "throughputKbps": 1638.4,
+    "requestLatencyMs": 562.5,
+    "downloadThroughputKbps": 1474.5600000000002,
+    "uploadThroughputKbps": 675,
+    "cpuSlowdownMultiplier": 4
+  },
+  "screenEmulation": {
+    "mobile": true,
+    "width": 412,
+    "height": 823,
+    "deviceScaleFactor": 1.75,
+    "disabled": false
+  },
+  "baseline": [
+    {
+      "path": "/",
+      "runs": [
+        {
+          "performance": 95,
+          "accessibility": 100,
+          "lcp": 2505,
+          "cls": 0,
+          "tbt": 0,
+          "bytes": 345537,
+          "fcp": 2130
+        },
+        {
+          "performance": 96,
+          "accessibility": 100,
+          "lcp": 2476.4431,
+          "cls": 0,
+          "tbt": 0,
+          "bytes": 339913,
+          "fcp": 2101.4431
+        },
+        {
+          "performance": 96,
+          "accessibility": 100,
+          "lcp": 2476.4318,
+          "cls": 0,
+          "tbt": 0,
+          "bytes": 339421,
+          "fcp": 2101.4318
+        }
+      ],
+      "median": {
+        "performance": 96,
+        "accessibility": 100,
+        "lcp": 2476.4431,
+        "cls": 0,
+        "tbt": 0,
+        "bytes": 339913,
+        "fcp": 2101.4431
+      }
+    },
+    {
+      "path": "/makaleler",
+      "runs": [
+        {
+          "performance": 95,
+          "accessibility": 100,
+          "lcp": 2633.1558999999997,
+          "cls": 0,
+          "tbt": 15.5,
+          "bytes": 339509,
+          "fcp": 2102.1558999999997
+        },
+        {
+          "performance": 95,
+          "accessibility": 100,
+          "lcp": 2627.0906,
+          "cls": 0,
+          "tbt": 13,
+          "bytes": 339284,
+          "fcp": 2101.0906
+        },
+        {
+          "performance": 95,
+          "accessibility": 100,
+          "lcp": 2631.4935,
+          "cls": 0,
+          "tbt": 15,
+          "bytes": 339495,
+          "fcp": 2101.4935
+        }
+      ],
+      "median": {
+        "performance": 95,
+        "accessibility": 100,
+        "lcp": 2631.4935,
+        "cls": 0,
+        "tbt": 15,
+        "bytes": 339495,
+        "fcp": 2101.4935
+      }
+    },
+    {
+      "path": "/makaleler/test-browser",
+      "runs": [
+        {
+          "performance": 96,
+          "accessibility": 100,
+          "lcp": 2476.4051,
+          "cls": 0,
+          "tbt": 0,
+          "bytes": 338076,
+          "fcp": 2101.4051
+        },
+        {
+          "performance": 96,
+          "accessibility": 100,
+          "lcp": 2476.2147999999997,
+          "cls": 0,
+          "tbt": 0,
+          "bytes": 338506,
+          "fcp": 2101.2147999999997
+        },
+        {
+          "performance": 96,
+          "accessibility": 100,
+          "lcp": 2477.4088,
+          "cls": 0,
+          "tbt": 0,
+          "bytes": 338316,
+          "fcp": 2102.4088
+        }
+      ],
+      "median": {
+        "performance": 96,
+        "accessibility": 100,
+        "lcp": 2476.4051,
+        "cls": 0,
+        "tbt": 0,
+        "bytes": 338316,
+        "fcp": 2101.4051
+      }
+    },
+    {
+      "path": "/iletisim",
+      "runs": [
+        {
+          "performance": 96,
+          "accessibility": 100,
+          "lcp": 2476.4475,
+          "cls": 0,
+          "tbt": 0,
+          "bytes": 341732,
+          "fcp": 2101.4475
+        },
+        {
+          "performance": 95,
+          "accessibility": 100,
+          "lcp": 2554.3985000000002,
+          "cls": 0,
+          "tbt": 14,
+          "bytes": 341528,
+          "fcp": 2101.3985000000002
+        },
+        {
+          "performance": 96,
+          "accessibility": 100,
+          "lcp": 2476.4049999999997,
+          "cls": 0,
+          "tbt": 0,
+          "bytes": 341974,
+          "fcp": 2101.4049999999997
+        }
+      ],
+      "median": {
+        "performance": 96,
+        "accessibility": 100,
+        "lcp": 2476.4475,
+        "cls": 0,
+        "tbt": 0,
+        "bytes": 341732,
+        "fcp": 2101.4049999999997
+      }
+    }
+  ],
+  "after": [
+    {
+      "path": "/",
+      "runs": [
+        {
+          "performance": 100,
+          "accessibility": 100,
+          "lcp": 1351.502,
+          "cls": 0,
+          "tbt": 0,
+          "bytes": 102165,
+          "fcp": 1051.502
+        },
+        {
+          "performance": 100,
+          "accessibility": 100,
+          "lcp": 1280.5014,
+          "cls": 0,
+          "tbt": 0,
+          "bytes": 96145,
+          "fcp": 1055.5014
+        },
+        {
+          "performance": 100,
+          "accessibility": 100,
+          "lcp": 1276.5946,
+          "cls": 0,
+          "tbt": 0,
+          "bytes": 96137,
+          "fcp": 1051.5946
+        }
+      ],
+      "median": {
+        "performance": 100,
+        "accessibility": 100,
+        "lcp": 1280.5014,
+        "cls": 0,
+        "tbt": 0,
+        "bytes": 96145,
+        "fcp": 1051.5946
+      }
+    },
+    {
+      "path": "/makaleler",
+      "runs": [
+        {
+          "performance": 100,
+          "accessibility": 100,
+          "lcp": 1351.6219999999998,
+          "cls": 0,
+          "tbt": 0,
+          "bytes": 95974,
+          "fcp": 1051.6219999999998
+        },
+        {
+          "performance": 100,
+          "accessibility": 100,
+          "lcp": 1351.676,
+          "cls": 0,
+          "tbt": 0,
+          "bytes": 95903,
+          "fcp": 1051.676
+        },
+        {
+          "performance": 100,
+          "accessibility": 100,
+          "lcp": 1351.6026000000002,
+          "cls": 0,
+          "tbt": 0,
+          "bytes": 95950,
+          "fcp": 1051.6026000000002
+        }
+      ],
+      "median": {
+        "performance": 100,
+        "accessibility": 100,
+        "lcp": 1351.6219999999998,
+        "cls": 0,
+        "tbt": 0,
+        "bytes": 95950,
+        "fcp": 1051.6219999999998
+      }
+    },
+    {
+      "path": "/makaleler/test-browser",
+      "runs": [
+        {
+          "performance": 100,
+          "accessibility": 100,
+          "lcp": 1276.2041,
+          "cls": 0,
+          "tbt": 0,
+          "bytes": 94669,
+          "fcp": 1051.2041
+        },
+        {
+          "performance": 100,
+          "accessibility": 100,
+          "lcp": 1276.3071,
+          "cls": 0,
+          "tbt": 0,
+          "bytes": 95014,
+          "fcp": 1051.3071
+        },
+        {
+          "performance": 100,
+          "accessibility": 100,
+          "lcp": 1277.2056,
+          "cls": 0,
+          "tbt": 0,
+          "bytes": 94840,
+          "fcp": 1052.2056
+        }
+      ],
+      "median": {
+        "performance": 100,
+        "accessibility": 100,
+        "lcp": 1276.3071,
+        "cls": 0,
+        "tbt": 0,
+        "bytes": 94840,
+        "fcp": 1051.3071
+      }
+    },
+    {
+      "path": "/iletisim",
+      "runs": [
+        {
+          "performance": 100,
+          "accessibility": 100,
+          "lcp": 1276.7494000000002,
+          "cls": 0,
+          "tbt": 0,
+          "bytes": 98453,
+          "fcp": 1051.7494000000002
+        },
+        {
+          "performance": 100,
+          "accessibility": 100,
+          "lcp": 1275.6972,
+          "cls": 0,
+          "tbt": 0,
+          "bytes": 98188,
+          "fcp": 1050.6972
+        },
+        {
+          "performance": 100,
+          "accessibility": 100,
+          "lcp": 1355.8596,
+          "cls": 0,
+          "tbt": 14.5,
+          "bytes": 98239,
+          "fcp": 1051.8596
+        }
+      ],
+      "median": {
+        "performance": 100,
+        "accessibility": 100,
+        "lcp": 1276.7494000000002,
+        "cls": 0,
+        "tbt": 0,
+        "bytes": 98239,
+        "fcp": 1051.7494000000002
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "path": "/",
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/hakkimda",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/makaleler",
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/makaleler/test-browser",
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/uzmanlik-alanlari",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/uzmanlik-alanlari/test-area",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/sss",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/iletisim",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/kvkk",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/cerez-politikasi",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/yasal-uyari",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/konumlar",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/admin/login",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/admin",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/admin/articles/create",
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ]
+    },
+    {
+      "path": "/admin/profile",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/admin/faq",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/admin/media",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/admin/settings",
+      "violations": [],
+      "incomplete": [
+        "th-has-data-cells"
+      ]
+    }
+  ]
+}

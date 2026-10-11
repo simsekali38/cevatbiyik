@@ -1,5 +1,5 @@
 @model ProfileInput
-@{ ViewData["Title"] = "Profil yönetimi"; }
+@{ ViewData["UseRichEditor"] = true; ViewData["Title"] = "Profil yönetimi"; }
 <h1>Profil yönetimi</h1><p>Yalnızca doğrulanmış biyografi, vizyon ve baro adı girin. T.C. kimlik veya sicil numarası eklemeyin. Her düzenlemede yayımlama onayı yeniden işaretlenmelidir.</p>
 <form data-admin-form asp-action="Save" method="post" asp-antiforgery="false">
 @Html.AntiForgeryToken()@if (!ViewData.ModelState.IsValid) { <div asp-validation-summary="All" class="validation-summary-errors" role="alert"></div> }

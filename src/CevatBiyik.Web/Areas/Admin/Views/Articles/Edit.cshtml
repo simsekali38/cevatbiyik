@@ -1,5 +1,5 @@
 @model CreateArticleDto
-@{ ViewData["Title"] = "Makale düzenle"; }
+@{ ViewData["UseRichEditor"] = true; ViewData["Title"] = "Makale düzenle"; }
 <h1>Makale düzenle</h1><p>İçeriği aşağıdaki editörle biçimlendirin. Görselleri medya kütüphanesinden kapak olarak seçin. Taslak için yayın kutusunu kapalı bırakın. Başlık değişince mevcut URL korunur.</p>
 <form data-admin-form asp-action="Save" asp-route-id="@ViewData["EntityId"]" method="post" asp-antiforgery="false">
 @Html.AntiForgeryToken()@if (!ViewData.ModelState.IsValid) { <div asp-validation-summary="All" class="validation-summary-errors" role="alert"></div> }

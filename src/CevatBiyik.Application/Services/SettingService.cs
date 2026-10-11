@@ -9,6 +9,7 @@ namespace CevatBiyik.Application.Services;
 
 public sealed class SettingService(IRepository<SiteSetting> settings, IValidator<UpdateSiteSettingDto> validator) : ISettingService
 {
+    private IReadOnlyList<SiteSettingDto>? publicSnapshot;
     public async Task<SiteSettingDto?> GetAsync(long id, CancellationToken cancellationToken = default)
     {
         var entity = await settings.FindAsync(id, cancellationToken);
@@ -28,16 +29,20 @@ public sealed class SettingService(IRepository<SiteSetting> settings, IValidator
         var entity = new SiteSetting { Key = input.Key, Value = input.Value.Trim(), IsActive = input.IsActive };
         settings.Add(entity);
         await settings.SaveAsync(cancellationToken);
+        publicSnapshot = null;
         return Map(entity);
     }
 
     public async Task<IReadOnlyList<SiteSettingDto>> ListPublicAsync(CancellationToken cancellationToken = default)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+        if (publicSnapshot is not null) { return publicSnapshot; }
         var keys = PublicSettingKeys.All.ToArray();
         var rows = await settings.ListAsync(x => x.IsActive && keys.Contains(x.Key) && x.Value != "CONTENT_REQUIRED",
             1, 100, cancellationToken);
         // A second ordinal allowlist check protects against permissive DB collation and legacy rows.
-        return rows.Where(x => PublicSettingKeys.All.Contains(x.Key)).Select(Map).ToArray();
+        publicSnapshot = Array.AsReadOnly(rows.Where(x => PublicSettingKeys.All.Contains(x.Key)).Select(Map).ToArray());
+        return publicSnapshot;
     }
 
     public async Task<SiteSettingDto> UpdateAsync(long id, UpdateSiteSettingDto input, CancellationToken cancellationToken = default)
@@ -49,10 +54,15 @@ public sealed class SettingService(IRepository<SiteSetting> settings, IValidator
         entity.Value = input.Value.Trim();
         entity.IsActive = input.IsActive;
         await settings.SaveAsync(cancellationToken);
+        publicSnapshot = null;
         return Map(entity);
     }
 
-    public Task DeleteAsync(long id, CancellationToken cancellationToken = default) => ServiceRules.DeleteAsync(settings, id, cancellationToken);
+    public async Task DeleteAsync(long id, CancellationToken cancellationToken = default)
+    {
+        await ServiceRules.DeleteAsync(settings, id, cancellationToken);
+        publicSnapshot = null;
+    }
 
     private async Task CheckKeyAsync(string key, long id, CancellationToken cancellationToken)
     {

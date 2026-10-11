@@ -27,7 +27,7 @@ public sealed class SecurityHeadersMiddleware(RequestDelegate next, IConfigurati
             {
                 context.Response.Headers["X-Robots-Tag"] = "noindex, nofollow";
             }
-            if ((isAdmin || context.Response.StatusCode >= 400)
+            if ((isAdmin || context.Response.StatusCode >= 400 || context.Response.ContentType?.StartsWith("text/html", StringComparison.OrdinalIgnoreCase) == true)
                 && !context.Response.Headers.CacheControl.ToString().Contains("no-store", StringComparison.Ordinal))
             {
                 context.Response.Headers.CacheControl = "no-store";

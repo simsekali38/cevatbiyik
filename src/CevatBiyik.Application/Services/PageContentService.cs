@@ -7,11 +7,17 @@ using FluentValidation;
 namespace CevatBiyik.Application.Services;
 public sealed class PageContentService(IRepository<PageContent> pages) : IPageContentService
 {
+    // The service is scoped: reuse one reviewed snapshot within a request, never across visitors.
+    private IReadOnlyList<PageContentDto>? publicSnapshot;
     public async Task<IReadOnlyList<PageContentDto>> ListAsync(bool publicOnly = false, CancellationToken ct = default)
     {
+        ct.ThrowIfCancellationRequested();
+        if (publicOnly && publicSnapshot is not null) { return publicSnapshot; }
         var paths = ContentPublication.Pages.Keys.ToArray();
         var rows = await pages.ListAsync(x => paths.Contains(x.Path) && (!publicOnly || (x.IsActive && x.IsReviewed)), 1, 10, ct);
-        return rows.Where(x => ContentPublication.Pages.ContainsKey(x.Path) && (!publicOnly || ContentPublication.Complete(x.Title, x.Body))).Select(Map).ToArray();
+        var result = rows.Where(x => ContentPublication.Pages.ContainsKey(x.Path) && (!publicOnly || ContentPublication.Complete(x.Title, x.Body))).Select(Map).ToArray();
+        if (publicOnly) { publicSnapshot = Array.AsReadOnly(result); }
+        return publicOnly ? publicSnapshot! : result;
     }
     public async Task<PageContentDto?> GetAsync(long id, CancellationToken ct = default)
     { var item = await pages.FindAsync(id, ct); return item is null ? null : Map(item); }
@@ -22,8 +28,7 @@ public sealed class PageContentService(IRepository<PageContent> pages) : IPageCo
             return null;
         }
 
-        var rows = await pages.ListAsync(x => x.Path == path && x.IsActive && x.IsReviewed, 1, 1, ct);
-        return rows.Count == 0 || !ContentPublication.Complete(rows[0].Title, rows[0].Body) ? null : Map(rows[0]);
+        return (await ListAsync(true, ct)).SingleOrDefault(x => x.Path == path);
     }
     public async Task SaveAsync(long? id, PageContentInput input, CancellationToken ct = default)
     {
@@ -46,8 +51,9 @@ public sealed class PageContentService(IRepository<PageContent> pages) : IPageCo
         }
 
         await pages.SaveAsync(ct);
+        publicSnapshot = null;
     }
     public async Task DisableAsync(long id, CancellationToken ct = default)
-    { var item = await ServiceRules.RequireAsync(pages, id, ct); item.IsActive = false; await pages.SaveAsync(ct); }
+    { var item = await ServiceRules.RequireAsync(pages, id, ct); item.IsActive = false; await pages.SaveAsync(ct); publicSnapshot = null; }
     private static PageContentDto Map(PageContent x) => new(x.Id, x.Path, x.Title, x.Body, x.IsActive, x.IsReviewed, x.UpdatedAt);
 }

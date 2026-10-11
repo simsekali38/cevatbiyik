@@ -4,6 +4,22 @@ All notable project changes should be recorded here.
 
 ## [Unreleased]
 
+### Phase 14 — measured performance and accessibility (2026-10-11)
+- Static CSS/JS/SVG Brotli/Gzip, verified fingerprint caching and ETag/304; HTML no-store,
+  no shared OutputCache/ResponseCaching and no HTML compression (ADR-030).
+- Deterministic minified application assets, conditional CMS editor loading, cover priority/
+  footer lazy loading and request-scoped reviewed page/profile/public-setting snapshots.
+- Fixed Quill format reads stealing keyboard focus; sticky-header scroll margins and explicit
+  modal Tab/Shift+Tab cycling with native Escape/focus return.
+- Local mobile Lighthouse before/after: four routes, three runs each; performance 95–96 ->100,
+  LCP medians 2.48–2.63 s ->1.28–1.35 s, transfer 71–72% lower, CLS 0.
+- Added scoped invalidation/cancellation, fixed EF query budget, compression/cache/nonce/image
+  tests and axe/keyboard/reflow/dialog/forced-colors browser checks. Measurement commands and
+  limitations are in docs/performance/MEASUREMENT_GUIDE.md and docs/qa/PHASE_14_REVIEW.md.
+- Verification: 407 .NET tests (10 hosted persistence included), 6 analytics JS + 10 Playwright,
+  8 scanner self-tests; Release 0 errors/warnings, npm audit clean. One empty-schema migration skip.
+- No migration or production config changes; SH-12-01 remains open. Owner closure/commit approved (2026-10-11).
+
 ### UX/UI and safe rich content (2026-10-11)
 - Grouped responsive admin navigation, dashboard cards, split article editing, inline validation,
   save/dirty feedback, current-page list filtering, explicit deletion and upload feedback.

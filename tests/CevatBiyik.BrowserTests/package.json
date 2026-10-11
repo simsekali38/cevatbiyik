@@ -1,6 +1,15 @@
 {
   "name": "cevat-biyik-browser-tests",
   "private": true,
-  "scripts": { "test": "node --test analytics.test.cjs", "test:e2e": "node --test --test-concurrency=1 e2e.test.cjs" },
-  "devDependencies": { "playwright": "1.62.1" }
+  "scripts": {
+    "test": "node --test analytics.test.cjs",
+    "test:e2e": "node --test --test-concurrency=1 e2e.test.cjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "clean-css": "5.3.3",
+    "lighthouse": "13.5.0",
+    "playwright": "1.62.1",
+    "terser": "5.51.2"
+  }
 }

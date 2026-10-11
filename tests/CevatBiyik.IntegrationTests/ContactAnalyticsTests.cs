@@ -82,7 +82,7 @@ public sealed partial class ContactAnalyticsTests
             }
         }
         Assert.Contains("Analitiği reddet", WebUtility.HtmlDecode(initial), StringComparison.Ordinal);
-        Assert.DoesNotContain("/js/analytics.js", initial, StringComparison.Ordinal);
+        Assert.DoesNotContain("/js/analytics.min.js", initial, StringComparison.Ordinal);
         Assert.DoesNotContain("googletagmanager.com", before.Headers.GetValues("Content-Security-Policy").Single(), StringComparison.Ordinal);
         Assert.Equal(HttpStatusCode.BadRequest, (await client.PostAsync("/cerez-tercihi", new FormUrlEncodedContent(new Dictionary<string,string> { ["choice"] = "allow" }))).StatusCode);
         var allowed = await Post(client, "/", "/cerez-tercihi", new() { ["choice"] = "allow", ["returnUrl"] = "https://evil.invalid" });
@@ -91,14 +91,14 @@ public sealed partial class ContactAnalyticsTests
         Assert.Contains("secure", cookie, StringComparison.OrdinalIgnoreCase); Assert.Contains("httponly", cookie, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("samesite=strict", cookie, StringComparison.OrdinalIgnoreCase); Assert.DoesNotContain("domain=", cookie, StringComparison.OrdinalIgnoreCase);
         var after = await client.GetAsync("/"); var html = await after.Content.ReadAsStringAsync();
-        Assert.Contains("/js/analytics.js", html, StringComparison.Ordinal); Assert.Contains("data-provider=\"gtm\"", html, StringComparison.Ordinal);
+        Assert.Contains("/js/analytics.min.js", html, StringComparison.Ordinal); Assert.Contains("data-provider=\"gtm\"", html, StringComparison.Ordinal);
         var csp = after.Headers.GetValues("Content-Security-Policy").Single();
         Assert.Contains("https://www.googletagmanager.com", csp, StringComparison.Ordinal); Assert.DoesNotContain("unsafe-inline", csp, StringComparison.Ordinal);
         Assert.DoesNotContain("unsafe-eval", csp, StringComparison.Ordinal); Assert.True(after.Headers.CacheControl!.NoStore);
         var nonce = WebUtility.HtmlDecode(Regex.Match(html, "nonce=\"([^\"]+)\"[^>]*data-provider").Groups[1].Value);
         Assert.NotEmpty(nonce); Assert.Contains("'nonce-" + nonce + "'", csp, StringComparison.Ordinal);
         await Post(client, "/", "/cerez-tercihi", new() { ["choice"] = "deny" });
-        Assert.DoesNotContain("/js/analytics.js", await client.GetStringAsync("/"), StringComparison.Ordinal);
+        Assert.DoesNotContain("/js/analytics.min.js", await client.GetStringAsync("/"), StringComparison.Ordinal);
     }
     [Theory]
     [InlineData(false, "GTM-TEST123", true)]
@@ -110,7 +110,7 @@ public sealed partial class ContactAnalyticsTests
         using var configured = Analytics(factory, id, enabled: enabled); using var client = Client(configured);
         await Post(client, "/", "/cerez-tercihi", new() { ["choice"] = "allow" });
         var response = await client.GetAsync("/");
-        Assert.DoesNotContain("/js/analytics.js", await response.Content.ReadAsStringAsync(), StringComparison.Ordinal);
+        Assert.DoesNotContain("/js/analytics.min.js", await response.Content.ReadAsStringAsync(), StringComparison.Ordinal);
         Assert.DoesNotContain("googletagmanager.com", response.Headers.GetValues("Content-Security-Policy").Single(), StringComparison.Ordinal);
     }
     [Fact]
@@ -119,7 +119,7 @@ public sealed partial class ContactAnalyticsTests
         using var factory = new PublicWebFactory(); Legal(factory);
         using var configured = Analytics(factory); using var client = Client(configured);
         client.DefaultRequestHeaders.Add("Cookie", "__Host-CevatBiyik.Consent=allow");
-        Assert.DoesNotContain("/js/analytics.js", await client.GetStringAsync("/"), StringComparison.Ordinal);
+        Assert.DoesNotContain("/js/analytics.min.js", await client.GetStringAsync("/"), StringComparison.Ordinal);
         Assert.Equal(HttpStatusCode.BadRequest, (await Post(client, "/", "/cerez-tercihi", new() { ["choice"] = "arbitrary" })).StatusCode);
     }
     [Theory]
@@ -134,7 +134,7 @@ public sealed partial class ContactAnalyticsTests
         var cookie = Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Protect(protector, payload);
         client.DefaultRequestHeaders.Add("Cookie", "__Host-CevatBiyik.Consent=" + cookie);
         var response = await client.GetAsync("/");
-        Assert.DoesNotContain("/js/analytics.js", await response.Content.ReadAsStringAsync(), StringComparison.Ordinal);
+        Assert.DoesNotContain("/js/analytics.min.js", await response.Content.ReadAsStringAsync(), StringComparison.Ordinal);
         Assert.DoesNotContain("googletagmanager.com", response.Headers.GetValues("Content-Security-Policy").Single(), StringComparison.Ordinal);
     }
     [Fact]
@@ -146,7 +146,7 @@ public sealed partial class ContactAnalyticsTests
         await Post(client, "/", "/cerez-tercihi", new() { ["choice"] = "allow" });
         Assert.Contains("data-provider=\"ga4\"", await client.GetStringAsync("/"), StringComparison.Ordinal);
         var admin = await client.GetAsync("/admin/login");
-        Assert.DoesNotContain("analytics.js", await admin.Content.ReadAsStringAsync(), StringComparison.Ordinal);
+        Assert.DoesNotContain("analytics.min.js", await admin.Content.ReadAsStringAsync(), StringComparison.Ordinal);
         Assert.DoesNotContain("googletagmanager.com", admin.Headers.GetValues("Content-Security-Policy").Single(), StringComparison.Ordinal);
     }
     [Fact]

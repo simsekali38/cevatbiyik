@@ -3,7 +3,7 @@
 Completed phases: 00–13 (owner-approved closure). Database rollout execution and Plesk validation are not implied by code acceptance.
 Phase 07 closure and commit approved by the owner; dedicated MySQL/Plesk checks remain rollout gates.
 Phase 08 implemented/locally verified; owner closure approved (2026-10-10). Phase 09 implemented/locally verified, owner closure approved (2026-10-10). Phase 10 implemented/locally verified, owner closure approved (2026-10-10). Phase 11 implemented/locally verified; owner closure approved. Phase 12 owner closure approved (2026-10-10); SH-12-01 remains an unresolved production blocker. Remaining later phases: 13–17.
-Phase 13 implemented / locally verified (2026-10-11); owner closure approved (2026-10-11). Hosted MariaDB compatibility passed; genuine MySQL8 pending. Later unstarted phases: 14–17.
+Phase 13 implemented / locally verified (2026-10-11); owner closure approved (2026-10-11). Hosted MariaDB compatibility passed; genuine MySQL8 pending. Phase 14 implemented / locally measured and regression verified; owner closure approved (2026-10-11). Later unstarted phases: 15–17.
 Numbering is unique; see ADR-016/018/019/020/021/022/023/024/025/026.
 
 | Phase | Guide | Status |
@@ -22,7 +22,7 @@ Numbering is unique; see ADR-016/018/019/020/021/022/023/024/025/026.
 | 11 | [11-contact-analytics.md](11-contact-analytics.md) | Completed / owner-approved closure |
 | 12 | [12-security-hardening.md](12-security-hardening.md) | Completed / owner-approved closure; SH-12-01 production blocker open |
 | 13 | [13-testing.md](13-testing.md) | Implemented / locally and hosted MariaDB verified; owner closure approved (2026-10-11); genuine MySQL8 pending |
-| 14 | [14-performance-accessibility.md](14-performance-accessibility.md) | Pending |
+| 14 | [14-performance-accessibility.md](14-performance-accessibility.md) | Implemented / measured; owner closure approved (2026-10-11); field CWV and complete assistive-technology audit are rollout gates |
 | 15 | [15-plesk-deployment.md](15-plesk-deployment.md) | Pending |
 | 16 | [16-production-audit.md](16-production-audit.md) | Pending |
 | 17 | [17-launch.md](17-launch.md) | Pending |

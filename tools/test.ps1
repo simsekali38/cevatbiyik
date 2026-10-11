@@ -47,6 +47,7 @@ try {
     Invoke-Check dotnet @('build', 'CevatBiyik.sln', '-c', $Configuration, '--no-restore', '-m:1', '-p:UseSharedCompilation=false')
     Invoke-Check dotnet @('test', 'CevatBiyik.sln', '-c', $Configuration, '--no-build', '--no-restore', '-m:1', '--logger', 'trx;LogFilePrefix=regression')
     Invoke-Check node @('--test', 'tests/CevatBiyik.BrowserTests/analytics.test.cjs')
+    Invoke-Check node @('tools/build-assets.cjs', '--check')
     Invoke-Check python @('tools/security_scan.py', '--self-test')
     Invoke-Check dotnet @('format', 'style', 'CevatBiyik.sln', '--verify-no-changes', '--no-restore', '--diagnostics', 'IDE0011')
     if ($Browser) {
@@ -66,6 +67,7 @@ try {
         }
         if (-not $ready) { throw 'Isolated HTTPS fixture did not become ready.' }
         Invoke-Check node @('--test', '--test-concurrency=1', 'tests/CevatBiyik.BrowserTests/e2e.test.cjs')
+        Invoke-Check node @('--test', '--test-concurrency=1', 'tests/CevatBiyik.BrowserTests/phase14.test.cjs')
     }
     if ($SecurityScan) { Invoke-Check python @('tools/security_scan.py', '--history') }
     Write-Host 'Requested checks passed. Explicit MySQL skips are not live provider verification.'

@@ -1,5 +1,5 @@
 @model PageContentInput
-@{ ViewData["Title"] = "Sayfa içeriği düzenle"; }
+@{ ViewData["UseRichEditor"] = true; ViewData["Title"] = "Sayfa içeriği düzenle"; }
 <h1>@ViewData["Title"]</h1><p>Hukuki metinler avukat tarafından kontrol edilmelidir. Editörün sunduğu biçimlendirmeleri kullanın; kimlik/sicil numarası ve doğrulanmamış iddia eklemeyin. İnceleme onayı her düzenlemede yeniden verilir.</p>
 <form data-admin-form asp-action="Save" asp-route-id="@ViewData["EntityId"]" method="post" asp-antiforgery="false">
 @Html.AntiForgeryToken()@if (!ViewData.ModelState.IsValid) { <div asp-validation-summary="All" class="validation-summary-errors" role="alert"></div> }

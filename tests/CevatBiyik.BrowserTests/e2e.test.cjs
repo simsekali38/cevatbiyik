@@ -60,11 +60,11 @@ test('visitor navigates/searches/reads FAQ with mobile layout and real CSP/JSON-
 test('consent opt-in/withdrawal, successful contact PRG and no pre-consent tracking', async () => session(async (page, context, external) => {
   await goto(page, '/'); assert.equal(external.length, 0);
   await clickNavigation(page, page.getByRole('button', {name: 'Analitiği reddet', exact:true}));
-  assert.equal(await page.locator('script[src*="analytics.js"]').count(), 0);
+  assert.equal(await page.locator('script[src*="analytics.min.js"]').count(), 0);
   await page.locator('#cookie-heading').click();
   await clickNavigation(page, page.getByRole('button', {name: 'Analitiğe izin ver', exact:true}));
   await page.waitForFunction(() => !!window.dataLayer);
-  assert.equal(await page.locator('script[src*="analytics.js"]').count(), 1);
+  assert.equal(await page.locator('script[src*="analytics.min.js"]').count(), 1);
   assert.ok(external.includes('https://www.googletagmanager.com'));
   const consent = (await context.cookies()).find(x => x.name === '__Host-CevatBiyik.Consent');
   assert.ok(consent.secure && consent.httpOnly && consent.sameSite === 'Strict');
@@ -79,7 +79,7 @@ test('consent opt-in/withdrawal, successful contact PRG and no pre-consent track
   await goto(page, '/iletisim'); assert.equal(await page.locator('#contact-success').count(), 0);
   await page.locator('#cookie-heading').click();
   await clickNavigation(page, page.getByRole('button', {name: 'Analitiği reddet', exact:true}));
-  assert.equal(await page.locator('script[src*="analytics.js"]').count(), 0);
+  assert.equal(await page.locator('script[src*="analytics.min.js"]').count(), 0);
 }));
 
 test('admin logs in, creates/publishes article, views CMS modules and logs out', async () => session(async (page, context) => {

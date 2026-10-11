@@ -1,5 +1,5 @@
 @model CreatePracticeAreaDto
-@{ ViewData["Title"] = "Uzmanlık alanı düzenle"; }
+@{ ViewData["UseRichEditor"] = true; ViewData["Title"] = "Uzmanlık alanı düzenle"; }
 <h1>Uzmanlık alanı düzenle</h1><p>Yalnızca doğrulanmış çalışma alanlarını yayımlayın. Başlık, liste ve bağlantılar için içerik editörünü kullanın.</p>
 <form data-admin-form asp-action="Save" asp-route-id="@ViewData["EntityId"]" method="post" asp-antiforgery="false">
 @Html.AntiForgeryToken()@if (!ViewData.ModelState.IsValid) { <div asp-validation-summary="All" class="validation-summary-errors" role="alert"></div> }

@@ -4,6 +4,8 @@
 .admin-body h2 { font-size: 1.2rem; font-weight: 650; }
 .admin-body p { overflow-wrap: anywhere; }
 .admin-header { position: sticky; top: 0; z-index: 1030; border-bottom: 2px solid var(--brand-gold); }
+/* WCAG 2.4.11: keyboard targets must remain below the sticky header. */
+.admin-main :is(a, button, input, select, textarea, [tabindex], [contenteditable]), .admin-main { scroll-margin-top: 100px; }
 .admin-header-inner { min-height: 84px; padding: .75rem 1.5rem; display: flex; align-items: center; gap: 1rem; }
 .admin-header .brand-emblem { width: 52px; height: 52px; }
 .admin-header .brand-name { font-size: 1.15rem; }
@@ -108,6 +110,7 @@
 @media (max-width: 1199.98px) { .admin-form-grid { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 991.98px) { .admin-sidebar { width: min(320px, 88vw) !important; } .admin-header-inner { padding: .65rem 1rem; flex-wrap: wrap; gap: .65rem; } .admin-main { padding: 1.25rem; } .admin-header-actions { gap: .65rem; } }
 @media (max-width: 575.98px) { .admin-header .brand-emblem { width: 40px; height: 40px; } .admin-header .brand-name { font-size: .95rem; } .admin-header-actions { width: 100%; justify-content: space-between; margin-left: 0; } .admin-main { padding: 1rem; } .admin-main > form:not(.admin-delete), .admin-form, .admin-login { padding: 1rem; } .admin-login { margin: .5rem auto; } .admin-main fieldset { padding: .85rem; } .admin-editor .ql-editor { padding: 1rem; } .admin-save-state { width: 100%; margin-left: 0; } }
+@media (max-width: 575.98px) { .admin-main :is(a, button, input, select, textarea, [tabindex], [contenteditable]), .admin-main { scroll-margin-top: 145px; } }
 @media (forced-colors: active) { .admin-status, .admin-editor, .admin-nav-link.is-active { border-color: CanvasText; } }
 
 @media (max-width: 991.98px) { .admin-no-js .admin-shell { flex-direction: column; } .admin-no-js .admin-sidebar { position: static; transform: none; visibility: visible; width: 100% !important; height: auto; } .admin-no-js .admin-sidebar .offcanvas-body { display: block; } .admin-no-js .admin-sidebar .offcanvas-header, .admin-no-js button[data-bs-toggle="offcanvas"] { display: none; } }

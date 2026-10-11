@@ -15,6 +15,15 @@
         catch (_) { return false; }
     };
     const announce = (node, message) => { node.textContent = message; };
+    const keepDialogFocus = dialog => dialog.addEventListener("keydown", event => {
+        if (event.key !== "Tab") return;
+        const targets = [...dialog.querySelectorAll('a[href], button, input, select, textarea, [tabindex]')]
+            .filter(node => !node.disabled && node.tabIndex >= 0 && node.getClientRects().length);
+        const first = targets[0], last = targets.at(-1);
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+        // Escape remains native and returns focus through the close handler.
+    });
 
     if (window.Quill) document.querySelectorAll("textarea[data-rich-editor]").forEach((source, number) => {
         const required = source.required;
@@ -122,6 +131,7 @@
             if (selection.length) editor.formatText(selection.index, selection.length, "link", url, "user");
             else { editor.insertText(selection.index, url, "link", url, "user"); editor.setSelection(selection.index + url.length, 0, "silent"); }
         });
+        keepDialogFocus(dialog);
         dialog.addEventListener("close", () => editor.focus());
         button("Bağlantıyı kaldır", () => editor.format("link", false, "user"));
         button("Geri al", () => editor.getModule("history").undo()); button("Yinele", () => editor.getModule("history").redo());
@@ -133,6 +143,7 @@
         const previewBody = make("div", "admin-editor-preview-body");
         const closePreview = make("button", "btn btn-primary", "Kapat"); closePreview.type = "button"; closePreview.addEventListener("click", () => previewDialog.close());
         previewDialog.append(previewTitle, previewBody, closePreview); document.body.append(previewDialog);
+        keepDialogFocus(previewDialog);
         previewDialog.addEventListener("close", () => editor.focus());
         const showPreview = (mode = "preview") => {
             sync(false); previewBody.replaceChildren();
@@ -157,7 +168,8 @@
         menu("Biçim", [["Kalın", invoke("Kalın")], ["İtalik", invoke("İtalik")], ["Altı çizili", invoke("Altı çizili")], ["Biçimi temizle", invoke("Biçimi temizle")]]);
         menu("Araçlar", [["Kelime ve karakter sayısı", () => showPreview("stats")], ["Bağlantıyı kaldır", invoke("Bağlantıyı kaldır")]]);
         function updateButtons() {
-            const format = editor.getFormat();
+            // Reading without a range makes Quill focus the editor, stealing focus on blur/Tab.
+            const format = editor.getFormat(selection.index, selection.length);
             controls.forEach(({control, format: name, value}) => control.setAttribute("aria-pressed", String(format[name] === value || (name === "align" && value === false && !format.align))));
             formatSelect.value = String(format.header || "");
         }

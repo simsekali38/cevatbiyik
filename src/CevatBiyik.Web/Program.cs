@@ -122,6 +122,15 @@ if (!builder.Environment.IsDevelopment())
     builder.Services.AddHttpsRedirection(options => options.HttpsPort = 443);
 }
 
+// HTTPS compression is limited to public assets. Never compress HTML containing CSRF/session data.
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+    options.MimeTypes = ["text/css", "text/javascript", "application/javascript", "image/svg+xml"];
+    options.Providers.Add<Microsoft.AspNetCore.ResponseCompression.BrotliCompressionProvider>();
+    options.Providers.Add<Microsoft.AspNetCore.ResponseCompression.GzipCompressionProvider>();
+});
+
 var app = builder.Build();
 
 if (provisionAdmin)
@@ -162,7 +171,8 @@ app.Use(async (context, next) =>
     }
     await next(context);
 });
-app.UseStaticFiles();
+app.UseResponseCompression();
+app.UseStaticFiles(new StaticFileOptions { OnPrepareResponse = CevatBiyik.Web.Performance.StaticAssetPolicy.PrepareResponse });
 
 app.UseAuthentication();
 app.UseAuthorization();
