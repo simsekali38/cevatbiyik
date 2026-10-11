@@ -3,8 +3,8 @@
 ## Executed
 
 - Discovery/ADR/manifest review: retained net8.0, directional Clean Architecture, MySQL 8, Windows/Plesk, one domain and filesystem assets.
-- `dotnet build CevatBiyik.sln --no-restore`: zero errors, zero warnings after stopping the temporary preview process.
-- `dotnet test CevatBiyik.sln --no-restore`: 55 unit + 37 integration tests passed; two opt-in MySQL persistence tests skipped.
+- `dotnet build project/CevatBiyik.sln --no-restore`: zero errors, zero warnings after stopping the temporary preview process.
+- `dotnet test project/CevatBiyik.sln --no-restore`: 55 unit + 37 integration tests passed; two opt-in MySQL persistence tests skipped.
 - Targeted `dotnet format whitespace ... --verify-no-changes --no-restore`: passed.
 - `git diff --check`: passed. Manifest phase_count and every phase_guides file verified.
 - Browser: desktop homepage and article list; 390px mobile homepage/contact, menu opened by Enter and form Name→Email keyboard focus.
@@ -34,5 +34,5 @@ Identity/admin/CMS and final SEO publication controls remain future work. No dep
 - Browser: homepage loaded through Development settings; three emblem images loaded.
 - 390 px viewport: client/scroll width both 375 (scrollbar included); logo 52 px, Enter toggles menu.
 - 1440 px viewport: client/scroll width both 1425; desktop nav and logo visible.
-- Palette contrast pairs are recorded in docs/design/BRAND_GUIDELINES.md; full WCAG audit remains Phase 14.
+- Palette contrast pairs are recorded in design/BRAND_GUIDELINES.md; full WCAG audit remains Phase 14.
 - SVG is a hand-drawn reference adaptation, not the original vector artwork. Source photos are not served publicly.

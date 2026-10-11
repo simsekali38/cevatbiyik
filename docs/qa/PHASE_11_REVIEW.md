@@ -24,7 +24,7 @@ ADR-017 navy/gold and existing emblem retained. SMTP/config/legal facts are not 
 ```powershell
 dotnet build -c Release --no-restore -m:1 -p:UseSharedCompilation=false
 dotnet test -c Release --no-restore -m:1 -p:UseSharedCompilation=false --logger "trx;LogFilePrefix=phase11-verified"
-node --test tests/CevatBiyik.BrowserTests/analytics.test.cjs
+node --test project/tests/CevatBiyik.BrowserTests/analytics.test.cjs
 dotnet format style --verify-no-changes --no-restore --severity warn --diagnostics IDE0011
 ```
 
@@ -32,7 +32,7 @@ dotnet format style --verify-no-changes --no-restore --severity warn --diagnosti
 - **6 Node tests passed**, built-in test/vm/DOM fixtures with no network or third-party libraries.
 - Release build **0 errors / 0 warnings**. Full style/import/braces check passed; existing LocalSeoFlowTests import order normalized.
 - Existing persistence model/SQL/no-pending-model-change test passed after ContactNotifications generation.
-- Generated/reviewed docs/database/CONTACT_NOTIFICATIONS.sql: six additive fields/one index, no seeds/destructive Up,
+- Generated/reviewed database/CONTACT_NOTIFICATIONS.sql: six additive fields/one index, no seeds/destructive Up,
   no retroactive queuing; no database update. SQLite relational claims verified; dedicated MySQL claim test explicitly skipped.
 - Nonce comparison test fixed to decode Razor HTML attribute encoding (base64 +); actual CSP/browser nonce behavior preserved.
 - Public/Admin/Identity, CMS, media/private documents, reviewed pages, SEO/sitemap/local links and previous tests remained green.

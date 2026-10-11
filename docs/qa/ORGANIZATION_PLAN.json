@@ -1,0 +1,1772 @@
+{
+  "head": "9105423",
+  "moves": {
+    "API.md": "docs/API.md",
+    "ARCHITECTURE.md": "docs/ARCHITECTURE.md",
+    "CONTENT_GUIDELINES.md": "docs/CONTENT_GUIDELINES.md",
+    "DATABASE.md": "docs/DATABASE.md",
+    "DECISIONS.md": "docs/DECISIONS.md",
+    "DEPLOYMENT.md": "docs/DEPLOYMENT.md",
+    "OPEN_QUESTIONS.md": "docs/OPEN_QUESTIONS.md",
+    "PROJECT_AUDIT.md": "docs/PROJECT_AUDIT.md",
+    "PROJECT_REQUIREMENTS.md": "docs/PROJECT_REQUIREMENTS.md",
+    "SECURITY.md": "docs/SECURITY.md",
+    "SEO_STRATEGY.md": "docs/SEO_STRATEGY.md",
+    "TESTING.md": "docs/TESTING.md",
+    "CHANGELOG.md": "docs/CHANGELOG.md",
+    "src": "project/src",
+    "tests": "project/tests",
+    "tools": "project/tools",
+    "CevatBiyik.sln": "project/CevatBiyik.sln",
+    "Directory.Build.props": "project/Directory.Build.props",
+    "Directory.Packages.props": "project/Directory.Packages.props",
+    "global.json": "project/global.json",
+    ".config": "project/.config",
+    "docs/design": "design",
+    "docs/database": "database",
+    "skills": "ai/skills",
+    "phases": "ai/phases",
+    "MASTER_PROMPT.md": "ai/MASTER_PROMPT.md",
+    "PHASE_PROMPTS.md": "ai/PHASE_PROMPTS.md",
+    "project-manifest.json": "ai/project-manifest.json"
+  },
+  "trackedFiles": [
+    {
+      "from": ".config/dotnet-tools.json",
+      "to": "project/.config/dotnet-tools.json"
+    },
+    {
+      "from": "API.md",
+      "to": "docs/API.md"
+    },
+    {
+      "from": "ARCHITECTURE.md",
+      "to": "docs/ARCHITECTURE.md"
+    },
+    {
+      "from": "CHANGELOG.md",
+      "to": "docs/CHANGELOG.md"
+    },
+    {
+      "from": "CONTENT_GUIDELINES.md",
+      "to": "docs/CONTENT_GUIDELINES.md"
+    },
+    {
+      "from": "CevatBiyik.sln",
+      "to": "project/CevatBiyik.sln"
+    },
+    {
+      "from": "DATABASE.md",
+      "to": "docs/DATABASE.md"
+    },
+    {
+      "from": "DECISIONS.md",
+      "to": "docs/DECISIONS.md"
+    },
+    {
+      "from": "DEPLOYMENT.md",
+      "to": "docs/DEPLOYMENT.md"
+    },
+    {
+      "from": "Directory.Build.props",
+      "to": "project/Directory.Build.props"
+    },
+    {
+      "from": "Directory.Packages.props",
+      "to": "project/Directory.Packages.props"
+    },
+    {
+      "from": "MASTER_PROMPT.md",
+      "to": "ai/MASTER_PROMPT.md"
+    },
+    {
+      "from": "OPEN_QUESTIONS.md",
+      "to": "docs/OPEN_QUESTIONS.md"
+    },
+    {
+      "from": "PHASE_PROMPTS.md",
+      "to": "ai/PHASE_PROMPTS.md"
+    },
+    {
+      "from": "PROJECT_AUDIT.md",
+      "to": "docs/PROJECT_AUDIT.md"
+    },
+    {
+      "from": "PROJECT_REQUIREMENTS.md",
+      "to": "docs/PROJECT_REQUIREMENTS.md"
+    },
+    {
+      "from": "SECURITY.md",
+      "to": "docs/SECURITY.md"
+    },
+    {
+      "from": "SEO_STRATEGY.md",
+      "to": "docs/SEO_STRATEGY.md"
+    },
+    {
+      "from": "TESTING.md",
+      "to": "docs/TESTING.md"
+    },
+    {
+      "from": "docs/database/CMS_FEATURES.sql",
+      "to": "database/CMS_FEATURES.sql"
+    },
+    {
+      "from": "docs/database/CONTACT_NOTIFICATIONS.sql",
+      "to": "database/CONTACT_NOTIFICATIONS.sql"
+    },
+    {
+      "from": "docs/database/ERD.md",
+      "to": "database/ERD.md"
+    },
+    {
+      "from": "docs/database/IDENTITY_ADMIN.sql",
+      "to": "database/IDENTITY_ADMIN.sql"
+    },
+    {
+      "from": "docs/database/LOCAL_SEO.sql",
+      "to": "database/LOCAL_SEO.sql"
+    },
+    {
+      "from": "docs/database/MEDIA_FILES.sql",
+      "to": "database/MEDIA_FILES.sql"
+    },
+    {
+      "from": "docs/database/MIGRATIONS.md",
+      "to": "database/MIGRATIONS.md"
+    },
+    {
+      "from": "docs/database/PROD_SAMPLE_DATA.md",
+      "to": "database/PROD_SAMPLE_DATA.md"
+    },
+    {
+      "from": "docs/database/PROD_SAMPLE_DATA.sql",
+      "to": "database/PROD_SAMPLE_DATA.sql"
+    },
+    {
+      "from": "docs/database/PROD_SAMPLE_DATA_COUNTS.json",
+      "to": "database/PROD_SAMPLE_DATA_COUNTS.json"
+    },
+    {
+      "from": "docs/database/PUBLIC_SITE_CONTENT.sql",
+      "to": "database/PUBLIC_SITE_CONTENT.sql"
+    },
+    {
+      "from": "docs/database/SEO_REDIRECTS.sql",
+      "to": "database/SEO_REDIRECTS.sql"
+    },
+    {
+      "from": "docs/database/prod-sample-assets.zip",
+      "to": "database/prod-sample-assets.zip"
+    },
+    {
+      "from": "docs/database/prod-sample-assets/documents/ded10000000000000000000000000000.pdf",
+      "to": "database/prod-sample-assets/documents/ded10000000000000000000000000000.pdf"
+    },
+    {
+      "from": "docs/database/prod-sample-assets/documents/ded10000000000000000000000000001.pdf",
+      "to": "database/prod-sample-assets/documents/ded10000000000000000000000000001.pdf"
+    },
+    {
+      "from": "docs/database/prod-sample-assets/documents/ded10000000000000000000000000002.pdf",
+      "to": "database/prod-sample-assets/documents/ded10000000000000000000000000002.pdf"
+    },
+    {
+      "from": "docs/database/prod-sample-assets/images/ded00000000000000000000000000000.webp",
+      "to": "database/prod-sample-assets/images/ded00000000000000000000000000000.webp"
+    },
+    {
+      "from": "docs/database/prod-sample-assets/images/ded00000000000000000000000000001.webp",
+      "to": "database/prod-sample-assets/images/ded00000000000000000000000000001.webp"
+    },
+    {
+      "from": "docs/database/prod-sample-assets/images/ded00000000000000000000000000002.webp",
+      "to": "database/prod-sample-assets/images/ded00000000000000000000000000002.webp"
+    },
+    {
+      "from": "docs/database/prod-sample-assets/images/ded00000000000000000000000000003.webp",
+      "to": "database/prod-sample-assets/images/ded00000000000000000000000000003.webp"
+    },
+    {
+      "from": "docs/database/prod-sample-assets/images/ded00000000000000000000000000004.webp",
+      "to": "database/prod-sample-assets/images/ded00000000000000000000000000004.webp"
+    },
+    {
+      "from": "docs/database/prod-sample-assets/images/ded00000000000000000000000000005.webp",
+      "to": "database/prod-sample-assets/images/ded00000000000000000000000000005.webp"
+    },
+    {
+      "from": "docs/database/prod-sample-assets/images/ded00000000000000000000000000006.webp",
+      "to": "database/prod-sample-assets/images/ded00000000000000000000000000006.webp"
+    },
+    {
+      "from": "docs/database/prod-sample-assets/images/ded00000000000000000000000000007.webp",
+      "to": "database/prod-sample-assets/images/ded00000000000000000000000000007.webp"
+    },
+    {
+      "from": "docs/database/prod-sample-assets/manifest.json",
+      "to": "database/prod-sample-assets/manifest.json"
+    },
+    {
+      "from": "docs/design/ARTICLES_TRANSFER_REVIEW.md",
+      "to": "design/ARTICLES_TRANSFER_REVIEW.md"
+    },
+    {
+      "from": "docs/design/Ana Sayfa-export.png",
+      "to": "design/Ana Sayfa-export.png"
+    },
+    {
+      "from": "docs/design/BRAND_GUIDELINES.md",
+      "to": "design/BRAND_GUIDELINES.md"
+    },
+    {
+      "from": "docs/design/Makaleler-export.png",
+      "to": "design/Makaleler-export.png"
+    },
+    {
+      "from": "docs/design/PRACTICE_AREAS_TRANSFER_REVIEW.md",
+      "to": "design/PRACTICE_AREAS_TRANSFER_REVIEW.md"
+    },
+    {
+      "from": "docs/design/PUBLIC_HOME_REFINEMENT_REVIEW.md",
+      "to": "design/PUBLIC_HOME_REFINEMENT_REVIEW.md"
+    },
+    {
+      "from": "docs/design/PUBLIC_HOME_TRANSFER_REVIEW.md",
+      "to": "design/PUBLIC_HOME_TRANSFER_REVIEW.md"
+    },
+    {
+      "from": "docs/design/uxmagic-homepage.html",
+      "to": "design/uxmagic-homepage.html"
+    },
+    {
+      "from": "global.json",
+      "to": "project/global.json"
+    },
+    {
+      "from": "phases/00-discovery.md",
+      "to": "ai/phases/00-discovery.md"
+    },
+    {
+      "from": "phases/01-foundation.md",
+      "to": "ai/phases/01-foundation.md"
+    },
+    {
+      "from": "phases/02-domain-database.md",
+      "to": "ai/phases/02-domain-database.md"
+    },
+    {
+      "from": "phases/03-application.md",
+      "to": "ai/phases/03-application.md"
+    },
+    {
+      "from": "phases/04-public-ui.md",
+      "to": "ai/phases/04-public-ui.md"
+    },
+    {
+      "from": "phases/05-identity-auth.md",
+      "to": "ai/phases/05-identity-auth.md"
+    },
+    {
+      "from": "phases/06-cms-features.md",
+      "to": "ai/phases/06-cms-features.md"
+    },
+    {
+      "from": "phases/07-media-files.md",
+      "to": "ai/phases/07-media-files.md"
+    },
+    {
+      "from": "phases/08-public-site.md",
+      "to": "ai/phases/08-public-site.md"
+    },
+    {
+      "from": "phases/09-seo.md",
+      "to": "ai/phases/09-seo.md"
+    },
+    {
+      "from": "phases/10-local-seo.md",
+      "to": "ai/phases/10-local-seo.md"
+    },
+    {
+      "from": "phases/11-contact-analytics.md",
+      "to": "ai/phases/11-contact-analytics.md"
+    },
+    {
+      "from": "phases/12-security-hardening.md",
+      "to": "ai/phases/12-security-hardening.md"
+    },
+    {
+      "from": "phases/13-testing.md",
+      "to": "ai/phases/13-testing.md"
+    },
+    {
+      "from": "phases/14-performance-accessibility.md",
+      "to": "ai/phases/14-performance-accessibility.md"
+    },
+    {
+      "from": "phases/15-plesk-deployment.md",
+      "to": "ai/phases/15-plesk-deployment.md"
+    },
+    {
+      "from": "phases/16-production-audit.md",
+      "to": "ai/phases/16-production-audit.md"
+    },
+    {
+      "from": "phases/17-launch.md",
+      "to": "ai/phases/17-launch.md"
+    },
+    {
+      "from": "phases/PHASE_ORDER.md",
+      "to": "ai/phases/PHASE_ORDER.md"
+    },
+    {
+      "from": "project-manifest.json",
+      "to": "ai/project-manifest.json"
+    },
+    {
+      "from": "skills/accessibility/SKILL.md",
+      "to": "ai/skills/accessibility/SKILL.md"
+    },
+    {
+      "from": "skills/admin-panel/SKILL.md",
+      "to": "ai/skills/admin-panel/SKILL.md"
+    },
+    {
+      "from": "skills/architecture/SKILL.md",
+      "to": "ai/skills/architecture/SKILL.md"
+    },
+    {
+      "from": "skills/backend/SKILL.md",
+      "to": "ai/skills/backend/SKILL.md"
+    },
+    {
+      "from": "skills/content/SKILL.md",
+      "to": "ai/skills/content/SKILL.md"
+    },
+    {
+      "from": "skills/database/SKILL.md",
+      "to": "ai/skills/database/SKILL.md"
+    },
+    {
+      "from": "skills/devops/SKILL.md",
+      "to": "ai/skills/devops/SKILL.md"
+    },
+    {
+      "from": "skills/frontend/SKILL.md",
+      "to": "ai/skills/frontend/SKILL.md"
+    },
+    {
+      "from": "skills/legal-content/SKILL.md",
+      "to": "ai/skills/legal-content/SKILL.md"
+    },
+    {
+      "from": "skills/performance/SKILL.md",
+      "to": "ai/skills/performance/SKILL.md"
+    },
+    {
+      "from": "skills/qa/SKILL.md",
+      "to": "ai/skills/qa/SKILL.md"
+    },
+    {
+      "from": "skills/security/SKILL.md",
+      "to": "ai/skills/security/SKILL.md"
+    },
+    {
+      "from": "skills/seo/SKILL.md",
+      "to": "ai/skills/seo/SKILL.md"
+    },
+    {
+      "from": "skills/testing/SKILL.md",
+      "to": "ai/skills/testing/SKILL.md"
+    },
+    {
+      "from": "src/CevatBiyik.Application/AssemblyReference.cs",
+      "to": "project/src/CevatBiyik.Application/AssemblyReference.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/CevatBiyik.Application.csproj",
+      "to": "project/src/CevatBiyik.Application/CevatBiyik.Application.csproj"
+    },
+    {
+      "from": "src/CevatBiyik.Application/DTOs/ArticleDto.cs",
+      "to": "project/src/CevatBiyik.Application/DTOs/ArticleDto.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/DTOs/CmsDtos.cs",
+      "to": "project/src/CevatBiyik.Application/DTOs/CmsDtos.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/DTOs/ContactMessageDto.cs",
+      "to": "project/src/CevatBiyik.Application/DTOs/ContactMessageDto.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/DTOs/CreateArticleDto.cs",
+      "to": "project/src/CevatBiyik.Application/DTOs/CreateArticleDto.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/DTOs/CreateContactMessageDto.cs",
+      "to": "project/src/CevatBiyik.Application/DTOs/CreateContactMessageDto.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/DTOs/CreatePracticeAreaDto.cs",
+      "to": "project/src/CevatBiyik.Application/DTOs/CreatePracticeAreaDto.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/DTOs/LocationDtos.cs",
+      "to": "project/src/CevatBiyik.Application/DTOs/LocationDtos.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/DTOs/PagedResult.cs",
+      "to": "project/src/CevatBiyik.Application/DTOs/PagedResult.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/DTOs/PracticeAreaDto.cs",
+      "to": "project/src/CevatBiyik.Application/DTOs/PracticeAreaDto.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/DTOs/PublicContentDtos.cs",
+      "to": "project/src/CevatBiyik.Application/DTOs/PublicContentDtos.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/DTOs/RedirectDtos.cs",
+      "to": "project/src/CevatBiyik.Application/DTOs/RedirectDtos.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/DTOs/SiteSettingDto.cs",
+      "to": "project/src/CevatBiyik.Application/DTOs/SiteSettingDto.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/DTOs/UpdateArticleDto.cs",
+      "to": "project/src/CevatBiyik.Application/DTOs/UpdateArticleDto.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/DTOs/UpdateSiteSettingDto.cs",
+      "to": "project/src/CevatBiyik.Application/DTOs/UpdateSiteSettingDto.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/DependencyInjection.cs",
+      "to": "project/src/CevatBiyik.Application/DependencyInjection.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Exceptions/ConflictException.cs",
+      "to": "project/src/CevatBiyik.Application/Exceptions/ConflictException.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Exceptions/NotFoundException.cs",
+      "to": "project/src/CevatBiyik.Application/Exceptions/NotFoundException.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Interfaces/IAdminAuthenticationService.cs",
+      "to": "project/src/CevatBiyik.Application/Interfaces/IAdminAuthenticationService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Interfaces/IAdminDashboardService.cs",
+      "to": "project/src/CevatBiyik.Application/Interfaces/IAdminDashboardService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Interfaces/IAdminOperation.cs",
+      "to": "project/src/CevatBiyik.Application/Interfaces/IAdminOperation.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Interfaces/IArticleService.cs",
+      "to": "project/src/CevatBiyik.Application/Interfaces/IArticleService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Interfaces/IAuditLogService.cs",
+      "to": "project/src/CevatBiyik.Application/Interfaces/IAuditLogService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Interfaces/ICmsServices.cs",
+      "to": "project/src/CevatBiyik.Application/Interfaces/ICmsServices.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Interfaces/IContactNotifications.cs",
+      "to": "project/src/CevatBiyik.Application/Interfaces/IContactNotifications.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Interfaces/IContactService.cs",
+      "to": "project/src/CevatBiyik.Application/Interfaces/IContactService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Interfaces/IFileLibrary.cs",
+      "to": "project/src/CevatBiyik.Application/Interfaces/IFileLibrary.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Interfaces/ILocationService.cs",
+      "to": "project/src/CevatBiyik.Application/Interfaces/ILocationService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Interfaces/IPracticeAreaService.cs",
+      "to": "project/src/CevatBiyik.Application/Interfaces/IPracticeAreaService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Interfaces/IPublicContent.cs",
+      "to": "project/src/CevatBiyik.Application/Interfaces/IPublicContent.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Interfaces/IRedirectService.cs",
+      "to": "project/src/CevatBiyik.Application/Interfaces/IRedirectService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Interfaces/IRepository.cs",
+      "to": "project/src/CevatBiyik.Application/Interfaces/IRepository.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Interfaces/ISeoAuditService.cs",
+      "to": "project/src/CevatBiyik.Application/Interfaces/ISeoAuditService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Interfaces/ISettingService.cs",
+      "to": "project/src/CevatBiyik.Application/Interfaces/ISettingService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Interfaces/ISitemapService.cs",
+      "to": "project/src/CevatBiyik.Application/Interfaces/ISitemapService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Interfaces/ISlugService.cs",
+      "to": "project/src/CevatBiyik.Application/Interfaces/ISlugService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Services/AdminDashboardService.cs",
+      "to": "project/src/CevatBiyik.Application/Services/AdminDashboardService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Services/ArticleService.cs",
+      "to": "project/src/CevatBiyik.Application/Services/ArticleService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Services/ContactService.cs",
+      "to": "project/src/CevatBiyik.Application/Services/ContactService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Services/DocumentService.cs",
+      "to": "project/src/CevatBiyik.Application/Services/DocumentService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Services/FaqService.cs",
+      "to": "project/src/CevatBiyik.Application/Services/FaqService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Services/FileMaintenance.cs",
+      "to": "project/src/CevatBiyik.Application/Services/FileMaintenance.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Services/LocalContentQuality.cs",
+      "to": "project/src/CevatBiyik.Application/Services/LocalContentQuality.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Services/LocationService.cs",
+      "to": "project/src/CevatBiyik.Application/Services/LocationService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Services/MediaService.cs",
+      "to": "project/src/CevatBiyik.Application/Services/MediaService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Services/PageContentService.cs",
+      "to": "project/src/CevatBiyik.Application/Services/PageContentService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Services/PageSeoService.cs",
+      "to": "project/src/CevatBiyik.Application/Services/PageSeoService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Services/PracticeAreaService.cs",
+      "to": "project/src/CevatBiyik.Application/Services/PracticeAreaService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Services/ProfileService.cs",
+      "to": "project/src/CevatBiyik.Application/Services/ProfileService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Services/PublicRouteService.cs",
+      "to": "project/src/CevatBiyik.Application/Services/PublicRouteService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Services/RedirectService.cs",
+      "to": "project/src/CevatBiyik.Application/Services/RedirectService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Services/SeoAuditService.cs",
+      "to": "project/src/CevatBiyik.Application/Services/SeoAuditService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Services/SeoQuality.cs",
+      "to": "project/src/CevatBiyik.Application/Services/SeoQuality.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Services/ServiceRules.cs",
+      "to": "project/src/CevatBiyik.Application/Services/ServiceRules.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Services/SettingService.cs",
+      "to": "project/src/CevatBiyik.Application/Services/SettingService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Services/SlugService.cs",
+      "to": "project/src/CevatBiyik.Application/Services/SlugService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Services/TaxonomyService.cs",
+      "to": "project/src/CevatBiyik.Application/Services/TaxonomyService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Validation/ArticleValidators.cs",
+      "to": "project/src/CevatBiyik.Application/Validation/ArticleValidators.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Validation/CmsValidators.cs",
+      "to": "project/src/CevatBiyik.Application/Validation/CmsValidators.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Validation/CreateContactMessageValidator.cs",
+      "to": "project/src/CevatBiyik.Application/Validation/CreateContactMessageValidator.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Validation/CreatePracticeAreaValidator.cs",
+      "to": "project/src/CevatBiyik.Application/Validation/CreatePracticeAreaValidator.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Validation/LocationValidator.cs",
+      "to": "project/src/CevatBiyik.Application/Validation/LocationValidator.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Validation/PlainText.cs",
+      "to": "project/src/CevatBiyik.Application/Validation/PlainText.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Validation/PublicContentValidators.cs",
+      "to": "project/src/CevatBiyik.Application/Validation/PublicContentValidators.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Validation/PublicSettingKeys.cs",
+      "to": "project/src/CevatBiyik.Application/Validation/PublicSettingKeys.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Validation/RedirectValidator.cs",
+      "to": "project/src/CevatBiyik.Application/Validation/RedirectValidator.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Validation/RichText.cs",
+      "to": "project/src/CevatBiyik.Application/Validation/RichText.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Application/Validation/UpdateSiteSettingValidator.cs",
+      "to": "project/src/CevatBiyik.Application/Validation/UpdateSiteSettingValidator.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Domain/AssemblyReference.cs",
+      "to": "project/src/CevatBiyik.Domain/AssemblyReference.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Domain/CevatBiyik.Domain.csproj",
+      "to": "project/src/CevatBiyik.Domain/CevatBiyik.Domain.csproj"
+    },
+    {
+      "from": "src/CevatBiyik.Domain/Entities/Article.cs",
+      "to": "project/src/CevatBiyik.Domain/Entities/Article.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Domain/Entities/ArticleCategory.cs",
+      "to": "project/src/CevatBiyik.Domain/Entities/ArticleCategory.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Domain/Entities/ArticleTag.cs",
+      "to": "project/src/CevatBiyik.Domain/Entities/ArticleTag.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Domain/Entities/ArticleTagLink.cs",
+      "to": "project/src/CevatBiyik.Domain/Entities/ArticleTagLink.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Domain/Entities/AuditLog.cs",
+      "to": "project/src/CevatBiyik.Domain/Entities/AuditLog.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Domain/Entities/BaseEntity.cs",
+      "to": "project/src/CevatBiyik.Domain/Entities/BaseEntity.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Domain/Entities/ContactMessage.cs",
+      "to": "project/src/CevatBiyik.Domain/Entities/ContactMessage.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Domain/Entities/FaqItem.cs",
+      "to": "project/src/CevatBiyik.Domain/Entities/FaqItem.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Domain/Entities/LawyerProfile.cs",
+      "to": "project/src/CevatBiyik.Domain/Entities/LawyerProfile.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Domain/Entities/Location.cs",
+      "to": "project/src/CevatBiyik.Domain/Entities/Location.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Domain/Entities/MediaAsset.cs",
+      "to": "project/src/CevatBiyik.Domain/Entities/MediaAsset.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Domain/Entities/PageContent.cs",
+      "to": "project/src/CevatBiyik.Domain/Entities/PageContent.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Domain/Entities/PageSeo.cs",
+      "to": "project/src/CevatBiyik.Domain/Entities/PageSeo.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Domain/Entities/PracticeArea.cs",
+      "to": "project/src/CevatBiyik.Domain/Entities/PracticeArea.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Domain/Entities/PrivateDocument.cs",
+      "to": "project/src/CevatBiyik.Domain/Entities/PrivateDocument.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Domain/Entities/RedirectRule.cs",
+      "to": "project/src/CevatBiyik.Domain/Entities/RedirectRule.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Domain/Entities/SiteSetting.cs",
+      "to": "project/src/CevatBiyik.Domain/Entities/SiteSetting.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/AssemblyReference.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/AssemblyReference.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/CevatBiyik.Infrastructure.csproj",
+      "to": "project/src/CevatBiyik.Infrastructure/CevatBiyik.Infrastructure.csproj"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/DependencyInjection.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/DependencyInjection.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Email/ContactNotificationStore.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Email/ContactNotificationStore.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Email/ContactNotificationWorker.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Email/ContactNotificationWorker.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Email/SmtpContactEmailSender.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Email/SmtpContactEmailSender.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Email/SmtpNotificationOptions.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Email/SmtpNotificationOptions.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Identity/AdminAccess.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Identity/AdminAccess.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Identity/AdminAuthenticationService.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Identity/AdminAuthenticationService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Identity/AdminOperation.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Identity/AdminOperation.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Identity/AdminProvisioner.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Identity/AdminProvisioner.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Identity/ApplicationUser.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Identity/ApplicationUser.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Identity/AuditLogService.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Identity/AuditLogService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Media/DefenderScanner.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Media/DefenderScanner.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Media/FileDocumentStorage.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Media/FileDocumentStorage.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Media/FileImageStorage.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Media/FileImageStorage.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Media/ManagedFiles.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Media/ManagedFiles.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Media/PdfPolicy.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Media/PdfPolicy.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Media/SafeFilePaths.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Media/SafeFilePaths.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/AppDbContext.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/AppDbContext.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Configurations/ArticleConfiguration.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Configurations/ArticleConfiguration.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Configurations/AuditLogConfiguration.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Configurations/AuditLogConfiguration.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Configurations/BaseEntityConfiguration.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Configurations/BaseEntityConfiguration.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Configurations/CmsConfigurations.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Configurations/CmsConfigurations.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Configurations/ContactMessageConfiguration.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Configurations/ContactMessageConfiguration.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Configurations/LocationConfiguration.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Configurations/LocationConfiguration.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Configurations/PracticeAreaConfiguration.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Configurations/PracticeAreaConfiguration.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Configurations/PrivateDocumentConfiguration.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Configurations/PrivateDocumentConfiguration.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Configurations/PublicContentConfigurations.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Configurations/PublicContentConfigurations.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Configurations/RedirectRuleConfiguration.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Configurations/RedirectRuleConfiguration.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Configurations/SiteSettingConfiguration.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Configurations/SiteSettingConfiguration.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/DatabaseServerConfiguration.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/DatabaseServerConfiguration.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/EfRepository.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/EfRepository.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/FileCatalog.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/FileCatalog.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009181406_InitialCreate.Designer.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009181406_InitialCreate.Designer.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009181406_InitialCreate.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009181406_InitialCreate.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009194432_IdentityAdmin.Designer.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009194432_IdentityAdmin.Designer.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009194432_IdentityAdmin.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009194432_IdentityAdmin.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009202119_CmsFeatures.Designer.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009202119_CmsFeatures.Designer.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009202119_CmsFeatures.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009202119_CmsFeatures.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009210341_MediaFiles.Designer.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009210341_MediaFiles.Designer.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009210341_MediaFiles.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009210341_MediaFiles.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009214118_PublicSiteContent.Designer.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009214118_PublicSiteContent.Designer.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009214118_PublicSiteContent.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009214118_PublicSiteContent.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009221754_SeoRedirects.Designer.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009221754_SeoRedirects.Designer.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009221754_SeoRedirects.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009221754_SeoRedirects.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009224849_LocalSeo.Designer.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009224849_LocalSeo.Designer.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009224849_LocalSeo.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Migrations/20261009224849_LocalSeo.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Migrations/20261010200603_ContactNotifications.Designer.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Migrations/20261010200603_ContactNotifications.Designer.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Migrations/20261010200603_ContactNotifications.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Migrations/20261010200603_ContactNotifications.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/Migrations/AppDbContextModelSnapshot.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/Migrations/AppDbContextModelSnapshot.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Infrastructure/Persistence/SitemapService.cs",
+      "to": "project/src/CevatBiyik.Infrastructure/Persistence/SitemapService.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/.config/dotnet-tools.json",
+      "to": "project/src/CevatBiyik.Web/.config/dotnet-tools.json"
+    },
+    {
+      "from": "src/CevatBiyik.Web/.gitignore",
+      "to": "project/src/CevatBiyik.Web/.gitignore"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Analytics/AnalyticsConsent.cs",
+      "to": "project/src/CevatBiyik.Web/Analytics/AnalyticsConsent.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Analytics/AnalyticsPolicy.cs",
+      "to": "project/src/CevatBiyik.Web/Analytics/AnalyticsPolicy.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Controllers/AccountController.cs",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Controllers/AccountController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Controllers/AdminControllerBase.cs",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Controllers/AdminControllerBase.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Controllers/ArticlesController.cs",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Controllers/ArticlesController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Controllers/ContactMessagesController.cs",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Controllers/ContactMessagesController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Controllers/DashboardController.cs",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Controllers/DashboardController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Controllers/DocumentsController.cs",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Controllers/DocumentsController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Controllers/FaqController.cs",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Controllers/FaqController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Controllers/FilesController.cs",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Controllers/FilesController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Controllers/GuideController.cs",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Controllers/GuideController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Controllers/LocationsController.cs",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Controllers/LocationsController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Controllers/MediaController.cs",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Controllers/MediaController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Controllers/PageContentsController.cs",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Controllers/PageContentsController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Controllers/PageSeoController.cs",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Controllers/PageSeoController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Controllers/PracticeAreasController.cs",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Controllers/PracticeAreasController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Controllers/ProfileController.cs",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Controllers/ProfileController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Controllers/RedirectsController.cs",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Controllers/RedirectsController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Controllers/SeoController.cs",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Controllers/SeoController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Controllers/SettingsController.cs",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Controllers/SettingsController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Controllers/TaxonomyController.cs",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Controllers/TaxonomyController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Models/LoginModel.cs",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Models/LoginModel.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Account/AccessDenied.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Account/AccessDenied.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Account/Login.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Account/Login.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Articles/Edit.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Articles/Edit.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Articles/Index.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Articles/Index.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/ContactMessages/Index.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/ContactMessages/Index.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Dashboard/Index.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Dashboard/Index.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Documents/Index.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Documents/Index.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Faq/Edit.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Faq/Edit.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Faq/Index.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Faq/Index.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Files/Index.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Files/Index.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Guide/Index.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Guide/Index.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Locations/Edit.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Locations/Edit.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Locations/Index.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Locations/Index.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Media/Index.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Media/Index.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/PageContents/Edit.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/PageContents/Edit.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/PageContents/Index.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/PageContents/Index.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/PageSeo/Edit.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/PageSeo/Edit.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/PageSeo/Index.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/PageSeo/Index.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/PracticeAreas/Edit.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/PracticeAreas/Edit.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/PracticeAreas/Index.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/PracticeAreas/Index.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Profile/Edit.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Profile/Edit.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Redirects/Edit.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Redirects/Edit.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Redirects/Index.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Redirects/Index.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Seo/Index.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Seo/Index.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Settings/Edit.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Settings/Edit.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Settings/Index.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Settings/Index.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Shared/EditorTemplates/SeoInput.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Shared/EditorTemplates/SeoInput.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Shared/_AdminLayout.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Shared/_AdminLayout.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Shared/_Paging.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Shared/_Paging.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Taxonomy/Edit.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Taxonomy/Edit.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/Taxonomy/Index.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/Taxonomy/Index.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/_ViewImports.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/_ViewImports.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Areas/Admin/Views/_ViewStart.cshtml",
+      "to": "project/src/CevatBiyik.Web/Areas/Admin/Views/_ViewStart.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/CevatBiyik.Web.csproj",
+      "to": "project/src/CevatBiyik.Web/CevatBiyik.Web.csproj"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Controllers/ArticlesController.cs",
+      "to": "project/src/CevatBiyik.Web/Controllers/ArticlesController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Controllers/ConsentController.cs",
+      "to": "project/src/CevatBiyik.Web/Controllers/ConsentController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Controllers/ContactController.cs",
+      "to": "project/src/CevatBiyik.Web/Controllers/ContactController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Controllers/ErrorController.cs",
+      "to": "project/src/CevatBiyik.Web/Controllers/ErrorController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Controllers/FaqController.cs",
+      "to": "project/src/CevatBiyik.Web/Controllers/FaqController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Controllers/HomeController.cs",
+      "to": "project/src/CevatBiyik.Web/Controllers/HomeController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Controllers/LocationsController.cs",
+      "to": "project/src/CevatBiyik.Web/Controllers/LocationsController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Controllers/PagesController.cs",
+      "to": "project/src/CevatBiyik.Web/Controllers/PagesController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Controllers/PracticeAreasController.cs",
+      "to": "project/src/CevatBiyik.Web/Controllers/PracticeAreasController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Controllers/PublicController.cs",
+      "to": "project/src/CevatBiyik.Web/Controllers/PublicController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Controllers/SeoController.cs",
+      "to": "project/src/CevatBiyik.Web/Controllers/SeoController.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Filters/PublicSiteFilter.cs",
+      "to": "project/src/CevatBiyik.Web/Filters/PublicSiteFilter.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Models/AdminGuideViewModel.cs",
+      "to": "project/src/CevatBiyik.Web/Models/AdminGuideViewModel.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Models/AdminLabels.cs",
+      "to": "project/src/CevatBiyik.Web/Models/AdminLabels.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Models/ContactFormPolicy.cs",
+      "to": "project/src/CevatBiyik.Web/Models/ContactFormPolicy.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Models/PublicSiteSettings.cs",
+      "to": "project/src/CevatBiyik.Web/Models/PublicSiteSettings.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Models/PublicViewModels.cs",
+      "to": "project/src/CevatBiyik.Web/Models/PublicViewModels.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Performance/StaticAssetPolicy.cs",
+      "to": "project/src/CevatBiyik.Web/Performance/StaticAssetPolicy.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Program.cs",
+      "to": "project/src/CevatBiyik.Web/Program.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Properties/PublishProfiles/FolderProfile.pubxml",
+      "to": "project/src/CevatBiyik.Web/Properties/PublishProfiles/FolderProfile.pubxml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Properties/launchSettings.json",
+      "to": "project/src/CevatBiyik.Web/Properties/launchSettings.json"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Security/AdminAreaConvention.cs",
+      "to": "project/src/CevatBiyik.Web/Security/AdminAreaConvention.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Security/ConsentCspMiddleware.cs",
+      "to": "project/src/CevatBiyik.Web/Security/ConsentCspMiddleware.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Security/HostingDataProtection.cs",
+      "to": "project/src/CevatBiyik.Web/Security/HostingDataProtection.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Security/PrivateDocumentsConvention.cs",
+      "to": "project/src/CevatBiyik.Web/Security/PrivateDocumentsConvention.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Security/SecurityHeadersMiddleware.cs",
+      "to": "project/src/CevatBiyik.Web/Security/SecurityHeadersMiddleware.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Seo/RedirectMiddleware.cs",
+      "to": "project/src/CevatBiyik.Web/Seo/RedirectMiddleware.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Seo/SeoPolicy.cs",
+      "to": "project/src/CevatBiyik.Web/Seo/SeoPolicy.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Seo/SeoPresentation.cs",
+      "to": "project/src/CevatBiyik.Web/Seo/SeoPresentation.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Seo/StructuredDataTagHelper.cs",
+      "to": "project/src/CevatBiyik.Web/Seo/StructuredDataTagHelper.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/TagHelpers/AdminActionLinkTagHelper.cs",
+      "to": "project/src/CevatBiyik.Web/TagHelpers/AdminActionLinkTagHelper.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/TagHelpers/AdminRichEditorTagHelper.cs",
+      "to": "project/src/CevatBiyik.Web/TagHelpers/AdminRichEditorTagHelper.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/TagHelpers/RichContentTagHelper.cs",
+      "to": "project/src/CevatBiyik.Web/TagHelpers/RichContentTagHelper.cs"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Views/Articles/Detail.cshtml",
+      "to": "project/src/CevatBiyik.Web/Views/Articles/Detail.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Views/Articles/Index.cshtml",
+      "to": "project/src/CevatBiyik.Web/Views/Articles/Index.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Views/Error/Index.cshtml",
+      "to": "project/src/CevatBiyik.Web/Views/Error/Index.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Views/Faq/Index.cshtml",
+      "to": "project/src/CevatBiyik.Web/Views/Faq/Index.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Views/Home/About.cshtml",
+      "to": "project/src/CevatBiyik.Web/Views/Home/About.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Views/Home/Contact.cshtml",
+      "to": "project/src/CevatBiyik.Web/Views/Home/Contact.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Views/Home/Index.cshtml",
+      "to": "project/src/CevatBiyik.Web/Views/Home/Index.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Views/Locations/Detail.cshtml",
+      "to": "project/src/CevatBiyik.Web/Views/Locations/Detail.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Views/Locations/Index.cshtml",
+      "to": "project/src/CevatBiyik.Web/Views/Locations/Index.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Views/Pages/Detail.cshtml",
+      "to": "project/src/CevatBiyik.Web/Views/Pages/Detail.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Views/PracticeAreas/Detail.cshtml",
+      "to": "project/src/CevatBiyik.Web/Views/PracticeAreas/Detail.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Views/PracticeAreas/Index.cshtml",
+      "to": "project/src/CevatBiyik.Web/Views/PracticeAreas/Index.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Views/Shared/_AnalyticsConsent.cshtml",
+      "to": "project/src/CevatBiyik.Web/Views/Shared/_AnalyticsConsent.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Views/Shared/_Layout.cshtml",
+      "to": "project/src/CevatBiyik.Web/Views/Shared/_Layout.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Views/Shared/_RelatedLocations.cshtml",
+      "to": "project/src/CevatBiyik.Web/Views/Shared/_RelatedLocations.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Views/_ViewImports.cshtml",
+      "to": "project/src/CevatBiyik.Web/Views/_ViewImports.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/Views/_ViewStart.cshtml",
+      "to": "project/src/CevatBiyik.Web/Views/_ViewStart.cshtml"
+    },
+    {
+      "from": "src/CevatBiyik.Web/web.config",
+      "to": "project/src/CevatBiyik.Web/web.config"
+    },
+    {
+      "from": "src/CevatBiyik.Web/wwwroot/css/admin.css",
+      "to": "project/src/CevatBiyik.Web/wwwroot/css/admin.css"
+    },
+    {
+      "from": "src/CevatBiyik.Web/wwwroot/css/admin.min.css",
+      "to": "project/src/CevatBiyik.Web/wwwroot/css/admin.min.css"
+    },
+    {
+      "from": "src/CevatBiyik.Web/wwwroot/css/site.css",
+      "to": "project/src/CevatBiyik.Web/wwwroot/css/site.css"
+    },
+    {
+      "from": "src/CevatBiyik.Web/wwwroot/css/site.min.css",
+      "to": "project/src/CevatBiyik.Web/wwwroot/css/site.min.css"
+    },
+    {
+      "from": "src/CevatBiyik.Web/wwwroot/images/brand/cevat-biyik-emblem.svg",
+      "to": "project/src/CevatBiyik.Web/wwwroot/images/brand/cevat-biyik-emblem.svg"
+    },
+    {
+      "from": "src/CevatBiyik.Web/wwwroot/js/admin.js",
+      "to": "project/src/CevatBiyik.Web/wwwroot/js/admin.js"
+    },
+    {
+      "from": "src/CevatBiyik.Web/wwwroot/js/admin.min.js",
+      "to": "project/src/CevatBiyik.Web/wwwroot/js/admin.min.js"
+    },
+    {
+      "from": "src/CevatBiyik.Web/wwwroot/js/analytics.js",
+      "to": "project/src/CevatBiyik.Web/wwwroot/js/analytics.js"
+    },
+    {
+      "from": "src/CevatBiyik.Web/wwwroot/js/analytics.min.js",
+      "to": "project/src/CevatBiyik.Web/wwwroot/js/analytics.min.js"
+    },
+    {
+      "from": "src/CevatBiyik.Web/wwwroot/js/site.js",
+      "to": "project/src/CevatBiyik.Web/wwwroot/js/site.js"
+    },
+    {
+      "from": "src/CevatBiyik.Web/wwwroot/js/site.min.js",
+      "to": "project/src/CevatBiyik.Web/wwwroot/js/site.min.js"
+    },
+    {
+      "from": "src/CevatBiyik.Web/wwwroot/lib/bootstrap/LICENSE",
+      "to": "project/src/CevatBiyik.Web/wwwroot/lib/bootstrap/LICENSE"
+    },
+    {
+      "from": "src/CevatBiyik.Web/wwwroot/lib/bootstrap/README.md",
+      "to": "project/src/CevatBiyik.Web/wwwroot/lib/bootstrap/README.md"
+    },
+    {
+      "from": "src/CevatBiyik.Web/wwwroot/lib/bootstrap/bootstrap.bundle.min.js",
+      "to": "project/src/CevatBiyik.Web/wwwroot/lib/bootstrap/bootstrap.bundle.min.js"
+    },
+    {
+      "from": "src/CevatBiyik.Web/wwwroot/lib/bootstrap/bootstrap.min.css",
+      "to": "project/src/CevatBiyik.Web/wwwroot/lib/bootstrap/bootstrap.min.css"
+    },
+    {
+      "from": "src/CevatBiyik.Web/wwwroot/lib/quill/LICENSE",
+      "to": "project/src/CevatBiyik.Web/wwwroot/lib/quill/LICENSE"
+    },
+    {
+      "from": "src/CevatBiyik.Web/wwwroot/lib/quill/README.md",
+      "to": "project/src/CevatBiyik.Web/wwwroot/lib/quill/README.md"
+    },
+    {
+      "from": "src/CevatBiyik.Web/wwwroot/lib/quill/quill.core.css",
+      "to": "project/src/CevatBiyik.Web/wwwroot/lib/quill/quill.core.css"
+    },
+    {
+      "from": "src/CevatBiyik.Web/wwwroot/lib/quill/quill.js",
+      "to": "project/src/CevatBiyik.Web/wwwroot/lib/quill/quill.js"
+    },
+    {
+      "from": "src/CevatBiyik.Web/wwwroot/uploads/.gitkeep",
+      "to": "project/src/CevatBiyik.Web/wwwroot/uploads/.gitkeep"
+    },
+    {
+      "from": "src/CevatBiyik.Web/wwwroot/uploads/web.config",
+      "to": "project/src/CevatBiyik.Web/wwwroot/uploads/web.config"
+    },
+    {
+      "from": "tests/CevatBiyik.BrowserTests/admin-ux.test.cjs",
+      "to": "project/tests/CevatBiyik.BrowserTests/admin-ux.test.cjs"
+    },
+    {
+      "from": "tests/CevatBiyik.BrowserTests/analytics.test.cjs",
+      "to": "project/tests/CevatBiyik.BrowserTests/analytics.test.cjs"
+    },
+    {
+      "from": "tests/CevatBiyik.BrowserTests/e2e.test.cjs",
+      "to": "project/tests/CevatBiyik.BrowserTests/e2e.test.cjs"
+    },
+    {
+      "from": "tests/CevatBiyik.BrowserTests/package-lock.json",
+      "to": "project/tests/CevatBiyik.BrowserTests/package-lock.json"
+    },
+    {
+      "from": "tests/CevatBiyik.BrowserTests/package.json",
+      "to": "project/tests/CevatBiyik.BrowserTests/package.json"
+    },
+    {
+      "from": "tests/CevatBiyik.BrowserTests/phase14-audit.mjs",
+      "to": "project/tests/CevatBiyik.BrowserTests/phase14-audit.mjs"
+    },
+    {
+      "from": "tests/CevatBiyik.BrowserTests/phase14.test.cjs",
+      "to": "project/tests/CevatBiyik.BrowserTests/phase14.test.cjs"
+    },
+    {
+      "from": "tests/CevatBiyik.E2EHost/CevatBiyik.E2EHost.csproj",
+      "to": "project/tests/CevatBiyik.E2EHost/CevatBiyik.E2EHost.csproj"
+    },
+    {
+      "from": "tests/CevatBiyik.E2EHost/DemoCommand.cs",
+      "to": "project/tests/CevatBiyik.E2EHost/DemoCommand.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.E2EHost/FixtureGateway.cs",
+      "to": "project/tests/CevatBiyik.E2EHost/FixtureGateway.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.E2EHost/Properties/launchSettings.json",
+      "to": "project/tests/CevatBiyik.E2EHost/Properties/launchSettings.json"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/AdminFlowTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/AdminFlowTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/AdminGuidanceTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/AdminGuidanceTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/AdminWebFactory.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/AdminWebFactory.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/ArticleDesignTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/ArticleDesignTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/BaselineSmokeTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/BaselineSmokeTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/CevatBiyik.IntegrationTests.csproj",
+      "to": "project/tests/CevatBiyik.IntegrationTests/CevatBiyik.IntegrationTests.csproj"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/CmsFlowTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/CmsFlowTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/CmsPreview.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/CmsPreview.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/ContactAnalyticsTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/ContactAnalyticsTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/ContactFlowTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/ContactFlowTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/DemoDataSeeder.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/DemoDataSeeder.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/DemoDataTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/DemoDataTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/DevelopmentConfigurationTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/DevelopmentConfigurationTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/DisabledDocumentsTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/DisabledDocumentsTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/DocumentFlowTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/DocumentFlowTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/HostingConfigurationTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/HostingConfigurationTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/ImageStorageTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/ImageStorageTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/LocalSeoFlowTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/LocalSeoFlowTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/MySqlPersistenceTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/MySqlPersistenceTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/MySqlRegressionTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/MySqlRegressionTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/MySqlTestGuard.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/MySqlTestGuard.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/PerformanceAccessibilityTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/PerformanceAccessibilityTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/PracticeAreaDesignTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/PracticeAreaDesignTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/PublicContentFlowTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/PublicContentFlowTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/PublicHomeRefinementTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/PublicHomeRefinementTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/PublicUiTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/PublicUiTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/PublicWebFactory.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/PublicWebFactory.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/QueryBudgetTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/QueryBudgetTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/RemainingAboutTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/RemainingAboutTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/RemainingPublicPageTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/RemainingPublicPageTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/RemainingSeoTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/RemainingSeoTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/RichContentFlowTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/RichContentFlowTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/SecurityHardeningTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/SecurityHardeningTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/SeoEnhancementTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/SeoEnhancementTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.IntegrationTests/WorkflowRegressionTests.cs",
+      "to": "project/tests/CevatBiyik.IntegrationTests/WorkflowRegressionTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.UnitTests/AdminBusinessTests.cs",
+      "to": "project/tests/CevatBiyik.UnitTests/AdminBusinessTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.UnitTests/ApplicationDependencyInjectionTests.cs",
+      "to": "project/tests/CevatBiyik.UnitTests/ApplicationDependencyInjectionTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.UnitTests/ApplicationServiceTests.cs",
+      "to": "project/tests/CevatBiyik.UnitTests/ApplicationServiceTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.UnitTests/ArchitectureTests.cs",
+      "to": "project/tests/CevatBiyik.UnitTests/ArchitectureTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.UnitTests/CevatBiyik.UnitTests.csproj",
+      "to": "project/tests/CevatBiyik.UnitTests/CevatBiyik.UnitTests.csproj"
+    },
+    {
+      "from": "tests/CevatBiyik.UnitTests/CmsBusinessTests.cs",
+      "to": "project/tests/CevatBiyik.UnitTests/CmsBusinessTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.UnitTests/ContactNotificationTests.cs",
+      "to": "project/tests/CevatBiyik.UnitTests/ContactNotificationTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.UnitTests/DatabaseServerConfigurationTests.cs",
+      "to": "project/tests/CevatBiyik.UnitTests/DatabaseServerConfigurationTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.UnitTests/ExpandedHtmlTests.cs",
+      "to": "project/tests/CevatBiyik.UnitTests/ExpandedHtmlTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.UnitTests/FileLibraryTests.cs",
+      "to": "project/tests/CevatBiyik.UnitTests/FileLibraryTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.UnitTests/InfrastructureDependencyInjectionTests.cs",
+      "to": "project/tests/CevatBiyik.UnitTests/InfrastructureDependencyInjectionTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.UnitTests/LocalSeoTests.cs",
+      "to": "project/tests/CevatBiyik.UnitTests/LocalSeoTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.UnitTests/PersistenceTests.cs",
+      "to": "project/tests/CevatBiyik.UnitTests/PersistenceTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.UnitTests/PublicContentTests.cs",
+      "to": "project/tests/CevatBiyik.UnitTests/PublicContentTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.UnitTests/PublicDesignTests.cs",
+      "to": "project/tests/CevatBiyik.UnitTests/PublicDesignTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.UnitTests/PublicQueryTests.cs",
+      "to": "project/tests/CevatBiyik.UnitTests/PublicQueryTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.UnitTests/RegressionGapTests.cs",
+      "to": "project/tests/CevatBiyik.UnitTests/RegressionGapTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.UnitTests/RepoRoot.cs",
+      "to": "project/tests/CevatBiyik.UnitTests/RepoRoot.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.UnitTests/RequestSnapshotTests.cs",
+      "to": "project/tests/CevatBiyik.UnitTests/RequestSnapshotTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.UnitTests/RichTextTests.cs",
+      "to": "project/tests/CevatBiyik.UnitTests/RichTextTests.cs"
+    },
+    {
+      "from": "tests/CevatBiyik.UnitTests/SeoBusinessTests.cs",
+      "to": "project/tests/CevatBiyik.UnitTests/SeoBusinessTests.cs"
+    },
+    {
+      "from": "tests/Fixtures/PdfFixture.cs",
+      "to": "project/tests/Fixtures/PdfFixture.cs"
+    },
+    {
+      "from": "tools/Test-ProdSampleData.ps1",
+      "to": "project/tools/Test-ProdSampleData.ps1"
+    },
+    {
+      "from": "tools/build-assets.cjs",
+      "to": "project/tools/build-assets.cjs"
+    },
+    {
+      "from": "tools/phase14-audit.ps1",
+      "to": "project/tools/phase14-audit.ps1"
+    },
+    {
+      "from": "tools/publish.ps1",
+      "to": "project/tools/publish.ps1"
+    },
+    {
+      "from": "tools/read-only-db-check.ps1",
+      "to": "project/tools/read-only-db-check.ps1"
+    },
+    {
+      "from": "tools/security_scan.py",
+      "to": "project/tools/security_scan.py"
+    },
+    {
+      "from": "tools/test.ps1",
+      "to": "project/tools/test.ps1"
+    },
+    {
+      "from": "tools/test_publish.py",
+      "to": "project/tools/test_publish.py"
+    },
+    {
+      "from": "tools/verify_publish.py",
+      "to": "project/tools/verify_publish.py"
+    }
+  ],
+  "removed": []
+}

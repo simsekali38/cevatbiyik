@@ -22,30 +22,30 @@ Commit/push, hosting değişikliği, gerçek yayın, seed veya DB/migration yazm
 ## 2. Değiştirilen dosyalar
 
 Bu görevde public UI:
-- src/CevatBiyik.Web/Views/Home/About.cshtml
-- src/CevatBiyik.Web/Views/Home/Contact.cshtml
-- src/CevatBiyik.Web/Views/Faq/Index.cshtml
-- src/CevatBiyik.Web/Views/Pages/Detail.cshtml
-- src/CevatBiyik.Web/wwwroot/css/site.css, site.min.css (builder çıktısı)
+- project/src/CevatBiyik.Web/Views/Home/About.cshtml
+- project/src/CevatBiyik.Web/Views/Home/Contact.cshtml
+- project/src/CevatBiyik.Web/Views/Faq/Index.cshtml
+- project/src/CevatBiyik.Web/Views/Pages/Detail.cshtml
+- project/src/CevatBiyik.Web/wwwroot/css/site.css, site.min.css (builder çıktısı)
 
 SEO sunum katmanı:
-- src/CevatBiyik.Web/Controllers/PublicController.cs, PagesController.cs
-- src/CevatBiyik.Web/Models/PublicSiteSettings.cs
-- src/CevatBiyik.Web/Seo/SeoPresentation.cs
+- project/src/CevatBiyik.Web/Controllers/PublicController.cs, PagesController.cs
+- project/src/CevatBiyik.Web/Models/PublicSiteSettings.cs
+- project/src/CevatBiyik.Web/Seo/SeoPresentation.cs
 
 Test/araçlar:
-- tests/CevatBiyik.IntegrationTests/RemainingAboutTests.cs
-- tests/CevatBiyik.IntegrationTests/RemainingPublicPageTests.cs
-- tests/CevatBiyik.IntegrationTests/RemainingSeoTests.cs
-- tests/CevatBiyik.BrowserTests/phase14.test.cjs, phase14-audit.mjs
-- tools/phase14-audit.ps1 (remaining ölçümü ayrı klasörde)
-- tools/read-only-db-check.ps1 (yalnızca cevodbtest, sabit read-only sorgular)
-- src/CevatBiyik.Web/CevatBiyik.Web.csproj (server-owned JSON publish dışlama kuralı)
+- project/tests/CevatBiyik.IntegrationTests/RemainingAboutTests.cs
+- project/tests/CevatBiyik.IntegrationTests/RemainingPublicPageTests.cs
+- project/tests/CevatBiyik.IntegrationTests/RemainingSeoTests.cs
+- project/tests/CevatBiyik.BrowserTests/phase14.test.cjs, phase14-audit.mjs
+- project/tools/phase14-audit.ps1 (remaining ölçümü ayrı klasörde)
+- project/tools/read-only-db-check.ps1 (yalnızca cevodbtest, sabit read-only sorgular)
+- project/src/CevatBiyik.Web/CevatBiyik.Web.csproj (server-owned JSON publish dışlama kuralı)
 
 Belgeler: CHANGELOG.md, DECISIONS.md, SECURITY.md,
 docs/qa/REMAINING_WORK_START.md ve bu rapor,
 docs/deployment/REMAINING_LAUNCH_ACTIONS.md,
-docs/design/PRACTICE_AREAS_TRANSFER_REVIEW.md takip notu.
+design/PRACTICE_AREAS_TRANSFER_REVIEW.md takip notu.
 
 Bu görev başlangıcında mevcut ve korunan önceki çalışmalar:
 ArticlesController.cs, Views/Articles/Index.cshtml ve Detail.cshtml,
@@ -78,15 +78,15 @@ Tekrar çalıştırma (yalnızca test terminali):
 ```powershell
 $env:AllowedHosts = '*'
 $env:Site__BaseUrl = 'https://cevatbiyik.av.tr'
-pwsh -NoProfile -File tools/test.ps1 -Browser
+pwsh -NoProfile -File project/tools/test.ps1 -Browser
 dotnet format analyzers CevatBiyik.sln --verify-no-changes --no-restore --severity warn
-python tools/security_scan.py
-python tools/security_scan.py --history
+python project/tools/security_scan.py
+python project/tools/security_scan.py --history
 dotnet list CevatBiyik.sln package --vulnerable --include-transitive
-npm audit --prefix tests/CevatBiyik.BrowserTests --audit-level=high
-pwsh -NoProfile -File tools/phase14-audit.ps1 -Stage remaining -NoBuild
-pwsh -NoProfile -File tools/read-only-db-check.ps1
-pwsh -NoProfile -File tools/publish.ps1 -SkipTests
+npm audit --prefix project/tests/CevatBiyik.BrowserTests --audit-level=high
+pwsh -NoProfile -File project/tools/phase14-audit.ps1 -Stage remaining -NoBuild
+pwsh -NoProfile -File project/tools/read-only-db-check.ps1
+pwsh -NoProfile -File project/tools/publish.ps1 -SkipTests
 ```
 
 Test env overrides gerçek ignored hosting JSON'un test hostuna sızan Host/origin

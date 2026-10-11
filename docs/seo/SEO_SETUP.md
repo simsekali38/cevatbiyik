@@ -19,7 +19,7 @@ From repository root; keep connection details in Web user-secrets. Use compatibl
 ```powershell
 dotnet build -c Release --no-restore
 dotnet test -c Release --no-restore
-.\artifacts\ef8\dotnet-ef.exe migrations script PublicSiteContent SeoRedirects --project src/CevatBiyik.Infrastructure --startup-project src/CevatBiyik.Web --configuration Release --no-build --output docs/database/SEO_REDIRECTS.sql
+.\artifacts\ef8\dotnet-ef.exe migrations script PublicSiteContent SeoRedirects --project project/src/CevatBiyik.Infrastructure --startup-project project/src/CevatBiyik.Web --configuration Release --no-build --output database/SEO_REDIRECTS.sql
 ```
 
 Validate migration/services with `CEVATBIYIK_TEST_MYSQL` against a dedicated `cevatbiyik_test_*` MySQL 8 database;
@@ -27,7 +27,7 @@ see `../database/MIGRATIONS.md`. Never use production credentials/database for t
 After dedicated validation and a coordinated backup, apply the reviewed migration to the intended local database:
 
 ```powershell
-.\artifacts\ef8\dotnet-ef.exe database update SeoRedirects --project src/CevatBiyik.Infrastructure --startup-project src/CevatBiyik.Web --configuration Release
+.\artifacts\ef8\dotnet-ef.exe database update SeoRedirects --project project/src/CevatBiyik.Infrastructure --startup-project project/src/CevatBiyik.Web --configuration Release
 ```
 
 The agent did not run database update. Up adds RedirectRules and six nullable PracticeAreas fields, two indexes,

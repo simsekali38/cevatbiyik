@@ -1,0 +1,91 @@
+@inject IConfiguration Configuration
+@{
+    var site = ViewData["SiteSettings"] as PublicSiteSettings ?? PublicSiteSettings.Empty;
+    var title = ViewData["Title"]?.ToString() ?? site.Name;
+    var description = ViewData["MetaDescription"]?.ToString() ?? site.Description;
+    var fullTitle = ViewData["SeoTitle"]?.ToString() ?? title + " | " + site.Name;
+    var robots = CevatBiyik.Web.Seo.SeoPolicy.Robots(Configuration.GetValue<bool>("Site:AllowIndexing"), ViewData["Robots"]?.ToString()?.Contains("noindex", StringComparison.Ordinal) == true);
+    var origin = CevatBiyik.Web.Seo.SeoPresentation.Origin(Configuration);
+    var baseUri = new Uri(origin);
+    var canonicalPath = ViewData["CanonicalPath"]?.ToString();
+    var canonical = CevatBiyik.Web.Seo.SeoPolicy.Canonical(origin, canonicalPath);
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+    var profile = ViewData["PublicProfile"] as ProfileDto;
+    var pages = ViewData["PublicPages"] as IReadOnlyList<PageContentDto> ?? Array.Empty<PageContentDto>();
+    var hasEmail = CevatBiyik.Application.Validation.ContentPublication.Complete(site.Email);
+    var hasPhone = CevatBiyik.Application.Validation.ContentPublication.Complete(site.Phone);
+    var hasAddress = CevatBiyik.Application.Validation.ContentPublication.Complete(site.Address);
+    var emailValid = hasEmail && System.Net.Mail.MailAddress.TryCreate(site.Email, out var email) && email.Address == site.Email;
+    var phone = new string(site.Phone.Where(c => char.IsAsciiDigit(c) || c == '+').ToArray());
+    var phoneDigits = phone.StartsWith('+') ? phone[1..] : phone;
+    var phoneValid = hasPhone && phoneDigits.Length is >= 7 and <= 15 && phoneDigits.All(char.IsAsciiDigit);
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="@robots" />
+    <title>@fullTitle</title>
+    <meta name="description" content="@description" />
+    @if (canonical is not null)
+    {
+        <link rel="canonical" href="@canonical" />
+        <meta property="og:url" content="@canonical" />
+    }
+    <meta property="og:title" content="@(ViewData["OpenGraphTitle"] ?? fullTitle)" />
+    <meta property="og:description" content="@(ViewData["OpenGraphDescription"] ?? description)" />
+    @if(ViewData["Keywords"] is string keywords){<meta name="keywords" content="@keywords" />}
+    @if(ViewData["OpenGraphImage"] is string image){<meta property="og:image" content="@(baseUri.GetLeftPart(UriPartial.Authority) + image)" />}
+    <structured-data model="@ViewData["StructuredData"]" nonce="@Context.Items["CspNonce"]"></structured-data>
+    <meta property="og:type" content="@(ViewData["OpenGraphType"] ?? "website")" />
+    <meta property="og:site_name" content="@site.Name" />
+    <meta property="og:locale" content="tr_TR" />
+    <link rel="stylesheet" href="~/lib/bootstrap/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    <script src="~/lib/bootstrap/bootstrap.bundle.min.js" asp-append-version="true" defer></script>
+    <script src="~/js/site.min.js" asp-append-version="true" defer></script>
+</head>
+<body class="public-site">
+    <a class="skip-link" href="#icerik">Ana içeriğe geç</a>
+    <partial name="_AnalyticsConsent" />
+    <header class="site-header">
+        <div class="site-info-strip"><div class="container"><span>@site.Name · Hukuk &amp; Danışmanlık</span><span>@if (emailValid) { <a href="mailto:@site.Email">@site.Email</a> } else { <a asp-controller="Home" asp-action="Contact">İletişim bilgileri ve görüşme talebi →</a> }</span></div></div>
+        <div class="container">
+        <nav class="navbar navbar-expand-xl py-2" data-bs-theme="light" aria-label="Ana menü">
+            <a class="navbar-brand brand" asp-controller="Home" asp-action="Index" aria-label="@site.Name — ana sayfa"><img class="brand-emblem" src="~/images/brand/cevat-biyik-emblem.svg" asp-append-version="true" width="56" height="56" alt="" /><span class="brand-name">@site.Name<span class="brand-caption">HUKUK &amp; DANIŞMANLIK</span></span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#ana-menu" aria-controls="ana-menu" aria-expanded="false" aria-label="Menüyü aç veya kapat"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="ana-menu"><ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+                <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index" aria-current="@(currentController == "Home" && currentAction == "Index" ? "page" : null)">Ana sayfa</a></li>
+                <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="About" aria-current="@(currentAction == "About" ? "page" : null)">Hakkımda</a></li>
+                <li class="nav-item"><a class="nav-link" asp-controller="PracticeAreas" asp-action="Index" aria-current="@(currentController == "PracticeAreas" ? "page" : null)">Uzmanlık alanları</a></li>
+                <li class="nav-item"><a class="nav-link" asp-controller="Articles" asp-action="Index" aria-current="@(currentController == "Articles" ? "page" : null)">Makaleler</a></li>
+                <li class="nav-item"><a class="nav-link" asp-controller="Faq" asp-action="Index" aria-current="@(currentController == "Faq" ? "page" : null)">SSS</a></li>
+                <li class="nav-item ms-lg-3"><a class="btn btn-primary" data-analytics-event="cta_click" asp-controller="Home" asp-action="Contact" aria-current="@(currentAction == "Contact" ? "page" : null)">İletişim <span aria-hidden="true">↗</span></a></li>
+            </ul></div>
+        </nav>
+    </div></header>
+    <main id="icerik" tabindex="-1"><partial name="_PublicBreadcrumb" model="@(PublicBreadcrumb.Create(Context.Request.Path.Value ?? "/", ViewData["Title"]?.ToString() ?? "", ViewData.Model))" />@RenderBody()</main>
+    <footer class="site-footer"><div class="container">
+        <div class="row g-4 footer-top">
+            <div class="col-lg-5"><div class="footer-brand"><img loading="lazy" decoding="async" class="brand-emblem" src="~/images/brand/cevat-biyik-emblem.svg" asp-append-version="true" width="56" height="56" alt="" /><p class="footer-name">@site.Name<span class="brand-caption">HUKUK &amp; DANIŞMANLIK</span></p></div><p class="footer-description">Makaleler, çalışma alanları ve iletişim.</p></div>
+            <div class="col-sm-6 col-lg-3"><h2 class="footer-heading">Keşfedin</h2><nav aria-label="Alt menü"><ul class="list-unstyled footer-links"><li><a asp-controller="Home" asp-action="About">Hakkımda</a></li><li><a asp-controller="PracticeAreas" asp-action="Index">Uzmanlık alanları</a></li><li><a asp-controller="Articles" asp-action="Index">Makaleler</a></li><li><a href="/konumlar">Kayseri yerel bilgiler</a></li></ul></nav></div>
+            <div class="col-sm-6 col-lg-4 footer-contact"><h2 class="footer-heading">İletişim</h2>
+                @if (hasEmail) { <p class="mb-2">@if (emailValid) { <a href="mailto:@site.Email">@site.Email</a> } else { @site.Email }</p> }
+                @if (hasPhone) { <p class="mb-2">@if (phoneValid) { <a href="tel:@phone">@site.Phone</a> } else { @site.Phone }</p> }
+                @if (hasAddress) { <p class="mb-2">@site.Address</p> }
+                @if (profile is not null && CevatBiyik.Application.Validation.ContentPublication.Complete(profile.BarAssociation)) { <p>Baro: @profile.BarAssociation</p> }
+                <a asp-controller="Home" asp-action="Contact">İletişim formuna git <span aria-hidden="true">↗</span></a>
+            </div>
+        </div>
+        <nav class="footer-legal" aria-label="Hukuki bilgiler"><a href="/sss">Sıkça Sorulan Sorular</a>
+        @foreach (var path in new[] { "/kvkk", "/cerez-politikasi", "/yasal-uyari" })
+        {
+            <a href="@path">@(pages.FirstOrDefault(x => x.Path == path)?.Title ?? CevatBiyik.Application.Validation.ContentPublication.Pages[path])</a>
+        }
+        </nav>
+        <div class="footer-bottom"><span>© @DateTime.UtcNow.Year @site.Name</span><span>cevatbiyik.av.tr</span></div>
+    </div></footer>
+</body>
+</html>

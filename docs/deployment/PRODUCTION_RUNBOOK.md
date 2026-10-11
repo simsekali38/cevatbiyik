@@ -36,12 +36,12 @@ gerçek operasyonun yapıldığı anlamına gelmez.
 Yerelde önce tam kontrol:
 
 ```powershell
-pwsh -NoProfile -File tools/test.ps1 -Browser -HostedMySql
-pwsh -NoProfile -File tools/publish.ps1 -SkipTests
+pwsh -NoProfile -File project/tools/test.ps1 -Browser -HostedMySql
+pwsh -NoProfile -File project/tools/publish.ps1 -SkipTests
 ```
 
 `-SkipTests` yalnızca aynı çalışma ağacı için yukarıdaki kontroller geçtiğinde kullanılır.
-Normal `tools/publish.ps1` build/.NET/JS/format kontrollerini kendisi yapar. Paket yeni
+Normal `project/tools/publish.ps1` build/.NET/JS/format kontrollerini kendisi yapar. Paket yeni
 `artifacts/releases/<UTC>-<id>` dizinine framework-dependent yayımlanır. Windows x64
 Skia native dosyası, out-of-process web.config, 6 MiB IIS limiti ve yasak içerikler
 denetlenir; SHA-256 manifesti üretilir. Kirli çalışma ağacı bilgisi manifestte yer alır;
@@ -105,7 +105,7 @@ içerebilir; mevcut Git geçmişi değiştirilmedi. Rotasyon hosting erişimi ol
 
 Geçmiş temizliği için ayrı owner onayı, clone/remote envanteri ve koordineli history
 rewrite gerekir. Bu faz hiçbir force-push/history rewrite yapmaz. Sadece geçmiş
-temizlemek rotasyon yerine geçmez. `python tools/security_scan.py --history` geçmiş
+temizlemek rotasyon yerine geçmez. `python project/tools/security_scan.py --history` geçmiş
 bulguları nedeniyle 1 dönebilir; bu sonuç “temiz” olarak raporlanmaz.
 
 ## 5. MariaDB / bağlantı ve migration
@@ -132,7 +132,7 @@ kullanıcısı SELECT/INSERT/UPDATE/DELETE; DDL yalnızca bakım operatörü hes
 Araç manifesti EF **8.0.29** ile hizalıdır; restore edin:
 
 ```powershell
-dotnet tool restore
+dotnet tool restore --tool-manifest project/.config/dotnet-tools.json
 ```
 
 Önce aynı yeni provider/config ile ayrı test DB üzerinde ileri migration ve rollback
@@ -140,7 +140,7 @@ drill; ardından mevcut üretim `__EFMigrationsHistory` salt okunur DBA inceleme
 İdempotent SQL üretimi canlı DB'ye bağlanmadan yapılabilir:
 
 ```powershell
-dotnet ef migrations script --idempotent --project src/CevatBiyik.Infrastructure --startup-project src/CevatBiyik.Web --configuration Release --output artifacts/migrations/reviewed.sql
+dotnet ef migrations script --idempotent --project project/src/CevatBiyik.Infrastructure --startup-project project/src/CevatBiyik.Web --configuration Release --output artifacts/migrations/reviewed.sql
 ```
 
 SQL gerçek MariaDB sürümünde izole DB üzerinde yürütülüp incelenmeden canlıya uygulanmaz.
@@ -152,7 +152,7 @@ SQL üretimde kullanılmaz.
 Kaynak/SDK kurulmayan hosting için aynı onaylı release'ten migration bundle hazırlayın:
 
 ```powershell
-dotnet ef migrations bundle --project src/CevatBiyik.Infrastructure --startup-project src/CevatBiyik.Web --configuration Release --target-runtime win-x64 --output artifacts/migrations/efbundle.exe
+dotnet ef migrations bundle --project project/src/CevatBiyik.Infrastructure --startup-project project/src/CevatBiyik.Web --configuration Release --target-runtime win-x64 --output artifacts/migrations/efbundle.exe
 ```
 
 Bundle dağıtımı site kökünün dışındaki korumalı bakım klasörüne yapılır. Aynı release'in

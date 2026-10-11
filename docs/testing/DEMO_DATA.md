@@ -5,9 +5,9 @@ No Domain, AppDbContext model, migration, production DI or appsettings change. N
 
 ## Files and boundaries
 
-- `tests/CevatBiyik.IntegrationTests/DemoDataSeeder.cs`: explicit seed/cleanup/status and transactional ownership manifest.
-- `tests/CevatBiyik.E2EHost/DemoCommand.cs`: guarded manual command using only the test project's local user-secrets.
-- `tests/CevatBiyik.IntegrationTests/DemoDataTests.cs`: eight target/isolation/idempotency/rollback/cascade tests.
+- `project/tests/CevatBiyik.IntegrationTests/DemoDataSeeder.cs`: explicit seed/cleanup/status and transactional ownership manifest.
+- `project/tests/CevatBiyik.E2EHost/DemoCommand.cs`: guarded manual command using only the test project's local user-secrets.
+- `project/tests/CevatBiyik.IntegrationTests/DemoDataTests.cs`: eight target/isolation/idempotency/rollback/cascade tests.
 
 Requires the exact owner-approved host/account and **Database=cevodbtest**, plus `--confirm cevodbtest`.
 `cevodb`, any other database and unconfirmed commands are rejected. There is no application startup hook or Admin action.
@@ -21,30 +21,30 @@ From repository root; the test connection is already saved under `Testing:MySql:
 local `cevat-biyik-integration-tests` user-secrets. Do not copy the password to the repository.
 
 ```powershell
-dotnet build CevatBiyik.sln -c Release
+dotnet build project/CevatBiyik.sln -c Release
 ```
 
 Load the demo dataset:
 
 ```powershell
-dotnet tests/CevatBiyik.E2EHost/bin/Release/net8.0/CevatBiyik.E2EHost.dll --demo seed --confirm cevodbtest
+dotnet project/tests/CevatBiyik.E2EHost/bin/Release/net8.0/CevatBiyik.E2EHost.dll --demo seed --confirm cevodbtest
 ```
 
 Inspect whether the manifest exists:
 
 ```powershell
-dotnet tests/CevatBiyik.E2EHost/bin/Release/net8.0/CevatBiyik.E2EHost.dll --demo status --confirm cevodbtest
+dotnet project/tests/CevatBiyik.E2EHost/bin/Release/net8.0/CevatBiyik.E2EHost.dll --demo status --confirm cevodbtest
 ```
 
 Clean only owned demo records:
 
 ```powershell
-dotnet tests/CevatBiyik.E2EHost/bin/Release/net8.0/CevatBiyik.E2EHost.dll --demo cleanup --confirm cevodbtest
+dotnet project/tests/CevatBiyik.E2EHost/bin/Release/net8.0/CevatBiyik.E2EHost.dll --demo cleanup --confirm cevodbtest
 ```
 
 Seed repeated twice does not duplicate or overwrite records. Cleanup repeated after success is a no-op.
 Do not run ordinary persistence tests while demo records are present: those tests intentionally expect isolated empty data.
-Clean first, then `pwsh -NoProfile -File tools/test.ps1 -HostedMySql`.
+Clean first, then `pwsh -NoProfile -File project/tools/test.ps1 -HostedMySql`.
 
 ## Dataset
 

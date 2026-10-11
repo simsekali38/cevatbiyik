@@ -29,10 +29,10 @@ deposunda saklanır; public kaynakta sır, kişisel veri veya gerçek yedek tutu
 ## Doğrulama
 
 ```powershell
-dotnet build CevatBiyik.sln -c Release --no-restore -m:1 -p:UseSharedCompilation=false
-python tools/test_publish.py
-python tools/security_scan.py --self-test
-python tools/security_scan.py
+dotnet build project/CevatBiyik.sln -c Release --no-restore -m:1 -p:UseSharedCompilation=false
+python project/tools/test_publish.py
+python project/tools/security_scan.py --self-test
+python project/tools/security_scan.py
 git diff --check
 ```
 

@@ -58,9 +58,9 @@ dotnet_naming_style.underscore_camel.capitalization = camel_case
 # Türkçe içerik/metin projesi: CA1303 (literal yerelleştirme) gürültüsünü kapat
 dotnet_diagnostic.CA1303.severity = none
 # Test projelerinde isimlendirme (Metot_Senaryo_Beklenen) serbest
-[tests/**/*.cs]
+[project/tests/**/*.cs]
 dotnet_diagnostic.CA1707.severity = none
 
 # EF CLI owns generated migrations and snapshots.
-[src/CevatBiyik.Infrastructure/Persistence/Migrations/*.cs]
+[project/src/CevatBiyik.Infrastructure/Persistence/Migrations/*.cs]
 generated_code = true

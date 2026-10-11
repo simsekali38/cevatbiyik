@@ -1,0 +1,87 @@
+{
+  "head": "91054230dfd312d727df9f950eb85c93f527ae0c",
+  "root": [
+    {
+      "name": ".editorconfig",
+      "kind": "file",
+      "action": "preserve"
+    },
+    {
+      "name": ".git",
+      "kind": "directory",
+      "action": "preserve"
+    },
+    {
+      "name": ".gitattributes",
+      "kind": "file",
+      "action": "preserve"
+    },
+    {
+      "name": ".github",
+      "kind": "directory",
+      "action": "preserve"
+    },
+    {
+      "name": ".gitignore",
+      "kind": "file",
+      "action": "preserve"
+    },
+    {
+      "name": ".vs",
+      "kind": "directory",
+      "action": "preserve"
+    },
+    {
+      "name": "AGENTS.md",
+      "kind": "file",
+      "action": "preserve"
+    },
+    {
+      "name": "ai",
+      "kind": "directory",
+      "action": "preserve"
+    },
+    {
+      "name": "artifacts",
+      "kind": "directory",
+      "action": "preserve"
+    },
+    {
+      "name": "CLAUDE.md",
+      "kind": "file",
+      "action": "preserve"
+    },
+    {
+      "name": "database",
+      "kind": "directory",
+      "action": "preserve"
+    },
+    {
+      "name": "design",
+      "kind": "directory",
+      "action": "preserve"
+    },
+    {
+      "name": "docs",
+      "kind": "directory",
+      "action": "preserve"
+    },
+    {
+      "name": "project",
+      "kind": "directory",
+      "action": "preserve"
+    },
+    {
+      "name": "README.md",
+      "kind": "file",
+      "action": "preserve"
+    },
+    {
+      "name": "test.txt",
+      "kind": "file",
+      "action": "preserve"
+    }
+  ],
+  "prior_changes_preserved": true,
+  "staged_paths": []
+}

@@ -29,13 +29,13 @@ Node development dependencies are pinned in BrowserTests/package.json and packag
 Phase 03 layout:
 
 ```text
-src/CevatBiyik.Application/
+project/src/CevatBiyik.Application/
   DTOs/         input and read models (no EF entities returned)
   Interfaces/   business services, slug helper, IRepository<T> port
   Services/     business rules and explicit soft deletion
   Validation/   FluentValidation validators and plain-text input policy
   Exceptions/   safe NotFoundException and ConflictException
-src/CevatBiyik.Infrastructure/Persistence/
+project/src/CevatBiyik.Infrastructure/Persistence/
   EfRepository.cs   MySQL implementation of the Application port
 ```
 

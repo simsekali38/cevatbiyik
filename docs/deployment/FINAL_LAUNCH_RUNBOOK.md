@@ -50,9 +50,9 @@ Onaylanan temiz commit'te, bağlantı secret'larını çıktılamadan:
 
 ```powershell
 git status --short
-dotnet tool restore
-pwsh -NoProfile -File tools/test.ps1 -Browser -HostedMySql
-pwsh -NoProfile -File tools/publish.ps1 -SkipTests
+dotnet tool restore --tool-manifest project/.config/dotnet-tools.json
+pwsh -NoProfile -File project/tools/test.ps1 -Browser -HostedMySql
+pwsh -NoProfile -File project/tools/publish.ps1 -SkipTests
 ```
 
 HostedMySql sadece yetkili geçici MariaDB testidir; MySQL8 onayı yerine geçmez.

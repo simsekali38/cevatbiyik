@@ -6,8 +6,8 @@ Clean demo records before running persistence tests; no automatic demo seeding i
 Run from the repository root with PowerShell 7, the pinned .NET 8 SDK, Node >=20 and Python 3.
 
 ```powershell
-dotnet restore CevatBiyik.sln
-pwsh -NoProfile -File tools/test.ps1
+dotnet restore project/CevatBiyik.sln
+pwsh -NoProfile -File project/tools/test.ps1
 ```
 
 The runner builds Release, runs unit/integration tests with TRX, six JS analytics tests, eight scanner self-tests
@@ -17,8 +17,8 @@ variables and restore them in finally. TRX files are in ignored TestResults; fix
 ## Real browser journeys
 
 ```powershell
-npm ci --ignore-scripts --prefix tests/CevatBiyik.BrowserTests
-pwsh -NoProfile -File tools/test.ps1 -Browser
+npm ci --ignore-scripts --prefix project/tests/CevatBiyik.BrowserTests
+pwsh -NoProfile -File project/tools/test.ps1 -Browser
 ```
 
 Playwright 1.62.1 is locked in package-lock.json as a development-only dependency. Installed Edge is the default;
@@ -59,9 +59,9 @@ On Windows, the runner reads that project's local secrets without printing them:
 
 ```powershell
 # First, only while the schema is entirely empty:
-pwsh -NoProfile -File tools/test.ps1 -HostedMySql -MigrationMySql
+pwsh -NoProfile -File project/tools/test.ps1 -HostedMySql -MigrationMySql
 # Then, reuse the resulting latest schema for rollback-isolated persistence tests:
-pwsh -NoProfile -File tools/test.ps1 -HostedMySql
+pwsh -NoProfile -File project/tools/test.ps1 -HostedMySql
 ```
 
 Run sequentially. The migration test deletes only its synthetic legacy contact on success, retaining the schema.
@@ -70,7 +70,7 @@ The hosted flag explicitly opts into the observed MariaDB version; ordinary opt-
 When the owner removes the database/account, remove this test secret too:
 
 ```powershell
-dotnet user-secrets remove 'Testing:MySql:ConnectionString' --project tests/CevatBiyik.IntegrationTests
+dotnet user-secrets remove 'Testing:MySql:ConnectionString' --project project/tests/CevatBiyik.IntegrationTests
 ```
 
 The agent does not automatically drop the database or revoke the hosting account.
@@ -81,7 +81,7 @@ Provision disposable schemas and a restricted test account; set credentials loca
 
 ```powershell
 $env:CEVATBIYIK_TEST_MYSQL = 'Server=localhost;Database=cevatbiyik_test_regression;User ID=TEST_USER;Password=TEST_PASSWORD;'
-pwsh -NoProfile -File tools/test.ps1 -MySql
+pwsh -NoProfile -File project/tools/test.ps1 -MySql
 Remove-Item Env:CEVATBIYIK_TEST_MYSQL
 ```
 
@@ -94,7 +94,7 @@ The separate migration transition test requires an **entirely empty** schema on 
 
 ```powershell
 $env:CEVATBIYIK_TEST_MYSQL_MIGRATIONS = 'Server=localhost;Database=cevatbiyik_test_migrations_run01;User ID=TEST_USER;Password=TEST_PASSWORD;'
-pwsh -NoProfile -File tools/test.ps1 -MigrationMySql
+pwsh -NoProfile -File project/tools/test.ps1 -MigrationMySql
 Remove-Item Env:CEVATBIYIK_TEST_MYSQL_MIGRATIONS
 ```
 
@@ -107,15 +107,15 @@ Both switches can be combined. Without variables **11 live MySQL tests skip**; o
 ## Targeted checks and release gates
 
 ```powershell
-dotnet test tests/CevatBiyik.IntegrationTests -c Release --filter Category=Workflow
-dotnet test tests/CevatBiyik.IntegrationTests -c Release --filter FullyQualifiedName~SecurityHardeningTests
-dotnet test tests/CevatBiyik.IntegrationTests -c Release --filter FullyQualifiedName~SeoEnhancementTests
-python tools/security_scan.py --history
-npm audit --package-lock-only --prefix tests/CevatBiyik.BrowserTests
+dotnet test project/tests/CevatBiyik.IntegrationTests -c Release --filter Category=Workflow
+dotnet test project/tests/CevatBiyik.IntegrationTests -c Release --filter FullyQualifiedName~SecurityHardeningTests
+dotnet test project/tests/CevatBiyik.IntegrationTests -c Release --filter FullyQualifiedName~SeoEnhancementTests
+python project/tools/security_scan.py --history
+npm audit --package-lock-only --prefix project/tests/CevatBiyik.BrowserTests
 dotnet list CevatBiyik.sln package --vulnerable --include-transitive
 ```
 
-`tools/test.ps1 -SecurityScan` adds the redacted working-tree/history scan and **fails on findings**.
+`project/tools/test.ps1 -SecurityScan` adds the redacted working-tree/history scan and **fails on findings**.
 SH-12-01 remains a release blocker, never allowlisted. Default success tests the scanner itself, not repository cleanliness.
 Phase 12's direct/transitive NuGet audit remains the baseline; Phase 13 adds no runtime/NuGet dependency.
 Never publish tests, gateway binaries, fake content, source business cards or local configuration to Plesk.

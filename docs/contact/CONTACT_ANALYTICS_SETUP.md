@@ -15,7 +15,7 @@ User-owned appsettings.json remains untouched by this phase. Missing real facts/
 - Web/Analytics/: runtime availability and versioned Data Protection consent.
 - Web/Controllers/ConsentController.cs, Views/Shared/_AnalyticsConsent.cshtml, wwwroot/js/analytics.js and site.js.
 - Tests: ContactNotificationTests.cs, ContactAnalyticsTests.cs, dedicated MySqlPersistenceTests case and
-  tests/CevatBiyik.BrowserTests/analytics.test.cjs (Node built-in runner; no npm installation).
+  project/tests/CevatBiyik.BrowserTests/analytics.test.cjs (Node built-in runner; no npm installation).
 
 ## Contact flow
 
@@ -44,14 +44,14 @@ requires unsupported authentication/TLS. Confirm STARTTLS, valid certificate cha
 Development templates (fill locally; never send real secrets in chat):
 
 ```powershell
-dotnet user-secrets set "Smtp:Host" "<SMTP_HOST>" --project src/CevatBiyik.Web
-dotnet user-secrets set "Smtp:Port" "587" --project src/CevatBiyik.Web
-dotnet user-secrets set "Smtp:UserName" "<SMTP_USERNAME>" --project src/CevatBiyik.Web
-dotnet user-secrets set "Smtp:Password" "<SMTP_PASSWORD>" --project src/CevatBiyik.Web
-dotnet user-secrets set "Smtp:From" "<VERIFIED_FROM_EMAIL>" --project src/CevatBiyik.Web
-dotnet user-secrets set "Smtp:Recipient" "<APPROVED_ADMIN_EMAIL>" --project src/CevatBiyik.Web
+dotnet user-secrets set "Smtp:Host" "<SMTP_HOST>" --project project/src/CevatBiyik.Web
+dotnet user-secrets set "Smtp:Port" "587" --project project/src/CevatBiyik.Web
+dotnet user-secrets set "Smtp:UserName" "<SMTP_USERNAME>" --project project/src/CevatBiyik.Web
+dotnet user-secrets set "Smtp:Password" "<SMTP_PASSWORD>" --project project/src/CevatBiyik.Web
+dotnet user-secrets set "Smtp:From" "<VERIFIED_FROM_EMAIL>" --project project/src/CevatBiyik.Web
+dotnet user-secrets set "Smtp:Recipient" "<APPROVED_ADMIN_EMAIL>" --project project/src/CevatBiyik.Web
 # Enable only after migration/provider and authorized recipient checks:
-dotnet user-secrets set "Smtp:Enabled" "true" --project src/CevatBiyik.Web
+dotnet user-secrets set "Smtp:Enabled" "true" --project project/src/CevatBiyik.Web
 ```
 
 Production equivalents: Smtp__Host, Smtp__Port, Smtp__UserName, Smtp__Password, Smtp__From,
@@ -146,17 +146,17 @@ No live Google requests were made during verification.
 ## Migration and verification
 
 Migration: 20261010200603_ContactNotifications (six columns + one index; no seeds/destructive Up; previous rows not queued).
-Reviewed generated MySQL SQL: docs/database/CONTACT_NOTIFICATIONS.sql. MySQL DDL can implicitly commit;
+Reviewed generated MySQL SQL: database/CONTACT_NOTIFICATIONS.sql. MySQL DDL can implicitly commit;
 backup/quiesce first, apply to dedicated test DB, validate, then perform owner-approved rollout. Down loses notification metadata.
 
 ```powershell
 dotnet build -c Release --no-restore -m:1 -p:UseSharedCompilation=false
 dotnet test -c Release --no-restore -m:1 -p:UseSharedCompilation=false
-node --test tests/CevatBiyik.BrowserTests/analytics.test.cjs
+node --test project/tests/CevatBiyik.BrowserTests/analytics.test.cjs
 dotnet format style --verify-no-changes --no-restore --severity warn --diagnostics IDE0011
-.\artifacts\ef8\dotnet-ef.exe migrations script LocalSeo ContactNotifications --project src/CevatBiyik.Infrastructure --startup-project src/CevatBiyik.Web --configuration Release
+.\artifacts\ef8\dotnet-ef.exe migrations script LocalSeo ContactNotifications --project project/src/CevatBiyik.Infrastructure --startup-project project/src/CevatBiyik.Web --configuration Release
 # After dedicated MySQL testing/backup and local authorization, not run by the agent:
-.\artifacts\ef8\dotnet-ef.exe database update ContactNotifications --project src/CevatBiyik.Infrastructure --startup-project src/CevatBiyik.Web
+.\artifacts\ef8\dotnet-ef.exe database update ContactNotifications --project project/src/CevatBiyik.Infrastructure --startup-project project/src/CevatBiyik.Web
 ```
 
 Dedicated opt-in tests require CEVATBIYIK_TEST_MYSQL pointing to cevatbiyik_test_*; never use the production DB.

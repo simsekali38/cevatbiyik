@@ -29,9 +29,9 @@ appsettings.Secrets.json
 .env.*
 
 ## Yüklenen dosyalar (Faz 06/07): içerik repoda değil, hosting/yedekte tutulur
-src/CevatBiyik.Web/wwwroot/uploads/*
-!src/CevatBiyik.Web/wwwroot/uploads/.gitkeep
-!src/CevatBiyik.Web/wwwroot/uploads/web.config
+project/src/CevatBiyik.Web/wwwroot/uploads/*
+!project/src/CevatBiyik.Web/wwwroot/uploads/.gitkeep
+!project/src/CevatBiyik.Web/wwwroot/uploads/web.config
 
 ## OS
 Thumbs.db
@@ -39,7 +39,7 @@ Thumbs.db
 
 ## Geçici
 test.txt
-src/CevatBiyik.Web/App_Data/
+project/src/CevatBiyik.Web/App_Data/
 
 ## Local security scanner cache
 __pycache__/
@@ -47,3 +47,6 @@ __pycache__/
 
 ## Test-only Node dependencies
 node_modules/
+
+# Server-owned local JSON stays private after relocation
+project/src/CevatBiyik.Web/appsettings*.json

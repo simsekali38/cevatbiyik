@@ -16,8 +16,8 @@ Two **sequential** runner invocations passed:
 
 | Invocation | Result |
 | --- | --- |
-| `tools/test.ps1 -HostedMySql -MigrationMySql` on empty schema | 173 unit + 180 integration = 353 passed, 10 persistence skips; legacy contact Up/Down/Up passed |
-| `tools/test.ps1 -HostedMySql` after schema setup | 173 unit + 189 integration = **362 passed**, 1 migration skip (already passed separately) |
+| `project/tools/test.ps1 -HostedMySql -MigrationMySql` on empty schema | 173 unit + 180 integration = 353 passed, 10 persistence skips; legacy contact Up/Down/Up passed |
+| `project/tools/test.ps1 -HostedMySql` after schema setup | 173 unit + 189 integration = **362 passed**, 1 migration skip (already passed separately) |
 | Distinct .NET cases across the two stages | **363 passed** = 173 unit + 179 local integration + 10 hosted persistence + 1 hosted migration |
 | Build/JS/scanner/style | 0 errors / 0 warnings; 6 JS and 8 scanner self-tests passed; style passed |
 | Final read-only hosting inspection | 26 tables, 8 applied migrations, **0 data rows** excluding migration history |
@@ -50,7 +50,7 @@ SH-12-01 remains report-only by owner instruction; no appsettings/history edits 
 | IntegrationTests/AdminWebFactory.cs | Optional explicit fixture content root and quiet fixture-only logging; normal test semantics preserved |
 | E2EHost project, solution | Local HTTPS gateway around actual MVC fixture, temporary certificate, SQLite/Identity/fake scanner and synthetic content |
 | BrowserTests/e2e.test.cjs, package.json/package-lock.json | 4 actual Edge journeys, fresh contexts, external network blocking; pinned test-only Playwright |
-| tools/test.ps1, .gitignore | Repeatable failure-propagating runner, explicit MySQL flags, owned hidden fixture lifecycle and ignored Node dependencies |
+| project/tools/test.ps1, .gitignore | Repeatable failure-propagating runner, explicit MySQL flags, owned hidden fixture lifecycle and ignored Node dependencies |
 | TESTING, ARCHITECTURE, DECISIONS, CHANGELOG, phase guides, database/testing/QA docs | ADR-026, safety, coverage matrix, commands/results/limitations |
 
 No production source feature code changed; the pre-existing user-owned appsettings.json modification is outside Phase 13.
@@ -73,10 +73,10 @@ No production source feature code changed; the pre-existing user-owned appsettin
 Executed commands:
 
 ```powershell
-pwsh -NoProfile -File tools/test.ps1 -Browser
-node --test --test-concurrency=1 tests/CevatBiyik.BrowserTests/e2e.test.cjs
-npm audit --package-lock-only --prefix tests/CevatBiyik.BrowserTests
-python tools/security_scan.py --history
+pwsh -NoProfile -File project/tools/test.ps1 -Browser
+node --test --test-concurrency=1 project/tests/CevatBiyik.BrowserTests/e2e.test.cjs
+npm audit --package-lock-only --prefix project/tests/CevatBiyik.BrowserTests
+python project/tools/security_scan.py --history
 git diff --check
 ```
 

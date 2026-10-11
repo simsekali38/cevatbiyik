@@ -17,3 +17,6 @@ After coding:
 
 Never claim tests passed unless they were actually executed.
 Never fabricate production content.
+
+Layout: project/CevatBiyik.sln; docs/DECISIONS.md; ai/MASTER_PROMPT.md;
+ai/project-manifest.json; design/BRAND_GUIDELINES.md. Run tools from project/.

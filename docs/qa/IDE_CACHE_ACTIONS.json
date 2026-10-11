@@ -1,0 +1,22 @@
+[
+  {
+    "source": ".vs\\CevatBiyik\\DesignTimeBuild",
+    "destination": "artifacts\\ide-cache\\20261012\\.vs_CevatBiyik_DesignTimeBuild",
+    "action": "preserved outside IDE cache"
+  },
+  {
+    "source": ".vs\\CevatBiyik\\FileContentIndex",
+    "destination": "artifacts\\ide-cache\\20261012\\.vs_CevatBiyik_FileContentIndex",
+    "action": "preserved outside IDE cache"
+  },
+  {
+    "source": ".vs\\CevatBiyik\\CopilotIndices",
+    "destination": "artifacts\\ide-cache\\20261012\\.vs_CevatBiyik_CopilotIndices",
+    "action": "preserved outside IDE cache"
+  },
+  {
+    "source": ".vs\\ProjectEvaluation",
+    "destination": "artifacts\\ide-cache\\20261012\\.vs_ProjectEvaluation",
+    "action": "preserved outside IDE cache"
+  }
+]

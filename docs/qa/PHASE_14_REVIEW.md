@@ -10,15 +10,15 @@ MySQL 8 hedefi ve Plesk/filesystem sınırları korundu.
 
 | Katman / dosyalar | Sonuç |
 | --- | --- |
-| `src/CevatBiyik.Web/Performance/StaticAssetPolicy.cs`, `Program.cs` | CSS/JS/SVG için HTTPS Brotli/Gzip; doğrulanmış içerik hash'i/GUID WebP immutable cache; sürümsüz/sahte hash bir saat must-revalidate; ETag/304/Vary korunur |
+| `project/src/CevatBiyik.Web/Performance/StaticAssetPolicy.cs`, `Program.cs` | CSS/JS/SVG için HTTPS Brotli/Gzip; doğrulanmış içerik hash'i/GUID WebP immutable cache; sürümsüz/sahte hash bir saat must-revalidate; ETag/304/Vary korunur |
 | `Security/SecurityHeadersMiddleware.cs` | Public HTML dahil no-store; nonce, admin/hata/download güvenlik sınırları korunur; HTML compression ve tam sayfa OutputCache/ResponseCaching kullanılmaz |
-| `src/CevatBiyik.Application/Services/{PageContent,Profile,Setting}Service.cs` | Public DTO'lar scoped snapshot olarak tekrar kullanılır; başarılı yazmada invalidation, cancellation, eksik profil cache'i; cross-request cache yok |
-| `tools/build-assets.cjs`, `wwwroot/css/*.min.css`, `wwwroot/js/*.min.js` | Deterministik yerel minify; kaynak+çıktı birlikte sürümlenir; runtime dependency eklenmez |
+| `project/src/CevatBiyik.Application/Services/{PageContent,Profile,Setting}Service.cs` | Public DTO'lar scoped snapshot olarak tekrar kullanılır; başarılı yazmada invalidation, cancellation, eksik profil cache'i; cross-request cache yok |
+| `project/tools/build-assets.cjs`, `wwwroot/css/*.min.css`, `wwwroot/js/*.min.js` | Deterministik yerel minify; kaynak+çıktı birlikte sürümlenir; runtime dependency eklenmez |
 | Public `_Layout`, `_AnalyticsConsent`, `Articles/Detail` | Minified/versioned asset referansları; footer lazy/async; detay kapağı eager/high priority ve boyutlar; listelerde mevcut lazy/dimensions korunur |
 | Admin `_AdminLayout` ve altı CMS `Edit.cshtml` | Quill sadece zengin içerik düzenlerken yüklenir; login/dashboard/listelerde 209 KB editör JS'i ve core CSS'i istenmez |
 | `wwwroot/js/admin.js`, `wwwroot/css/admin.css` | Quill getFormat çağrısının blur/Tab sırasında odağı geri çekmesi düzeltildi; sticky header scroll margin; modal Tab döngüsü, native Escape ve editöre odak dönüşü |
 | `RequestSnapshotTests`, `QueryBudgetTests`, `PerformanceAccessibilityTests` | 13 yeni .NET vakası: scoped invalidation/cancellation, sabit query budget/no-tracking, compression/hash/304/no-store/nonce/dimensions/cover policy |
-| `phase14.test.cjs`, `phase14-audit.mjs`, `tools/phase14-audit.ps1`, `tools/test.ps1` | Axe, klavye, modal, mobil reflow, forced colors ve tekrar üretilebilir Lighthouse/AA denetimi |
+| `phase14.test.cjs`, `phase14-audit.mjs`, `project/tools/phase14-audit.ps1`, `project/tools/test.ps1` | Axe, klavye, modal, mobil reflow, forced colors ve tekrar üretilebilir Lighthouse/AA denetimi |
 | `DECISIONS.md` | ADR-030: ölçülen asset teslimi, güvenli cache/compression ve scoped public snapshot kararları |
 
 Sistem fontları (Segoe UI/Arial/Georgia) korundu; harici font/FOIT bağımlılığı yok.
@@ -103,15 +103,15 @@ gerçek 400% zoom, touch-target ve tüm hata/yayın/consent durumları için ins
 ## Doğrulama komutları ve sonuçları
 
 ```powershell
-node tools/build-assets.cjs
-pwsh -NoProfile -File tools/phase14-audit.ps1 -Stage baseline -NoBuild
-pwsh -NoProfile -File tools/phase14-audit.ps1 -Stage after -NoBuild
-pwsh -NoProfile -File tools/test.ps1 -Browser -HostedMySql
-dotnet build CevatBiyik.sln -c Release --no-restore -m:1 -p:UseSharedCompilation=false
-dotnet test tests/CevatBiyik.IntegrationTests -c Release --no-build --no-restore --filter FullyQualifiedName~PerformanceAccessibilityTests
-node tools/build-assets.cjs --check
+node project/tools/build-assets.cjs
+pwsh -NoProfile -File project/tools/phase14-audit.ps1 -Stage baseline -NoBuild
+pwsh -NoProfile -File project/tools/phase14-audit.ps1 -Stage after -NoBuild
+pwsh -NoProfile -File project/tools/test.ps1 -Browser -HostedMySql
+dotnet build project/CevatBiyik.sln -c Release --no-restore -m:1 -p:UseSharedCompilation=false
+dotnet test project/tests/CevatBiyik.IntegrationTests -c Release --no-build --no-restore --filter FullyQualifiedName~PerformanceAccessibilityTests
+node project/tools/build-assets.cjs --check
 dotnet format style CevatBiyik.sln --verify-no-changes --no-restore --diagnostics IDE0011
-npm audit --prefix tests/CevatBiyik.BrowserTests --audit-level=high
+npm audit --prefix project/tests/CevatBiyik.BrowserTests --audit-level=high
 ```
 
 Baseline komutu optimizasyondan önce çalıştırıldı; bugünkü kodla tekrar baseline üretmek önceki

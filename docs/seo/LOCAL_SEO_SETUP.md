@@ -4,7 +4,7 @@ Implemented and owner-approved 2026-10-10. ADR-023 extends ADR-019/021/022 witho
 
 ## Modules / file paths
 
-- Domain: src/CevatBiyik.Domain/Entities/Location.cs (LocationKind, Location and two association entities).
+- Domain: project/src/CevatBiyik.Domain/Entities/Location.cs (LocationKind, Location and two association entities).
 - Application: DTOs/LocationDtos.cs, Interfaces/ILocationService.cs, Services/LocationService.cs,
   Services/LocalContentQuality.cs, Validation/LocationValidator.cs; DI and media/reference/public-route policies.
 - Infrastructure: Persistence/Configurations/LocationConfiguration.cs, AppDbContext/EfRepository,
@@ -63,7 +63,7 @@ No fake rating/review, credentials, hours, geocoordinates or private registry/id
 ```powershell
 dotnet build -c Release --no-restore -m:1 -p:UseSharedCompilation=false
 dotnet test -c Release --no-restore -m:1 -p:UseSharedCompilation=false
-.\artifacts\ef8\dotnet-ef.exe migrations script SeoRedirects LocalSeo --project src/CevatBiyik.Infrastructure --startup-project src/CevatBiyik.Web --configuration Release --no-build --output docs/database/LOCAL_SEO.sql
+.\artifacts\ef8\dotnet-ef.exe migrations script SeoRedirects LocalSeo --project project/src/CevatBiyik.Infrastructure --startup-project project/src/CevatBiyik.Web --configuration Release --no-build --output database/LOCAL_SEO.sql
 ```
 
 Reviewed SQL adds three empty tables, eight indexes and six FKs; no seeds or destructive Up. Body longtext and details
@@ -72,7 +72,7 @@ Validate first with CEVATBIYIK_TEST_MYSQL against a dedicated cevatbiyik_test_* 
 Back up DB and media/files together before applying reviewed migration to the intended local environment:
 
 ```powershell
-.\artifacts\ef8\dotnet-ef.exe database update LocalSeo --project src/CevatBiyik.Infrastructure --startup-project src/CevatBiyik.Web --configuration Release
+.\artifacts\ef8\dotnet-ef.exe database update LocalSeo --project project/src/CevatBiyik.Infrastructure --startup-project project/src/CevatBiyik.Web --configuration Release
 ```
 
 Phase 10 closure and commit were authorized by the owner. The agent did not run database update, deploy, or enable schema/indexing flags. User-owned appsettings

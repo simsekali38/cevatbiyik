@@ -11,7 +11,7 @@ Kutular gerçek operatör kanıtıyla işaretlenir; yerel test sonuçları hosti
 
 - [ ] Owner onaylı commit; dirty-state olmadan release yeniden üretildi.
 - [ ] Build, .NET/JS/tarayıcı/regresyon, format, package audit sonuçları kaydedildi.
-- [ ] `tools/publish.ps1` ve release denetimi geçti; SHA-256 manifesti saklandı.
+- [ ] `project/tools/publish.ps1` ve release denetimi geçti; SHA-256 manifesti saklandı.
 - [ ] Release'de appsettings, gerçek uploads/private, SQL seed, test host, secret/key yok.
 - [ ] win-x64 libSkiaSharp.dll ve yerel minified asset'ler tam.
 

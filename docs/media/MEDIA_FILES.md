@@ -60,19 +60,19 @@ Süreç çökmesi telafiyi engelleyebilir; age-grace ve mutabakat bu nedenle ger
 Yerel Development ortamında gerçek hosting değerlerini kendi makinenizde girin; sırları repoya yazmayın.
 
 ```powershell
-dotnet user-secrets set 'Storage:DefenderExecutable' 'C:\ProgramData\Microsoft\Windows Defender\Platform\CONTENT_REQUIRED\MpCmdRun.exe' --project src/CevatBiyik.Web
-dotnet user-secrets set 'Storage:PrivateRoot' 'D:\CONTENT_REQUIRED\private-files' --project src/CevatBiyik.Web
+dotnet user-secrets set 'Storage:DefenderExecutable' 'C:\ProgramData\Microsoft\Windows Defender\Platform\CONTENT_REQUIRED\MpCmdRun.exe' --project project/src/CevatBiyik.Web
+dotnet user-secrets set 'Storage:PrivateRoot' 'D:\CONTENT_REQUIRED\private-files' --project project/src/CevatBiyik.Web
 dotnet build -c Release
 dotnet test -c Release --no-build
-.\artifacts\ef8\dotnet-ef.exe migrations script CmsFeatures MediaFiles --project src/CevatBiyik.Infrastructure --startup-project src/CevatBiyik.Web --configuration Release --output artifacts/MediaFiles.sql
+.\artifacts\ef8\dotnet-ef.exe migrations script CmsFeatures MediaFiles --project project/src/CevatBiyik.Infrastructure --startup-project project/src/CevatBiyik.Web --configuration Release --output artifacts/MediaFiles.sql
 ```
 
-`MediaFiles` migration mevcut; yeniden migrations add çalıştırmayın. Yalnızca PrivateDocuments tablosu ve unique StoragePath index eklenir; seed/destructive Up işlemi yoktur. SQL: docs/database/MEDIA_FILES.sql. MySQL DDL implicit commit yapabilir; script transaction tam geri alma garantisi değildir. Down tabloyu siler ve belge metadata kaybına yol açar; üretimde geri yükleme planını kullanın.
+`MediaFiles` migration mevcut; yeniden migrations add çalıştırmayın. Yalnızca PrivateDocuments tablosu ve unique StoragePath index eklenir; seed/destructive Up işlemi yoktur. SQL: database/MEDIA_FILES.sql. MySQL DDL implicit commit yapabilir; script transaction tam geri alma garantisi değildir. Down tabloyu siler ve belge metadata kaybına yol açar; üretimde geri yükleme planını kullanın.
 
 Dedicated `cevatbiyik_test_*` MySQL 8 doğrulaması, yedek ve SQL incelemesinden sonra hedef yerel DB'ye uygulanacak komut:
 
 ```powershell
-.\artifacts\ef8\dotnet-ef.exe database update MediaFiles --project src/CevatBiyik.Infrastructure --startup-project src/CevatBiyik.Web --configuration Release
+.\artifacts\ef8\dotnet-ef.exe database update MediaFiles --project project/src/CevatBiyik.Infrastructure --startup-project project/src/CevatBiyik.Web --configuration Release
 ```
 
 Bu görevde canlı/yerel cevodb update çalıştırılmadı. EF CLI 8 kullanılır; root manifestin farklı major sürümü bu iş için kullanılmaz.

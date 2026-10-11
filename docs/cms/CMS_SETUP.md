@@ -28,27 +28,27 @@ dotnet tool install dotnet-ef --version 8.0.29 --tool-path artifacts/ef8
 $env:ASPNETCORE_ENVIRONMENT = 'Development'
 dotnet build -c Release
 dotnet test -c Release
-.\artifacts\ef8\dotnet-ef.exe migrations has-pending-model-changes --project src/CevatBiyik.Infrastructure --startup-project src/CevatBiyik.Web
+.\artifacts\ef8\dotnet-ef.exe migrations has-pending-model-changes --project project/src/CevatBiyik.Infrastructure --startup-project project/src/CevatBiyik.Web
 ```
 
 Configure the local connection if not already set; replace placeholders locally, never in tracked files:
 
 ```powershell
-dotnet user-secrets set 'ConnectionStrings:DefaultConnection' 'Server=CONTENT_REQUIRED;Port=3306;Database=cevodb;User ID=CONTENT_REQUIRED;Password=CONTENT_REQUIRED;' --project src/CevatBiyik.Web
+dotnet user-secrets set 'ConnectionStrings:DefaultConnection' 'Server=CONTENT_REQUIRED;Port=3306;Database=cevodb;User ID=CONTENT_REQUIRED;Password=CONTENT_REQUIRED;' --project project/src/CevatBiyik.Web
 ```
 
 First validate on a dedicated MySQL 8 test database (name must start cevatbiyik_test_):
 
 ```powershell
 $env:CEVATBIYIK_TEST_MYSQL = 'Server=CONTENT_REQUIRED;Database=cevatbiyik_test_phase06;User ID=CONTENT_REQUIRED;Password=CONTENT_REQUIRED;'
-dotnet test tests/CevatBiyik.IntegrationTests --filter FullyQualifiedName~MySqlPersistenceTests
+dotnet test project/tests/CevatBiyik.IntegrationTests --filter FullyQualifiedName~MySqlPersistenceTests
 Remove-Item Env:CEVATBIYIK_TEST_MYSQL
 ```
 
 After review/test, apply to the intended local development database:
 
 ```powershell
-.\artifacts\ef8\dotnet-ef.exe database update CmsFeatures --project src/CevatBiyik.Infrastructure --startup-project src/CevatBiyik.Web
+.\artifacts\ef8\dotnet-ef.exe database update CmsFeatures --project project/src/CevatBiyik.Infrastructure --startup-project project/src/CevatBiyik.Web
 ```
 
 This applies missing preceding IdentityAdmin too. First real administrator setup: ../security/ADMIN_SETUP.md.
@@ -96,7 +96,7 @@ No other profession/location/rating facts are inferred. Do not enable indexing/s
 
 ```powershell
 $env:CEVATBIYIK_CMS_PREVIEW = '1'
-dotnet test tests/CevatBiyik.IntegrationTests --filter 'FullyQualifiedName~TaxonomyAndArticleSeo|FullyQualifiedName~MediaUpload'
+dotnet test project/tests/CevatBiyik.IntegrationTests --filter 'FullyQualifiedName~TaxonomyAndArticleSeo|FullyQualifiedName~MediaUpload'
 Remove-Item Env:CEVATBIYIK_CMS_PREVIEW
 python -m http.server 5086 --bind 127.0.0.1 --directory artifacts/cms-preview
 ```

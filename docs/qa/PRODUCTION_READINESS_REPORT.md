@@ -18,14 +18,14 @@ için yeni ADR açılmadı. ADR-008/025/030/032 kararları uygulanır.
 ## Tekrarlanabilir doğrulama
 
 ```powershell
-pwsh -NoProfile -File tools/test.ps1 -Browser -HostedMySql
+pwsh -NoProfile -File project/tools/test.ps1 -Browser -HostedMySql
 dotnet format analyzers CevatBiyik.sln --verify-no-changes --no-restore --severity warn
-python tools/security_scan.py
-python tools/security_scan.py --history
+python project/tools/security_scan.py
+python project/tools/security_scan.py --history
 dotnet list CevatBiyik.sln package --vulnerable --include-transitive
-npm audit --prefix tests/CevatBiyik.BrowserTests --audit-level=high
-pwsh -NoProfile -File tools/phase14-audit.ps1 -Stage phase16 -NoBuild
-pwsh -NoProfile -File tools/publish.ps1 -SkipTests
+npm audit --prefix project/tests/CevatBiyik.BrowserTests --audit-level=high
+pwsh -NoProfile -File project/tools/phase14-audit.ps1 -Stage phase16 -NoBuild
+pwsh -NoProfile -File project/tools/publish.ps1 -SkipTests
 ```
 
 `-SkipTests` yalnızca bu çalışma ağacında tam testler çalıştırıldığı için kullanıldı.

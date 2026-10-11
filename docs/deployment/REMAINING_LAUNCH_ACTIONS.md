@@ -51,10 +51,10 @@ Bu görev sunucuyu veya veritabanını değiştirmez. Kodda migration farkı yok
 # Yerel test sunucusu; gerçek DB yazma testleri bilinçli olarak seçilmez.
 $env:AllowedHosts = '*'
 $env:Site__BaseUrl = 'https://cevatbiyik.av.tr'
-pwsh -NoProfile -File tools/test.ps1 -Browser
-pwsh -NoProfile -File tools/phase14-audit.ps1 -Stage remaining -NoBuild
-pwsh -NoProfile -File tools/read-only-db-check.ps1
-pwsh -NoProfile -File tools/publish.ps1 -SkipTests
+pwsh -NoProfile -File project/tools/test.ps1 -Browser
+pwsh -NoProfile -File project/tools/phase14-audit.ps1 -Stage remaining -NoBuild
+pwsh -NoProfile -File project/tools/read-only-db-check.ps1
+pwsh -NoProfile -File project/tools/publish.ps1 -SkipTests
 ```
 
 Bu ortam değişkenleri yalnızca test terminali içindir; Production AllowedHosts='*'

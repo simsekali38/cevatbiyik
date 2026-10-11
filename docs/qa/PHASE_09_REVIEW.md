@@ -35,7 +35,7 @@ Commands:
 dotnet build -c Release --no-restore
 dotnet test -c Release --no-restore --logger "trx;LogFilePrefix=phase09-final"
 dotnet format style CevatBiyik.sln --no-restore --diagnostics IDE0011 --verify-no-changes
-.\artifacts\ef8\dotnet-ef.exe migrations script PublicSiteContent SeoRedirects --project src/CevatBiyik.Infrastructure --startup-project src/CevatBiyik.Web --configuration Release --no-build --output docs/database/SEO_REDIRECTS.sql
+.\artifacts\ef8\dotnet-ef.exe migrations script PublicSiteContent SeoRedirects --project project/src/CevatBiyik.Infrastructure --startup-project project/src/CevatBiyik.Web --configuration Release --no-build --output database/SEO_REDIRECTS.sql
 git diff --check
 ```
 

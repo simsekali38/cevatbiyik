@@ -1,0 +1,13 @@
+@model IReadOnlyList<BreadcrumbItem>
+@if (Model.Count > 0)
+{
+    <nav class="container public-breadcrumb content-breadcrumb" aria-label="İçerik yolu">
+        <ol class="breadcrumb">
+            @foreach (var item in Model)
+            {
+                if (item.Url is { } url) { <li class="breadcrumb-item"><a href="@url">@item.Title</a></li> }
+                else { <li class="breadcrumb-item active" aria-current="page">@item.Title</li> }
+            }
+        </ol>
+    </nav>
+}

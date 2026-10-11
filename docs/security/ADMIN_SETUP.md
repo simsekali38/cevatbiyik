@@ -26,14 +26,14 @@ Admin responses are no-store and noindex. Every state-changing form includes an 
 
 The existing InitialCreate migration remains intact. IdentityAdmin adds seven Identity
 tables and AuditLogs; it does not alter the four content tables or seed credentials.
-Review the generated [SQL](../database/IDENTITY_ADMIN.sql) and back up the target DB first.
+Review the generated [SQL](../../database/IDENTITY_ADMIN.sql) and back up the target DB first.
 MySQL DDL is not fully transactional: use a reviewed backup/restore plan rather than
 assuming a failed migration can be rolled back automatically.
 
 ```powershell
-dotnet build CevatBiyik.sln
-dotnet test CevatBiyik.sln
-dotnet ef database update IdentityAdmin --project src/CevatBiyik.Infrastructure --startup-project src/CevatBiyik.Web
+dotnet build project/CevatBiyik.sln
+dotnet test project/CevatBiyik.sln
+dotnet ef database update IdentityAdmin --project project/src/CevatBiyik.Infrastructure --startup-project project/src/CevatBiyik.Web
 ```
 
 Expected new tables: AspNetUsers, AspNetRoles, AspNetUserRoles, AspNetUserClaims,
@@ -47,15 +47,15 @@ SQLite tests validate real Identity/cookies/repositories but do not replace MySQ
 Replace the placeholders locally. Do not paste credentials into chat or commit them.
 
 ```powershell
-dotnet user-secrets set "AdminBootstrap:UserName" "<ADMIN_USER_NAME>" --project src/CevatBiyik.Web
-dotnet user-secrets set "AdminBootstrap:Email" "<ADMIN_EMAIL>" --project src/CevatBiyik.Web
-dotnet user-secrets set "AdminBootstrap:Password" "<STRONG_UNIQUE_PASSWORD>" --project src/CevatBiyik.Web
+dotnet user-secrets set "AdminBootstrap:UserName" "<ADMIN_USER_NAME>" --project project/src/CevatBiyik.Web
+dotnet user-secrets set "AdminBootstrap:Email" "<ADMIN_EMAIL>" --project project/src/CevatBiyik.Web
+dotnet user-secrets set "AdminBootstrap:Password" "<STRONG_UNIQUE_PASSWORD>" --project project/src/CevatBiyik.Web
 $env:ASPNETCORE_ENVIRONMENT = "Development"
-dotnet run --project src/CevatBiyik.Web --no-launch-profile -- --provision-admin
-dotnet user-secrets remove "AdminBootstrap:Password" --project src/CevatBiyik.Web
-dotnet user-secrets remove "AdminBootstrap:UserName" --project src/CevatBiyik.Web
-dotnet user-secrets remove "AdminBootstrap:Email" --project src/CevatBiyik.Web
-dotnet run --project src/CevatBiyik.Web --launch-profile https
+dotnet run --project project/src/CevatBiyik.Web --no-launch-profile -- --provision-admin
+dotnet user-secrets remove "AdminBootstrap:Password" --project project/src/CevatBiyik.Web
+dotnet user-secrets remove "AdminBootstrap:UserName" --project project/src/CevatBiyik.Web
+dotnet user-secrets remove "AdminBootstrap:Email" --project project/src/CevatBiyik.Web
+dotnet run --project project/src/CevatBiyik.Web --launch-profile https
 ```
 
 Provisioning creates the role/account and an audit event in one transaction, then exits

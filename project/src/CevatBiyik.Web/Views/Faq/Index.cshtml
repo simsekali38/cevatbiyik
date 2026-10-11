@@ -1,0 +1,20 @@
+@model PagedResult<FaqDto>
+<div class="public-content-page faq-public">
+<header class="container reading-width content-heading"><h1>Sıkça Sorulan Sorular</h1><p>Yanıtı görmek için soruyu açın.</p></header>
+<section class="faq-content"><div class="container reading-width">
+@if (Model.Items.Count == 0) { <div class="empty-state"><h2>Henüz yayımlanmış soru bulunmuyor</h2><a asp-controller="Home" asp-action="Contact">İletişime geç</a></div> }
+else
+{
+    <div class="accordion faq-accordion">
+    @foreach (var item in Model.Items)
+    {
+        <details class="accordion-item"><summary class="faq-toggle" id="faq-question-@item.Id">@item.Question</summary><rich-content value="@item.Answer" class="accordion-body" role="region" aria-labelledby="faq-question-@item.Id"></rich-content></details>
+    }
+    </div>
+}
+<nav class="page-links" aria-label="SSS sayfaları">
+@if (Model.HasPrevious) { <a class="btn btn-outline-primary" asp-route-page="@(Model.Page - 1)">Önceki sayfa</a> }
+@if (Model.HasNext) { <a class="btn btn-outline-primary" asp-route-page="@(Model.Page + 1)">Sonraki sayfa</a> }
+</nav>
+</div></section>
+</div>

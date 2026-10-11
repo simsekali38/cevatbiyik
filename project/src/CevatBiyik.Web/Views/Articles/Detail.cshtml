@@ -1,0 +1,63 @@
+@model ArticleDto
+@{
+    var related = ViewData["RelatedArticles"] as IReadOnlyList<ArticleDto> ?? Array.Empty<ArticleDto>();
+}
+<div class="article-detail-public">
+    <article>
+        <header class="page-heading">
+            <div class="container reading-width">
+
+                @if (CevatBiyik.Application.Validation.ContentPublication.Complete(Model.CategoryName))
+                {
+                    <a class="article-category" asp-action="Index" asp-route-topic="@Model.CategoryId">@Model.CategoryName</a>
+                }
+                <h1>@Model.Title</h1>
+                <div class="article-dates">
+                    @if (Model.PublishedAt is { } published)
+                    {
+                        <span>Yayın tarihi: <time datetime="@published.ToString("O")">@published.ToString("dd.MM.yyyy")</time></span>
+                        @if (Model.UpdatedAt is { } updated && updated > published)
+                        {
+                            <span>Güncelleme tarihi: <time datetime="@updated.ToString("O")">@updated.ToString("dd.MM.yyyy")</time></span>
+                        }
+                    }
+                </div>
+            </div>
+        </header>
+        <div class="section-pad article-reading">
+            <div class="container reading-width">
+                @if (Model.Cover is { } cover)
+                {
+                    <img src="@cover.Url" alt="@cover.AltText" width="@cover.Width" height="@cover.Height" class="article-cover" loading="eager" fetchpriority="high" decoding="async" />
+                }
+                @if (CevatBiyik.Application.Validation.ContentPublication.Complete(Model.Excerpt))
+                {
+                    <p class="article-lead">@Model.Excerpt</p>
+                }
+                <rich-content value="@Model.Content"></rich-content>
+                @if (Model.Tags.Count > 0)
+                {
+                    <ul class="article-tags" aria-label="Makale etiketleri">
+                        @foreach (var tag in Model.Tags)
+                        {
+                            <li><a asp-action="Index" asp-route-tag="@tag.Slug">@tag.Name</a></li>
+                        }
+                    </ul>
+                }
+                <div class="article-contact"><a class="btn btn-light" asp-controller="Home" asp-action="Contact">İletişime geçin <span aria-hidden="true">↗</span></a></div>
+                @if (related.Count > 0)
+                {
+                    <nav class="article-related" aria-label="İlgili makaleler">
+                        <h2>İlgili makaleler</h2>
+                        <ul>@foreach (var item in related)
+                        {
+                            <li><a asp-action="Detail" asp-route-slug="@item.Slug">@item.Title <span aria-hidden="true">↗</span></a></li>
+                        }</ul>
+                    </nav>
+                }
+                <a class="text-link article-back" asp-action="Index"><span aria-hidden="true">←</span> Tüm makaleler</a>
+            </div>
+        </div>
+    </article>
+    <partial name="_RelatedLocations" />
+</div>

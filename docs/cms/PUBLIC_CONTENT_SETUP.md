@@ -20,17 +20,17 @@ Use EF 8.0.29 from `artifacts/ef8`, preserving the separately managed tool manif
 ```powershell
 dotnet build -c Release --no-restore
 dotnet test -c Release --no-restore
-.\artifacts\ef8\dotnet-ef.exe migrations script MediaFiles PublicSiteContent --project src/CevatBiyik.Infrastructure --startup-project src/CevatBiyik.Web --configuration Release --no-build --output docs/database/PUBLIC_SITE_CONTENT.sql
+.\artifacts\ef8\dotnet-ef.exe migrations script MediaFiles PublicSiteContent --project project/src/CevatBiyik.Infrastructure --startup-project project/src/CevatBiyik.Web --configuration Release --no-build --output database/PUBLIC_SITE_CONTENT.sql
 ```
 
 Review SQL and validate on a dedicated MySQL 8 test database whose name starts with `cevatbiyik_test_`.
-Use `docs/database/MIGRATIONS.md` for the environment-variable test connection procedure. Never use production
+Use `database/MIGRATIONS.md` for the environment-variable test connection procedure. Never use production
 credentials for tests. SQL/model/SQLite checks do not certify a real MySQL update.
 
 After dedicated validation and a coordinated backup, apply the reviewed migration to the intended local database:
 
 ```powershell
-.\artifacts\ef8\dotnet-ef.exe database update PublicSiteContent --project src/CevatBiyik.Infrastructure --startup-project src/CevatBiyik.Web --configuration Release
+.\artifacts\ef8\dotnet-ef.exe database update PublicSiteContent --project project/src/CevatBiyik.Infrastructure --startup-project project/src/CevatBiyik.Web --configuration Release
 ```
 
 The agent did not execute this database update. MySQL DDL can commit implicitly; the SQL transaction wrapper
@@ -72,7 +72,7 @@ Optional isolated Razor export (no real database or lawyer facts):
 ```powershell
 $env:CEVATBIYIK_CMS_PREVIEW = '1'
 try {
-    dotnet test tests/CevatBiyik.IntegrationTests -c Release --filter FullyQualifiedName~AdminCms_PublishesReviewedContent
+    dotnet test project/tests/CevatBiyik.IntegrationTests -c Release --filter FullyQualifiedName~AdminCms_PublishesReviewedContent
 } finally {
     Remove-Item Env:CEVATBIYIK_CMS_PREVIEW
 }

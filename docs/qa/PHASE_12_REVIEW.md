@@ -12,28 +12,28 @@ OPEN_QUESTIONS, architecture/security/deployment and architecture/backend/securi
 
 | File | Concrete change |
 | --- | --- |
-| src/CevatBiyik.Web/Program.cs | Explicit cookie Path, normalized login, global static limiter, bounded proxy trust/HSTS and corrected middleware order/upload anchors |
-| src/CevatBiyik.Web/Security/SecurityHeadersMiddleware.cs | Nonce and final-response headers; preserve sandbox/consent overrides; Admin/error no-store/noindex |
-| src/CevatBiyik.Web/Security/ConsentCspMiddleware.cs | Reuse existing explicit opt-in CSP inside exception handling and after limiter |
-| tests/CevatBiyik.IntegrationTests/SecurityHardeningTests.cs | 36 header/proxy/limit/auth/image attack cases |
-| tests/CevatBiyik.IntegrationTests/AdminFlowTests.cs | Cookie host-prefix attributes/ticket lifetime plus expired/disabled Admin document-access test |
-| tests/CevatBiyik.IntegrationTests/DocumentFlowTests.cs | Sandbox preserved on download; security headers restored after audit failure/500 |
-| tests/CevatBiyik.UnitTests/FileLibraryTests.cs | 10 more active/escaped PDF name attacks |
-| tools/security_scan.py, .gitignore | Redacted standard-library working-tree/reachable-history scanner, eight self-tests; ignore local Python cache |
+| project/src/CevatBiyik.Web/Program.cs | Explicit cookie Path, normalized login, global static limiter, bounded proxy trust/HSTS and corrected middleware order/upload anchors |
+| project/src/CevatBiyik.Web/Security/SecurityHeadersMiddleware.cs | Nonce and final-response headers; preserve sandbox/consent overrides; Admin/error no-store/noindex |
+| project/src/CevatBiyik.Web/Security/ConsentCspMiddleware.cs | Reuse existing explicit opt-in CSP inside exception handling and after limiter |
+| project/tests/CevatBiyik.IntegrationTests/SecurityHardeningTests.cs | 36 header/proxy/limit/auth/image attack cases |
+| project/tests/CevatBiyik.IntegrationTests/AdminFlowTests.cs | Cookie host-prefix attributes/ticket lifetime plus expired/disabled Admin document-access test |
+| project/tests/CevatBiyik.IntegrationTests/DocumentFlowTests.cs | Sandbox preserved on download; security headers restored after audit failure/500 |
+| project/tests/CevatBiyik.UnitTests/FileLibraryTests.cs | 10 more active/escaped PDF name attacks |
+| project/tools/security_scan.py, .gitignore | Redacted standard-library working-tree/reachable-history scanner, eight self-tests; ignore local Python cache |
 | docs/security/SECURITY_HARDENING.md | Configuration, controls, hosting verification, explicit limitations and primary references |
 | DECISIONS/SECURITY/ARCHITECTURE/DEPLOYMENT/TESTING/CHANGELOG/OPEN_QUESTIONS and phase guides | ADR-025, findings, current status and verification record |
 
 ## Executed verification
 
 ```powershell
-dotnet build CevatBiyik.sln -c Release --no-restore -m:1 -p:UseSharedCompilation=false
-dotnet test CevatBiyik.sln -c Release --no-restore -m:1 -p:UseSharedCompilation=false --logger "trx;LogFilePrefix=phase12-verified"
-node --test tests/CevatBiyik.BrowserTests/analytics.test.cjs
+dotnet build project/CevatBiyik.sln -c Release --no-restore -m:1 -p:UseSharedCompilation=false
+dotnet test project/CevatBiyik.sln -c Release --no-restore -m:1 -p:UseSharedCompilation=false --logger "trx;LogFilePrefix=phase12-verified"
+node --test project/tests/CevatBiyik.BrowserTests/analytics.test.cjs
 dotnet format CevatBiyik.sln style --verify-no-changes --no-restore --severity warn --diagnostics IDE0011
 dotnet list CevatBiyik.sln package --vulnerable --include-transitive
-python tools/security_scan.py --self-test
-python tools/security_scan.py --history
-git -c core.safecrlf=false diff --check -- . ':!src/CevatBiyik.Web/appsettings.json'
+python project/tools/security_scan.py --self-test
+python project/tools/security_scan.py --history
+git -c core.safecrlf=false diff --check -- . ':!project/src/CevatBiyik.Web/appsettings.json'
 ```
 
 - Release build **0 errors / 0 warnings**. Local SDK 8.0.425 / ASP.NET Core runtime 8.0.31.

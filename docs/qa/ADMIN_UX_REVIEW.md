@@ -2,7 +2,7 @@
 
 Tarih: 2026-10-11. Kapsam: sahibin altı maddelik yönetim paneli ve iletişim UX isteği.
 Onaylı Phase 14 önce **7ccf8c8** ile commit edildi. Bu takip çalışması ayrı değişikliktir;
-Phase 15 başlatılmadı. AGENTS.md, skills/admin-panel, frontend, security, accessibility,
+Phase 15 başlatılmadı. AGENTS.md, ai/skills/admin-panel, frontend, security, accessibility,
 BRAND_GUIDELINES ve ADR-017/029/030 esas alındı. Karar: ADR-031.
 
 ## Uygulanan değişiklikler
@@ -24,8 +24,8 @@ paylaşım özelliği yoktur. Medya/belge modüllerinde olmayan düzenleme endpo
 ## Tekrarlanabilir doğrulama
 
 ```powershell
-node tools/build-assets.cjs
-pwsh -NoProfile -File tools/test.ps1 -Browser -HostedMySql
+node project/tools/build-assets.cjs
+pwsh -NoProfile -File project/tools/test.ps1 -Browser -HostedMySql
 ```
 
 Hosting kontrolü yalnızca kullanıcı tarafından ayrılmış `cevodbtest` bağlantısını

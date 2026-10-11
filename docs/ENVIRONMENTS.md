@@ -11,7 +11,7 @@ anahtarları varsa yerel JSON değerini ezebilir.
 
 Gerçek `appsettings.Development.json` da Git/publish dışındadır. Yeni clone'da
 `docs/deployment/templates/appsettings.Development.template.json` dosyasını
-`src/CevatBiyik.Web/appsettings.Development.json` olarak kopyalayıp
+`project/src/CevatBiyik.Web/appsettings.Development.json` olarak kopyalayıp
 `ConnectionStrings:DefaultConnection` alanına yalnızca geliştirme/test bağlantısını yazın.
 Temel `appsettings.json` dosyasını temel şablondan oluşturun. Mevcut yerel bağlantı,
 owner isteğiyle temel JSON'dan Development JSON'una değer gösterilmeden aktarılmıştır.
@@ -21,7 +21,7 @@ Integration testlerinin ayrı opt-in test secret kaynağı bu karardan etkilenme
 Yerelde başlatma:
 
 ```powershell
-dotnet run --project src/CevatBiyik.Web --launch-profile https
+dotnet run --project project/src/CevatBiyik.Web --launch-profile https
 ```
 
 Adres: `https://localhost:7080`. İzinli hostlar localhost/loopback ile sınırlıdır;
@@ -33,7 +33,7 @@ Development'da `Site:AllowIndexing=false`. Hosting JSON dosyaları değişmemiş
 `appsettings.Production.json` içinde tutulur. Bu iki üretim Web dosyası Git ve publish
 paketi dışındadır; yerel mevcut içerik değiştirilmeden takibi kaldırılmıştır.
 Sır içermeyen şablonlar `docs/deployment/templates/` altında tutulur.
-Yeni clone için temel şablonu `src/CevatBiyik.Web/appsettings.json` olarak kopyalayın;
+Yeni clone için temel şablonu `project/src/CevatBiyik.Web/appsettings.json` olarak kopyalayın;
 Development bağlantısını Git dışında tutulan `appsettings.Development.json` ile verin. Production JSON sadece sunucuda
 oluşturulur. Ayrıntı: [Üretim rehberi](deployment/PRODUCTION_RUNBOOK.md).
 
@@ -106,7 +106,7 @@ Yerel MySQL kurulu değil; hosting'deki uzak MySQL kullanılacak. Dikkat edilece
 
 ## 6. Dosya yüklemeleri
 
-- Yol: `src/CevatBiyik.Web/wwwroot/uploads/` (ADR-004).
+- Yol: `project/src/CevatBiyik.Web/wwwroot/uploads/` (ADR-004).
 - İçerik repoya girmez; `.gitkeep` ve güvenlik için `uploads/web.config` takip edilir.
 - Production'da uygulama havuzu kimliğinin bu klasöre **yazma** izni olmalı, başka yerlere olmamalı (Faz 07 ve 13).
 - Faz 06 yalnızca doğrulanıp yeniden kodlanan public WebP görsellerini kabul eder; gizli belgeler burada tutulmaz.
@@ -121,7 +121,7 @@ dotnet build
 dotnet test
 ```
 
-Faz 01 doğrulama (2026-10-09): `dotnet build CevatBiyik.sln -c Release` 0 hata; `dotnet test` 11 unit + 3 integration test başarılı.
+Faz 01 doğrulama (2026-10-09): `dotnet build project/CevatBiyik.sln -c Release` 0 hata; `dotnet test` 11 unit + 3 integration test başarılı.
 
 ## Phase 05 administrator provisioning
 

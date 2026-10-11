@@ -6,13 +6,13 @@ PowerShell 7, .NET 8 SDK, Node.js ve yerel Microsoft Edge gerekir. Tarayıcı/de
 yalnızca geliştirme makinesindedir; Plesk üzerinde Node, Lighthouse veya axe kurulmaz.
 
 ```powershell
-npm ci --ignore-scripts --prefix tests/CevatBiyik.BrowserTests
-node tools/build-assets.cjs
-pwsh -NoProfile -File tools/test.ps1 -Browser
-pwsh -NoProfile -File tools/phase14-audit.ps1 -Stage after
+npm ci --ignore-scripts --prefix project/tests/CevatBiyik.BrowserTests
+node project/tools/build-assets.cjs
+pwsh -NoProfile -File project/tools/test.ps1 -Browser
+pwsh -NoProfile -File project/tools/phase14-audit.ps1 -Stage after
 ```
 
-`tools/build-assets.cjs --check` üretilmiş `.min.css` / `.min.js` dosyalarının kaynaklarıyla
+`project/tools/build-assets.cjs --check` üretilmiş `.min.css` / `.min.js` dosyalarının kaynaklarıyla
 eşleştiğini doğrular. Kaynak dosyayı değiştirin, tekrar üretin ve kaynak + çıktıyı birlikte commit edin.
 CleanCSS 5.3.3 / Terser 5.51.2 sürümleri lock dosyasındadır. Üçüncü taraf Bootstrap/Quill
 dosyaları yeniden yazılmaz; editör yalnızca altı CMS düzenleme görünümünde yüklenir.
@@ -38,7 +38,7 @@ Bu eşikler yerel fixture regresyon bütçesidir; gerçek kullanıcı INP değer
 Hızlı klavye/axe doğrulaması:
 
 ```powershell
-pwsh -NoProfile -File tools/phase14-audit.ps1 -BrowserChecksOnly
+pwsh -NoProfile -File project/tools/phase14-audit.ps1 -BrowserChecksOnly
 ```
 
 Tam axe denetimi 19 public/admin rotası, WCAG 2 A/AA, 2.1 AA, 2.2 AA etiketleri ve 390 px

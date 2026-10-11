@@ -21,20 +21,20 @@ Gerçek bildirilen MariaDB10.3/SSL farkı yeni karar ADR-032'de açıkça kayded
 | IIS | Web csproj/web.config outofprocess, ANCM V2, Production, stdout kapalı, 6 MiB, config/App_Data/.git hidden, directory browse kapalı. |
 | Database dialect | Infrastructure `DatabaseServerConfiguration`: açık MySql8/MariaDb sürümü, AutoDetect yok; opt-in hosted testlerde MariaDb10.3.39 aynı dialect. Snapshot/migration değiştirilmedi. |
 | Anahtarlar | Web `HostingDataProtection`: private absolute key store, Windows machine DPAPI, sabit app adı; public/placeholder yolu reddi ve gerçek restart/decrypt testi. |
-| Publish | `tools/publish.ps1`, `verify_publish.py`, `test_publish.py`: yeni release dizini, yasak içerik/native/IIS kontrolü, SHA-256 manifest; server verisini silme/sync/migration yok. |
+| Publish | `project/tools/publish.ps1`, `verify_publish.py`, `test_publish.py`: yeni release dizini, yasak içerik/native/IIS kontrolü, SHA-256 manifest; server verisini silme/sync/migration yok. |
 | Araç/asset | dotnet-ef 8.0.29 mevcut EF8.0.29 ile eşlendi; deterministic minifier kontrolü Windows CRLF/LF farklılıklarına dayanıklı. |
 | Operasyon | PRODUCTION_RUNBOOK, PLESK_CHECKLIST, PLESK_MEDIA_RUNBOOK, DEPLOYMENT, ENVIRONMENTS, SECURITY_HARDENING, OPEN_QUESTIONS ve faz durumu güncellendi. |
 
 ## Çalıştırılan doğrulamalar
 
 ```powershell
-node tools/build-assets.cjs
-pwsh -NoProfile -File tools/test.ps1 -Browser -HostedMySql
-pwsh -NoProfile -File tools/publish.ps1 -SkipTests
-dotnet tool restore
+node project/tools/build-assets.cjs
+pwsh -NoProfile -File project/tools/test.ps1 -Browser -HostedMySql
+pwsh -NoProfile -File project/tools/publish.ps1 -SkipTests
+dotnet tool restore --tool-manifest project/.config/dotnet-tools.json
 dotnet list CevatBiyik.sln package --vulnerable --include-transitive
-python tools/security_scan.py
-python tools/security_scan.py --history
+python project/tools/security_scan.py
+python project/tools/security_scan.py --history
 ```
 
 - Release build **0 hata / 0 uyarı**.

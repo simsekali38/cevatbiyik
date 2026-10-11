@@ -27,10 +27,10 @@ frontend/admin/accessibility/security/architecture/backend skills, brand guideli
 ## Reproduce
 
 ```powershell
-npm ci --ignore-scripts --prefix tests/CevatBiyik.BrowserTests
-pwsh -NoProfile -File tools/test.ps1 -Browser
+npm ci --ignore-scripts --prefix project/tests/CevatBiyik.BrowserTests
+pwsh -NoProfile -File project/tools/test.ps1 -Browser
 # Optional guarded hosted persistence, connection already in test user-secrets:
-pwsh -NoProfile -File tools/test.ps1 -Browser -HostedMySql
+pwsh -NoProfile -File project/tools/test.ps1 -Browser -HostedMySql
 dotnet list CevatBiyik.sln package --vulnerable --include-transitive
 ```
 

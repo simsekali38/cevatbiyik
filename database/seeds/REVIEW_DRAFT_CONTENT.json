@@ -1,0 +1,1727 @@
+[
+  {
+    "table": "PracticeAreas",
+    "id": 910200001,
+    "key": [
+      "Slug",
+      "ceza-hukuku"
+    ],
+    "data": {
+      "Id": 910200001,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "Ceza Hukuku",
+      "Slug": "ceza-hukuku",
+      "ShortDescription": "Soruşturma ve yargılama sürecini, dosya belgelerini ve savunma hazırlığını birlikte ele alan hukuki bilgilendirme.",
+      "Content": "<h2>Kapsam</h2><p>Bir ceza dosyasının anlaşılması yalnızca olayın anlatımına dayanmaz. İddianın kapsamı, kişinin süreçteki sıfatı, dosyanın hangi aşamada bulunduğu ve alınan kararların içeriği birlikte incelenir. Soruşturma ile yargılama farklı amaç ve işlemlere sahiptir; hazırlık yapılırken bu aşamaların birbirine karıştırılmaması gerekir.</p><h2>Temel kavramlar</h2><p>Şüpheli, sanık, müşteki ve tanık sıfatları aynı değildir. Bir çağrı yazısı veya tutanak değerlendirilirken belgenin hangi makamdan geldiği ve hangi işlem için düzenlendiği anlaşılmalıdır. Olayın ceza hukuku bakımından niteliği, yalnızca günlük dilde kullanılan suç adından hareketle belirlenemez.</p><h2>Belge hazırlığı</h2><p>İfade tutanakları, çağrı yazıları, karar örnekleri ve elde bulunan yazışmalar ayrı bir dosyada toplanabilir. Belgelerin asılları korunmalı, eksik sayfalar ve okunamayan kısımlar not edilmelidir. Başkalarının kişisel verilerini veya dosya içeriğini açık internet ortamlarında paylaşmak yerine güvenli inceleme yöntemi belirlenmelidir.</p><h2>Değerlendirme süreci</h2><p>Olay kronolojisi ile dosya işlemlerinin kronolojisi ayrı hazırlanır. Mevcut belgelerle desteklenen bilgiler, hatırlanan ayrıntılar ve açıklama bekleyen noktalar birbirinden ayrılır. Dosyanın güncel durumu öğrenilmeden tek bir belge üzerinden kesin değerlendirme yapılması yanıltıcı olabilir.</p><h2>Dikkat edilmesi gerekenler</h2><p>Resmî bildirimlerin tarihi ve teslim biçimi önem taşıyabilir. Bir işlem için beklemek veya internetten bulunan hazır bir dilekçeyi kullanmak yerine somut dosyanın zamanında değerlendirilmesi gerekir. Bu bilgilendirme, belirli bir savunma yöntemi veya sonuç önerisi içermez.</p>",
+      "SortOrder": 1,
+      "MetaTitle": "Ceza Hukuku",
+      "MetaDescription": "Soruşturma ve yargılama sürecini, dosya belgelerini ve savunma hazırlığını birlikte ele alan hukuki bilgilendirme.",
+      "OpenGraphTitle": "Ceza Hukuku",
+      "OpenGraphDescription": "Soruşturma ve yargılama sürecini, dosya belgelerini ve savunma hazırlığını birlikte ele alan hukuki bilgilendirme."
+    }
+  },
+  {
+    "table": "PracticeAreas",
+    "id": 910200002,
+    "key": [
+      "Slug",
+      "idare-hukuku"
+    ],
+    "data": {
+      "Id": 910200002,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "İdare Hukuku",
+      "Slug": "idare-hukuku",
+      "ShortDescription": "İdari işlemler, başvuru belgeleri ve kamu kurumlarıyla yürütülen süreçlerin düzenli biçimde değerlendirilmesi.",
+      "Content": "<h2>Kapsam</h2><p>İdare hukuku, kamu gücünün kullanıldığı işlemler ve bu işlemlerin kişiler üzerindeki etkileriyle ilgilenir. Ruhsat, izin, disiplin, kamu görevi ve idari yaptırım gibi konular birbirinden farklı dosya yapıları oluşturur. İnceleme, başvuranın beklentisinden önce mevcut işlemin ne olduğunu açıklığa kavuşturmalıdır.</p><h2>Temel kavramlar</h2><p>Bir idari başvuru ile dava aynı işlem değildir. İşlemi yapan kurum, kararın dayanakları, bildirimin yöntemi ve başvurunun konusu ayrı ayrı belirlenir. Yazılı bir kararın bulunup bulunmadığı, sessiz kalan bir başvurunun ne zaman yapıldığı ve hangi yanıtların alındığı inceleme çerçevesini etkiler.</p><h2>Belge hazırlığı</h2><p>Başvuru dilekçesi, kayıt numarası, teslim belgesi, kurum cevabı ve tebliğ evrakı bir araya getirilir. Elektronik başvurularda tarih ve işlem numarası içeren kayıtlar korunur. Başvuruya eklenen belgelerin aynı sürümünün saklanması, kurumun hangi bilgiye sahip olduğunu anlamayı kolaylaştırır.</p><h2>Değerlendirme süreci</h2><p>Önce işlem ve başvuru sırası çıkarılır, sonra istenen sonucun mevcut belgelerle ilişkisi değerlendirilir. Birden fazla kurum yazısı varsa her birinin konusu ve tarihi ayrı gösterilir. Eksik belge ihtiyacı ile hukuki değerlendirme gerektiren sorular birbirinden ayrılarak görüşme gündemi hazırlanır.</p><h2>Dikkat edilmesi gerekenler</h2><p>Başvuru ve yargısal inceleme süreleri işlem türüne göre değişebilir. Genel bir süre hesabına güvenmek yerine tebliğ ve öğrenme bilgileriyle birlikte değerlendirme yapılmalıdır. Kuruma yeniden yazı göndermek her durumda diğer işlemlerin yerine geçmez; somut yol ayrıca incelenmelidir.</p>",
+      "SortOrder": 2,
+      "MetaTitle": "İdare Hukuku",
+      "MetaDescription": "İdari işlemler, başvuru belgeleri ve kamu kurumlarıyla yürütülen süreçlerin düzenli biçimde değerlendirilmesi.",
+      "OpenGraphTitle": "İdare Hukuku",
+      "OpenGraphDescription": "İdari işlemler, başvuru belgeleri ve kamu kurumlarıyla yürütülen süreçlerin düzenli biçimde değerlendirilmesi."
+    }
+  },
+  {
+    "table": "PracticeAreas",
+    "id": 910200003,
+    "key": [
+      "Slug",
+      "aile-hukuku"
+    ],
+    "data": {
+      "Id": 910200003,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "Aile Hukuku",
+      "Slug": "aile-hukuku",
+      "ShortDescription": "Aile ilişkilerinde kişisel durum, mali konular ve çocuklara ilişkin belgelerin dikkatli değerlendirilmesine yönelik açıklamalar.",
+      "Content": "<h2>Kapsam</h2><p>Aile hukukuna ilişkin bir uyuşmazlık kişisel ilişkiler, ekonomik koşullar ve çocukların yaşam düzeni gibi farklı konuları birlikte içerebilir. Görüşmeye hazırlıkta her başlık ayrı ele alınmalı; yalnızca taraflar arasındaki son tartışma üzerinden bütün sürecin değerlendirilmesinden kaçınılmalıdır.</p><h2>Temel kavramlar</h2><p>Evlilik birliğine ilişkin sorunlar, malvarlığı ilişkileri ve çocuklara dair düzenlemeler aynı talep değildir. Günlük ihtiyaçların belirlenmesi ile geçmişteki olayların açıklanması da farklı hazırlık gerektirir. Bir aile dosyasındaki kişisel bilgiler, gereksiz kişilere aktarılmadan ele alınmalıdır.</p><h2>Belge hazırlığı</h2><p>Mevcut resmî belgeler, daha önce verilmiş kararlar, gelir ve gider kayıtları ile tarafların üzerinde anlaştığı hususlar düzenlenebilir. Çocuklara ait eğitim ve sağlık bilgileri yalnızca gerekli kapsamda paylaşılmalıdır. Yazışmalar seçilerek değiştirilmemeli; bağlamı koruyan özgün kayıtlar saklanmalıdır.</p><h2>Değerlendirme süreci</h2><p>Olaylar, güncel yaşam koşulları ve çözüm bekleyen konular için ayrı başlıklar hazırlanır. Belirsiz iddialar ile doğrudan bilinen olaylar ayrılır. Görüşmede hem kısa vadeli ihtiyaçlar hem de kalıcı düzenleme gerektiren hususlar değerlendirilerek belge eksikleri belirlenir.</p><h2>Dikkat edilmesi gerekenler</h2><p>İnternet ortamındaki örnek kararlar her aile için aynı sonucu göstermez. Çocuklar üzerinden iletişim kurulması veya özel hayat bilgilerinin kamuya açılması yeni sorunlar doğurabilir. Güvenlik riski ya da acil bir resmî işlem varsa gecikmeden uygun kurum ve hukuki destek kanalıyla değerlendirme yapılmalıdır.</p>",
+      "SortOrder": 3,
+      "MetaTitle": "Aile Hukuku",
+      "MetaDescription": "Aile ilişkilerinde kişisel durum, mali konular ve çocuklara ilişkin belgelerin dikkatli değerlendirilmesine yönelik açıklamalar.",
+      "OpenGraphTitle": "Aile Hukuku",
+      "OpenGraphDescription": "Aile ilişkilerinde kişisel durum, mali konular ve çocuklara ilişkin belgelerin dikkatli değerlendirilmesine yönelik açıklamalar."
+    }
+  },
+  {
+    "table": "PracticeAreas",
+    "id": 910200004,
+    "key": [
+      "Slug",
+      "is-hukuku"
+    ],
+    "data": {
+      "Id": 910200004,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "İş Hukuku",
+      "Slug": "is-hukuku",
+      "ShortDescription": "Çalışma ilişkisi, ücret kayıtları, işyeri yazışmaları ve sözleşme belgelerinin birlikte incelenmesine ilişkin bilgiler.",
+      "Content": "<h2>Kapsam</h2><p>İş hukukunda değerlendirme, çalışma ilişkisinin nasıl kurulduğu ve uygulamada nasıl yürütüldüğünü birlikte ele alır. İşe giriş, görev değişikliği, ücret ödemeleri ve ilişkinin sona ermesi farklı belge kümeleri oluşturur. Yazılı sözleşme kadar fiilî çalışma düzeninin de anlaşılması gerekir.</p><h2>Temel kavramlar</h2><p>Ücret, yan hak, çalışma süresi ve görev tanımı aynı kavram değildir. Bir bordrodaki kalemlerin hangi döneme ilişkin olduğu ve ödeme kayıtlarıyla örtüşüp örtüşmediği açıklığa kavuşturulmalıdır. İşçi ve işverenin dosyayı hazırlarken kendi kayıtları dışında karşı tarafın bildirimlerini de koruması önemlidir.</p><h2>Belge hazırlığı</h2><p>Sözleşme, bordro, banka hareketi, görev yazısı, izin kaydı ve feshe ilişkin bildirimler tarih sırasına konabilir. Eksik dönemler ayrı listelenir. Dijital yazışmalarda gönderen, alıcı ve tarih bilgileri korunur; başkalarının hesaplarına izinsiz erişilerek belge elde edilmeye çalışılmaz.</p><h2>Değerlendirme süreci</h2><p>Çalışma dönemleri ve görevler için bir zaman çizelgesi hazırlanır. Ücret veya diğer talepler değerlendirilirken kayıtların hangi kaleme ilişkin olduğu belirlenir. Görüşmede belge eksikliği, hesaplama gereksinimi ve izlenecek başvuru yolu ayrı başlıklar halinde ele alınır.</p><h2>Dikkat edilmesi gerekenler</h2><p>Her iş uyuşmazlığı aynı başvuru düzenine veya süreye tabi olmayabilir. İmzalanacak bir belgeyi anlamadan imzalamak ya da sadece bir hesaplama sitesine dayanmak yerine somut koşullar incelenmelidir. Buradaki bilgiler belirli bir alacak miktarı veya dava sonucu vaat etmez.</p>",
+      "SortOrder": 4,
+      "MetaTitle": "İş Hukuku",
+      "MetaDescription": "Çalışma ilişkisi, ücret kayıtları, işyeri yazışmaları ve sözleşme belgelerinin birlikte incelenmesine ilişkin bilgiler.",
+      "OpenGraphTitle": "İş Hukuku",
+      "OpenGraphDescription": "Çalışma ilişkisi, ücret kayıtları, işyeri yazışmaları ve sözleşme belgelerinin birlikte incelenmesine ilişkin bilgiler."
+    }
+  },
+  {
+    "table": "PracticeAreas",
+    "id": 910200005,
+    "key": [
+      "Slug",
+      "kvkk-danismanligi"
+    ],
+    "data": {
+      "Id": 910200005,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "KVKK Danışmanlığı",
+      "Slug": "kvkk-danismanligi",
+      "ShortDescription": "Kişisel veri işleme faaliyetlerinin, bilgi akışlarının ve kurum içi belge düzeninin anlaşılmasına yönelik çerçeve.",
+      "Content": "<h2>Kapsam</h2><p>Kişisel verilerin korunması çalışması, yalnızca internet sitesine bir metin eklemekten ibaret değildir. Hangi bilgilerin kimden toplandığı, hangi süreçte kullanıldığı ve kimlerin erişebildiği görünür hale getirilmelidir. Kurumun gerçek işleyişi anlaşılmadan başka bir işletmenin metninin kopyalanması uygun bir başlangıç değildir.</p><h2>Temel kavramlar</h2><p>Veri işleme amacı, hukuki sebep, aydınlatma ve rıza kavramları birbirinin yerine kullanılamaz. Önce çalışan, müşteri, ziyaretçi ve başvuru sahibi gibi süreçler ayrılır. Her süreçteki bilgi kategorileri ile kullanılan yazılım ve hizmet sağlayıcılar birlikte değerlendirilir.</p><h2>Belge hazırlığı</h2><p>Formlar, sözleşmeler, mevcut aydınlatma metinleri, erişim yetkileri ve hizmet sağlayıcı listesi hazırlanabilir. Gereksiz kişisel veri örnekleri paylaşmak yerine veri alanlarının adları ve akışları gösterilir. Saklama veya silme işlemleri hakkında yazılı bir uygulama varsa güncel sürümü dosyaya eklenir.</p><h2>Değerlendirme süreci</h2><p>Bilginin toplandığı noktadan silindiği veya arşivlendiği aşamaya kadar süreç haritası çıkarılır. Gerçek uygulama ile mevcut belgeler arasındaki farklar belirlenir. Teknik önlem, çalışan bilgilendirmesi ve hukuki belge ihtiyaçları birbirine bağlı fakat ayrı iş kalemleri olarak değerlendirilir.</p><h2>Dikkat edilmesi gerekenler</h2><p>Yasal uyum tek seferlik belge teslimiyle kalıcı hale gelmez. Yeni form, analitik hizmet veya dış hizmet sağlayıcı devreye alındığında süreç yeniden incelenmelidir. Bu sayfa bir uyum sertifikası, tüm işletmeler için ortak metin veya belirli bir yükümlülükten muafiyet iddiası içermez.</p>",
+      "SortOrder": 5,
+      "MetaTitle": "KVKK Danışmanlığı",
+      "MetaDescription": "Kişisel veri işleme faaliyetlerinin, bilgi akışlarının ve kurum içi belge düzeninin anlaşılmasına yönelik çerçeve.",
+      "OpenGraphTitle": "KVKK Danışmanlığı",
+      "OpenGraphDescription": "Kişisel veri işleme faaliyetlerinin, bilgi akışlarının ve kurum içi belge düzeninin anlaşılmasına yönelik çerçeve."
+    }
+  },
+  {
+    "table": "PracticeAreas",
+    "id": 910200006,
+    "key": [
+      "Slug",
+      "ticaret-hukuku"
+    ],
+    "data": {
+      "Id": 910200006,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "Ticaret Hukuku",
+      "Slug": "ticaret-hukuku",
+      "ShortDescription": "Ticari ilişkiler, şirket belgeleri ve işlem kayıtlarının sözleşme bağlamında değerlendirilmesine ilişkin açıklamalar.",
+      "Content": "<h2>Kapsam</h2><p>Ticari bir uyuşmazlığın anlaşılmasında işlemin ekonomik amacı ile hukuki belgeler birlikte değerlendirilir. Şirket ilişkileri, mal veya hizmet tedariki ve ödeme düzeni farklı konular oluşturur. Tarafların unvanları, işlemdeki yetkileri ve hangi sözleşmeye dayanıldığı başlangıçta netleştirilmelidir.</p><h2>Temel kavramlar</h2><p>Teklif, sipariş, sözleşme, teslim ve fatura farklı aşamaları belgeleyebilir. Bir faturanın bulunması bütün sözleşme koşullarının açıklığa kavuştuğu anlamına gelmez. Şirket adına yapılan işlemler için temsil ve imza yetkisinin hangi belgeye dayandığı ayrıca önem taşır.</p><h2>Belge hazırlığı</h2><p>Sözleşme ve ekleri, sipariş yazışmaları, teslim kayıtları, faturalar ve ödeme belgeleri ilişkilendirilir. Şirket kayıtları paylaşılırken ticari sırlar için güvenli yöntem seçilir. Aynı işleme ilişkin farklı sürümler varsa hangisinin ne zaman gönderildiği kaydedilir.</p><h2>Değerlendirme süreci</h2><p>İşlem akışı, taraf yükümlülükleri ve karşılıklı bildirimler ayrı tablolar halinde açıklanabilir. Uyuşmazlığın miktarı kadar ticari ilişkinin devam edip etmediği de görüşme gündemine alınır. Belgeler üzerinden seçeneklerin koşulları ve uygulamada ihtiyaç duyulan bilgiler değerlendirilir.</p><h2>Dikkat edilmesi gerekenler</h2><p>Bir ticari işlemin alışılmış olması yazılı belgeleri önemsiz hale getirmez. Sonradan hazırlanmış kayıtlar özgün belgelerin yerine geçmemelidir. Şirketin diğer işlemleriyle karışan ödeme veya teslim bilgileri dikkatle ayrılmalı; somut değerlendirme yapılmadan sonuç beklentisi oluşturulmamalıdır.</p>",
+      "SortOrder": 6,
+      "MetaTitle": "Ticaret Hukuku",
+      "MetaDescription": "Ticari ilişkiler, şirket belgeleri ve işlem kayıtlarının sözleşme bağlamında değerlendirilmesine ilişkin açıklamalar.",
+      "OpenGraphTitle": "Ticaret Hukuku",
+      "OpenGraphDescription": "Ticari ilişkiler, şirket belgeleri ve işlem kayıtlarının sözleşme bağlamında değerlendirilmesine ilişkin açıklamalar."
+    }
+  },
+  {
+    "table": "PracticeAreas",
+    "id": 910200007,
+    "key": [
+      "Slug",
+      "tuketici-hukuku"
+    ],
+    "data": {
+      "Id": 910200007,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "Tüketici Hukuku",
+      "Slug": "tuketici-hukuku",
+      "ShortDescription": "Mal ve hizmet alımlarında sipariş, teslim, ödeme ve başvuru kayıtlarının düzenlenmesine yönelik bilgiler.",
+      "Content": "<h2>Kapsam</h2><p>Tüketiciyle satıcı veya hizmet sağlayıcı arasındaki ilişkinin değerlendirilmesi, satın alınan ürünün niteliği ve işlemin nasıl yapıldığıyla başlar. Mağaza, internet ve diğer satış kanallarında belgeler farklı olabilir. Sorun anlatılırken beklenen özellik, teslim edilen ürün ve sonradan ortaya çıkan durum ayrı gösterilmelidir.</p><h2>Temel kavramlar</h2><p>Siparişin iptali, üründeki sorun ve hizmetin eksik sunulması aynı başlık değildir. Ticari amaçla yapılan bir alımın niteliği ayrıca incelenebilir. Bir başvuru için hangi kurum veya yolun uygun olduğu, yalnızca ürünün adına bakılarak belirlenemez.</p><h2>Belge hazırlığı</h2><p>Sipariş onayı, fatura, ödeme belgesi, teslim tutanağı, ürün açıklaması ve müşteri hizmetleri yazışmaları korunur. Görsellerde sorun açıkça gösterilir; özgün dosyalar saklanır. Servis kayıtları varsa hangi işlemlerin yapıldığı tarihleriyle birlikte açıklanır.</p><h2>Değerlendirme süreci</h2><p>Satın alma ve bildirim tarihleri kronolojik sıraya konur. Talep edilen çözüm ile daha önce verilen yanıtlar karşılaştırılır. Ürünün kullanımı ve mevcut durumu açıklanarak belge eksikleri belirlenir; uygulanabilecek başvuru yöntemi somut işlem üzerinden değerlendirilir.</p><h2>Dikkat edilmesi gerekenler</h2><p>Her alışveriş için aynı süre veya parasal sınır geçerliymiş gibi hareket edilmemelidir. Güncel kurallar ve işlem türü incelenmeden hazır başvuru metni kullanılmamalıdır. Ürün veya yazışmaların kaybolmasına yol açabilecek işlemlerden önce kayıtların korunması uygun olur.</p>",
+      "SortOrder": 7,
+      "MetaTitle": "Tüketici Hukuku",
+      "MetaDescription": "Mal ve hizmet alımlarında sipariş, teslim, ödeme ve başvuru kayıtlarının düzenlenmesine yönelik bilgiler.",
+      "OpenGraphTitle": "Tüketici Hukuku",
+      "OpenGraphDescription": "Mal ve hizmet alımlarında sipariş, teslim, ödeme ve başvuru kayıtlarının düzenlenmesine yönelik bilgiler."
+    }
+  },
+  {
+    "table": "PracticeAreas",
+    "id": 910200008,
+    "key": [
+      "Slug",
+      "icra-ve-iflas-hukuku"
+    ],
+    "data": {
+      "Id": 910200008,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "İcra ve İflas Hukuku",
+      "Slug": "icra-ve-iflas-hukuku",
+      "ShortDescription": "Alacak ilişkisi, takip evrakı, bildirim ve ödeme kayıtlarının dikkatli değerlendirilmesine yönelik çerçeve.",
+      "Content": "<h2>Kapsam</h2><p>İcra ve iflas hukukunda alacağın dayanağı ile takip sürecinde yapılan işlemler birlikte ele alınır. Alacaklı veya borçlu sıfatıyla dosya hazırlanması farklı belge ihtiyaçları doğurur. Mevcut takip numarası, ilgili birim ve alınan bildirimler açıkça belirlenmelidir.</p><h2>Temel kavramlar</h2><p>Alacağın doğması, ödeme yapılması ve takip başlatılması ayrı gelişmelerdir. Sözleşmeden, faturadan veya başka bir belgeden kaynaklanan talepler aynı biçimde değerlendirilmez. Bir bildirimin adı ile hukuki etkisi, içeriği ve dosyanın aşaması üzerinden anlaşılmalıdır.</p><h2>Belge hazırlığı</h2><p>Dayanak sözleşme, faturalar, borç veya ödeme belgeleri, takip evrakı ve tebliğ kayıtları düzenlenir. Kısmi ödemeler ve mahsup açıklamaları ayrı işaretlenir. Dosya dışındaki yazışmaların da süreçle bağlantısı gösterilir; özgün belgeler değiştirilmeden saklanır.</p><h2>Değerlendirme süreci</h2><p>İddia edilen tutar, ödeme geçmişi ve takipte istenen kalemler karşılaştırılır. Tarihler ve bildirimler üzerinden dosyanın mevcut aşaması belirlenir. Görüşmede belge eksikleri, acil değerlendirme gerektiren işlemler ve açıklama bekleyen tutarlar ayrı tutulur.</p><h2>Dikkat edilmesi gerekenler</h2><p>Resmî bir takip bildirimi geldiyse internetten genel bilgi okumak için işlemi ertelemek uygun olmayabilir. Süre ve başvuru seçenekleri somut evraka göre incelenmelidir. Bir ödeme yapılacaksa kime, hangi dosyaya ve hangi açıklamayla yapıldığı açık biçimde kayda alınmalıdır.</p>",
+      "SortOrder": 8,
+      "MetaTitle": "İcra ve İflas Hukuku",
+      "MetaDescription": "Alacak ilişkisi, takip evrakı, bildirim ve ödeme kayıtlarının dikkatli değerlendirilmesine yönelik çerçeve.",
+      "OpenGraphTitle": "İcra ve İflas Hukuku",
+      "OpenGraphDescription": "Alacak ilişkisi, takip evrakı, bildirim ve ödeme kayıtlarının dikkatli değerlendirilmesine yönelik çerçeve."
+    }
+  },
+  {
+    "table": "PracticeAreas",
+    "id": 910200009,
+    "key": [
+      "Slug",
+      "sozlesmeler-hukuku"
+    ],
+    "data": {
+      "Id": 910200009,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "Sözleşmeler Hukuku",
+      "Slug": "sozlesmeler-hukuku",
+      "ShortDescription": "Sözleşme taslağı, yükümlülükler, ekler ve uygulama sırasında oluşan değişikliklerin birlikte incelenmesine yönelik bilgiler.",
+      "Content": "<h2>Kapsam</h2><p>Bir sözleşme yalnızca imza sayfasından oluşmaz. Tarafların amacı, işin kapsamı, bedel, teslim ve sona erme düzeni bütün metinle birlikte değerlendirilir. Taslak incelemesi ile yürürlükteki sözleşmenin uygulanmasına ilişkin uyuşmazlık aynı çalışma değildir.</p><h2>Temel kavramlar</h2><p>Teklif, ek protokol, teknik şartname ve genel koşullar sözleşme ilişkisinin farklı parçaları olabilir. Hangi belgeye öncelik verildiği ve eklerin gerçekten taraflara sunulup sunulmadığı önemlidir. Sözlü açıklamalar ile yazılı metin arasındaki farklar görüşme öncesinde belirlenmelidir.</p><h2>Belge hazırlığı</h2><p>Güncel taslak, önceki sürümler, imzalı nüsha, ekler ve değişiklik yazışmaları ayrı tutulur. Bedel ve teslim koşullarıyla ilgili belgeler ilişkilendirilir. Taraf unvanı, temsil yetkisi ve imza yöntemi hakkında mevcut bilgiler dosyaya eklenir.</p><h2>Değerlendirme süreci</h2><p>Önce işlemin amacı ve tarafların üstleneceği işler açıklanır. Ardından yükümlülüklerin yerine getirilmesi, kabul ölçütleri ve bildirim biçimleri incelenir. Belirsiz ifadeler ile uygulamada karşılığı olmayan hükümler ayrılarak sorular hazırlanır.</p><h2>Dikkat edilmesi gerekenler</h2><p>Başka bir işlem için hazırlanmış metni yalnızca isimleri değiştirerek kullanmak risklidir. Tüm sayfalar ve ekler görülmeden değerlendirme tamamlanmış sayılmamalıdır. İmzalama, değişiklik veya sona erdirme kararından önce somut koşulların açıklığa kavuşturulması gerekir.</p>",
+      "SortOrder": 9,
+      "MetaTitle": "Sözleşmeler Hukuku",
+      "MetaDescription": "Sözleşme taslağı, yükümlülükler, ekler ve uygulama sırasında oluşan değişikliklerin birlikte incelenmesine yönelik bilgiler.",
+      "OpenGraphTitle": "Sözleşmeler Hukuku",
+      "OpenGraphDescription": "Sözleşme taslağı, yükümlülükler, ekler ve uygulama sırasında oluşan değişikliklerin birlikte incelenmesine yönelik bilgiler."
+    }
+  },
+  {
+    "table": "PracticeAreas",
+    "id": 910200010,
+    "key": [
+      "Slug",
+      "miras-hukuku"
+    ],
+    "data": {
+      "Id": 910200010,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "Miras Hukuku",
+      "Slug": "miras-hukuku",
+      "ShortDescription": "Mirasla bağlantılı kişi, malvarlığı ve belge bilgilerinin düzenli değerlendirilmesine ilişkin genel açıklamalar.",
+      "Content": "<h2>Kapsam</h2><p>Miras hukukunda aile ilişkileri ile malvarlığına ilişkin bilgiler birlikte ele alınır. Mevcut belgeler, daha önce yapılmış işlemler ve tarafların beklentileri birbirinden ayrılmalıdır. Yalnızca aile içinde aktarılan bilgiye dayanarak pay veya hak sonucu çıkarılması sağlıklı bir başlangıç değildir.</p><h2>Temel kavramlar</h2><p>Mirasçı sıfatı, paylaşım, malvarlığı üzerindeki işlemler ve borçlara ilişkin konular farklı değerlendirme gerektirebilir. Taşınır, taşınmaz ve şirket ilişkilerine ait kayıtlar aynı dosyada görünse de ayrı belgelerle açıklanmalıdır. Aile içindeki anlaşmanın kapsamı ve yazılı olup olmadığı ayrıca incelenir.</p><h2>Belge hazırlığı</h2><p>Mevcut resmî belgeler, tapu ve hesap bilgileri, sözleşmeler ve daha önce verilmiş kararlar toparlanır. Bilinmeyen malvarlığı kalemleri kesin varmış gibi listelenmez. Kişisel ve mali bilgiler güvenli biçimde paylaşılır; asıl belgeler saklanır.</p><h2>Değerlendirme süreci</h2><p>Kişiler arasındaki ilişki, olayların tarih sırası ve bilinen malvarlığı için ayrı listeler hazırlanır. Daha önce yapılan başvurular ve işlemler eklenir. Görüşmede açıklama gerektiren kayıtlar, belge temin ihtiyacı ve somut hukuki seçenekler değerlendirilir.</p><h2>Dikkat edilmesi gerekenler</h2><p>Paylaşım veya belge imzalama öncesinde metnin kapsamı anlaşılmalıdır. Bir ailede uygulanan çözüm başka bir aile için aynı sonucu vermez. Süre veya borç değerlendirmesi gerektiren işlemler internetten edinilen genel bilgilerle ertelenmemelidir.</p>",
+      "SortOrder": 10,
+      "MetaTitle": "Miras Hukuku",
+      "MetaDescription": "Mirasla bağlantılı kişi, malvarlığı ve belge bilgilerinin düzenli değerlendirilmesine ilişkin genel açıklamalar.",
+      "OpenGraphTitle": "Miras Hukuku",
+      "OpenGraphDescription": "Mirasla bağlantılı kişi, malvarlığı ve belge bilgilerinin düzenli değerlendirilmesine ilişkin genel açıklamalar."
+    }
+  },
+  {
+    "table": "PracticeAreas",
+    "id": 910200011,
+    "key": [
+      "Slug",
+      "gayrimenkul-ve-tasinmaz-hukuku"
+    ],
+    "data": {
+      "Id": 910200011,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "Gayrimenkul ve Taşınmaz Hukuku",
+      "Slug": "gayrimenkul-ve-tasinmaz-hukuku",
+      "ShortDescription": "Tapu, sözleşme, kullanım ve taşınmaz kayıtlarının birbirleriyle ilişkilendirilmesine yönelik bilgiler.",
+      "Content": "<h2>Kapsam</h2><p>Taşınmazla ilgili bir uyuşmazlık mülkiyet, kullanım, kira veya sözleşme ilişkisini içerebilir. Taşınmazın açıkça tanımlanması ve tartışmanın hangi ilişkiye dayandığının belirlenmesi gerekir. Adres, tapu bilgisi ve fiilî kullanım farklı veri alanlarıdır; birbirinin yerine geçmez.</p><h2>Temel kavramlar</h2><p>Paylı ilişki, devir, kullanım ve kira konuları ayrı değerlendirilir. Taşınmazın görünen durumu ile kayıtlardaki bilgisi arasında fark bulunabilir. Sözleşme kapsamındaki bağımsız bölüm veya alan, ek belgelerle birlikte anlaşılmalıdır.</p><h2>Belge hazırlığı</h2><p>Tapu örneği, sözleşme, ödeme ve teslim kayıtları ile mevcut bildirimler dosyalanır. Varsa plan, kroki veya fotoğraflar tarih bilgisiyle saklanır. Belgelerdeki ada, parsel ve bölüm bilgileri karşılaştırılır; farklı taşınmazların kayıtlarının karışmamasına dikkat edilir.</p><h2>Değerlendirme süreci</h2><p>İşlemler ve kullanım süreci kronolojik olarak yazılır. Talep edilen çözümün hangi belge ve olaylara dayandığı açıklanır. Görüşmede kayıt eksikleri, sözleşme koşulları ve yerinde inceleme gereksinimi ayrı ele alınır.</p><h2>Dikkat edilmesi gerekenler</h2><p>İnternet ilanı veya sözlü tanıtım tek başına taşınmazın hukuki durumunu açıklamaz. Devir, ödeme veya yeni bir sözleşme öncesinde kayıtların güncelliği değerlendirilmelidir. Bu metin belirli bir taşınmazın uygunluğu veya yatırım sonucu hakkında güvence vermez.</p>",
+      "SortOrder": 11,
+      "MetaTitle": "Gayrimenkul ve Taşınmaz Hukuku",
+      "MetaDescription": "Tapu, sözleşme, kullanım ve taşınmaz kayıtlarının birbirleriyle ilişkilendirilmesine yönelik bilgiler.",
+      "OpenGraphTitle": "Gayrimenkul ve Taşınmaz Hukuku",
+      "OpenGraphDescription": "Tapu, sözleşme, kullanım ve taşınmaz kayıtlarının birbirleriyle ilişkilendirilmesine yönelik bilgiler."
+    }
+  },
+  {
+    "table": "PracticeAreas",
+    "id": 910200012,
+    "key": [
+      "Slug",
+      "vergi-hukuku"
+    ],
+    "data": {
+      "Id": 910200012,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "Vergi Hukuku",
+      "Slug": "vergi-hukuku",
+      "ShortDescription": "Vergi bildirimleri, beyan ve işlem kayıtlarının dönemleriyle birlikte değerlendirilmesine yönelik açıklamalar.",
+      "Content": "<h2>Kapsam</h2><p>Vergi hukukuna ilişkin inceleme, vergi türü ve döneminin belirlenmesiyle başlar. Beyan, inceleme, bildirim ve ödeme süreçleri farklı belge ve aşamalar oluşturur. Aynı kişinin birden fazla döneme ilişkin evrakı varsa her dosya kalemi ayrı gösterilmelidir.</p><h2>Temel kavramlar</h2><p>Bir ödeme kaydı, tarhiyat veya ceza bildirimi aynı işlem değildir. Belgenin düzenlenme ve tebliğ tarihleri ayrı değerlendirilir. Mali kayıtların teknik açıklaması ile hukuki başvuru seçeneklerinin incelenmesi birbirini tamamlayan fakat farklı çalışmalardır.</p><h2>Belge hazırlığı</h2><p>İlgili bildirim, beyanname, tahakkuk ve ödeme kayıtları, kurum yazışmaları ve inceleme belgeleri hazırlanır. Dönem ve işlem numaraları birlikte kaydedilir. Muhasebe kayıtları paylaşılırken ticari ve kişisel bilgilerin güvenliği korunur.</p><h2>Değerlendirme süreci</h2><p>Kurumun işlemi ile mevcut mali kayıtlar karşılaştırılır. Açıklama gerektiren kalemler belirlenir ve daha önce yapılan başvuruların sonuçları dosyaya eklenir. Görüşme için belge ve soru listesi hazırlanırken mali danışmanla koordinasyon gerektiren konular ayrıca belirtilir.</p><h2>Dikkat edilmesi gerekenler</h2><p>Başvuru yolları ve süreler somut belgeye göre değerlendirilmelidir. Önceki bir dönem için kullanılan yöntem güncel işlem için otomatik olarak geçerli olmayabilir. Hazır hesaplamalara dayanarak kesin tutar veya sonuç beklentisi oluşturulmamalıdır.</p>",
+      "SortOrder": 12,
+      "MetaTitle": "Vergi Hukuku",
+      "MetaDescription": "Vergi bildirimleri, beyan ve işlem kayıtlarının dönemleriyle birlikte değerlendirilmesine yönelik açıklamalar.",
+      "OpenGraphTitle": "Vergi Hukuku",
+      "OpenGraphDescription": "Vergi bildirimleri, beyan ve işlem kayıtlarının dönemleriyle birlikte değerlendirilmesine yönelik açıklamalar."
+    }
+  },
+  {
+    "table": "PracticeAreas",
+    "id": 910200013,
+    "key": [
+      "Slug",
+      "sigorta-hukuku"
+    ],
+    "data": {
+      "Id": 910200013,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "Sigorta Hukuku",
+      "Slug": "sigorta-hukuku",
+      "ShortDescription": "Poliçe, hasar bildirimleri ve sigorta yazışmalarının olay kayıtlarıyla birlikte incelenmesine ilişkin bilgiler.",
+      "Content": "<h2>Kapsam</h2><p>Sigorta uyuşmazlıklarında poliçe metni ile gerçekleşen olay birlikte değerlendirilir. Teminat, istisna, bildirim ve hasar süreci gibi konular birbirinden ayrılmalıdır. Yalnızca poliçenin başlığı veya prim bedeli üzerinden kapsam sonucu çıkarılması yanıltıcı olabilir.</p><h2>Temel kavramlar</h2><p>Sigortalı, sigorta ettiren ve diğer ilgili kişilerin sıfatları aynı olmayabilir. Olayın tarihi, poliçe dönemi ve talep edilen ödeme açıkça gösterilir. Farklı poliçeler bulunuyorsa hangi belgenin hangi risk veya döneme ilişkin olduğu belirlenir.</p><h2>Belge hazırlığı</h2><p>Poliçe ve ekleri, olay tutanakları, hasar bildirimi, eksper kayıtları ve şirket cevapları bir araya getirilir. Ödeme veya onarım belgeleri eklenir. İletilen belgelerin tarih ve alındı kayıtları korunur; olayla ilgisiz kişisel bilgiler gereksiz yere paylaşılmaz.</p><h2>Değerlendirme süreci</h2><p>Olay ile başvurunun zaman çizelgesi hazırlanır. Şirketin açıklaması ve talep edilen çözüm karşılaştırılır. Görüşmede belge eksikleri, teminat yorumları ve başvuru seçenekleri ayrı değerlendirilir; kapsamı bilinmeyen bir poliçe için kesin yorum yapılmaz.</p><h2>Dikkat edilmesi gerekenler</h2><p>Her hasar için aynı işlem sırası veya süre geçerli değildir. Yeni belge imzalamadan veya bir ödeme teklifini kabul etmeden kapsamı anlaşılmalıdır. Bu sayfa belirli bir tazminat miktarını ya da başvurunun kabul edileceğini garanti etmez.</p>",
+      "SortOrder": 13,
+      "MetaTitle": "Sigorta Hukuku",
+      "MetaDescription": "Poliçe, hasar bildirimleri ve sigorta yazışmalarının olay kayıtlarıyla birlikte incelenmesine ilişkin bilgiler.",
+      "OpenGraphTitle": "Sigorta Hukuku",
+      "OpenGraphDescription": "Poliçe, hasar bildirimleri ve sigorta yazışmalarının olay kayıtlarıyla birlikte incelenmesine ilişkin bilgiler."
+    }
+  },
+  {
+    "table": "PracticeAreas",
+    "id": 910200014,
+    "key": [
+      "Slug",
+      "fikri-ve-sinai-mulkiyet-hukuku"
+    ],
+    "data": {
+      "Id": 910200014,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "Fikrî ve Sınaî Mülkiyet Hukuku",
+      "Slug": "fikri-ve-sinai-mulkiyet-hukuku",
+      "ShortDescription": "Eser, marka ve diğer fikrî değerlerle ilgili hak, kullanım ve başvuru belgelerinin değerlendirilmesine yönelik çerçeve.",
+      "Content": "<h2>Kapsam</h2><p>Fikrî ve sınaî mülkiyet konuları farklı koruma biçimleri ve belge düzenleri içerir. Bir eser, işaret, tasarım veya buluşla ilgili inceleme yapılırken öncelikle konu ve talep açıkça tanımlanır. Ticari kullanım ile hak sahipliğinin dayanağı ayrı değerlendirilir.</p><h2>Temel kavramlar</h2><p>Üretim, tescil başvurusu, lisans ve kullanım izni aynı işlem değildir. Bir görselin internette bulunması kullanım koşullarını kendiliğinden açıklamaz. Eserin veya işaretin kimin tarafından, hangi tarihte ve hangi ilişki kapsamında oluşturulduğu önem taşır.</p><h2>Belge hazırlığı</h2><p>Başvuru ve tescil belgeleri, sözleşmeler, üretim kayıtları, kullanım örnekleri ve yazışmalar korunur. İnternet içerikleri için tarih ve kaynak bilgileri saklanır. Başkasının içeriğini çoğaltmak yerine mevcut kullanımın güvenli ve sınırlı biçimde belgelendirilmesi tercih edilir.</p><h2>Değerlendirme süreci</h2><p>Hak iddiasının dayanağı ile tartışılan kullanım karşılaştırılır. Taraflar arasındaki sözleşmenin kapsamı ve önceki izinler değerlendirilir. Görüşmede teknik konu, belge ihtiyacı ve hukuki seçenekler ayrı başlıklar halinde ele alınır.</p><h2>Dikkat edilmesi gerekenler</h2><p>Tescil veya başvuru bulunması her kullanım için aynı değerlendirmeyi doğurmaz. Hazır bir lisans metni bütün içerik türleri için uygun olmayabilir. Paylaşım, satış veya başvuru öncesinde somut koşullar incelenmeli; hak veya sonuç garantisi varsayılmamalıdır.</p>",
+      "SortOrder": 14,
+      "MetaTitle": "Fikrî ve Sınaî Mülkiyet Hukuku",
+      "MetaDescription": "Eser, marka ve diğer fikrî değerlerle ilgili hak, kullanım ve başvuru belgelerinin değerlendirilmesine yönelik çerçeve.",
+      "OpenGraphTitle": "Fikrî ve Sınaî Mülkiyet Hukuku",
+      "OpenGraphDescription": "Eser, marka ve diğer fikrî değerlerle ilgili hak, kullanım ve başvuru belgelerinin değerlendirilmesine yönelik çerçeve."
+    }
+  },
+  {
+    "table": "PracticeAreas",
+    "id": 910200015,
+    "key": [
+      "Slug",
+      "basin-ve-medya-hukuku"
+    ],
+    "data": {
+      "Id": 910200015,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "Basın ve Medya Hukuku",
+      "Slug": "basin-ve-medya-hukuku",
+      "ShortDescription": "Yayın, dijital içerik ve kişilik haklarına ilişkin kayıtların bağlamı korunarak değerlendirilmesine yönelik bilgiler.",
+      "Content": "<h2>Kapsam</h2><p>Basın ve medya konuları haber, yorum, görsel ve çevrim içi paylaşım gibi farklı içerikleri kapsayabilir. İncelemede yayının tam bağlamı, tarihi ve erişim biçimi anlaşılmalıdır. Tek bir cümlenin veya kesilmiş ekran görüntüsünün bütün olayı açıklaması beklenmemelidir.</p><h2>Temel kavramlar</h2><p>Haber aktarımı, görüş açıklaması ve kişisel veri paylaşımı aynı nitelikte değildir. İçeriğin üreticisi, yayımlandığı mecra ve sonraki paylaşımlar ayrı değerlendirilir. Kamuya açık olması, içeriğin her amaçla yeniden kullanılabileceği anlamına gelmez.</p><h2>Belge hazırlığı</h2><p>URL, yayın tarihi, tam içerik ve mevcut yazışmalar kaydedilir. Değişen veya kaldırılan içeriklerde önceki duruma ilişkin özgün kayıtlar korunur. Kişisel verilerin yeniden yayılmasını önlemek için dosya yalnızca gerekli kişilerle güvenli biçimde paylaşılır.</p><h2>Değerlendirme süreci</h2><p>İçeriğin kapsamı ile ileri sürülen sorun karşılaştırılır. Daha önce yapılan bildirimler ve alınan cevaplar ayrı sıraya konur. Görüşmede olayın güncelliği, belge eksikleri ve uygun başvuru seçenekleri değerlendirilir.</p><h2>Dikkat edilmesi gerekenler</h2><p>Sosyal medyada tartışmayı büyütmek veya aynı içeriği tekrar yaymak yeni sorunlara yol açabilir. Genel bir açıklama yerine somut yayının bütünlüğü üzerinden değerlendirme yapılmalıdır. Bu metin her içerik için kaldırma veya tazminat sonucu vaat etmez.</p>",
+      "SortOrder": 15,
+      "MetaTitle": "Basın ve Medya Hukuku",
+      "MetaDescription": "Yayın, dijital içerik ve kişilik haklarına ilişkin kayıtların bağlamı korunarak değerlendirilmesine yönelik bilgiler.",
+      "OpenGraphTitle": "Basın ve Medya Hukuku",
+      "OpenGraphDescription": "Yayın, dijital içerik ve kişilik haklarına ilişkin kayıtların bağlamı korunarak değerlendirilmesine yönelik bilgiler."
+    }
+  },
+  {
+    "table": "PracticeAreas",
+    "id": 910200016,
+    "key": [
+      "Slug",
+      "dava-ve-tahkim"
+    ],
+    "data": {
+      "Id": 910200016,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "Dava ve Tahkim",
+      "Slug": "dava-ve-tahkim",
+      "ShortDescription": "Uyuşmazlık çözüm yolları, dosya hazırlığı ve tahkim belgelerinin somut koşullarla birlikte değerlendirilmesine yönelik bilgiler.",
+      "Content": "<h2>Kapsam</h2><p>Uyuşmazlığın çözüm yolu belirlenirken talebin niteliği, tarafların ilişkisi ve mevcut sözleşmeler incelenir. Mahkeme süreci ile tahkim farklı işleyişlere sahip olabilir. Bir yöntemin hızlı veya her durumda uygun olduğu varsayılmadan dosyanın koşulları değerlendirilmelidir.</p><h2>Temel kavramlar</h2><p>Talep, delil, yetki ve usul kavramları ayrı inceleme başlıklarıdır. Tahkim kaydı varsa metnin kapsamı ve ilgili kurallar birlikte ele alınır. Müzakere veya diğer çözüm girişimleriyle yargılama işlemlerinin ilişkisi ayrıca değerlendirilir.</p><h2>Belge hazırlığı</h2><p>Sözleşme, tahkim kaydı, yazışmalar, önceki başvurular ve talebi destekleyen belgeler düzenlenir. Karşı tarafın bildirimleri eksiksiz saklanır. Yabancı dilde belgeler veya farklı ülkelerle bağlantı varsa bu husus dosya özetinde açıkça belirtilir.</p><h2>Değerlendirme süreci</h2><p>Önce uyuşmazlık haritası ve talepler belirlenir. Ardından belge yeterliliği, çözüm yolunun koşulları ve hazırlık gereksinimi değerlendirilir. Görüşmede maliyet, zaman planı ve dosya takibi hakkında açıklama gerektiren noktalar birlikte ele alınır.</p><h2>Dikkat edilmesi gerekenler</h2><p>Sözleşmede tahkim kelimesinin geçmesi tek başına tüm usul sorularını çözmez. Başvuru öncesinde kayıt ve kurallar incelenmelidir. Süre, maliyet veya sonuç hakkında dosya görülmeden kesin vaat verilmesi uygun değildir.</p>",
+      "SortOrder": 16,
+      "MetaTitle": "Dava ve Tahkim",
+      "MetaDescription": "Uyuşmazlık çözüm yolları, dosya hazırlığı ve tahkim belgelerinin somut koşullarla birlikte değerlendirilmesine yönelik bilgiler.",
+      "OpenGraphTitle": "Dava ve Tahkim",
+      "OpenGraphDescription": "Uyuşmazlık çözüm yolları, dosya hazırlığı ve tahkim belgelerinin somut koşullarla birlikte değerlendirilmesine yönelik bilgiler."
+    }
+  },
+  {
+    "table": "ArticleCategories",
+    "id": 910200030,
+    "key": [
+      "Slug",
+      "hukuki-hazirlik"
+    ],
+    "data": {
+      "Id": 910200030,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "Hukuki Hazırlık",
+      "Slug": "hukuki-hazirlik"
+    }
+  },
+  {
+    "table": "ArticleCategories",
+    "id": 910200031,
+    "key": [
+      "Slug",
+      "sozlesme-ve-ticari-iliskiler"
+    ],
+    "data": {
+      "Id": 910200031,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "Sözleşme ve Ticari İlişkiler",
+      "Slug": "sozlesme-ve-ticari-iliskiler"
+    }
+  },
+  {
+    "table": "ArticleCategories",
+    "id": 910200032,
+    "key": [
+      "Slug",
+      "kisisel-haklar-ve-basvurular"
+    ],
+    "data": {
+      "Id": 910200032,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "Kişisel Haklar ve Başvurular",
+      "Slug": "kisisel-haklar-ve-basvurular"
+    }
+  },
+  {
+    "table": "ArticleCategories",
+    "id": 910200033,
+    "key": [
+      "Slug",
+      "malvarligi-ve-belgeler"
+    ],
+    "data": {
+      "Id": 910200033,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "Malvarlığı ve Belgeler",
+      "Slug": "malvarligi-ve-belgeler"
+    }
+  },
+  {
+    "table": "ArticleTags",
+    "id": 910200040,
+    "key": [
+      "Slug",
+      "belge-hazirligi"
+    ],
+    "data": {
+      "Id": 910200040,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "Belge Hazırlığı",
+      "Slug": "belge-hazirligi"
+    }
+  },
+  {
+    "table": "ArticleTags",
+    "id": 910200041,
+    "key": [
+      "Slug",
+      "sozlesme-incelemesi"
+    ],
+    "data": {
+      "Id": 910200041,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "Sözleşme İncelemesi",
+      "Slug": "sozlesme-incelemesi"
+    }
+  },
+  {
+    "table": "ArticleTags",
+    "id": 910200042,
+    "key": [
+      "Slug",
+      "basvuru-kayitlari"
+    ],
+    "data": {
+      "Id": 910200042,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "Başvuru Kayıtları",
+      "Slug": "basvuru-kayitlari"
+    }
+  },
+  {
+    "table": "ArticleTags",
+    "id": 910200043,
+    "key": [
+      "Slug",
+      "gorusme-hazirligi"
+    ],
+    "data": {
+      "Id": 910200043,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "Görüşme Hazırlığı",
+      "Slug": "gorusme-hazirligi"
+    }
+  },
+  {
+    "table": "ArticleTags",
+    "id": 910200044,
+    "key": [
+      "Slug",
+      "kisisel-veriler"
+    ],
+    "data": {
+      "Id": 910200044,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "Kişisel Veriler",
+      "Slug": "kisisel-veriler"
+    }
+  },
+  {
+    "table": "ArticleTags",
+    "id": 910200045,
+    "key": [
+      "Slug",
+      "odeme-belgeleri"
+    ],
+    "data": {
+      "Id": 910200045,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Name": "Ödeme Belgeleri",
+      "Slug": "odeme-belgeleri"
+    }
+  },
+  {
+    "table": "Articles",
+    "id": 910200060,
+    "key": [
+      "Slug",
+      "ceza-dosyasinda-olay-kronolojisi-ve-belge-hazirligi"
+    ],
+    "data": {
+      "Id": 910200060,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Title": "Ceza dosyasında olay kronolojisi ve belge hazırlığı",
+      "Slug": "ceza-dosyasinda-olay-kronolojisi-ve-belge-hazirligi",
+      "Excerpt": "İfade ve çağrı belgelerini olayların sırasıyla ilişkilendirerek görüşme için anlaşılır bir dosya hazırlamak.",
+      "Content": "<h2>Olay ile işlem tarihini ayırmak</h2><p>Bir olayın gerçekleştiği gün ile resmî tutanağın düzenlendiği gün farklı olabilir. Önce olayların sırası yazılır, sonra dosyadaki işlemler ayrı bir zaman çizelgesine eklenir. Tam hatırlanmayan tarihler kesin tarih gibi gösterilmez. Anlatılan bilgilerin doğrudan gözleme mi, bir belgeye mi yoksa başka bir kişinin aktarımına mı dayandığı belirtilir.</p><h2>Tutanakların bütünlüğünü korumak</h2><p>Tutanakların yalnızca seçilmiş satırları yerine bütün sayfaları saklanmalıdır. İmza, tarih ve ekler dosyanın anlaşılması için önemli olabilir. Bir belgenin okunamayan bölümü varsa bu durum not edilir; kişisel yorumlarla metin tamamlanmaz. Görüşme sırasında tutanağa ilişkin sorular ayrı bir listede sunulur.</p><h2>Çağrı yazısını dosyayla ilişkilendirmek</h2><p>Çağrı yazısında belirtilen makam, işlem ve dosya bilgileri kaydedilir. Birden fazla yazı varsa her birinin hangi işlemle bağlantılı olduğu açıklanır. Bildirimin alınma tarihi ve yöntemi, belgenin düzenlendiği tarihten ayrı tutulur. Belgenin ne anlama geldiği anlaşılmıyorsa internet yorumları yerine somut evrak değerlendirilmelidir.</p><h2>Görüşme gündemini hazırlamak</h2><p>Dosyanın hangi aşamada olduğuna ilişkin bilinen bilgiler, mevcut belgeler ve öğrenilmek istenen sorular bir sayfalık özet halinde düzenlenebilir. Özet asıl belgelerin yerini tutmaz. Açıklama bekleyen bir iddia ile belgeyle desteklenen bilgi aynı kesinlikte sunulmamalıdır. Kişisel veriler güvenli bir paylaşım yöntemiyle iletilmelidir.</p><h2>Anlatımdaki belirsizlikler</h2><p>Aynı olayı farklı zamanlarda anlatırken bazı ayrıntıların farklı hatırlanması mümkündür. Bu farkları ortadan kaldırmak için sonradan kesin bir anlatı oluşturmak yerine hangi kısmın hatırlanmadığı belirtilmelidir. Belgeye bakılarak öğrenilen bilgi ile doğrudan yaşanan olay ayrı gösterilir. Başkalarının anlatımları kendi gözleminiz gibi sunulmamalıdır. Önceden hazırlanmış notlar da özgün haliyle saklanabilir; bir notun ne zaman yazıldığı ile anlattığı olayın tarihi aynı olmak zorunda değildir.</p><h2>Dosyanın güvenli paylaşımı</h2><p>Ceza dosyasında üçüncü kişilere ait hassas bilgiler bulunabilir. Görüşme için hazırlanan dosya, sosyal medya veya herkese açık depolama bağlantıları üzerinden dağıtılmamalıdır. Belge listesi hazırlamak, hangi kayıtların gerçekten incelemeyle ilgili olduğunu ayırmayı kolaylaştırır. Bir belgenin hukuka uygun biçimde elde edilip edilmediği ve nasıl kullanılabileceği ayrıca değerlendirilmesi gereken konudur. Kamuya açıklama yapmak ile inceleme için bilgi paylaşmak aynı işlem değildir.</p><h2>Hazırlık kontrolü</h2><ul><li>Özgün belgeleri ve eklerini birlikte saklayın.</li><li>Tarihleri, tarafları ve belirsiz noktaları ayrı belirtin.</li><li>Yanıt beklediğiniz soruları yazılı hale getirin.</li></ul><p>Konunun genel çerçevesi için <a href=\"/uzmanlik-alanlari/ceza-hukuku\">Ceza Hukuku</a> sayfasını inceleyebilirsiniz. Bu yazı genel bilgilendirmedir; somut olayın hukuki değerlendirmesinin veya resmî başvurunun yerine geçmez.</p>",
+      "PublishedAt": "2026-10-01 09:00:00.000000",
+      "PracticeAreaId": 910200001,
+      "CategoryId": 910200032,
+      "MetaTitle": "Ceza dosyasında olay kronolojisi ve belge hazırlığı",
+      "MetaDescription": "İfade ve çağrı belgelerini olayların sırasıyla ilişkilendirerek görüşme için anlaşılır bir dosya hazırlamak.",
+      "OpenGraphTitle": "Ceza dosyasında olay kronolojisi ve belge hazırlığı",
+      "OpenGraphDescription": "İfade ve çağrı belgelerini olayların sırasıyla ilişkilendirerek görüşme için anlaşılır bir dosya hazırlamak."
+    }
+  },
+  {
+    "table": "Articles",
+    "id": 910200061,
+    "key": [
+      "Slug",
+      "idari-basvurularda-kayit-ve-bildirim-duzeni"
+    ],
+    "data": {
+      "Id": 910200061,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Title": "İdari başvurularda kayıt ve bildirim düzeni",
+      "Slug": "idari-basvurularda-kayit-ve-bildirim-duzeni",
+      "Excerpt": "Kurum başvurularını, kayıt numaralarını ve cevapları bir araya getirerek işlem sırasını açıklığa kavuşturmak.",
+      "Content": "<h2>Başvurunun konusunu sınırlandırmak</h2><p>Bir kuruma gönderilen yazıda farklı konular bir arada bulunabilir. Dosya hazırlanırken hangi talebin hangi belgeye dayandığı ayrı gösterilir. Başvurunun amacı ile beklenen yanıt birbirinden ayrılır. Kurumun adını ve işlem yapan birimi kaydetmek, sonraki yazışmaların hangi başvuruyla ilgili olduğunu anlamayı kolaylaştırır.</p><h2>Teslim ve kayıt belgesini saklamak</h2><p>Dilekçenin bir nüshası ile teslim veya elektronik kayıt belgesi birlikte tutulur. Kayıt numarası, başvuru tarihi ve eklerin listesi not edilir. Sonradan ek belge sunulduysa bunun hangi başvuruya ilişkin olduğu belirtilir. Başvurunun farklı sürümleri bulunuyorsa kurumda olan sürümün hangisi olduğu açıklığa kavuşturulur.</p><h2>Cevapları ayrı okumak</h2><p>Kurumdan gelen her yazı aynı talebe cevap vermeyebilir. Yazının konusu, dayanağı ve sonraki işlem bilgileri dikkatle ayrılır. Olumlu veya olumsuz görünen tek bir cümle üzerinden bütün dosya değerlendirilmez. Tebliğ ve öğrenme bilgileri ayrıca kaydedilir; süre değerlendirmesi için özgün evrak korunur.</p><h2>Sonraki adımı değerlendirmek</h2><p>Yeni bir başvuru yapmanın veya başka bir yol izlemenin koşulları işlem türüne göre değişebilir. Görüşmeye önceki başvuruların tamamı ve eksik görülen belgelerle hazırlanmak yararlıdır. Açıklama isteme, yeniden başvuru ve yargısal inceleme seçenekleri birbirinin otomatik yerine geçmez. Güncel durum somut kayıtlarla birlikte incelenmelidir.</p><h2>Birden fazla işlem olduğunda</h2><p>Aynı kurumdan gelen yazılar birbirini tamamlayabilir veya tamamen farklı işlemlere ilişkin olabilir. Her yazıya kısa bir dosya etiketi vererek konusu, tarihi ve bağlantılı başvuru numarası kaydedilebilir. Bir işlem değişmişse önceki belge silinmez; değişiklik sırası gösterilir. Başvuru sahibi adına başka bir kişi işlem yaptıysa hangi yetki ve belgeye dayandığı açıklanır. Kurumun yanıtının başka bir birime yönlendirme içermesi, esas talebin karşılandığı anlamına otomatik olarak gelmez.</p><h2>Eksik kayıtlarla değerlendirme</h2><p>Başvuru belgesinin bulunmadığı durumlarda kesin tarihler varsayılmamalıdır. Elde olan kayıtlar ve hangi belgenin eksik olduğu ayrı belirtilir. Elektronik işlem ekranında yalnızca güncel durum görünüyorsa geçmiş bildirimler ayrıca araştırılabilir. Görüşmenin amacı, eksikliği gizleyerek bir sonuç çıkarmak değil, hangi bilginin hangi yöntemle tamamlanabileceğini anlamaktır. Başvuru yolunu belirlemeden önce kurumun yaptığı işlemin kapsamının doğru anlaşılması gerekir.</p><h2>Hazırlık kontrolü</h2><ul><li>Özgün belgeleri ve eklerini birlikte saklayın.</li><li>Tarihleri, tarafları ve belirsiz noktaları ayrı belirtin.</li><li>Yanıt beklediğiniz soruları yazılı hale getirin.</li></ul><p>Konunun genel çerçevesi için <a href=\"/uzmanlik-alanlari/idare-hukuku\">İdare Hukuku</a> sayfasını inceleyebilirsiniz. Bu yazı genel bilgilendirmedir; somut olayın hukuki değerlendirmesinin veya resmî başvurunun yerine geçmez.</p>",
+      "PublishedAt": "2026-10-01 09:00:00.000000",
+      "PracticeAreaId": 910200002,
+      "CategoryId": 910200032,
+      "MetaTitle": "İdari başvurularda kayıt ve bildirim düzeni",
+      "MetaDescription": "Kurum başvurularını, kayıt numaralarını ve cevapları bir araya getirerek işlem sırasını açıklığa kavuşturmak.",
+      "OpenGraphTitle": "İdari başvurularda kayıt ve bildirim düzeni",
+      "OpenGraphDescription": "Kurum başvurularını, kayıt numaralarını ve cevapları bir araya getirerek işlem sırasını açıklığa kavuşturmak."
+    }
+  },
+  {
+    "table": "Articles",
+    "id": 910200062,
+    "key": [
+      "Slug",
+      "aile-uyusmazliklarinda-gorusmeye-guvenli-hazirlik"
+    ],
+    "data": {
+      "Id": 910200062,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Title": "Aile uyuşmazlıklarında görüşmeye güvenli hazırlık",
+      "Slug": "aile-uyusmazliklarinda-gorusmeye-guvenli-hazirlik",
+      "Excerpt": "Kişisel ve mali konuları ayrı başlıklarda düzenleyerek aile dosyasını ölçülü biçimde hazırlamak.",
+      "Content": "<h2>Güncel ihtiyaçları belirlemek</h2><p>Aile dosyasında geçmiş olaylar kadar güncel yaşam koşulları da açıklanmalıdır. Barınma, düzenli giderler ve çocukların günlük ihtiyaçları ayrı bir listeye yazılabilir. Taraflar arasında üzerinde anlaşılmış hususlar ile tartışmalı konular ayrılır. Bir görüşme için bütün özel hayat ayrıntılarını anlatmak yerine değerlendirmeyle ilgili bilgileri düzenlemek daha kullanışlıdır.</p><h2>Mali belgeleri sınıflandırmak</h2><p>Gelir, düzenli gider, borç ve malvarlığı bilgileri birbirine karıştırılmadan dosyalanır. Bir ödemenin hangi döneme ait olduğu belirtilir. Kişisel hesap hareketleri paylaşılırken gerekli kapsam gözetilir. Başkasının hesabına izinsiz erişmek veya belgenin içeriğini değiştirmek yerine elde bulunan özgün kayıtlar korunur.</p><h2>Çocukların bilgilerini korumak</h2><p>Eğitim ve sağlık bilgileri yalnızca inceleme için gereken kapsamda ele alınır. Çocukların fotoğrafları ve özel bilgileri kamuya açık ortamlarda paylaşılmaz. Günlük düzenle ilgili açıklamalar somut gözleme dayandırılır. Taraflar arasındaki iletişim sorunu çocuklar üzerinden yürütülmeden uygun iletişim yöntemi değerlendirilir.</p><h2>Soruları açık yazmak</h2><p>Görüşmede yanıt beklenen sorular olay anlatımından ayrı tutulabilir. Mevcut kararlar, önceki başvurular ve yakın zamanda alınan bildirimler özellikle gösterilir. Genel internet örnekleri kendi dosyasının sonucu gibi değerlendirilmemelidir. Güvenlik riski veya acil işlem bulunuyorsa uygun kurumsal ve hukuki destek geciktirilmemelidir.</p><h2>İletişim ve belge ayrımı</h2><p>Taraflar arasındaki gündelik iletişim, mali belgeler ve çocuklarla ilgili kayıtlar ayrı dosyalanabilir. Böylece bir konunun anlatımı diğer konuların değerlendirmesini gölgelemez. Yazışmalardan yalnızca seçilen birkaç cümle yerine bağlamı açıklayan bütün kayıt korunur. Kişisel yorumlar özgün mesajın içine eklenmez. Görüşmeye hazırlanırken diğer tarafın özel hayatını araştırmak veya üçüncü kişilere ait hesaplara erişmek yerine hukuka uygun biçimde elde bulunan bilgiler esas alınmalıdır.</p><h2>Beklentiyi somutlaştırmak</h2><p>Bir aile uyuşmazlığında beklenti yalnızca tek bir sonuçtan ibaret olmayabilir. Günlük ihtiyaç, iletişim düzeni ve mali belirsizlikler ayrı sorular olarak yazılabilir. Öncelik sırası hazırlanması görüşmede zamanın dengeli kullanılmasına yardımcı olur. Her beklentinin mevcut belgelerle ilişkisi ayrıca değerlendirilir. Duygusal olarak zorlayıcı bir olayda kişisel destek ihtiyacı ile hukuki değerlendirme ihtiyacının farklı olduğu gözetilmeli; somut kararlar bütün koşullar üzerinden ele alınmalıdır.</p><h2>Hazırlık kontrolü</h2><ul><li>Özgün belgeleri ve eklerini birlikte saklayın.</li><li>Tarihleri, tarafları ve belirsiz noktaları ayrı belirtin.</li><li>Yanıt beklediğiniz soruları yazılı hale getirin.</li></ul><p>Konunun genel çerçevesi için <a href=\"/uzmanlik-alanlari/aile-hukuku\">Aile Hukuku</a> sayfasını inceleyebilirsiniz. Bu yazı genel bilgilendirmedir; somut olayın hukuki değerlendirmesinin veya resmî başvurunun yerine geçmez.</p>",
+      "PublishedAt": "2026-10-01 09:00:00.000000",
+      "PracticeAreaId": 910200003,
+      "CategoryId": 910200032,
+      "MetaTitle": "Aile uyuşmazlıklarında görüşmeye güvenli hazırlık",
+      "MetaDescription": "Kişisel ve mali konuları ayrı başlıklarda düzenleyerek aile dosyasını ölçülü biçimde hazırlamak.",
+      "OpenGraphTitle": "Aile uyuşmazlıklarında görüşmeye güvenli hazırlık",
+      "OpenGraphDescription": "Kişisel ve mali konuları ayrı başlıklarda düzenleyerek aile dosyasını ölçülü biçimde hazırlamak."
+    }
+  },
+  {
+    "table": "Articles",
+    "id": 910200063,
+    "key": [
+      "Slug",
+      "calisma-iliskisinde-ucret-ve-donem-kayitlari"
+    ],
+    "data": {
+      "Id": 910200063,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Title": "Çalışma ilişkisinde ücret ve dönem kayıtları",
+      "Slug": "calisma-iliskisinde-ucret-ve-donem-kayitlari",
+      "Excerpt": "Sözleşme, bordro ve ödeme belgelerini çalışma dönemleriyle eşleştirmek için düzenli bir hazırlık yöntemi.",
+      "Content": "<h2>Çalışma çizelgesini oluşturmak</h2><p>İşe giriş, görev değişikliği ve ayrılış bilgileri tarih sırasına konur. Farklı işyerleri veya dönemler varsa bunlar ayrı gösterilir. Fiilî çalışma düzeni ile sözleşmedeki görev tanımı arasındaki farklar açıklanır. Kesin olmayan bilgiler tahmin olarak işaretlenir; eksik dönemler gizlenmeden not edilir.</p><h2>Bordro ile ödemeyi karşılaştırmak</h2><p>Bir bordrodaki kalem ile banka ödemesi aynı tutar veya dönemi göstermeyebilir. Her belge için dönem, ödeme açıklaması ve eldeki kayıt belirlenir. Kesinti, ek ödeme ve yan haklar ayrı listelenir. Tek bir ayın kaydından bütün çalışma dönemine ilişkin hesap sonucu çıkarılması yerine dosyanın tamamı incelenmelidir.</p><h2>Bildirimleri bir arada tutmak</h2><p>Görev yazıları, izin kayıtları ve ilişkinin sona ermesine ilişkin belgeler ücret dosyasıyla ilişkilendirilir. Dijital yazışmalarda tarih ve taraf bilgileri korunur. Belgenin teslim edildiği tarih ile üzerinde yazan tarih ayrı kaydedilir. Sonradan imzalanan bir metnin kapsamı görüşmede ayrıca açıklanır.</p><h2>Hesaplama öncesi soruları belirlemek</h2><p>Talep edilen kalemler ve bu kalemlere ilişkin belgeler bir tablo halinde düzenlenebilir. Belge eksikliği ile hukuki nitelendirme sorusu birbirinden ayrılır. Çevrim içi hesaplama sonuçları somut koşulların yerini tutmaz. Başvuru yolu ve süre değerlendirmesi için mevcut ilişki ve bildirimler birlikte incelenir.</p><h2>Birden fazla ücret bileşeni</h2><p>Sabit ödeme, değişken ödeme ve yan haklara ilişkin kayıtlar ayrı tutulabilir. Bir kalemin adı aynı olsa bile hangi dönemde ve hangi koşulla uygulandığı değişebilir. Banka açıklamasında toplu ödeme görünüyorsa bunun hangi aylara karşılık geldiği kesin olmayan bir tahminle doldurulmaz. Mevcut belgeler ve işyeri açıklamaları birlikte dosyalanır. İş ilişkisinin fiilî uygulaması ile yazılı sözleşme arasında fark bulunuyorsa bu fark, hukuki değerlendirmeye sunulacak ayrı bir soru olarak kaydedilir.</p><h2>Dönemler arasında karşılaştırma</h2><p>Ücret veya görev düzenindeki değişiklikler için önceki ve sonraki dönem kayıtları yan yana getirilebilir. Karşılaştırma, tek başına bir alacak hesabı değildir; kayıtların neyi gösterdiğini anlamaya yarar. Eksik bordro ya da okunamayan yazışma varsa belge listesine eklenir. Ayrılış sırasında verilen belgeler bütün olarak incelenir. Bir evrakın başlığına bakarak tüm hak veya yükümlülüklerin sona erdiği varsayılmamalıdır.</p><h2>Hazırlık kontrolü</h2><ul><li>Özgün belgeleri ve eklerini birlikte saklayın.</li><li>Tarihleri, tarafları ve belirsiz noktaları ayrı belirtin.</li><li>Yanıt beklediğiniz soruları yazılı hale getirin.</li></ul><p>Konunun genel çerçevesi için <a href=\"/uzmanlik-alanlari/is-hukuku\">İş Hukuku</a> sayfasını inceleyebilirsiniz. Bu yazı genel bilgilendirmedir; somut olayın hukuki değerlendirmesinin veya resmî başvurunun yerine geçmez.</p>",
+      "PublishedAt": "2026-10-01 09:00:00.000000",
+      "PracticeAreaId": 910200004,
+      "CategoryId": 910200030,
+      "MetaTitle": "Çalışma ilişkisinde ücret ve dönem kayıtları",
+      "MetaDescription": "Sözleşme, bordro ve ödeme belgelerini çalışma dönemleriyle eşleştirmek için düzenli bir hazırlık yöntemi.",
+      "OpenGraphTitle": "Çalışma ilişkisinde ücret ve dönem kayıtları",
+      "OpenGraphDescription": "Sözleşme, bordro ve ödeme belgelerini çalışma dönemleriyle eşleştirmek için düzenli bir hazırlık yöntemi."
+    }
+  },
+  {
+    "table": "Articles",
+    "id": 910200064,
+    "key": [
+      "Slug",
+      "kisisel-veri-envanterine-sureclerden-baslamak"
+    ],
+    "data": {
+      "Id": 910200064,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Title": "Kişisel veri envanterine süreçlerden başlamak",
+      "Slug": "kisisel-veri-envanterine-sureclerden-baslamak",
+      "Excerpt": "Formlar, çalışan süreçleri ve dış hizmet sağlayıcılarla veri akışını anlaşılır biçimde ortaya koymak.",
+      "Content": "<h2>Süreçleri birbirinden ayırmak</h2><p>İletişim formu, çalışan dosyası ve müşteri kaydı aynı bilgi akışına sahip değildir. Her süreçte kimin hangi bilgiye ihtiyaç duyduğu açıklanır. Veri alanlarının adları ile gerçek kişi kayıtları birbirinden ayrılır. İlk hazırlıkta gerçek kişisel veri kopyaları toplamak yerine süreçlerin ve alanların listelenmesi yeterli bir başlangıç olabilir.</p><h2>Amaç ile teknik kullanımı eşleştirmek</h2><p>Bir bilginin alınma amacı ve daha sonra hangi sistemde kullanıldığı birlikte gösterilir. Form üzerinde bulunan ancak kullanılmayan alanlar ayrıca değerlendirilir. Erişim yetkileri ve hizmet sağlayıcı ilişkileri görünür hale getirilir. Bir işletmenin başka bir metni kopyalaması gerçek akıştaki farklılıkları ortadan kaldırmaz.</p><h2>Saklama akışını anlamak</h2><p>Bilginin aktif sistemde, arşivde ve yedekte nasıl tutulduğu ayrı değerlendirilir. Silme işleminin uygulamada hangi aşamaları etkilediği anlaşılmalıdır. Belirlenmemiş bir saklama süresi kesin bir uygulama gibi yazılmaz. Yeni bir yazılım veya hizmet sağlayıcı devreye alındığında süreç listesi güncellenir.</p><h2>Belge ve uygulamayı karşılaştırmak</h2><p>Mevcut aydınlatma metni ve diğer belgeler süreç listesiyle karşılaştırılır. İşleme amacı, hukuki sebep ve varsa aktarım bilgileri ayrı inceleme başlıklarıdır. Hukuki belge, erişim düzeni ve teknik güvenlik ihtiyaçları birlikte planlanır. Bu çalışma, bütün yükümlülüklerin tamamlandığına ilişkin bir sertifika oluşturmaz.</p><h2>Hizmet sağlayıcıları görünür kılmak</h2><p>E-posta, barındırma, müşteri yönetimi veya dosya paylaşımı hizmetleri farklı veri akışları oluşturabilir. Sadece kullanılan ürünün adı değil, hangi bilgilerin o ürüne girdiği ve kimlerin erişebildiği kaydedilir. Bir hizmetin yurt içinde veya dışında hangi altyapıyla sunulduğu bilinmiyorsa bu bilgi doğrulama ihtiyacı olarak tutulur. Varsayıma dayalı aktarım açıklaması yazılmaz. Kullanılmayan bir analitik veya reklam hizmeti envantere etkinmiş gibi eklenmemelidir.</p><h2>Değişikliklerin takip edilmesi</h2><p>Yeni bir form alanı veya erişim yetkisi küçük bir teknik değişiklik gibi görünse de bilgi akışını etkileyebilir. Süreç listesinin kim tarafından ve ne zaman güncelleneceği belirlenebilir. Mevcut belgelerle fiilî uygulama arasında fark varsa farkın nedeni araştırılır. Belge düzenlemek ile uygulamayı düzeltmek ayrı iş kalemleridir. Genel bir politika metni, belirli bir veri toplama faaliyeti için gereken açıklamaların yerini otomatik olarak tutmaz.</p><h2>Hazırlık kontrolü</h2><ul><li>Özgün belgeleri ve eklerini birlikte saklayın.</li><li>Tarihleri, tarafları ve belirsiz noktaları ayrı belirtin.</li><li>Yanıt beklediğiniz soruları yazılı hale getirin.</li></ul><p>Konunun genel çerçevesi için <a href=\"/uzmanlik-alanlari/kvkk-danismanligi\">KVKK Danışmanlığı</a> sayfasını inceleyebilirsiniz. Bu yazı genel bilgilendirmedir; somut olayın hukuki değerlendirmesinin veya resmî başvurunun yerine geçmez.</p>",
+      "PublishedAt": "2026-10-01 09:00:00.000000",
+      "PracticeAreaId": 910200005,
+      "CategoryId": 910200032,
+      "MetaTitle": "Kişisel veri envanterine süreçlerden başlamak",
+      "MetaDescription": "Formlar, çalışan süreçleri ve dış hizmet sağlayıcılarla veri akışını anlaşılır biçimde ortaya koymak.",
+      "OpenGraphTitle": "Kişisel veri envanterine süreçlerden başlamak",
+      "OpenGraphDescription": "Formlar, çalışan süreçleri ve dış hizmet sağlayıcılarla veri akışını anlaşılır biçimde ortaya koymak."
+    }
+  },
+  {
+    "table": "Articles",
+    "id": 910200065,
+    "key": [
+      "Slug",
+      "ticari-sozlesmede-teslim-ve-odeme-belgeleri"
+    ],
+    "data": {
+      "Id": 910200065,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Title": "Ticari sözleşmede teslim ve ödeme belgeleri",
+      "Slug": "ticari-sozlesmede-teslim-ve-odeme-belgeleri",
+      "Excerpt": "Sipariş, teslim, fatura ve ödeme kayıtlarını aynı işlem dosyasında ilişkilendirerek uyuşmazlığın kapsamını anlamak.",
+      "Content": "<h2>İşlem dosyasını tanımlamak</h2><p>Taraf unvanları, işlem konusu ve hangi sözleşmeye dayanıldığı dosyanın başında belirtilir. Farklı siparişlere ait belgeler aynı dosyada bulunuyorsa ayrılır. Teklif ile kabul edilen koşullar arasındaki farklar not edilir. İmza veya temsil bilgileri, işlem belgelerinden bağımsız olarak da incelenebilir.</p><h2>Teslim aşamasını belgelemek</h2><p>Teslim tarihi, miktar ve kabul bilgileri bir araya getirilir. Teslimle ilgili çekince veya eksiklik bildirimi varsa özgün haliyle saklanır. Fatura, teslimin bütün koşullarını tek başına açıklamayabilir. İşlemin devam eden kısmı ile tamamlanan kısmı ayrı gösterilerek belirsiz kalan konular belirlenir.</p><h2>Ödeme akışını izlemek</h2><p>Ödemelerin hangi belge veya döneme ilişkin olduğu açıklamalarıyla kaydedilir. Kısmi ödeme, mahsup ve iade kayıtları birbirine karıştırılmaz. Yazışmalardaki ödeme planı ile gerçekleşen hareketler karşılaştırılır. Ticari sır niteliğindeki bilgiler güvenli bir paylaşım yöntemiyle iletilmelidir.</p><h2>Görüşme için uyuşmazlık haritası</h2><p>Tarafların farklı değerlendirdiği noktalar ve mevcut belgeler ayrı başlıklara konur. İlişkinin devam edip etmediği ve hangi çözümün beklendiği açıklanır. Eksik kayıtlar görünür hale getirilir. Dosya görülmeden alacak miktarı, işlem süresi veya sonuç hakkında kesin değerlendirme yapılmaz.</p><h2>Yetki ve işlem bağlantısı</h2><p>Ticari dosyada belgeyi gönderen kişi ile işlemin tarafı aynı olmayabilir. Temsil veya imza konusunda mevcut kayıtlar düzenlenir; yetki hakkında bilinmeyen hususlar kesin kabul edilmez. Farklı şirketlere ait faturalar veya teslim belgeleri bir arada tutuluyorsa hangi ilişkinin parçası oldukları açıklanır. Bir şirketin grup içinde yer alması, bütün şirketlerin tek taraf olduğu anlamına gelmez. İşlem ve taraf tanımı dosyanın bütün belgelerinde tutarlı okunmalıdır.</p><h2>Devam eden ilişkiyi değerlendirmek</h2><p>Uyuşmazlık sırasında ticari ilişki sürüyorsa yeni teslimler ve ödemeler geçmiş kayıtlarla karıştırılmamalıdır. Mevcut anlaşmazlık ile yeni işlemlerin koşulları ayrı gösterilir. Yazışmalarda kullanılan uzlaşma önerileri bütün bağlamıyla saklanır. Bir önerinin kabul edilip edilmediği belirsizse bu durum açıkça belirtilir. Görüşmede yalnızca geçmiş tutarlar değil, devam eden yükümlülükler ve belge düzeninin nasıl sürdürüleceği de değerlendirilebilir.</p><h2>Hazırlık kontrolü</h2><ul><li>Özgün belgeleri ve eklerini birlikte saklayın.</li><li>Tarihleri, tarafları ve belirsiz noktaları ayrı belirtin.</li><li>Yanıt beklediğiniz soruları yazılı hale getirin.</li></ul><p>Konunun genel çerçevesi için <a href=\"/uzmanlik-alanlari/ticaret-hukuku\">Ticaret Hukuku</a> sayfasını inceleyebilirsiniz. Bu yazı genel bilgilendirmedir; somut olayın hukuki değerlendirmesinin veya resmî başvurunun yerine geçmez.</p>",
+      "PublishedAt": "2026-10-01 09:00:00.000000",
+      "PracticeAreaId": 910200006,
+      "CategoryId": 910200031,
+      "MetaTitle": "Ticari sözleşmede teslim ve ödeme belgeleri",
+      "MetaDescription": "Sipariş, teslim, fatura ve ödeme kayıtlarını aynı işlem dosyasında ilişkilendirerek uyuşmazlığın kapsamını anlamak.",
+      "OpenGraphTitle": "Ticari sözleşmede teslim ve ödeme belgeleri",
+      "OpenGraphDescription": "Sipariş, teslim, fatura ve ödeme kayıtlarını aynı işlem dosyasında ilişkilendirerek uyuşmazlığın kapsamını anlamak."
+    }
+  },
+  {
+    "table": "Articles",
+    "id": 910200066,
+    "key": [
+      "Slug",
+      "tuketici-basvurusunda-urun-ve-iletisim-kayitlari"
+    ],
+    "data": {
+      "Id": 910200066,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Title": "Tüketici başvurusunda ürün ve iletişim kayıtları",
+      "Slug": "tuketici-basvurusunda-urun-ve-iletisim-kayitlari",
+      "Excerpt": "Satın alma belgeleri ve çözüm taleplerini kronolojik bir dosyada toplamak için pratik bir düzen.",
+      "Content": "<h2>Satın alma koşullarını kaydetmek</h2><p>Sipariş edilen ürün veya hizmetin açıklaması ve satış kanalı belirlenir. Ürün sayfası, sipariş onayı ve ödeme belgesi birlikte saklanır. Sonradan değişen ürün açıklaması varsa mevcut kayıtların tarihi korunur. Ticari amaçlı bir alımın niteliği ayrıca değerlendirilmesi gereken bir konu olabilir.</p><h2>Sorunu somutlaştırmak</h2><p>Beklenen özellik ile karşılaşılan durum ayrı anlatılır. Sorunun ilk fark edildiği tarih, kullanım koşulları ve varsa servis işlemleri kaydedilir. Fotoğraf veya video kayıtları özgün biçimde saklanır. Ürüne müdahale edilmesi veya kayıtların silinmesi öncesinde mevcut durumun belgelenmesi yararlı olabilir.</p><h2>Çözüm taleplerini izlemek</h2><p>Satıcıya veya hizmet sağlayıcıya gönderilen yazılar ve verilen yanıtlar sıra halinde tutulur. Talep edilen çözümün değişmesi halinde bunun nedeni açıklanır. Telefon görüşmeleri için tarih ve görüşme konusu not edilebilir; kesin olmayan konuşma içeriği kesin kayıt gibi sunulmaz.</p><h2>Başvuru yolunu seçmeden önce</h2><p>İşlem türü, mevcut tutar ve güncel kurallar somut dosyayla birlikte değerlendirilmelidir. Başka bir kişinin izlediği yol aynı alışveriş için otomatik uygun değildir. Genel bir süre veya parasal sınır bilgisine güvenmek yerine mevcut belgeler incelenir. Görüşme için bütün yazışmaları bir arada tutmak karar vermeyi kolaylaştırır.</p><h2>Servis sürecinin izlenmesi</h2><p>Ürün servise verilmişse teslim belgesi, servis açıklaması ve geri teslim kaydı birlikte tutulur. Aynı sorunun farklı zamanlarda yaşanması halinde her olay ayrı tarihle gösterilir. Bir müdahalenin ne anlama geldiği teknik belge üzerinden anlaşılmalıdır; yalnızca günlük ifadelerle kesin bir tespit yapılmaz. Ürünün şu anda kimde bulunduğu ve kullanılabilir durumda olup olmadığı da dosya özetinde yer alabilir. Eksik kayıtlar başvuru öncesinde belirlenir.</p><h2>Talep ile kayıt tutarlılığı</h2><p>Başvuruda istenen çözümün hangi olaya ve belgeye dayandığı açıklanmalıdır. Farklı zamanlarda farklı çözümler istenmişse yazışmaların sırası korunur. Satıcı veya hizmet sağlayıcıdan gelen bir öneri bütün şartlarıyla birlikte incelenir. İnternette okunan başka bir ürün kararının kendi alışverişiniz için aynı sonucu vereceği varsayılmaz. Güncel kurallar, işlem türü ve eldeki belgeler değerlendirilmeden kesin sonuç veya süre hesabı oluşturulmamalıdır.</p><h2>Hazırlık kontrolü</h2><ul><li>Özgün belgeleri ve eklerini birlikte saklayın.</li><li>Tarihleri, tarafları ve belirsiz noktaları ayrı belirtin.</li><li>Yanıt beklediğiniz soruları yazılı hale getirin.</li></ul><p>Konunun genel çerçevesi için <a href=\"/uzmanlik-alanlari/tuketici-hukuku\">Tüketici Hukuku</a> sayfasını inceleyebilirsiniz. Bu yazı genel bilgilendirmedir; somut olayın hukuki değerlendirmesinin veya resmî başvurunun yerine geçmez.</p>",
+      "PublishedAt": "2026-10-01 09:00:00.000000",
+      "PracticeAreaId": 910200007,
+      "CategoryId": 910200032,
+      "MetaTitle": "Tüketici başvurusunda ürün ve iletişim kayıtları",
+      "MetaDescription": "Satın alma belgeleri ve çözüm taleplerini kronolojik bir dosyada toplamak için pratik bir düzen.",
+      "OpenGraphTitle": "Tüketici başvurusunda ürün ve iletişim kayıtları",
+      "OpenGraphDescription": "Satın alma belgeleri ve çözüm taleplerini kronolojik bir dosyada toplamak için pratik bir düzen."
+    }
+  },
+  {
+    "table": "Articles",
+    "id": 910200067,
+    "key": [
+      "Slug",
+      "takip-evraki-geldiginde-dosya-nasil-duzenlenir"
+    ],
+    "data": {
+      "Id": 910200067,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Title": "Takip evrakı geldiğinde dosya nasıl düzenlenir?",
+      "Slug": "takip-evraki-geldiginde-dosya-nasil-duzenlenir",
+      "Excerpt": "Resmî takip bildirimi, alacağın dayanağı ve ödeme geçmişini birbirinden ayırarak hazırlık yapmak.",
+      "Content": "<h2>Bildirim bilgilerini korumak</h2><p>Evrakın geldiği birim, dosya numarası ve belgenin tam adı kaydedilir. Tebliğ bilgileri asıl evrakla birlikte tutulur. Bildirimin üzerindeki tarih ile teslim tarihi aynı kabul edilmez. Bir belgenin yalnızca fotoğrafını almak yerine mümkünse bütün sayfaları ve ekleri saklanmalıdır.</p><h2>Dayanak ilişkiyi açıklamak</h2><p>Sözleşme, fatura veya başka bir belgeye dayanan ilişki ayrı özetlenir. Taraflar arasında sonradan yapılan anlaşmalar ve yazışmalar eklenir. Alacağın neden tartışıldığı açıkça yazılır. Duyuma dayalı açıklamalar ile kişisel olarak bilinen olaylar aynı kesinlikte aktarılmaz.</p><h2>Ödeme kayıtlarını eşleştirmek</h2><p>Her ödeme için tarih, tutar, alıcı ve açıklama belirlenir. Kısmi ödemeler ve iadeler ayrı listelenir. Başka bir işlem için yapılan ödemenin takip dosyasıyla karışmamasına dikkat edilir. Bir tutarı kabul etmek veya yeni bir belge imzalamak öncesinde metnin kapsamı anlaşılmalıdır.</p><h2>Zamanında değerlendirme</h2><p>Resmî bildirimlerin etkisi somut belge ve dosya aşamasına bağlıdır. Genel internet açıklamalarıyla işlemi ertelemek yerine uygun değerlendirme geciktirilmemelidir. Görüşmede süre, belge eksikliği ve izlenebilecek yollar ayrı ele alınır. Bu metin herhangi bir itirazın kabulünü veya takibin sonucunu garanti etmez.</p><h2>Tutarları ayrı göstermek</h2><p>Takipte yer alan kalemlerle taraflar arasındaki temel ilişkiye ait tutarlar aynı başlık altında toplanmamalıdır. Mevcut ödeme belgeleri dosya ve işlem açıklamasıyla eşleştirilir. Bir tutarın hangi gerekçeyle kabul edildiği veya tartışıldığı ayrı yazılır. Dosyadaki hesaplama ile kendi notlarınız farklıysa farkı değiştirmek yerine görünür hale getirin. Hangi belgenin neyi gösterdiği anlaşılmadan yalnızca toplam tutar üzerinden değerlendirme yapılması eksik kalabilir.</p><h2>İletişimi kayıt altına almak</h2><p>Takip evrakı dışında yapılan ödeme veya çözüm görüşmelerine ilişkin mevcut yazılı kayıtlar saklanır. Kimin adına iletişim kurulduğu ve hangi dosyanın konuşulduğu açıklanır. Yeni bir taahhüt veya anlaşma metni varsa bütün koşulları incelenmelidir. Bir mesaj göndermek ya da telefonla konuşmak resmî başvuru işleminin yerine otomatik geçmez. Belgelerin etkisi, dosyanın güncel aşaması ve somut koşullar birlikte değerlendirilmelidir.</p><h2>Hazırlık kontrolü</h2><ul><li>Özgün belgeleri ve eklerini birlikte saklayın.</li><li>Tarihleri, tarafları ve belirsiz noktaları ayrı belirtin.</li><li>Yanıt beklediğiniz soruları yazılı hale getirin.</li></ul><p>Konunun genel çerçevesi için <a href=\"/uzmanlik-alanlari/icra-ve-iflas-hukuku\">İcra ve İflas Hukuku</a> sayfasını inceleyebilirsiniz. Bu yazı genel bilgilendirmedir; somut olayın hukuki değerlendirmesinin veya resmî başvurunun yerine geçmez.</p>",
+      "PublishedAt": "2026-10-01 09:00:00.000000",
+      "PracticeAreaId": 910200008,
+      "CategoryId": 910200033,
+      "MetaTitle": "Takip evrakı geldiğinde dosya nasıl düzenlenir?",
+      "MetaDescription": "Resmî takip bildirimi, alacağın dayanağı ve ödeme geçmişini birbirinden ayırarak hazırlık yapmak.",
+      "OpenGraphTitle": "Takip evrakı geldiğinde dosya nasıl düzenlenir?",
+      "OpenGraphDescription": "Resmî takip bildirimi, alacağın dayanağı ve ödeme geçmişini birbirinden ayırarak hazırlık yapmak."
+    }
+  },
+  {
+    "table": "Articles",
+    "id": 910200068,
+    "key": [
+      "Slug",
+      "sozlesme-ekleri-ve-surum-yonetimi-neden-onemlidir"
+    ],
+    "data": {
+      "Id": 910200068,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Title": "Sözleşme ekleri ve sürüm yönetimi neden önemlidir?",
+      "Slug": "sozlesme-ekleri-ve-surum-yonetimi-neden-onemlidir",
+      "Excerpt": "Taslak ve imzalı metinleri, ekleri ve değişiklik yazışmalarını birbirine karıştırmadan düzenlemek.",
+      "Content": "<h2>Belge ailesini oluşturmak</h2><p>Ana sözleşme, teknik ekler, teklif ve genel koşullar bir belge listesinde gösterilir. Her belgenin tarihi ve sürümü kaydedilir. Taraflara gönderilen metin ile imzalanan metin aynı değilse fark açıklanır. Yalnızca son sayfanın saklanması eklerin kapsamını anlamaya yeterli olmayabilir.</p><h2>Değişiklikleri görünür kılmak</h2><p>E-posta veya başka bir yöntemle üzerinde anlaşılan değişiklikler dosyaya eklenir. Sözlü açıklamalar yazılı hükümlerin yerine geçirilmeden ayrı not edilir. Düzeltilen metnin hangi tarafça önerildiği ve nasıl kabul edildiği belirlenir. Bir sonraki sürümün öncekinin yerini alıp almadığı ayrıca incelenir.</p><h2>Uygulama kayıtlarıyla ilişki kurmak</h2><p>Teslim, kabul ve ödeme kayıtlarının hangi sözleşmeye dayandığı gösterilir. Metindeki iş tanımı ile fiilî uygulama arasında fark varsa bu fark açıkça anlatılır. Bildirim için kullanılan adres ve yöntemler dosyaya eklenir. İlişkinin devam eden kısımları tamamlanmış işlemlerden ayrılır.</p><h2>İmza öncesi sorular</h2><p>Belirsiz terimler ve eksik ekler görüşme gündemine alınır. Bir başka işten alınan sözleşme, yalnızca taraf adları değiştirilerek uygun hale gelmez. Temsil yetkisi ve imza yöntemine ilişkin belgeler hazırlanır. Tüm metin ve ekler görülmeden hukuki incelemenin tamamlandığı varsayılmamalıdır.</p><h2>Terimlerin uygulamadaki karşılığı</h2><p>Teslim, kabul, tamamlanma ve ödeme gibi sözcükler metinde kullanılsa da hangi olayla gerçekleşmiş sayıldıkları belirsiz olabilir. Her terim için uygulamada hangi belgenin veya bildirimin kullanıldığı gösterilir. Bir teknik şartname ana sözleşmeyle farklı ifadeler içeriyorsa fark ayrı not edilir. Tarafların işin başındaki beklentileri ile sonradan oluşan uygulama aynı kabul edilmez. İnceleme, kelimelerin gerçek işlem akışıyla ilişkisini açıklığa kavuşturmayı amaçlar.</p><h2>Belge düzenini sürdürmek</h2><p>Sözleşme imzalandıktan sonra dosya kapanmış sayılmaz. Ek anlaşma ve bildirimlerin ana sözleşmeyle ilişkisi korunmalıdır. Her yeni belgeye tarih ve işlem etiketi verilmesi sonraki incelemeyi kolaylaştırır. Yetkisiz veya eksik bir sürümün güncel metin gibi kullanılmaması için belgeler ayrı klasörlerde tutulabilir. Sözleşmenin sona ermesine yönelik bir karar da mevcut metin ve uygulama kayıtları üzerinden ayrıca değerlendirilmelidir.</p><h2>Hazırlık kontrolü</h2><ul><li>Özgün belgeleri ve eklerini birlikte saklayın.</li><li>Tarihleri, tarafları ve belirsiz noktaları ayrı belirtin.</li><li>Yanıt beklediğiniz soruları yazılı hale getirin.</li></ul><p>Konunun genel çerçevesi için <a href=\"/uzmanlik-alanlari/sozlesmeler-hukuku\">Sözleşmeler Hukuku</a> sayfasını inceleyebilirsiniz. Bu yazı genel bilgilendirmedir; somut olayın hukuki değerlendirmesinin veya resmî başvurunun yerine geçmez.</p>",
+      "PublishedAt": "2026-10-01 09:00:00.000000",
+      "PracticeAreaId": 910200009,
+      "CategoryId": 910200031,
+      "MetaTitle": "Sözleşme ekleri ve sürüm yönetimi neden önemlidir?",
+      "MetaDescription": "Taslak ve imzalı metinleri, ekleri ve değişiklik yazışmalarını birbirine karıştırmadan düzenlemek.",
+      "OpenGraphTitle": "Sözleşme ekleri ve sürüm yönetimi neden önemlidir?",
+      "OpenGraphDescription": "Taslak ve imzalı metinleri, ekleri ve değişiklik yazışmalarını birbirine karıştırmadan düzenlemek."
+    }
+  },
+  {
+    "table": "Articles",
+    "id": 910200069,
+    "key": [
+      "Slug",
+      "miras-gorusmesi-icin-kisi-ve-malvarligi-dosyasi"
+    ],
+    "data": {
+      "Id": 910200069,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Title": "Miras görüşmesi için kişi ve malvarlığı dosyası",
+      "Slug": "miras-gorusmesi-icin-kisi-ve-malvarligi-dosyasi",
+      "Excerpt": "Bilinen aile ilişkilerini ve malvarlığı kayıtlarını kesin olmayan bilgilerden ayırarak bir araya getirmek.",
+      "Content": "<h2>Kişi ilişkilerini açıklamak</h2><p>Aile ilişkileri ve mevcut resmî belgeler ayrı gösterilir. Aile içinde kullanılan ifadeler her zaman hukuki sıfatları açıklamaz. Bilinmeyen bir kişi veya işlem hakkında kesin bilgi varmış gibi yazılmaz. Görüşmede açıklama bekleyen hususlar belirlenerek belge temin ihtiyacı değerlendirilir.</p><h2>Malvarlığı listesini düzenlemek</h2><p>Taşınmaz, hesap, şirket ilişkisi ve diğer bilinen kalemler ayrı listelenir. Bir kalemin varlığı veya güncel durumu bilinmiyorsa bu belirsizlik belirtilir. Tapu ve hesap bilgileri güvenli yöntemle paylaşılır. Belgelerin hangi kişi ve işlemle ilgili olduğu açıkça gösterilmelidir.</p><h2>Önceki işlemleri toplamak</h2><p>Daha önce yapılmış başvurular, anlaşmalar ve verilmiş kararlar dosyaya eklenir. İmzalı belgeler ile taslaklar ayrı tutulur. Aile içindeki sözlü görüşmeler özgün belge gibi sunulmaz. Malvarlığı üzerinde işlem yapılmışsa tarih ve elde bulunan dayanak belgeler belirtilir.</p><h2>Paylaşım öncesi değerlendirme</h2><p>Bir belge imzalamadan önce hangi hak ve işlemleri kapsadığı anlaşılmalıdır. Başka bir aile için uygun olan paylaşım düzeni aynı koşulları taşımayabilir. Borç ve süre değerlendirmesi gerektiren konular genel bilgilerle ertelenmemelidir. Görüşme için hedefler, sorular ve belge eksikleri ayrı bir sayfada hazırlanabilir.</p><h2>Bilginin kaynağını göstermek</h2><p>Malvarlığı listesinde her kalemin hangi belgeye veya bilgiye dayandığı belirtilir. Aile içinde konuşulmuş bir bilgi ile resmî bir kayıt aynı kesinlikte değildir. Farklı kişilerden gelen açıklamalar çelişiyorsa çelişki gizlenmeden soru olarak hazırlanır. Belgelerin güncelliği ve hangi kişiyle ilişkili olduğu birlikte kontrol edilir. Kişisel ve mali bilgiler gereksiz kişilere dağıtılmadan uygun inceleme yöntemi belirlenmelidir.</p><h2>Anlaşma metnini anlamak</h2><p>Aile içinde hazırlanmış bir metin imza için sunulduğunda hangi malları, borçları veya işlemleri kapsadığı açıklığa kavuşturulmalıdır. Metnin dışında kalan konular varsayımla tamamlanmaz. Önceki başvurular ve resmî belgeler anlaşmayla birlikte incelenebilir. Bir kişinin sözlü açıklamasının bütün tarafların iradesini temsil ettiği varsayılmamalıdır. Görüşmede karar vermeden önce belirsiz kalan hususlar ve gerekli kayıtlar ayrı bir listeye alınmalıdır.</p><h2>Hazırlık kontrolü</h2><ul><li>Özgün belgeleri ve eklerini birlikte saklayın.</li><li>Tarihleri, tarafları ve belirsiz noktaları ayrı belirtin.</li><li>Yanıt beklediğiniz soruları yazılı hale getirin.</li></ul><p>Konunun genel çerçevesi için <a href=\"/uzmanlik-alanlari/miras-hukuku\">Miras Hukuku</a> sayfasını inceleyebilirsiniz. Bu yazı genel bilgilendirmedir; somut olayın hukuki değerlendirmesinin veya resmî başvurunun yerine geçmez.</p>",
+      "PublishedAt": "2026-10-01 09:00:00.000000",
+      "PracticeAreaId": 910200010,
+      "CategoryId": 910200033,
+      "MetaTitle": "Miras görüşmesi için kişi ve malvarlığı dosyası",
+      "MetaDescription": "Bilinen aile ilişkilerini ve malvarlığı kayıtlarını kesin olmayan bilgilerden ayırarak bir araya getirmek.",
+      "OpenGraphTitle": "Miras görüşmesi için kişi ve malvarlığı dosyası",
+      "OpenGraphDescription": "Bilinen aile ilişkilerini ve malvarlığı kayıtlarını kesin olmayan bilgilerden ayırarak bir araya getirmek."
+    }
+  },
+  {
+    "table": "Articles",
+    "id": 910200070,
+    "key": [
+      "Slug",
+      "tasinmaz-incelemesinde-tapu-ve-sozlesme-dosyasi"
+    ],
+    "data": {
+      "Id": 910200070,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Title": "Taşınmaz incelemesinde tapu ve sözleşme dosyası",
+      "Slug": "tasinmaz-incelemesinde-tapu-ve-sozlesme-dosyasi",
+      "Excerpt": "Taşınmazın tanımını, ödeme ve kullanım kayıtlarını aynı dosyada tutarlı biçimde ilişkilendirmek.",
+      "Content": "<h2>Taşınmazı doğru tanımlamak</h2><p>Adres, ada, parsel ve bağımsız bölüm bilgileri ayrı alanlarda gösterilir. Belgeler arasında farklılık varsa bu farklılık gizlenmeden not edilir. İlan metni ile resmî kayıt aynı bilgi kaynağı değildir. Birden fazla taşınmazın incelendiği dosyalarda her biri için ayrı belge listesi tutulmalıdır.</p><h2>Sözleşme ve ekleri birleştirmek</h2><p>İmzalı metin, ekler ve ödeme planı birlikte saklanır. Devir, kullanım ve teslimle ilgili koşullar ayrı okunur. Sonradan değişen bir husus varsa yazışmalar eklenir. Sözlü tanıtımda belirtilen fakat metinde bulunmayan özellikler ayrıca soru olarak hazırlanabilir.</p><h2>Fiilî durumu açıklamak</h2><p>Kullanım, teslim ve mevcut fiziksel durum hakkında elde bulunan kayıtlar düzenlenir. Fotoğraf veya kroki varsa tarihi ve kaynağı belirtilir. Yerinde inceleme ihtiyacı belgeler üzerinden değerlendirilir. Kullanım ilişkisi ile mülkiyet kaydı aynı şeymiş gibi anlatılmaz.</p><h2>İşlem öncesi kontrol</h2><p>Devir veya ödeme öncesinde kayıtların güncelliği ve sözleşmenin kapsamı somut biçimde incelenmelidir. Bir ilanın güven verici görünmesi hukuki değerlendirmeyi tamamlamaz. Görüşmeye eksiksiz kayıtlarla hazırlanmak belirsizlikleri azaltabilir. Bu metin taşınmazın yatırım değeri veya belirli bir işlem sonucuna ilişkin güvence vermez.</p><h2>Ödeme açıklamalarını korumak</h2><p>Taşınmazla ilgili kapora, kira, satış veya başka bir ödeme farklı ilişkilere ait olabilir. Her ödeme için elde bulunan açıklama ve dayanak belge saklanır. Birden fazla kişi veya taşınmazla ilgili tutarlar karıştırılmaz. Sonradan düzenlenen bir liste özgün banka veya makbuz kaydının yerine geçmez. Belgedeki açıklama ile tarafların anlattığı amaç arasında fark varsa bu fark ayrıca değerlendirilmek üzere not edilir.</p><h2>Kayıt güncelliğini değerlendirmek</h2><p>Eski bir belge geçmişteki durumu gösterebilir; güncel hukuki durumun bütünü olarak kabul edilmemelidir. İnceleme için hangi kayıtların yeniden temin edilmesi gerektiği somut dosyaya göre belirlenir. Adres değişikliği veya kullanım biçimindeki değişiklikler tapu ve sözleşme bilgileriyle birlikte açıklanır. Bir işlemin güvenli olduğu yalnızca görsellerden veya ilan açıklamasından çıkarılamaz. Belge, fiilî durum ve işlem amacı birlikte ele alınmalıdır.</p><h2>Hazırlık kontrolü</h2><ul><li>Özgün belgeleri ve eklerini birlikte saklayın.</li><li>Tarihleri, tarafları ve belirsiz noktaları ayrı belirtin.</li><li>Yanıt beklediğiniz soruları yazılı hale getirin.</li></ul><p>Konunun genel çerçevesi için <a href=\"/uzmanlik-alanlari/gayrimenkul-ve-tasinmaz-hukuku\">Gayrimenkul ve Taşınmaz Hukuku</a> sayfasını inceleyebilirsiniz. Bu yazı genel bilgilendirmedir; somut olayın hukuki değerlendirmesinin veya resmî başvurunun yerine geçmez.</p>",
+      "PublishedAt": "2026-10-01 09:00:00.000000",
+      "PracticeAreaId": 910200011,
+      "CategoryId": 910200033,
+      "MetaTitle": "Taşınmaz incelemesinde tapu ve sözleşme dosyası",
+      "MetaDescription": "Taşınmazın tanımını, ödeme ve kullanım kayıtlarını aynı dosyada tutarlı biçimde ilişkilendirmek.",
+      "OpenGraphTitle": "Taşınmaz incelemesinde tapu ve sözleşme dosyası",
+      "OpenGraphDescription": "Taşınmazın tanımını, ödeme ve kullanım kayıtlarını aynı dosyada tutarlı biçimde ilişkilendirmek."
+    }
+  },
+  {
+    "table": "Articles",
+    "id": 910200071,
+    "key": [
+      "Slug",
+      "sigorta-hasar-dosyasinda-police-ve-basvuru-kayitlari"
+    ],
+    "data": {
+      "Id": 910200071,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Title": "Sigorta hasar dosyasında poliçe ve başvuru kayıtları",
+      "Slug": "sigorta-hasar-dosyasinda-police-ve-basvuru-kayitlari",
+      "Excerpt": "Poliçe dönemini, olay belgelerini ve sigorta şirketi yanıtlarını düzenli biçimde değerlendirmeye hazırlamak.",
+      "Content": "<h2>Poliçeyi bütün olarak okumak</h2><p>Poliçe başlığıyla birlikte ekler ve genel koşullar dosyaya alınır. Dönem, sigortalı kişi veya varlık ve diğer sıfatlar kaydedilir. Farklı poliçeler bulunuyorsa hangi riskle ilişkili oldukları ayrı gösterilir. Yalnızca prim tutarından veya ürün adından kapsam sonucu çıkarılmaz.</p><h2>Olay kaydını hazırlamak</h2><p>Olay tarihi, elde bulunan tutanaklar ve hasarın mevcut durumu açıklanır. Onarım, sağlık veya diğer masraf belgeleri ayrı listelenir. Kesin olmayan bilgiler varsayım olarak gösterilir. Kişisel veriler ve ticari bilgiler gereksiz kişilere aktarılmadan dosya hazırlanır.</p><h2>Başvuru iletişimini izlemek</h2><p>Şirkete iletilen belgeler, alındı kayıtları ve yanıtlar tarih sırasına konur. Eksik belge talebi varsa ne zaman ve nasıl karşılandığı gösterilir. Ödeme veya ret açıklaması bütün metniyle saklanır. Telefon konuşması için not alınmışsa bunun yazılı şirket cevabı olmadığı belirtilir.</p><h2>Teklifi değerlendirmek</h2><p>Bir ödeme teklifinin hangi kalemleri kapsadığı ve hangi belgeye dayandığı anlaşılmalıdır. İmzalanacak metin asıl talep ile birlikte incelenir. Farklı olaylara ait sonuçlar kendi dosyasının sonucu gibi kabul edilmez. Başvuru yolu ve zamanlama mevcut poliçe ve yazışmalar üzerinden ayrıca değerlendirilmelidir.</p><h2>Masraf belgelerini sınıflandırmak</h2><p>Onarım, bakım, sağlık veya başka bir giderin olayla ilişkisi ayrı gösterilir. Fatura ve ödeme belgesi aynı dosyada bulunsa da hangi hizmete ait oldukları açıklanmalıdır. Farklı tarihlerde oluşan giderler sıraya konur. Henüz gerçekleşmemiş bir masraf kesin ödeme gibi yazılmaz. Eksik belge veya hesaplama sorusu görüşme gündemine alınır. Böylece poliçe kapsamıyla ilgili yorum ile tutarın belgelenmesi birbirinden ayrılabilir.</p><h2>Şirket açıklamasını bütün okumak</h2><p>Bir sigorta cevabında birden fazla gerekçe veya belge talebi yer alabilir. Tek bir cümleye dayanmak yerine metnin tamamı ve ekleri incelenir. Önceki yanıtlarla farklılık varsa tarih sırası korunur. Önerilen ödeme veya imzalanacak metnin hangi talepleri kapsadığı anlaşılmalıdır. Başka bir dosyada yapılan ödemenin kendi poliçeniz için aynı sonucu gösterdiği varsayılmamalıdır; değerlendirme mevcut kayıtlarla yürütülmelidir.</p><h2>Hazırlık kontrolü</h2><ul><li>Özgün belgeleri ve eklerini birlikte saklayın.</li><li>Tarihleri, tarafları ve belirsiz noktaları ayrı belirtin.</li><li>Yanıt beklediğiniz soruları yazılı hale getirin.</li></ul><p>Konunun genel çerçevesi için <a href=\"/uzmanlik-alanlari/sigorta-hukuku\">Sigorta Hukuku</a> sayfasını inceleyebilirsiniz. Bu yazı genel bilgilendirmedir; somut olayın hukuki değerlendirmesinin veya resmî başvurunun yerine geçmez.</p>",
+      "PublishedAt": "2026-10-01 09:00:00.000000",
+      "PracticeAreaId": 910200013,
+      "CategoryId": 910200033,
+      "MetaTitle": "Sigorta hasar dosyasında poliçe ve başvuru kayıtları",
+      "MetaDescription": "Poliçe dönemini, olay belgelerini ve sigorta şirketi yanıtlarını düzenli biçimde değerlendirmeye hazırlamak.",
+      "OpenGraphTitle": "Sigorta hasar dosyasında poliçe ve başvuru kayıtları",
+      "OpenGraphDescription": "Poliçe dönemini, olay belgelerini ve sigorta şirketi yanıtlarını düzenli biçimde değerlendirmeye hazırlamak."
+    }
+  },
+  {
+    "table": "ArticleTagLinks",
+    "data": {
+      "ArticleId": 910200060,
+      "TagId": 910200040
+    },
+    "key": [
+      "pair"
+    ]
+  },
+  {
+    "table": "ArticleTagLinks",
+    "data": {
+      "ArticleId": 910200060,
+      "TagId": 910200043
+    },
+    "key": [
+      "pair"
+    ]
+  },
+  {
+    "table": "ArticleTagLinks",
+    "data": {
+      "ArticleId": 910200061,
+      "TagId": 910200040
+    },
+    "key": [
+      "pair"
+    ]
+  },
+  {
+    "table": "ArticleTagLinks",
+    "data": {
+      "ArticleId": 910200061,
+      "TagId": 910200042
+    },
+    "key": [
+      "pair"
+    ]
+  },
+  {
+    "table": "ArticleTagLinks",
+    "data": {
+      "ArticleId": 910200062,
+      "TagId": 910200040
+    },
+    "key": [
+      "pair"
+    ]
+  },
+  {
+    "table": "ArticleTagLinks",
+    "data": {
+      "ArticleId": 910200062,
+      "TagId": 910200044
+    },
+    "key": [
+      "pair"
+    ]
+  },
+  {
+    "table": "ArticleTagLinks",
+    "data": {
+      "ArticleId": 910200063,
+      "TagId": 910200040
+    },
+    "key": [
+      "pair"
+    ]
+  },
+  {
+    "table": "ArticleTagLinks",
+    "data": {
+      "ArticleId": 910200063,
+      "TagId": 910200045
+    },
+    "key": [
+      "pair"
+    ]
+  },
+  {
+    "table": "ArticleTagLinks",
+    "data": {
+      "ArticleId": 910200064,
+      "TagId": 910200040
+    },
+    "key": [
+      "pair"
+    ]
+  },
+  {
+    "table": "ArticleTagLinks",
+    "data": {
+      "ArticleId": 910200064,
+      "TagId": 910200044
+    },
+    "key": [
+      "pair"
+    ]
+  },
+  {
+    "table": "ArticleTagLinks",
+    "data": {
+      "ArticleId": 910200065,
+      "TagId": 910200040
+    },
+    "key": [
+      "pair"
+    ]
+  },
+  {
+    "table": "ArticleTagLinks",
+    "data": {
+      "ArticleId": 910200065,
+      "TagId": 910200041
+    },
+    "key": [
+      "pair"
+    ]
+  },
+  {
+    "table": "ArticleTagLinks",
+    "data": {
+      "ArticleId": 910200066,
+      "TagId": 910200040
+    },
+    "key": [
+      "pair"
+    ]
+  },
+  {
+    "table": "ArticleTagLinks",
+    "data": {
+      "ArticleId": 910200066,
+      "TagId": 910200042
+    },
+    "key": [
+      "pair"
+    ]
+  },
+  {
+    "table": "ArticleTagLinks",
+    "data": {
+      "ArticleId": 910200067,
+      "TagId": 910200040
+    },
+    "key": [
+      "pair"
+    ]
+  },
+  {
+    "table": "ArticleTagLinks",
+    "data": {
+      "ArticleId": 910200067,
+      "TagId": 910200045
+    },
+    "key": [
+      "pair"
+    ]
+  },
+  {
+    "table": "ArticleTagLinks",
+    "data": {
+      "ArticleId": 910200068,
+      "TagId": 910200040
+    },
+    "key": [
+      "pair"
+    ]
+  },
+  {
+    "table": "ArticleTagLinks",
+    "data": {
+      "ArticleId": 910200068,
+      "TagId": 910200041
+    },
+    "key": [
+      "pair"
+    ]
+  },
+  {
+    "table": "ArticleTagLinks",
+    "data": {
+      "ArticleId": 910200069,
+      "TagId": 910200040
+    },
+    "key": [
+      "pair"
+    ]
+  },
+  {
+    "table": "ArticleTagLinks",
+    "data": {
+      "ArticleId": 910200070,
+      "TagId": 910200040
+    },
+    "key": [
+      "pair"
+    ]
+  },
+  {
+    "table": "ArticleTagLinks",
+    "data": {
+      "ArticleId": 910200071,
+      "TagId": 910200040
+    },
+    "key": [
+      "pair"
+    ]
+  },
+  {
+    "table": "FaqItems",
+    "id": 910200090,
+    "key": [
+      "Question",
+      "İlk görüşmeye nasıl hazırlanabilirim?"
+    ],
+    "data": {
+      "Id": 910200090,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Question": "İlk görüşmeye nasıl hazırlanabilirim?",
+      "Answer": "<p>Olayların kısa bir zaman çizelgesini, elinizdeki belgelerin listesini ve yanıt beklediğiniz soruları hazırlayabilirsiniz. Kesin bildiğiniz bilgiler ile açıklama bekleyen noktaları ayırın. Belgelerin tüm sayfalarını ve eklerini koruyun; özetiniz asıl belgelerin yerine geçmez. Yakın zamanda alınmış resmî bir bildirim varsa tarih ve teslim bilgilerini ayrıca gösterin.</p>",
+      "SortOrder": 1,
+      "IsReviewed": 1
+    }
+  },
+  {
+    "table": "FaqItems",
+    "id": 910200091,
+    "key": [
+      "Question",
+      "Belge asılları mı, kopyaları mı hazırlanmalı?"
+    ],
+    "data": {
+      "Id": 910200091,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Question": "Belge asılları mı, kopyaları mı hazırlanmalı?",
+      "Answer": "<p>İlk inceleme için okunaklı ve eksiksiz kopyalar düzenlenebilir; asıllar güvenli biçimde korunmalıdır. Hangi aşamada hangi belgenin gerekli olduğu somut dosyaya göre belirlenir. Belgeleri değiştirerek, keserek veya seçilmiş satırları göstererek hazırlamayın. Dijital belgelerde özgün dosya ve tarih bilgilerini saklamak yararlıdır.</p>",
+      "SortOrder": 2,
+      "IsReviewed": 1
+    }
+  },
+  {
+    "table": "FaqItems",
+    "id": 910200092,
+    "key": [
+      "Question",
+      "Resmî bildirim aldığımda ne yapmalıyım?"
+    ],
+    "data": {
+      "Id": 910200092,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Question": "Resmî bildirim aldığımda ne yapmalıyım?",
+      "Answer": "<p>Belgenin geldiği makamı, dosya numarasını ve teslim bilgilerini kaydedin. Zarf, ek ve tebliğ kayıtlarını da koruyun. İnternetteki genel süre bilgilerine dayanarak işlemi ertelemeyin; bildirim türü ve dosyanın aşaması birlikte değerlendirilmelidir. Bu sitedeki genel açıklamalar resmî bir işlem yerine geçmez.</p>",
+      "SortOrder": 3,
+      "IsReviewed": 1
+    }
+  },
+  {
+    "table": "FaqItems",
+    "id": 910200093,
+    "key": [
+      "Question",
+      "İletişim formuna ayrıntılı dosya bilgisi yazmalı mıyım?"
+    ],
+    "data": {
+      "Id": 910200093,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Question": "İletişim formuna ayrıntılı dosya bilgisi yazmalı mıyım?",
+      "Answer": "<p>İlk temas için konu başlığı ve size ulaşılabilecek bilgiyle sınırlı bir açıklama tercih edilebilir. Gereksiz kimlik, sağlık, mali bilgi veya üçüncü kişilere ait özel verileri açık form alanlarına yazmayın. Ayrıntılı belge paylaşımı gerekiyorsa güvenli yöntem ayrıca belirlenmelidir. Form göndermek başvuru süresini durdurduğu anlamına gelmez.</p>",
+      "SortOrder": 4,
+      "IsReviewed": 1
+    }
+  },
+  {
+    "table": "FaqItems",
+    "id": 910200094,
+    "key": [
+      "Question",
+      "Bir sözleşmeyi inceletirken eklerini de sunmalı mıyım?"
+    ],
+    "data": {
+      "Id": 910200094,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Question": "Bir sözleşmeyi inceletirken eklerini de sunmalı mıyım?",
+      "Answer": "<p>Ekler, teknik şartnameler ve değişiklik yazışmaları sözleşmenin kapsamını açıklayabilir. Güncel taslağı ve imzalı nüshayı birbirinden ayırın. Her belgenin tarihi ve sürümünü belirtin. Hangi metnin taraflarca kabul edildiği anlaşılmadan yalnızca imza sayfasıyla inceleme yapılması eksik kalabilir.</p>",
+      "SortOrder": 5,
+      "IsReviewed": 1
+    }
+  },
+  {
+    "table": "FaqItems",
+    "id": 910200095,
+    "key": [
+      "Question",
+      "İş uyuşmazlığı için hangi kayıtları toparlayabilirim?"
+    ],
+    "data": {
+      "Id": 910200095,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Question": "İş uyuşmazlığı için hangi kayıtları toparlayabilirim?",
+      "Answer": "<p>Sözleşme, çalışma dönemleri, bordro ve ödeme belgeleri ile mevcut bildirimleri bir araya getirebilirsiniz. Her kaydın hangi döneme ilişkin olduğunu gösterin. İzin, görev ve ayrılış yazıları varsa ayrı tutun. Talep edilen kalemler ile belge eksiklerini ayırmak görüşme gündemini daha anlaşılır hale getirir.</p>",
+      "SortOrder": 6,
+      "IsReviewed": 1
+    }
+  },
+  {
+    "table": "FaqItems",
+    "id": 910200096,
+    "key": [
+      "Question",
+      "Taşınmaz dosyasında adres bilgisi yeterli midir?"
+    ],
+    "data": {
+      "Id": 910200096,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Question": "Taşınmaz dosyasında adres bilgisi yeterli midir?",
+      "Answer": "<p>Adres tek başına taşınmazın bütün hukuki durumunu açıklamaz. Mevcut tapu bilgisi, sözleşme, ödeme ve kullanım kayıtları birlikte düzenlenebilir. Ada, parsel veya bölüm bilgileri arasında fark varsa bunu not edin. Resmî kayıt, ilan metni ve fiilî kullanım birbirinin yerine geçirilmemelidir.</p>",
+      "SortOrder": 7,
+      "IsReviewed": 1
+    }
+  },
+  {
+    "table": "FaqItems",
+    "id": 910200097,
+    "key": [
+      "Question",
+      "Mirasla ilgili görüşmede bilmediğim malları nasıl belirtmeliyim?"
+    ],
+    "data": {
+      "Id": 910200097,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Question": "Mirasla ilgili görüşmede bilmediğim malları nasıl belirtmeliyim?",
+      "Answer": "<p>Kesin olmayan bir malvarlığı bilgisini kesin kayıt gibi sunmayın. Bilinen kalemleri ve bunlara ilişkin belgeleri ayrı listeleyin; araştırılması gerekenleri açıklama bekleyen hususlar olarak gösterin. Önceki başvuru ve kararları da ekleyin. Paylaşım veya imza öncesinde belgenin kapsamı somut olarak değerlendirilmelidir.</p>",
+      "SortOrder": 8,
+      "IsReviewed": 1
+    }
+  },
+  {
+    "table": "FaqItems",
+    "id": 910200098,
+    "key": [
+      "Question",
+      "Bir ürün sorununda hangi yazışmalar saklanmalı?"
+    ],
+    "data": {
+      "Id": 910200098,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Question": "Bir ürün sorununda hangi yazışmalar saklanmalı?",
+      "Answer": "<p>Sipariş onayı, ödeme ve teslim belgeleri yanında satıcı veya servisle yapılan yazışmaları koruyun. Sorunun ilk fark edildiği tarih ve talep ettiğiniz çözümü not edin. Gelen cevapları tarih sırasına koyun. Satış kanalı ve işlem türü uygun başvuru yolunun değerlendirilmesinde ayrıca önem taşıyabilir.</p>",
+      "SortOrder": 9,
+      "IsReviewed": 1
+    }
+  },
+  {
+    "table": "FaqItems",
+    "id": 910200099,
+    "key": [
+      "Question",
+      "Kişisel veri çalışması için nereden başlanır?"
+    ],
+    "data": {
+      "Id": 910200099,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Question": "Kişisel veri çalışması için nereden başlanır?",
+      "Answer": "<p>Önce kullanılan formlar, yazılımlar, erişim yetkileri ve dış hizmet sağlayıcılar listelenebilir. Çalışan, müşteri ve ziyaretçi süreçlerini ayırın. Hangi bilginin hangi amaçla alındığını ve nerede tutulduğunu açıklayın. Başka bir kurumun metnini kopyalamak gerçek bilgi akışının incelenmesinin yerini tutmaz.</p>",
+      "SortOrder": 10,
+      "IsReviewed": 1
+    }
+  },
+  {
+    "table": "FaqItems",
+    "id": 910200100,
+    "key": [
+      "Question",
+      "Sigorta incelemesi için poliçenin hangi bölümleri gerekir?"
+    ],
+    "data": {
+      "Id": 910200100,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Question": "Sigorta incelemesi için poliçenin hangi bölümleri gerekir?",
+      "Answer": "<p>Poliçenin tüm sayfaları, ekleri ve mevcut genel koşulları olay belgeleriyle birlikte hazırlayın. Hasar bildirimi ve şirket cevaplarını tarih sırasına koyun. Ödeme veya onarım belgeleri varsa ekleyin. Poliçe adı ya da prim tutarı tek başına teminatın kapsamını açıklamayabilir.</p>",
+      "SortOrder": 11,
+      "IsReviewed": 1
+    }
+  },
+  {
+    "table": "FaqItems",
+    "id": 910200101,
+    "key": [
+      "Question",
+      "Sitedeki bir makale benim dosyam için kesin yanıt verir mi?"
+    ],
+    "data": {
+      "Id": 910200101,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Question": "Sitedeki bir makale benim dosyam için kesin yanıt verir mi?",
+      "Answer": "<p>Makaleler konuları anlaşılır hale getiren genel bilgilendirme metinleridir. Dosyanın belgeleri, tarihleri ve taraf ilişkileri farklı olabilir. Bir yazıyı okumak kişiye özel hukuki incelemenin yerine geçmez. Süre veya resmî işlem içeren durumlarda somut dosyanın zamanında değerlendirilmesi gerekir.</p>",
+      "SortOrder": 12,
+      "IsReviewed": 1
+    }
+  },
+  {
+    "table": "PageContents",
+    "id": 910200110,
+    "key": [
+      "Path",
+      "/"
+    ],
+    "data": {
+      "Id": 910200110,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Path": "/",
+      "Title": "Açık iletişim, düzenli hazırlık",
+      "Body": "<p>Hukuki konuları değerlendirirken olayın bütünü, mevcut belgeler ve açıklama bekleyen sorular birlikte ele alınır. Çalışma alanları, makaleler ve sık sorulan sorular görüşme öncesinde düzenli bir hazırlık yapmanıza yardımcı olur.</p><p>Genel bilgilendirme kişiye özel hukuki incelemenin yerine geçmez. İlk temas için kısa bir konu özeti paylaşılabilir; ayrıntılı belgelerin güvenli paylaşım yöntemi ayrıca belirlenir.</p>",
+      "IsReviewed": 1
+    }
+  },
+  {
+    "table": "PageContents",
+    "id": 910200111,
+    "key": [
+      "Path",
+      "/kvkk"
+    ],
+    "data": {
+      "Id": 910200111,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Path": "/kvkk",
+      "Title": "Kişisel Veriler ve İletişim Başvuruları",
+      "Body": "<h2>Metnin kapsamı</h2><p>Bu metin iletişim başvurusunda kişisel verilerin ele alınmasına ilişkin genel çerçeveyi açıklar. Bir başvuruda kimlik ve iletişim bilgileri ile konu özeti bulunabilir. İşleme faaliyetine ilişkin ayrıntılar, kullanılan sistem ve hizmetlerin gerçek işleyişiyle birlikte değerlendirilmelidir. Bu açıklama tek başına tamamlanmış bir aydınlatma metni değildir.</p><h2>İlk temas için bilgi paylaşımı</h2><p>Başvurunuzu açıklamak için gerekli olan bilgilerle sınırlı bir mesaj hazırlayın. Üçüncü kişilere ait kimlik, sağlık ve mali bilgileri gereksiz yere paylaşmayın. Ayrıntılı dosya belgeleri için güvenli yöntem görüşme sırasında belirlenebilir. Formun gönderilmesi resmî bir başvuru, temsil ilişkisi veya sürelerin durması anlamına gelmez.</p><h2>Amaç, dayanak ve alıcı bilgileri</h2><p>Başvurunun değerlendirilmesi ile size geri dönüş yapılması ayrı süreç başlıkları olarak incelenebilir. Veri sorumlusunun kimliği, her işleme faaliyetinin amacı ve hukuki dayanağı, varsa alıcı grupları ve aktarım koşulları gerçek uygulamaya göre ayrıca açıklanmalıdır. Doğrulanmamış bir hizmet sağlayıcının veya aktarımın var olduğu varsayılmaz.</p><h2>Saklama ve güvenlik</h2><p>Mesajların erişim düzeni, saklama ihtiyacı ve silme yöntemi gerçek operasyonla birlikte belirlenmelidir. Bu sayfa bir saklama süresi veya belirli bir yurt dışı aktarım uygulaması ilan etmez. Teknik ve idari önlemler süreçlere göre değerlendirilir. Başvuru kanalı ve ilgili kişi hakları konusunda yayımlanacak açıklama, gerçek kimlik ve iletişim bilgileriyle tamamlanmalıdır.</p>",
+      "IsReviewed": 1
+    }
+  },
+  {
+    "table": "PageContents",
+    "id": 910200112,
+    "key": [
+      "Path",
+      "/cerez-politikasi"
+    ],
+    "data": {
+      "Id": 910200112,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Path": "/cerez-politikasi",
+      "Title": "Çerez Tercihleri ve Site Kullanımı",
+      "Body": "<h2>Çerezlerin işlevi</h2><p>Çerezler tarayıcıda saklanan küçük kayıtlardır. Oturum güvenliği, form işlemleri ve tercihlerin hatırlanması gibi amaçlarla kullanılabilirler. Bir çerezin işlevi ile yalnızca adı aynı şey değildir; kullanılan kaydın gerçek amacı ve süresi değerlendirilmelidir. Bu sayfa her ortamda aynı çerezlerin bulunduğunu varsaymaz.</p><h2>Analitik tercihi</h2><p>Site altyapısı isteğe bağlı analitik kullanımını tercih yönetimine bağlayacak biçimde tasarlanmıştır. Bu destek bir analitik hesabının etkin olduğu anlamına gelmez. Analitik kullanımı yapılandırıldığında etkin sağlayıcı, veri kapsamı ve ilgili süreler gerçek ayarlarla birlikte açıklanmalıdır. Tercih verilmeden isteğe bağlı analitik başlatılmaması korunmalıdır.</p><h2>Tercihin yönetilmesi</h2><p>Çerez tercihlerini mevcut tercih kontrolünden değiştirebilirsiniz. Tarayıcı ayarları üzerinden kayıtların silinmesi veya engellenmesi de mümkündür. Bazı güvenlik veya oturum işlevlerinin engellenmesi site işlemlerini etkileyebilir. Yeni bir tercih sonrasındaki davranış kullanılan sistemle birlikte kontrol edilmelidir.</p><h2>Güncelleme ve kontrol</h2><p>Üçüncü taraf hizmetleri ve site ayarları değiştiğinde gerçek çerez envanteri yeniden incelenmelidir. Kullanılmayan bir sağlayıcı bu metin üzerinden etkin sayılmaz. Saklama süreleri ve aktarım açıklamaları doğrulanmadan kesin uygulama olarak ilan edilmez. Genel açıklama ile gerçek teknik envanter birbirinden ayrı değerlendirilir.</p>",
+      "IsReviewed": 1
+    }
+  },
+  {
+    "table": "PageContents",
+    "id": 910200113,
+    "key": [
+      "Path",
+      "/yasal-uyari"
+    ],
+    "data": {
+      "Id": 910200113,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Path": "/yasal-uyari",
+      "Title": "Yasal Uyarı ve Bilgilendirme Sınırları",
+      "Body": "<h2>Genel bilgi</h2><p>Bu sitedeki yazılar hukuki konuların anlaşılmasına yardımcı olan genel bilgilendirme metinleridir. Her olayın belgeleri, tarihleri ve taraf ilişkileri farklı olabilir. Bir makalenin okunması kişiye özel hukuki inceleme veya temsil ilişkisi oluşturmaz. Metinler belirli bir dava, başvuru veya işlem sonucu için garanti içermez.</p><h2>Güncellik ve somut değerlendirme</h2><p>Hukuki kurallar ve uygulama zaman içinde değişebilir. Bir metnin yayın tarihi, bütün somut olaylar için güncel veya uygun olduğu anlamına gelmez. Resmî işlem ve süre gerektiren durumlar yalnızca bu sitedeki açıklamalarla yürütülmemelidir. Belgeleriniz üzerinden uygun değerlendirme zamanında yapılmalıdır.</p><h2>İletişimin niteliği</h2><p>İletişim formu ilk temas için kullanılabilir; mahkemeye, kuruma veya karşı tarafa yapılması gereken bildirimlerin yerine geçmez. Başvuru gönderilmesi bir işin kabul edildiği anlamına gelmez. Dosya kapsamı ve çalışma koşulları ayrıca değerlendirilir. Gereksiz kişisel bilgileri ilk temas mesajına eklemeyin.</p><h2>İçerik ve bağlantılar</h2><p>Bağlantılar konu hakkında ek bilgiye ulaşmayı kolaylaştırmak için sunulabilir. Dış kaynağın içeriği ve güncelliği ayrıca kontrol edilmelidir. Sitedeki başlık veya görsel tek başına belirli bir mesleki başarı, sonuç veya gerçek mekân iddiası olarak değerlendirilmemelidir. Somut sorular için uygun hukuki değerlendirme gerekir.</p>",
+      "IsReviewed": 1
+    }
+  },
+  {
+    "table": "PageSeo",
+    "id": 910200120,
+    "key": [
+      "Path",
+      "/"
+    ],
+    "data": {
+      "Id": 910200120,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Path": "/",
+      "Keywords": null,
+      "MetaTitle": "Hukuk ve Bilgilendirme",
+      "MetaDescription": "Hukuk ve Bilgilendirme: konuya ilişkin açıklamalar, belge hazırlığı ve görüşme öncesi bilgilendirme. Somut hukuki değerlendirme dosya üzerinden yapılır.",
+      "OpenGraphTitle": "Hukuk ve Bilgilendirme",
+      "OpenGraphDescription": "Hukuk ve Bilgilendirme: konuya ilişkin açıklamalar, belge hazırlığı ve görüşme öncesi bilgilendirme. Somut hukuki değerlendirme dosya üzerinden yapılır."
+    }
+  },
+  {
+    "table": "PageSeo",
+    "id": 910200121,
+    "key": [
+      "Path",
+      "/hakkimda"
+    ],
+    "data": {
+      "Id": 910200121,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Path": "/hakkimda",
+      "Keywords": null,
+      "MetaTitle": "Mesleki Yaklaşım",
+      "MetaDescription": "Mesleki Yaklaşım: konuya ilişkin açıklamalar, belge hazırlığı ve görüşme öncesi bilgilendirme. Somut hukuki değerlendirme dosya üzerinden yapılır.",
+      "OpenGraphTitle": "Mesleki Yaklaşım",
+      "OpenGraphDescription": "Mesleki Yaklaşım: konuya ilişkin açıklamalar, belge hazırlığı ve görüşme öncesi bilgilendirme. Somut hukuki değerlendirme dosya üzerinden yapılır."
+    }
+  },
+  {
+    "table": "PageSeo",
+    "id": 910200122,
+    "key": [
+      "Path",
+      "/iletisim"
+    ],
+    "data": {
+      "Id": 910200122,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Path": "/iletisim",
+      "Keywords": null,
+      "MetaTitle": "İletişim ve Görüşme",
+      "MetaDescription": "İletişim ve Görüşme: konuya ilişkin açıklamalar, belge hazırlığı ve görüşme öncesi bilgilendirme. Somut hukuki değerlendirme dosya üzerinden yapılır.",
+      "OpenGraphTitle": "İletişim ve Görüşme",
+      "OpenGraphDescription": "İletişim ve Görüşme: konuya ilişkin açıklamalar, belge hazırlığı ve görüşme öncesi bilgilendirme. Somut hukuki değerlendirme dosya üzerinden yapılır."
+    }
+  },
+  {
+    "table": "PageSeo",
+    "id": 910200123,
+    "key": [
+      "Path",
+      "/makaleler"
+    ],
+    "data": {
+      "Id": 910200123,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Path": "/makaleler",
+      "Keywords": null,
+      "MetaTitle": "Hukuki Bilgilendirme Yazıları",
+      "MetaDescription": "Hukuki Bilgilendirme Yazıları: konuya ilişkin açıklamalar, belge hazırlığı ve görüşme öncesi bilgilendirme. Somut hukuki değerlendirme dosya üzerinden yapılır.",
+      "OpenGraphTitle": "Hukuki Bilgilendirme Yazıları",
+      "OpenGraphDescription": "Hukuki Bilgilendirme Yazıları: konuya ilişkin açıklamalar, belge hazırlığı ve görüşme öncesi bilgilendirme. Somut hukuki değerlendirme dosya üzerinden yapılır."
+    }
+  },
+  {
+    "table": "PageSeo",
+    "id": 910200124,
+    "key": [
+      "Path",
+      "/uzmanlik-alanlari"
+    ],
+    "data": {
+      "Id": 910200124,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Path": "/uzmanlik-alanlari",
+      "Keywords": null,
+      "MetaTitle": "Çalışma Alanları",
+      "MetaDescription": "Çalışma Alanları: konuya ilişkin açıklamalar, belge hazırlığı ve görüşme öncesi bilgilendirme. Somut hukuki değerlendirme dosya üzerinden yapılır.",
+      "OpenGraphTitle": "Çalışma Alanları",
+      "OpenGraphDescription": "Çalışma Alanları: konuya ilişkin açıklamalar, belge hazırlığı ve görüşme öncesi bilgilendirme. Somut hukuki değerlendirme dosya üzerinden yapılır."
+    }
+  },
+  {
+    "table": "PageSeo",
+    "id": 910200125,
+    "key": [
+      "Path",
+      "/sss"
+    ],
+    "data": {
+      "Id": 910200125,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Path": "/sss",
+      "Keywords": null,
+      "MetaTitle": "Sık Sorulan Sorular",
+      "MetaDescription": "Sık Sorulan Sorular: konuya ilişkin açıklamalar, belge hazırlığı ve görüşme öncesi bilgilendirme. Somut hukuki değerlendirme dosya üzerinden yapılır.",
+      "OpenGraphTitle": "Sık Sorulan Sorular",
+      "OpenGraphDescription": "Sık Sorulan Sorular: konuya ilişkin açıklamalar, belge hazırlığı ve görüşme öncesi bilgilendirme. Somut hukuki değerlendirme dosya üzerinden yapılır."
+    }
+  },
+  {
+    "table": "PageSeo",
+    "id": 910200126,
+    "key": [
+      "Path",
+      "/kvkk"
+    ],
+    "data": {
+      "Id": 910200126,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Path": "/kvkk",
+      "Keywords": null,
+      "MetaTitle": "Kişisel Veriler",
+      "MetaDescription": "Kişisel Veriler: konuya ilişkin açıklamalar, belge hazırlığı ve görüşme öncesi bilgilendirme. Somut hukuki değerlendirme dosya üzerinden yapılır.",
+      "OpenGraphTitle": "Kişisel Veriler",
+      "OpenGraphDescription": "Kişisel Veriler: konuya ilişkin açıklamalar, belge hazırlığı ve görüşme öncesi bilgilendirme. Somut hukuki değerlendirme dosya üzerinden yapılır."
+    }
+  },
+  {
+    "table": "PageSeo",
+    "id": 910200127,
+    "key": [
+      "Path",
+      "/cerez-politikasi"
+    ],
+    "data": {
+      "Id": 910200127,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Path": "/cerez-politikasi",
+      "Keywords": null,
+      "MetaTitle": "Çerez Tercihleri",
+      "MetaDescription": "Çerez Tercihleri: konuya ilişkin açıklamalar, belge hazırlığı ve görüşme öncesi bilgilendirme. Somut hukuki değerlendirme dosya üzerinden yapılır.",
+      "OpenGraphTitle": "Çerez Tercihleri",
+      "OpenGraphDescription": "Çerez Tercihleri: konuya ilişkin açıklamalar, belge hazırlığı ve görüşme öncesi bilgilendirme. Somut hukuki değerlendirme dosya üzerinden yapılır."
+    }
+  },
+  {
+    "table": "PageSeo",
+    "id": 910200128,
+    "key": [
+      "Path",
+      "/yasal-uyari"
+    ],
+    "data": {
+      "Id": 910200128,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Path": "/yasal-uyari",
+      "Keywords": null,
+      "MetaTitle": "Yasal Uyarı",
+      "MetaDescription": "Yasal Uyarı: konuya ilişkin açıklamalar, belge hazırlığı ve görüşme öncesi bilgilendirme. Somut hukuki değerlendirme dosya üzerinden yapılır.",
+      "OpenGraphTitle": "Yasal Uyarı",
+      "OpenGraphDescription": "Yasal Uyarı: konuya ilişkin açıklamalar, belge hazırlığı ve görüşme öncesi bilgilendirme. Somut hukuki değerlendirme dosya üzerinden yapılır."
+    }
+  },
+  {
+    "table": "LawyerProfiles",
+    "id": 910200140,
+    "key": [
+      "Key",
+      "primary"
+    ],
+    "data": {
+      "Id": 910200140,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Key": "primary",
+      "Biography": "<h2>Mesleki yaklaşım</h2><p>Hukuki bir konunun anlaşılmasında açık iletişim, düzenli belge hazırlığı ve olayların bütünlüğü esas alınır. Çalışma yaklaşımı, taleplerin ne olduğunu ve hangi bilgilerin açıklama beklediğini başlangıçta görünür hale getirmeyi amaçlar. Tarafların beklentileri ile dosyada bulunan kayıtlar ayrı değerlendirilir; somut inceleme yapılmadan sonuç sözü verilmez.</p><h2>Eğitim ve mesleki gelişim</h2><p>Hukuk lisans eğitiminin ardından mesleki hazırlık ve düzenli mevzuat takibine odaklanan bir gelişim çizgisi benimsenmiştir. Belge okuma, yazılı anlatım ve etik sorumluluklar çalışma disiplininin parçalarıdır. Eğitim kurumunun adı, mezuniyet yılı veya özel bir unvan hakkında bu metinde doğrulanmamış ayrıntı verilmez.</p><h2>Dosya düzeni ve iletişim</h2><p>Görüşme öncesinde olay özeti ve belge listesi hazırlanması tercih edilir. İnceleme sırasında eksik kayıtlar, açıklama gerektiren hususlar ve sonraki hazırlık adımları ayrı ele alınır. Dosya bilgilerinin güvenli paylaşılması ve gereksiz kişisel verilerin yayılmaması gözetilir. Bu yaklaşım her uyuşmazlığın koşullarına göre yeniden değerlendirilir.</p>",
+      "Vision": "<h2>Anlaşılır değerlendirme</h2><p>Hukuki bilgiyi sade bir dille açıklamak, seçeneklerin koşullarını görünür hale getirmek ve belgeye dayalı bir görüşme düzeni oluşturmak temel yaklaşımı belirler. Belirsizliklerin saklanması yerine açıkça belirtilmesi, sağlıklı bir değerlendirmeye katkı sağlar.</p><h2>Özenli çalışma</h2><p>İletişim, kayıt düzeni ve güncel bilgi birlikte ele alınır. Hazırlık sürecinde elde bulunan belgelerin bütünlüğü korunur. Kişiye özel değerlendirme ile genel bilgilendirme birbirine karıştırılmaz; mesleki çalışma somut dosya ve kapsam üzerinde şekillenir.</p>",
+      "BarAssociation": "Örnek Baro — mesleki kayıt açıklaması",
+      "IsReviewed": 1
+    }
+  },
+  {
+    "table": "SiteSettings",
+    "id": 910200150,
+    "key": [
+      "Key",
+      "Site.Name"
+    ],
+    "data": {
+      "Id": 910200150,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Key": "Site.Name",
+      "Value": "Hukuk ve Danışmanlık"
+    }
+  },
+  {
+    "table": "SiteSettings",
+    "id": 910200151,
+    "key": [
+      "Key",
+      "Site.Description"
+    ],
+    "data": {
+      "Id": 910200151,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Key": "Site.Description",
+      "Value": "Hukuki konularda anlaşılır bilgilendirme, düzenli belge hazırlığı ve görüşme öncesi açıklamalar."
+    }
+  },
+  {
+    "table": "SiteSettings",
+    "id": 910200152,
+    "key": [
+      "Key",
+      "Contact.Name"
+    ],
+    "data": {
+      "Id": 910200152,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Key": "Contact.Name",
+      "Value": "Hukuki Görüşme Birimi"
+    }
+  },
+  {
+    "table": "SiteSettings",
+    "id": 910200153,
+    "key": [
+      "Key",
+      "Contact.Email"
+    ],
+    "data": {
+      "Id": 910200153,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Key": "Contact.Email",
+      "Value": "iletisim@example.invalid"
+    }
+  },
+  {
+    "table": "SiteSettings",
+    "id": 910200154,
+    "key": [
+      "Key",
+      "Contact.Phone"
+    ],
+    "data": {
+      "Id": 910200154,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Key": "Contact.Phone",
+      "Value": "+90 000 000 00 00"
+    }
+  },
+  {
+    "table": "SiteSettings",
+    "id": 910200155,
+    "key": [
+      "Key",
+      "Contact.Address"
+    ],
+    "data": {
+      "Id": 910200155,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Key": "Contact.Address",
+      "Value": "Örnek Mahallesi, Belge Sokak No: 10, Kat: 2, Kayseri"
+    }
+  },
+  {
+    "table": "SiteSettings",
+    "id": 910200156,
+    "key": [
+      "Key",
+      "Contact.WorkingHours"
+    ],
+    "data": {
+      "Id": 910200156,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Key": "Contact.WorkingHours",
+      "Value": "Pazartesi–Cuma 09.00–18.00; görüşmeler önceden planlanır."
+    }
+  },
+  {
+    "table": "SiteSettings",
+    "id": 910200157,
+    "key": [
+      "Key",
+      "Contact.WhatsApp"
+    ],
+    "data": {
+      "Id": 910200157,
+      "CreatedAt": "@seed_now",
+      "UpdatedAt": null,
+      "IsActive": 1,
+      "IsDeleted": 0,
+      "Key": "Contact.WhatsApp",
+      "Value": "+90 000 000 00 00"
+    }
+  }
+]

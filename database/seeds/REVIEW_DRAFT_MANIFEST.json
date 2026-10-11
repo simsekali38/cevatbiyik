@@ -1,0 +1,62 @@
+{
+  "target_schema": "cevodbtest",
+  "purpose": "isolated test rendering only",
+  "production_allowed": false,
+  "counts": {
+    "PracticeAreas": 16,
+    "ArticleCategories": 4,
+    "ArticleTags": 6,
+    "Articles": 12,
+    "ArticleTagLinks": 21,
+    "FaqItems": 12,
+    "PageContents": 4,
+    "PageSeo": 9,
+    "LawyerProfiles": 1,
+    "SiteSettings": 8
+  },
+  "total_records": 93,
+  "id_range": [
+    910200001,
+    910200157
+  ],
+  "publication": {
+    "IsActive": 1,
+    "IsReviewed": 1,
+    "PublishedAt": "2026-10-01T09:00:00Z",
+    "review_meaning": "fixture visibility only; NOT lawyer approval"
+  },
+  "fictional_fields": [
+    "LawyerProfiles.Biography: education and professional narrative",
+    "LawyerProfiles.Vision",
+    "LawyerProfiles.BarAssociation",
+    "SiteSettings.Contact.Name",
+    "SiteSettings.Contact.Email",
+    "SiteSettings.Contact.Phone",
+    "SiteSettings.Contact.Address",
+    "SiteSettings.Contact.WorkingHours",
+    "SiteSettings.Contact.WhatsApp",
+    "Article publication dates"
+  ],
+  "sources": [
+    "https://www.kvkk.gov.tr/Icerik/2033/Aydinlatma-Yukumlulugu-",
+    "https://www.kvkk.gov.tr/Icerik/6765/AYDINLATMA-YUKUMLULUGUNUN-YERINE-GETIRILMESI-HAKKINDA-KAMUOYU-DUYURUSU",
+    "https://mevzuat.adalet.gov.tr/"
+  ],
+  "omitted_tables": {
+    "Locations": "no verified address",
+    "RedirectRules": "no demonstrated legacy URL",
+    "MediaAssets": "no physical upload fixture",
+    "Identity": "no account creation",
+    "ContactMessages/AuditLogs/Notifications/PrivateDocuments": "no fictional operational records"
+  },
+  "actual_engine": "MariaDB 10.3.39 based on prior read-only diagnosis; not contacted in this task",
+  "real_db_test": "NOT RUN: owner will execute manually in cevodbtest; no connection opened",
+  "existing_data_policy": "Keep natural keys and statuses unchanged; resolve foreign keys by existing natural key IDs; reserved ID conflict aborts",
+  "required_test_environment": {
+    "Site:AllowIndexing": false,
+    "Site:LegalServiceSchemaEnabled": false,
+    "Site:PersonSchemaEnabled": false,
+    "Smtp:Enabled": false,
+    "Analytics:Enabled": false
+  }
+}

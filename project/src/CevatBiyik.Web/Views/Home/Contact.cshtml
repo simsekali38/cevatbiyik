@@ -1,0 +1,47 @@
+@model ContactViewModel
+@{
+    var site = ViewData["SiteSettings"] as PublicSiteSettings ?? PublicSiteSettings.Empty;
+    bool HasError(string field) => ViewData.ModelState.TryGetValue("Form." + field, out var state) && state.Errors.Count > 0;
+}
+<div class="public-content-page contact-public">
+<header class="container content-heading">
+
+    <h1>İletişim</h1>
+</header>
+<section class="contact-content"><div class="container"><div class="row g-5">
+    <div class="col-lg-4"><aside class="contact-panel" aria-labelledby="contact-info-title"><h2 id="contact-info-title">İletişim bilgileri</h2><dl class="contact-info">
+        @if (CevatBiyik.Application.Validation.ContentPublication.Complete(site.Email)) { <dt>E-posta</dt><dd>@site.Email</dd> }
+        @if (CevatBiyik.Application.Validation.ContentPublication.Complete(site.Phone)) { <dt>Telefon</dt><dd>@site.Phone</dd> }
+        @if (CevatBiyik.Application.Validation.ContentPublication.Complete(site.Address)) { <dt>Adres</dt><dd>@site.Address</dd> }
+        @if (CevatBiyik.Application.Validation.ContentPublication.Complete(site.WorkingHours)) { <dt>Çalışma saatleri</dt><dd>@site.WorkingHours</dd> }
+    </dl>
+        @if (!new[] { site.Email, site.Phone, site.Address, site.WorkingHours }.Any(x => CevatBiyik.Application.Validation.ContentPublication.Complete(x))) { <p class="empty-state">İletişim bilgileri henüz yayımlanmadı.</p> }
+    </aside></div>
+    <div class="col-lg-8"><div class="contact-form-panel">
+        @if (TempData["ContactSuccess"] is string success) { <div class="alert alert-success" role="status" tabindex="-1" id="contact-success">@success</div> }
+        <h2 class="form-title">Mesajınızı iletin</h2><p id="form-help" class="form-intro">Ad soyad, e-posta, mesaj ve iletişim izni alanları zorunludur.</p>
+        @if (!Model.CanSubmit) { <p class="alert alert-secondary" role="status">İletişim formu şu anda kullanılamıyor.</p> }
+        <form method="post" asp-controller="Contact" asp-action="Submit" asp-antiforgery="false" aria-describedby="form-help">
+            @Html.AntiForgeryToken()
+            <div class="contact-trap" aria-hidden="true"><label for="contact-website">Web sitesi (boş bırakın)</label><input id="contact-website" name="Website" type="text" tabindex="-1" autocomplete="off" maxlength="200" /></div>
+            @if (!ViewData.ModelState.IsValid) { <div asp-validation-summary="All" class="validation-summary" id="validation-summary" tabindex="-1" role="alert" aria-label="Form hataları"></div> }
+            <div class="row g-4">
+                <div class="col-md-6"><label asp-for="Form.Name" class="form-label">Ad soyad <span aria-hidden="true">*</span></label><input asp-for="Form.Name" class="form-control" autocomplete="name" maxlength="150" required aria-describedby="name-error" aria-invalid="@(HasError("Name") ? "true" : "false")" /><span asp-validation-for="Form.Name" class="field-error" id="name-error"></span></div>
+                <div class="col-md-6"><label asp-for="Form.Email" class="form-label">E-posta <span aria-hidden="true">*</span></label><input asp-for="Form.Email" type="email" class="form-control" autocomplete="email" maxlength="254" required aria-describedby="email-error" aria-invalid="@(HasError("Email") ? "true" : "false")" /><span asp-validation-for="Form.Email" class="field-error" id="email-error"></span></div>
+                <div class="col-md-6"><label asp-for="Form.Phone" class="form-label">Telefon <span class="optional-label">(isteğe bağlı)</span></label><input asp-for="Form.Phone" type="tel" class="form-control" autocomplete="tel" maxlength="30" aria-describedby="phone-error" aria-invalid="@(HasError("Phone") ? "true" : "false")" /><span asp-validation-for="Form.Phone" class="field-error" id="phone-error"></span></div>
+                <div class="col-md-6"><label asp-for="Form.Subject" class="form-label">Konu <span class="optional-label">(isteğe bağlı)</span></label><input asp-for="Form.Subject" class="form-control" maxlength="250" aria-describedby="subject-error" aria-invalid="@(HasError("Subject") ? "true" : "false")" /><span asp-validation-for="Form.Subject" class="field-error" id="subject-error"></span></div>
+                <div class="col-12"><label asp-for="Form.Message" class="form-label">Mesajınız <span aria-hidden="true">*</span></label><textarea asp-for="Form.Message" class="form-control" rows="6" maxlength="5000" required aria-describedby="message-help message-error" aria-invalid="@(HasError("Message") ? "true" : "false")"></textarea><p class="form-text" id="message-help">En fazla 5.000 karakter. HTML kullanmayın.</p><span asp-validation-for="Form.Message" class="field-error" id="message-error"></span></div>
+                <div class="col-12"><div class="form-check"><input asp-for="Form.Consent" class="form-check-input" required aria-describedby="consent-help consent-error" aria-invalid="@(HasError("Consent") ? "true" : "false")" /><label asp-for="Form.Consent" class="form-check-label">Mesajıma yanıt verilmesi için benimle iletişime geçilmesini kabul ediyorum.</label></div><p class="form-text" id="consent-help">@if (CevatBiyik.Application.Validation.ContentPublication.Complete(Model.Notice)) { @Model.Notice } <a href="/kvkk" data-open-dialog="kvkk-notice">KVKK / Aydınlatma metni</a></p><span asp-validation-for="Form.Consent" class="field-error" id="consent-error"></span></div>
+                <div class="col-12"><button type="submit" class="btn btn-primary" disabled="@(!Model.CanSubmit)">Mesajı gönder <span aria-hidden="true">↗</span></button></div>
+            </div>
+        </form>
+    </div>
+</div></div></div></section>
+</div>
+<dialog id="kvkk-notice" class="legal-dialog" aria-labelledby="kvkk-title">
+    <div class="legal-dialog-header"><h2 id="kvkk-title">KVKK / Aydınlatma metni</h2><button type="button" class="btn btn-outline-primary" data-close-dialog>Kapat</button></div>
+    <div class="legal-dialog-body">
+        @if (Model.Privacy is { } privacy) { <rich-content value="@privacy.Body"></rich-content> }
+        else { <p role="status">CONTENT_REQUIRED — Onaylanmış aydınlatma metni henüz mevcut değil.</p> }
+    </div>
+</dialog>

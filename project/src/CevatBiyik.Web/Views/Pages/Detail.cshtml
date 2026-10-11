@@ -1,0 +1,8 @@
+@model PageContentDto
+<div class="public-content-page legal-public">
+<header class="container reading-width content-heading"><h1>@(Model?.Title ?? ViewData["FallbackTitle"])</h1></header>
+<section class="legal-content"><div class="container reading-width">
+@if (Model is null) { <div class="empty-state"><p>Bu sayfanın metni henüz yayımlanmamıştır.</p><p class="mb-0">CONTENT_REQUIRED</p></div> }
+else { <rich-content value="@Model.Body"></rich-content> }
+</div></section>
+</div>

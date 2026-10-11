@@ -12,12 +12,12 @@ Durum: Kod uygulandı ve yerelde doğrulandı; proje sahibi 2026-10-10 tarihinde
 | `dotnet format style CevatBiyik.sln --no-restore --diagnostics IDE0011` | Başarılı; son build stil uyarısı yok |
 | EF 8 `migrations add MediaFiles`, `migrations script CmsFeatures MediaFiles` | Oluşturuldu; PrivateDocuments ve unique StoragePath, seed/destructive Up yok |
 | Model / migration testleri | 18 entity type, pending model change yok, SQL unique index doğrulandı |
-| `dotnet publish src/CevatBiyik.Web -c Release --no-build --no-restore -o artifacts/phase07-publish` | Başarılı; yayınlanmadı |
+| `dotnet publish project/src/CevatBiyik.Web -c Release --no-build --no-restore -o artifacts/phase07-publish` | Başarılı; yayınlanmadı |
 | Publish XML/native incelemesi | maxAllowedContentLength **6291456**; win-x64/native/libSkiaSharp.dll var |
 | Private publish exclusion smoke | App_Data içine zararsız JSON probe kondu; pakete alınmadığı doğrulandı, probe kaldırıldı |
 | `git diff --check` | Whitespace hatası yok; Git CRLF normalizasyon bilgilendirmeleri var |
 
-TRX çıktı dizinleri: tests/CevatBiyik.UnitTests/TestResults ve tests/CevatBiyik.IntegrationTests/TestResults (ignored).
+TRX çıktı dizinleri: project/tests/CevatBiyik.UnitTests/TestResults ve project/tests/CevatBiyik.IntegrationTests/TestResults (ignored).
 Yerel QA publish appsettings bağlantısı boşaltıldı, public yayın/content gate'leri kapatıldı; kaynak appsettings.json değiştirilmedi.
 
 ## Güvenlik ve iş mantığı kapsamı
@@ -42,5 +42,5 @@ PDF kapısı tam parser/CDR değildir; unsupported PDF özellikleri bilerek redd
 Plesk ACL/virtual-directory/IIS limitleri, gerçek app-pool native load, tutarlı DB+iki filesystem backup/restore drill ve RPO/RTO ölçümü çalıştırılmadı.
 Hukuki retention süresi **CONTENT_REQUIRED**; otomatik hard purge yoktur. Tüm bu adımlar PLESK_MEDIA_RUNBOOK.md'de somutlaştırılmıştır.
 
-Concurrent src/CevatBiyik.Web/appsettings.json değişiklikleri kullanıcıya aittir; korunmuş ve Faz 07 değişikliği olarak değerlendirilmemiştir.
+Concurrent project/src/CevatBiyik.Web/appsettings.json değişiklikleri kullanıcıya aittir; korunmuş ve Faz 07 değişikliği olarak değerlendirilmemiştir.
 Kapanış ve commit proje sahibi tarafından onaylandı; deployment yapılmadı. Kapanış onayı kod kabulünü temsil eder; açık hosting gate'lerini geçtiği anlamına gelmez.

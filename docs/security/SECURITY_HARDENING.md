@@ -68,8 +68,8 @@ see docs/deployment/PLESK_MEDIA_RUNBOOK.md. No antivirus guarantee for public im
 
 ```powershell
 dotnet list CevatBiyik.sln package --vulnerable --include-transitive
-python tools/security_scan.py --self-test
-python tools/security_scan.py --history
+python project/tools/security_scan.py --self-test
+python project/tools/security_scan.py --history
 ```
 
 NuGet audit on 2026-10-10: six projects, no known vulnerable direct/transitive packages reported by nuget.org. No package
@@ -84,7 +84,7 @@ entropy/provider coverage, OCR/binary, ignored-file or remote-ref coverage; huma
 Exit 1 means a finding and must never be reported as a clean scan.
 
 **SH-12-01 — unresolved credential finding / production release blocker:** a nonempty database password is present at
-src/CevatBiyik.Web/appsettings.json:10 (ConnectionStrings:DefaultConnection) and reachable history blob b5d0f85ae705.
+project/src/CevatBiyik.Web/appsettings.json:10 (ConnectionStrings:DefaultConnection) and reachable history blob b5d0f85ae705.
 Usability/external exposure was not tested. Owner instructed on 2026-10-10: leave the file untouched and report the finding.
 Do not copy values into logs/commands/reports. Owner must rotate the credential, move the replacement into user-secrets/Plesk,
 clean tracked config and coordinate separate authorized history remediation if necessary. Deleting current text alone cannot
