@@ -1,5 +1,13 @@
 # Security Baseline
 
+## Phase 16 current configuration status
+
+ADR-032 supersedes the Phase 12 report-only scope for Git tracking: real base and
+Production JSON files are ignored and excluded from publish, with local contents preserved.
+Historical credential rotation/revocation is still unverified; SH-12-01 remains a
+production blocker. Current source scan success does not imply clean Git history.
+Current audit evidence: docs/qa/PRODUCTION_READINESS_REPORT.md.
+
 ## Phase 12 hardening and unresolved secret
 
 Final-response nonce CSP/DENY/nosniff/Permissions-Policy/referrer controls cover static, errors, limits and redirects.

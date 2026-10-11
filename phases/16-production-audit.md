@@ -4,6 +4,14 @@
 
 Run full production readiness audit and fix blockers.
 
+## Current status — 2026-10-11
+
+Local regression/audit and offline deployment preparation verified; production
+readiness is NO-GO pending rotation, hosting, supported DB/TLS, restore and content
+evidence. Owner closure approved (2026-10-11); open production gates carried into
+Phase 17 pre-launch checks. Phase 17 not started. See
+docs/qa/PRODUCTION_READINESS_REPORT.md and docs/deployment/RESTORE_DRILL_RECORD.md.
+
 ## Mandatory process
 
 1. Read `AGENTS.md`.

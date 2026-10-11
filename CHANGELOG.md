@@ -4,6 +4,21 @@ All notable project changes should be recorded here.
 
 ## [Unreleased]
 
+### Phase 16 — production readiness audit (2026-10-11)
+- Owner-approved closure and commit; open production gates carried into Phase 17
+  pre-launch checks without claiming rotation, hosting or restore completion.
+- Re-ran Release regression, live authorized MariaDB compatibility, browser journeys,
+  current/history secret scans, dependency audits and offline migration/publish checks.
+- Added isolated phase16 output to the existing Axe/Lighthouse harness without
+  overwriting Phase 14 evidence; retained its accessibility/performance budgets.
+- Added production readiness report and operator restore evidence form; clarified
+  current server-owned JSON policy in SECURITY.md. No domain/schema/dependency change.
+- Production rotation, Plesk rollout and coordinated restore require external evidence;
+  phase audit does not approve launch or automatically begin Phase 17.
+- Results: 425 .NET, 6 JS, 15 browser, 19 Axe routes with no automated violations;
+  four-route Lighthouse median performance/accessibility 100, LCP 1.28–1.43s, CLS 0.
+  One empty-schema migration skip; history scanner remains failing with two findings.
+
 ### Phase 15 — production publish and Plesk preparation (2026-10-11)
 - Owner-approved closure and commit; unresolved hosting gates carried into Phase 16.
 - Server-owned base/Production JSON removed from Git index without changing local

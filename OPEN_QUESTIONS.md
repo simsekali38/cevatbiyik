@@ -67,6 +67,13 @@ Diğer sorular faz ilerledikçe, ilgili fazdan önce çözülebilir.
 
 ## Phase 12 security release gate — 2026-10-10
 
+Phase 16 current evidence (2026-10-11): 425 .NET, 6 JS and 15 browser checks passed;
+19-route automated accessibility audit and four-route Lighthouse budgets passed.
+ADR-032 Git/publish exclusions verified; actual credential rotation remains unverified.
+Production readiness is NO-GO until hosting/DB/TLS/restore/content evidence is supplied.
+See docs/qa/PRODUCTION_READINESS_REPORT.md for current findings; older counts below
+are historical phase records, not the current test baseline.
+
 Phase 13 hosting update (2026-10-11): owner-provided `cevodbtest` passed 10 persistence and one migration-transition case
 as **MariaDB 10.3.39 compatibility**. It is not MySQL8 and does not support SSL. Genuine MySQL8 and encrypted hosting DB
 transport remain unresolved rollout checks; production provider/config was not changed. See docs/qa/PHASE_13_REVIEW.md.

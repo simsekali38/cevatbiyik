@@ -6,7 +6,7 @@ import {mkdir, writeFile} from 'node:fs/promises';
 import https from 'node:https';
 const base = 'https://localhost:57413';
 const stage = process.argv[2];
-if (!['baseline', 'after'].includes(stage)) throw new Error('Use baseline or after.');
+if (!['baseline', 'after', 'phase16'].includes(stage)) throw new Error('Use baseline, after or phase16.');
 await new Promise((resolve, reject) => {
   const req = https.get(base, {rejectUnauthorized: false}, res => {
     res.resume();
@@ -15,7 +15,7 @@ await new Promise((resolve, reject) => {
   });
   req.on('error', reject); req.setTimeout(2000, () => req.destroy());
 });
-const folder = `artifacts/phase14/${stage}`;
+const folder = stage === 'phase16' ? 'artifacts/phase16/audit' : `artifacts/phase14/${stage}`;
 await mkdir(folder, {recursive: true});
 const result = {stage, measuredAt: new Date().toISOString(), environment: 'Loopback HTTPS synthetic fixture; simulated mobile; no field INP', lighthouse: [], accessibility: []};
 let sequence = 30;
@@ -57,5 +57,5 @@ try {
   }
 } finally { await chrome.kill(); }
 await writeFile(`${folder}/summary.json`, JSON.stringify(result, null, 2));
-if (stage === 'after' && result.accessibility.some(a => a.violations.length)) process.exitCode = 1;
-if (stage === 'after' && result.lighthouse.some(a => a.median.performance < 90 || a.median.lcp > 2500 || a.median.cls > 0.1 || a.median.tbt > 200)) process.exitCode = 1;
+if (stage !== 'baseline' && result.accessibility.some(a => a.violations.length)) process.exitCode = 1;
+if (stage !== 'baseline' && result.lighthouse.some(a => a.median.performance < 90 || a.median.lcp > 2500 || a.median.cls > 0.1 || a.median.tbt > 200)) process.exitCode = 1;

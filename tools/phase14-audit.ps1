@@ -1,6 +1,6 @@
 #requires -Version 7.0
 [CmdletBinding()]
-param([ValidateSet('baseline', 'after')][string]$Stage = 'after', [switch]$NoBuild, [switch]$BrowserChecksOnly)
+param([ValidateSet('baseline', 'after', 'phase16')][string]$Stage = 'after', [switch]$NoBuild, [switch]$BrowserChecksOnly)
 $ErrorActionPreference = 'Stop'
 $taskRoot = Split-Path $PSScriptRoot -Parent
 $fixture = $null
@@ -11,7 +11,7 @@ try {
         if ($LASTEXITCODE -ne 0) { throw 'Audit build failed.' }
     }
     if (Get-NetTCPConnection -LocalPort 57413 -State Listen -ErrorAction SilentlyContinue) { throw 'Fixture port occupied; refusing another server.' }
-    $logs = Join-Path $taskRoot "artifacts/phase14/$Stage"
+    $logs = Join-Path $taskRoot $(if ($Stage -eq 'phase16') { 'artifacts/phase16/audit' } else { "artifacts/phase14/$Stage" })
     New-Item -ItemType Directory -Path $logs -Force | Out-Null
     $dll = Join-Path $taskRoot 'tests/CevatBiyik.E2EHost/bin/Release/net8.0/CevatBiyik.E2EHost.dll'
     $fixture = Start-Process -FilePath (Get-Command dotnet).Source -ArgumentList @('"' + $dll + '"', '--fixture-only') -WorkingDirectory $taskRoot -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $logs 'fixture.out.log') -RedirectStandardError (Join-Path $logs 'fixture.err.log')
