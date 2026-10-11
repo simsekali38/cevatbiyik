@@ -68,7 +68,7 @@ public sealed partial class ContactAnalyticsTests
         if (Environment.GetEnvironmentVariable("CEVATBIYIK_CMS_PREVIEW") == "1")
         {
             var env = configured.Services.GetRequiredService<IWebHostEnvironment>();
-            var root = Path.GetFullPath(Path.Combine(env.ContentRootPath, "../../artifacts/cms-preview"));
+            var root = Path.Combine(RepositoryPaths.Artifacts, "cms-preview");
             Directory.CreateDirectory(root);
             await File.WriteAllTextAsync(Path.Combine(root, "consent.html"), initial);
             await File.WriteAllTextAsync(Path.Combine(root, "contact-consent.html"), await client.GetStringAsync("/iletisim"));

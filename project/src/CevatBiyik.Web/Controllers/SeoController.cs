@@ -4,7 +4,8 @@ using CevatBiyik.Application.Interfaces;
 using CevatBiyik.Web.Seo;
 using Microsoft.AspNetCore.Mvc;
 namespace CevatBiyik.Web.Controllers;
-public sealed class SeoController(ISitemapService sitemap, IConfiguration configuration, IProfileService profiles, IPageContentService pages, IFaqService faq, ISettingService settings, ILocationService locations) : Controller
+[ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
+public sealed class SeoController(ISitemapService sitemap, IConfiguration configuration, ILocationService locations, PublicDiscoveryService discovery) : Controller
 {
     private static readonly XNamespace Ns = "http://www.sitemaps.org/schemas/sitemap/0.9";
     private bool Indexing => configuration.GetValue<bool>("Site:AllowIndexing");
@@ -52,36 +53,8 @@ public sealed class SeoController(ISitemapService sitemap, IConfiguration config
             return NotFound();
         }
 
-        var entries = new List<SitemapEntry> { new("/", null), new("/makaleler", null), new("/uzmanlik-alanlari", null) };
-        var values = await settings.ListPublicAsync(ct);
-        var site = new CevatBiyik.Web.Models.PublicSiteSettings(values.ToDictionary(x => x.Key, x => x.Value, StringComparer.Ordinal));
-        if (SeoPresentation.ContactFactsComplete(site))
-        {
-            entries.Add(new("/iletisim", null));
-        }
-        if (await profiles.GetAsync(true, ct) is not null)
-        {
-            entries.Add(new("/hakkimda", null));
-        }
-
-        foreach (var item in await pages.ListAsync(true, ct))
-        {
-            if (item.Path != "/")
-            {
-                entries.Add(new(item.Path, item.UpdatedAt));
-            }
-        }
-
-        if ((await faq.ListAsync(publicOnly: true, ct: ct)).Items.Count > 0)
-        {
-            entries.Add(new("/sss", null));
-        }
-
-        if ((await locations.IndexableAsync(ct)).Count > 0)
-        {
-            entries.Add(new("/konumlar", null));
-        }
-        return UrlSet(entries);
+        var document = await discovery.ReadAsync(ct);
+        return UrlSet(document.Pages.Select(x => new SitemapEntry(x.Path, x.ModifiedAt)));
     }
     [HttpGet("/sitemaps/locations.xml")]
     public async Task<IActionResult> Locations(CancellationToken ct)
@@ -110,5 +83,5 @@ public sealed class SeoController(ISitemapService sitemap, IConfiguration config
         return Xml(new XElement(Ns + "urlset", entries.Select(x => new XElement(Ns + "url",
             new XElement(Ns + "loc", origin + x.Path), x.ModifiedAt is { } modified ? new XElement(Ns + "lastmod", modified.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)) : null))));
     }
-    private ContentResult Xml(XElement root) => Content(new XDocument(new XDeclaration("1.0", "utf-8", null), root).ToString(), "application/xml; charset=utf-8");
+    private ContentResult Xml(XElement root) => Content("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + root, "application/xml; charset=utf-8");
 }

@@ -12,7 +12,7 @@ internal static class CmsPreview
         }
 
         var environment = factory.Services.GetRequiredService<IWebHostEnvironment>();
-        var root = System.IO.Path.GetFullPath(System.IO.Path.Combine(environment.ContentRootPath, "../../artifacts/cms-preview"));
+        var root = System.IO.Path.Combine(RepositoryPaths.Artifacts, "cms-preview");
         Directory.CreateDirectory(root);
         foreach (var (name, path) in pages)
         {

@@ -1,5 +1,28 @@
 # Architecture Decision Records
 
+## ADR-038 — Public discovery documents share publication gates
+
+Status: Implemented (2026-10-12).
+
+Serve sitemap, llms.txt and a project-specific paginated ai-catalog.json from the
+existing MVC application. Share approved public page eligibility in a Web-layer
+presentation service; reuse existing published article, practice-area and indexable
+location queries. Only allow known PageContent routes into public discovery files.
+No separate API platform, schema change, migration, package or startup seed.
+
+Use configured Site:BaseUrl, never the untrusted request Host. Site:AllowIndexing=false
+keeps sitemap empty and AI discovery disabled. Do not enable indexing automatically
+for demo deployments. Discovery responses are no-store so publication changes and
+environment gates do not reuse stale output. llms.txt follows a proposed convention,
+not a guaranteed crawler contract; ai-catalog.json schema_version=1.0 is our own format.
+
+Generate raster favicon variants from the unchanged local SVG using existing browser
+and Pillow tools. Public and admin layouts share local icon links. Preserve release
+packages and retained test evidence during artifact cleanup.
+
+Operational details and verification: docs/seo/PUBLIC_DISCOVERY.md and
+docs/qa/PUBLIC_DISCOVERY_REVIEW.md.
+
 ## ADR-037 — Published CMS fixtures restricted to isolated test storage
 
 Owner amendment: cevodbtest explicitly approved as manual SQL target. Guard now

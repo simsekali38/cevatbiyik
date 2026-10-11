@@ -4,6 +4,17 @@ All notable project changes should be recorded here.
 
 ## [Unreleased]
 
+### Sitemap, AI discovery and brand favicon (2026-10-12)
+- Shared reviewed public page eligibility; exclude unsupported CMS paths from sitemap.
+- Added explicit UTF-8 XML declaration and no-store discovery responses.
+- Added gated llms.txt and paginated project-specific ai-catalog.json using existing
+  public publication rules and configured canonical origin; no database changes.
+- Admin SEO screen now explains canonical origin/indexing gates and links discovery files.
+- Generated ICO/PNG/Apple icons from the unchanged local emblem; shared layout partial.
+- Added four integration regressions for discovery gates, pagination and favicon assets.
+- Removed 494 reproducible orphan preview build files (106.95 MiB logical bytes),
+  preserving source/configuration, releases, retained evidence and migration tooling.
+
 ### Owner-approved cevodbtest seed target
 - Restricted manual seed to cevodbtest; production cevodb remains excluded.
 - Resolve parent IDs through natural keys to retain existing test rows and FK links.

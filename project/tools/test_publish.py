@@ -5,10 +5,27 @@ import unittest
 from pathlib import Path
 from verify_publish import verify
 
-SCRATCH = Path(__file__).resolve().parents[1] / 'artifacts' / 'publish-tests'
+def find_repository_root(start):
+    for directory in (start, *start.parents):
+        if (directory / '.git').exists() and (directory / 'project' / 'CevatBiyik.sln').is_file():
+            return directory
+    raise RuntimeError('Publish boundary tests require the repository checkout.')
+
+
+SCRATCH = find_repository_root(Path(__file__).resolve().parent) / 'artifacts' / 'publish-tests'
 SCRATCH.mkdir(parents=True, exist_ok=True)
 
 class PublishBoundaryTests(unittest.TestCase):
+    def test_artifact_location_and_temporary_cleanup(self):
+        repository = find_repository_root(Path(__file__).resolve().parent)
+        self.assertEqual(SCRATCH, repository / 'artifacts' / 'publish-tests')
+        self.assertEqual(find_repository_root(repository / 'project' / 'src'), repository)
+        with tempfile.TemporaryDirectory(dir=SCRATCH) as probe:
+            created = Path(probe)
+            (created / 'synthetic.txt').write_text('synthetic cleanup probe', encoding='utf-8')
+            self.assertTrue(created.is_dir())
+        self.assertFalse(created.exists())
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(dir=SCRATCH)
         self.root = Path(self.temp.name)

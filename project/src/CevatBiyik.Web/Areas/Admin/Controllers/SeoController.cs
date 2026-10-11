@@ -16,6 +16,7 @@ public sealed class SeoController(ISeoAuditService audit, IConfiguration configu
 
         ViewData["AllowIndexing"] = configuration.GetValue<bool>("Site:AllowIndexing");
         ViewData["OriginValid"] = SeoPolicy.TryOrigin(configuration["Site:BaseUrl"], out _);
+        ViewData["CanonicalOrigin"] = SeoPresentation.Origin(configuration);
         ViewData["Production"] = environment.IsProduction();
         ViewData["LegalServiceEnabled"] = configuration.GetValue<bool>("Site:LegalServiceSchemaEnabled");
         return View(await audit.ReadAsync(page, ct));

@@ -49,6 +49,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     };
 });
 builder.Services.AddScoped<PublicSiteFilter>();
+builder.Services.AddScoped<CevatBiyik.Web.Seo.PublicDiscoveryService>();
 builder.Services.AddScoped<CevatBiyik.Web.Analytics.AnalyticsPolicy>();
 builder.Services.AddScoped<CevatBiyik.Web.Analytics.AnalyticsConsent>();
 builder.Services.AddAntiforgery(options =>

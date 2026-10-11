@@ -5,6 +5,8 @@
 <p>Canonical kök ayarı: @(ViewData["OriginValid"] is true ? "Geçerli HTTPS kökü" : "Eksik/geçersiz; güvenli varsayılan kullanılıyor"). LegalService: @(ViewData["LegalServiceEnabled"] is true ? "Açık; görünür iletişim bilgileri de doğrulanır" : "Kapalı").</p>
 <p class="mb-0">Bu göstergeler öneridir; sıralama veya indekslenme garantisi vermez. Başlık uzunluğu karakter tabanlı bir yardımcıdır. Gerçek içerik ve hukuki onay tamamlanmadan üretim indekslemesini açmayın.</p></div>
 <p><a href="/robots.txt">robots.txt çıktısı</a> · <a href="/sitemap.xml">Sitemap çıktısı</a> · <a href="/admin/redirects">Yönlendirmeler</a> · <a href="/admin/locations">Yerel içerik ve kalite kontrolleri</a></p>
+<p>URL kökü: <code>@ViewData["CanonicalOrigin"]</code>. İndeksleme kapalıyken sitemap boş, AI kataloğu devre dışı döner. URL kökü yayın yaptığınız HTTPS adresiyle aynı olmalıdır.</p>
+<p><a href="/ai-catalog.json">AI içerik kataloğu</a> · <a href="/llms.txt">llms.txt</a></p>
 <p>Taslaklar da bu kontrol listesinde yer alır. Liste, sabit sayfalar ile bu sayfadaki en fazla 12 makale ve 12 uzmanlık alanını inceler.</p>
 <div class="admin-table"><table class="table"><thead><tr><th scope="col">İçerik / yol</th><th scope="col">Öneriler</th><th scope="col">İşlem</th></tr></thead><tbody>
 @foreach(var item in Model.Rows)
