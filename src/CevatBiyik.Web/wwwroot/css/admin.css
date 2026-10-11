@@ -176,7 +176,7 @@
 .admin-action:hover { color: var(--brand-navy); background: #edf0f6; }
 .admin-action-danger { border-color: #d9b9b5 !important; color: #80251d !important; background: #fff !important; }
 .admin-action-danger:hover { background: #fff1ef !important; }
-.admin-confirm-form { display: inline-flex; margin: 0 0 0 .4rem !important; border: 0; padding: 0; vertical-align: middle; }
+.admin-confirm-form { display: inline-flex; margin: 0 0 0 .4rem !important; border: 0; padding: 0;  }
 .admin-confirm-form label[hidden] { display: none !important; }
 .admin-row-actions { min-width: 195px; white-space: nowrap; }
 .admin-confirm-dialog { width: min(460px, calc(100vw - 2rem)); border: 1px solid #bbc4d6; border-radius: 14px; padding: 1.75rem; color: var(--brand-navy); }
