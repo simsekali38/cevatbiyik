@@ -1,7 +1,10 @@
 @model IReadOnlyList<CevatBiyik.Application.Interfaces.DocumentDto>
 @{ ViewData["Title"] = "Özel belgeler"; var deleted = ViewData["Deleted"] is true; var page = (int)(ViewData["Page"] ?? 1); }
-<h1>Özel belgeler</h1>
-<p>Belgeler herkese açık değildir. Yalnızca PDF, en fazla 5 MiB. Antivirüs doğrulaması zorunludur; aktif içerik, ekler ve şifreli belgeler kabul edilmez.</p>
+<div class="admin-page-heading"><div><p class="admin-eyebrow">YALNIZCA YÖNETİCİ ERİŞİMİ</p><h1>Özel belgeler</h1><p>Yönetim ekibinin kendi kullanımı için PDF saklama alanı.</p></div><a class="btn btn-outline-primary" href="/admin/guide">Kullanım rehberi</a></div>
+<section class="admin-guide-card mb-4" aria-labelledby="documents-help"><h2 id="documents-help">Bu bölüm ne için kullanılır?</h2>
+<p>Yönetici olarak tekrar erişmek istediğiniz PDF'leri burada saklayabilirsiniz. Yüklenen belge ziyaretçi sitesinde görünmez; indirmek için yönetici hesabıyla giriş yapmak gerekir. Müvekkiller için hesap, paylaşım bağlantısı veya dosya gönderme akışı bulunmaz.</p>
+<ol><li>Anlaşılır bir başlık ve PDF seçin, ardından “Özel belge yükle”ye basın.</li><li>Güvenlik doğrulaması başarılıysa dosya listede görünür. “İndir” dosyayı bilgisayarınıza kaydeder.</li><li>Silme onayı dosyayı aktif listeden kaldırır. “Silinen belgeler”den saklama süresi içinde “Geri al” ile tekrar etkinleştirebilirsiniz; dosya eksik veya doğrulanamıyorsa teknik destek gerekir.</li></ol>
+<p class="form-text">Yalnızca PDF, en fazla 5 MiB. Antivirüs doğrulaması zorunludur; aktif içerik, ekler ve şifreli PDF kabul edilmez. Doğrulama hizmeti hazır değilse yükleme güvenli biçimde reddedilir. Bu alan yedeklemenin yerine geçmez.</p></section>
 <p><a href="/admin/documents">Aktif belgeler</a> · <a href="/admin/documents?deleted=true">Silinen belgeler</a></p>
 <form data-admin-form action="/admin/documents/upload" method="post" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
@@ -9,10 +12,10 @@
     <label for="file" class="form-label">PDF belge</label><input id="file" name="file" class="form-control" type="file" accept="application/pdf,.pdf" required />
     <button class="btn btn-primary my-3" type="submit">Özel belge yükle</button>
 </form>
-<div class="table-responsive"><table class="table"><thead><tr><th>Başlık</th><th>Boyut</th><th>İşlem</th></tr></thead><tbody>
+<div class="admin-table"><table class="table"><thead><tr><th scope="col">Başlık</th><th scope="col">Boyut</th><th scope="col">İşlem</th></tr></thead><tbody>
 @foreach (var item in Model)
 {
-    <tr><td>@item.Title</td><td>@item.Bytes byte</td><td>
+    <tr><td>@item.Title</td><td>@((item.Bytes / 1024d).ToString("N1")) KiB</td><td>
     @if (!deleted) { <a href="/admin/documents/download/@item.Id">İndir</a> }
     <form action="/admin/documents/@(deleted ? "restore" : "delete")/@item.Id" method="post">
         @Html.AntiForgeryToken()

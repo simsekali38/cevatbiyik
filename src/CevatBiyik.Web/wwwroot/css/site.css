@@ -151,3 +151,9 @@ h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.2; l
 .rich-content .content-align-center { text-align: center; }
 .rich-content .content-align-right { text-align: right; }
 .rich-content .content-align-justify { text-align: justify; }
+.rich-content h4 { font-size: 1.1rem; margin-block: 1.5rem .65rem; }
+.legal-dialog { width: min(760px, calc(100vw - 2rem)); max-height: 85vh; border: 1px solid var(--brand-navy); border-radius: 12px; padding: 0; color: var(--brand-navy); }
+.legal-dialog::backdrop { background: #18264b99; }
+.legal-dialog-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem; border-bottom: 1px solid var(--border-subtle); }
+.legal-dialog-header h2 { font-size: 1.25rem; margin: 0; }
+.legal-dialog-body { padding: 1.5rem; overflow-y: auto; max-height: 65vh; }

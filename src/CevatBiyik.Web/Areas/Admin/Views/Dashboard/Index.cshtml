@@ -1,6 +1,7 @@
 @model AdminDashboardDto
 @{ ViewData["Title"] = "Yönetim özeti"; }
-<h1>Yönetim özeti</h1>
+<div class="admin-page-heading"><div><p class="admin-eyebrow">İÇERİK YÖNETİMİ</p><h1>Yönetim özeti</h1><p>İçeriklerinizi düzenleyin, mesajları takip edin ve sitenizi güncel tutun.</p></div><a class="btn btn-primary" href="/admin/articles/create">+ Makale ekle</a></div>
+<section class="admin-welcome" aria-labelledby="setup-title"><div><p class="admin-eyebrow">NEREDEN BAŞLAMALIYIM?</p><h2 id="setup-title">İlk veri girişini birlikte sıralayalım</h2><p>İletişim bilgileri, profil, hukuki metinler ve ilk yayınınız için sekiz adımlık rehber.</p></div><a class="btn btn-outline-primary" href="/admin/guide">Başlangıç rehberini aç →</a></section>
 <div class="row g-3 my-3">
     <div class="col-sm-6 col-lg-3"><div class="admin-stat"><h2>Makaleler</h2><div class="admin-stat-number">@Model.Articles</div><p>@Model.PublishedArticles yayında</p><a href="/admin/articles">Makaleleri yönet</a></div></div>
     <div class="col-sm-6 col-lg-3"><div class="admin-stat"><h2>Uzmanlık alanları</h2><div class="admin-stat-number">@Model.PracticeAreas</div><p>Uzmanlık alanı</p><a href="/admin/practice-areas">Alanları yönet</a></div></div>

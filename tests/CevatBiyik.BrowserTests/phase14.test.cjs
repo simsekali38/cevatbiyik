@@ -80,6 +80,7 @@ test('admin loads editor only on editing screens and keyboard focus clears the s
   });
   assert.equal(visible, true);
   await audit(page);
+  await page.evaluate(() => scrollTo(0, 0));
   await page.screenshot({path:'artifacts/test-runs/phase14-editor-mobile.png', fullPage:true});
 }));
 test('editor dialogs meet AA checks, trap focus natively and return focus on Escape', async () => session(async page => {

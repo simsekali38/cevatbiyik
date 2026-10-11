@@ -19,7 +19,7 @@ function run(provider = "gtm", id = "GTM-TEST123", recorded = false, render = tr
             getElementById: () => null,
             createElement: () => ({}), head: { appendChild: element => elements.push(element) },
             addEventListener: (type, cb) => { (handlers[type] ||= []).push(cb); },
-            querySelectorAll: () => [{ addEventListener: (type, cb) => { formHandlers[type] = cb; } }]
+            querySelectorAll: selector => selector === "[data-open-dialog]" ? [] : [{ addEventListener: (type, cb) => { formHandlers[type] = cb; } }]
         }, console
     };
     vm.runInNewContext(code, context);

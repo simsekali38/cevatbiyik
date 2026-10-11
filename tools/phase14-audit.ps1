@@ -23,7 +23,12 @@ try {
         Start-Sleep -Milliseconds 500
     }
     if (-not $ready) { throw 'Fixture not ready.' }
-    if ($BrowserChecksOnly) { node --test --test-concurrency=1 tests/CevatBiyik.BrowserTests/phase14.test.cjs }
+    if ($BrowserChecksOnly) {
+        foreach ($suite in @('e2e', 'phase14', 'admin-ux')) {
+            node --test --test-concurrency=1 "tests/CevatBiyik.BrowserTests/$suite.test.cjs"
+            if ($LASTEXITCODE -ne 0) { throw "$suite browser checks failed." }
+        }
+    }
     else { node tests/CevatBiyik.BrowserTests/phase14-audit.mjs $Stage }
     if ($LASTEXITCODE -ne 0) { throw 'Phase 14 audit failed; inspect summary.json.' }
 } finally {

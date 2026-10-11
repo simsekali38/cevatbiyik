@@ -1,7 +1,7 @@
 @model IReadOnlyList<PageContentDto>
 @{ ViewData["Title"] = "Sayfa içerikleri"; }
 <h1>Sayfa içerikleri</h1><p>Onaylanmamış metinler kamuya açık sayfalara aktarılmaz. Sabit sayfa yolları değiştirilemez.</p>
-<div class="table-responsive"><table class="table"><thead><tr><th>Sayfa</th><th>Durum</th><th>İşlem</th></tr></thead><tbody>
+<div class="admin-table"><table class="table"><thead><tr><th scope="col">Sayfa</th><th scope="col">Durum</th><th scope="col">İşlem</th></tr></thead><tbody>
 @foreach (var route in CevatBiyik.Application.Validation.ContentPublication.Pages)
 {
     var item = Model.FirstOrDefault(x => x.Path == route.Key);

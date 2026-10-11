@@ -68,6 +68,7 @@ try {
         if (-not $ready) { throw 'Isolated HTTPS fixture did not become ready.' }
         Invoke-Check node @('--test', '--test-concurrency=1', 'tests/CevatBiyik.BrowserTests/e2e.test.cjs')
         Invoke-Check node @('--test', '--test-concurrency=1', 'tests/CevatBiyik.BrowserTests/phase14.test.cjs')
+        Invoke-Check node @('--test', '--test-concurrency=1', 'tests/CevatBiyik.BrowserTests/admin-ux.test.cjs')
     }
     if ($SecurityScan) { Invoke-Check python @('tools/security_scan.py', '--history') }
     Write-Host 'Requested checks passed. Explicit MySQL skips are not live provider verification.'

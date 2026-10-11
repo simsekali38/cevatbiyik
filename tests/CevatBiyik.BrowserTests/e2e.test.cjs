@@ -136,7 +136,7 @@ test('rich editor mobile navigation, keyboard exit, empty validation and safe li
   await page.locator('#Title').fill('TEST_ONLY empty editor');
   assert.equal(await page.locator('[data-seo-preview-title]').textContent(), 'TEST_ONLY empty editor');
   await page.getByRole('button', {name:'Değişiklikleri kaydet', exact:true}).click();
-  assert.match(await page.locator('.field-error[role=alert]').textContent(), /doldurun/);
+  assert.match(await page.locator('.field-error[role=alert]:visible').textContent(), /doldurun/);
   await page.locator('#Content-editor').fill('TEST_ONLY link text');
   await page.locator('#Content-editor').press('Control+a');
   await page.getByRole('button', {name:'Bağlantı', exact:true}).click();

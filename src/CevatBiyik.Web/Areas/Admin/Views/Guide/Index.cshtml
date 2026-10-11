@@ -1,0 +1,41 @@
+@model CevatBiyik.Web.Models.AdminGuideViewModel
+@{ ViewData["Title"] = "Başlangıç ve kullanım rehberi"; var current = Model.Steps[Model.SelectedStep - 1]; }
+<div class="admin-page-heading"><div><p class="admin-eyebrow">İLK KURULUM · @Model.Completed / 8 ADIMDA İÇERİK MEVCUT</p><h1>Web sitenizi adım adım hazırlayın</h1><p>Aşağıdaki sırayı izleyin. “İçerik mevcut” ifadesi, ilgili kaydın bulunduğunu gösterir; bilgilerin doğruluğunu yine sizin incelemeniz gerekir. Görsel kullanmıyorsanız görsel adımını geçebilirsiniz.</p></div></div>
+<div class="admin-guide-layout">
+    <nav class="admin-guide-steps" aria-label="İlk veri giriş adımları"><ol>
+        @foreach (var item in Model.Steps) { <li><a href="/admin/guide?step=@item.Number" aria-current="@(item.Number == Model.SelectedStep ? "step" : null)"><span class="admin-step-number">@item.Number</span><span>@item.Title<small>@(item.Complete ? "İçerik mevcut" : "Henüz tamamlanmadı")</small></span></a></li> }
+    </ol></nav>
+    <article class="admin-guide-card"><p class="admin-eyebrow">ADIM @current.Number / 8</p><h2>@current.Title</h2><p class="admin-guide-lead">@current.Description</p>
+    @switch (current.Number)
+    {
+        case 1:
+            <ol><li>“Site ayarları” sayfasını açın ve “Ayar ekle”yi seçin.</li><li>“Ayar” listesinden E-posta, Telefon ve Adres seçeneklerini ayrı ayrı seçip doğrulanmış bilgilerinizi “Değer” alanına girin.</li><li>Her kayıtta “Sitede kullan” seçeneğini açıp kaydedin. Var olan kaydı tekrar eklemek yerine düzenleyin.</li><li>İsteğe bağlı çalışma saatlerini ve site açıklamasını girin. Bilinmeyen bilgiyi tahmin etmeyin.</li></ol>
+            break;
+        case 2:
+            <ol><li>Biyografi ve vizyon alanlarına metninizi yazın. Araç çubuğu ile başlık, liste ve kalın metin ekleyebilirsiniz.</li><li>Baro bilgisini yalnızca doğrulanmış bilgiyle doldurun; kimlik numarası veya özel kişisel veri eklemeyin.</li><li>Metni inceleyin, onay ve etkin seçeneklerini seçip kaydedin.</li></ol>
+            break;
+        case 3:
+            <ol><li>“Sayfa içerikleri” bölümünde KVKK, çerez politikası ve yasal uyarı için “İçerik oluştur” veya “Düzenle”yi açın.</li><li>Size ve veri işleme sürecinize uygun, incelenmiş metinleri girin. Örnek metni otomatik olarak hukuki açıdan geçerli saymayın.</li><li>“İnceledim / onayladım” ve “Etkin” seçeneklerini seçin. İçerik değiştirildiğinde tekrar inceleyip onaylayın.</li><li>İletişim formu için aydınlatma metni ve iletişim izni yapılandırmasının da hazır olması gerekir; eksikse teknik sorumluya bildirin.</li></ol>
+            break;
+        case 4:
+            <ol><li>“Görsel kütüphanesi”nden JPG, PNG veya WebP seçin (en fazla 5 MiB).</li><li>Görselin neyi anlattığını “Görselin kısa açıklaması” alanına yazın; bu alternatif metindir, yalnızca dosya adı yazmayın.</li><li>Yükleyin. Makale düzenlerken kapak görseli olarak bu kaydı seçin.</li></ol><p>Görseller sitede görülebilir. Gizli PDF'ler için “Özel belgeler” kullanılır.</p>
+            break;
+        case 5:
+            <ol><li>“Uzmanlık alanı ekle”yi açın. Ad ve açıklama girin.</li><li>Metin editöründe açıklamayı düzenleyin. Kesin sonuç veya başarı garantisi veren ifadeler kullanmayın.</li><li>SEO bölümünde kısa başlık ve açıklama ekleyin; hazır olunca etkinleştirip kaydedin.</li></ol>
+            break;
+        case 6:
+            <ol><li>İsterseniz önce “Kategoriler” ve “Etiketler” bölümünden gruplar oluşturun.</li><li>“Makale ekle”de başlık, kısa açıklama ve ana metni girin. İlgili uzmanlık alanını ve kapağı seçin.</li><li>“Yayın etkin” kapalıyken kaydederseniz taslak olur. Önizleme metnin biçimini gösterir.</li><li>Hazır olduğunda yayını açıp tarih girin. İleri tarihli kayıt zamanı gelene kadar görünmez; tarih alanındaki Türkiye saati açıklamasını izleyin.</li><li>SEO başlığı/açıklamasını kontrol edin ve ziyaretçi sitesinde makaleyi açın.</li></ol>
+            break;
+        case 7:
+            <ol><li>“Soru ekle” ile anlaşılır bir soru ve yanıt girin.</li><li>Sıra numarası, listedeki konumu belirler.</li><li>Yanıtı inceleyin; onay ve etkin seçeneklerini açıp kaydedin.</li></ol>
+            break;
+        case 8:
+            <ol><li>“Sayfa içerikleri”nden ana sayfa metnini oluşturun.</li><li>“Siteyi görüntüle” ile yeni sekmede gezinip içerikleri, iletişim bilgilerini ve telefon görünümünü kontrol edin.</li><li>“SEO kontrolü” uyarılarını inceleyin. Yönlendirme ve yerel içerikler ileri düzey araçlardır; ihtiyaç yoksa kayıt oluşturmayın.</li><li>İletişim formundan bir deneme yapın; panelde mesajı kontrol edin. E-posta bildirimi ayrı yapılandırma gerektirir.</li></ol>
+            break;
+    }
+    <a class="btn btn-primary" href="@current.Url">@current.Title bölümünü aç <span aria-hidden="true">→</span></a>
+    <div class="admin-guide-pagination">@if(current.Number > 1){<a href="?step=@(current.Number - 1)">← Önceki adım</a>}@if(current.Number < 8){<a href="?step=@(current.Number + 1)">Sonraki adım →</a>}</div></article>
+</div>
+<section class="admin-guide-card mt-4" aria-labelledby="guide-everyday"><h2 id="guide-everyday">Günlük kullanımda bilmeniz gerekenler</h2>
+<div class="admin-help-grid"><div><h3>Kaydet ve yayınla</h3><p>Kaydetmek her zaman yayınlamak değildir. Etkin/yayın ve inceleme seçeneklerini kontrol edin. Metin değişince onayı tekrar verin.</p></div><div><h3>Düzenle ve sil</h3><p>Düzenle kalem simgesiyle açılır. Sil çöp kutusuyla başlatılır; pencerede kayıt adını kontrol edin. Vazgeçerseniz işlem yapılmaz.</p></div><div><h3>Mesajlar</h3><p>Mesajları okuyup okundu olarak işaretleyin. Panelden yanıt e-postası gönderilmez; kendi e-posta uygulamanızdan yanıtlayın.</p></div><div><h3>Özel belgeler</h3><p>Yalnızca yönetici için PDF saklama alanıdır. Ziyaretçi veya müvekkil portalı değildir; herkese açık bağlantı oluşturmaz.</p><a href="/admin/documents">Özel belge açıklamasını aç</a></div></div>
+</section>

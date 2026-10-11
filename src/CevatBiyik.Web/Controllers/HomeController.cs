@@ -35,8 +35,9 @@ public sealed class HomeController(IArticleService articles, IPracticeAreaServic
     public async Task<IActionResult> Contact(CancellationToken cancellationToken)
     {
         SetPage("İletişim", "Av. Cevat Bıyık iletişim bilgileri ve iletişim formu.", "/iletisim");
-        var model = ContactFormPolicy.Create(new CreateContactMessageDto(), environment, configuration);
-        if (environment.IsProduction() && await pages.PublishedAsync("/kvkk", cancellationToken) is null)
+        var model = ContactFormPolicy.Create(new CreateContactMessageDto(), environment, configuration)
+            with { Privacy = await pages.PublishedAsync("/kvkk", cancellationToken) };
+        if (environment.IsProduction() && model.Privacy is null)
         {
             model = model with { CanSubmit = false };
         }

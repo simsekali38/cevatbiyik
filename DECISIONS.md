@@ -1,5 +1,36 @@
 # Architecture Decision Records
 
+## ADR-031 — Guided admin workspace and editable allowlisted HTML
+
+Status: Implemented (2026-10-11, owner-requested admin UX follow-up).
+
+Reuse self-hosted Quill 2.0.3 and the ADR-029 Application sanitizer. Extend semantic
+formatting with h4, strike/deletion and sub/sup; keep scripts, inline CSS, events,
+iframe, tables and embedded media outside the allowlist. Source view is editable:
+parse without executing, reject unsupported tags/attributes/URLs before applying,
+then save through unchanged server validation. Source apply is not persistence.
+Read formatting with an explicit selection to avoid Quill restoring editor focus
+while ordinary fields are edited. Keep desktop/mobile keyboard focus visible below
+the measured sticky header. No replacement editor or new runtime dependency.
+
+Use one native confirmation dialog for existing confirmed POST operations. Render
+record names as text, initially focus Cancel, trap Tab and return focus on dismissal.
+Maintain antiforgery, role policies, server confirmation and no-JS checkbox fallback;
+the dialog is a usability affordance, not an authorization boundary. Pair labeled
+edit/delete SVG actions without relying on icons alone.
+
+Add server-rendered /admin/guide with eight entry steps and module links. Derive
+content-presence indicators through existing Application interfaces, without schema,
+onboarding writes or automatic legal/publication approval. Provide a beginner manual
+and describe private PDFs as administrator storage, not a client portal or sharing
+feature. Existing filesystem, antivirus, quarantine and retention contracts stay intact.
+
+Contact KVKK opens in a native dialog populated only from the current reviewed,
+published PageContent DTO and existing safe renderer. Prepare it for GET and failed
+POST. Preserve typed values/URL; Escape/Close returns focus. Keep /kvkk as the
+no-JS fallback and keep submission disabled when reviewed consent content is absent.
+No production config, secret, migration or hosting storage change.
+
 ## ADR-030 — Measured asset delivery and request-scoped public snapshots
 
 Status: Implemented (2026-10-11, Phase 14); verification in docs/qa/PHASE_14_REVIEW.md.

@@ -4,6 +4,24 @@ All notable project changes should be recorded here.
 
 ## [Unreleased]
 
+### Guided admin UX and editable HTML (2026-10-11)
+- Committed owner-approved Phase 14 as 7ccf8c8 before this follow-up.
+- Refined navy/gold admin navigation, cards, tables, responsive spacing and labeled
+  SVG edit/delete actions. Protected POST operations use a record-specific native
+  confirmation dialog with Cancel/focus return and no-JS fallback.
+- Editable HTML source with safe apply/rejection, h4/strike/sub/sup formatting;
+  six rich-edit screens covered for ordinary-input focus, plus mobile header clearance.
+- Eight-step SSR setup guide at /admin/guide, contextual help and beginner manual
+  docs/admin/ADMIN_USER_GUIDE.md; private PDF purpose, upload/download/recovery explained.
+- Contact KVKK dialog reuses reviewed sanitized page content without navigation or
+  loss of form values, including the contact page's consent-banner/footer links.
+  Missing legal content retains the existing submission gate.
+- Verification: Release 0 errors/warnings; 413 .NET (10 hosted persistence included),
+  6 analytics JS + 15 browser journeys, 8 scanner self-tests and asset/format checks.
+  One empty-schema migration opt-in skip; no migration added.
+- ADR-031 and docs/qa/ADMIN_UX_REVIEW.md record validation and limits. No migration,
+  runtime dependency, production setting or secret changes; SH-12-01 remains open.
+
 ### Phase 14 — measured performance and accessibility (2026-10-11)
 - Static CSS/JS/SVG Brotli/Gzip, verified fingerprint caching and ETag/304; HTML no-store,
   no shared OutputCache/ResponseCaching and no HTML compression (ADR-030).

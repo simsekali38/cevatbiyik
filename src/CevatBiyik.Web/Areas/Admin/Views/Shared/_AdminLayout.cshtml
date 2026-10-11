@@ -3,7 +3,7 @@
     var currentPath = Context.Request.Path.Value?.TrimEnd('/') ?? "";
     (string Title, (string Path, string Label)[] Links)[] groups =
     [
-        ("Genel", [("/admin", "Yönetim özeti"), ("/admin/contact-messages", "İletişim mesajları")]),
+        ("Genel", [("/admin", "Yönetim özeti"), ("/admin/guide", "Başlangıç ve kullanım rehberi"), ("/admin/contact-messages", "İletişim mesajları")]),
         ("İçerik", [("/admin/articles", "Makaleler"), ("/admin/practice-areas", "Uzmanlık alanları"), ("/admin/taxonomy/categories", "Kategoriler"), ("/admin/taxonomy/tags", "Etiketler"), ("/admin/profile", "Avukat profili"), ("/admin/page-contents", "Sayfa içerikleri"), ("/admin/faq", "Sıkça sorulan sorular")]),
         ("Medya ve dosyalar", [("/admin/media", "Görsel kütüphanesi"), ("/admin/documents", "Özel belgeler"), ("/admin/files", "Dosya kontrolü")]),
         ("SEO ve yapılandırma", [("/admin/page-seo", "Sayfa SEO ayarları"), ("/admin/locations", "Yerel içerikler"), ("/admin/seo", "SEO kontrolü"), ("/admin/redirects", "Yönlendirmeler"), ("/admin/settings", "Site ayarları")])
@@ -33,7 +33,7 @@
             <button type="button" class="btn admin-menu-toggle d-lg-none" data-bs-toggle="offcanvas" data-bs-target="#admin-navigation" aria-controls="admin-navigation" aria-label="Yönetim menüsünü aç">Menü</button>
         }
         <a class="brand text-decoration-none" href="/admin"><img class="brand-emblem" src="~/images/brand/cevat-biyik-emblem.svg" width="52" height="52" alt="" /><span class="brand-name">Av. Cevat Bıyık<span class="brand-caption">YÖNETİM PANELİ</span></span></a>
-        <div class="admin-header-actions"><a class="admin-public-link" href="/" target="_blank" rel="noopener noreferrer">Siteyi görüntüle <span class="visually-hidden">(yeni sekme)</span></a>
+        <div class="admin-header-actions">@if (signedIn) { <a class="admin-public-link" href="/admin/guide">Yardım ve başlangıç</a> }<a class="admin-public-link" href="/" target="_blank" rel="noopener noreferrer">Siteyi görüntüle <span class="visually-hidden">(yeni sekme)</span></a>
         @if (signedIn)
         {
             <form asp-area="Admin" asp-controller="Account" asp-action="Logout" method="post" asp-antiforgery="false">@Html.AntiForgeryToken()<button class="btn btn-outline-primary" type="submit">Çıkış yap</button></form>
@@ -52,7 +52,7 @@
                     @foreach (var link in group.Links)
                     {
                         var active = currentPath == link.Path || (link.Path != "/admin" && currentPath.StartsWith(link.Path + "/", StringComparison.OrdinalIgnoreCase));
-                        <a href="@link.Path" class="admin-nav-link @(active ? "is-active" : "")" aria-current="@(active ? "page" : null)">@link.Label</a>
+                        <a href="@link.Path" class="admin-nav-link @(active ? "is-active" : "")" aria-current="@(active ? "page" : null)"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="@(link.Path switch { "/admin" => "M3 3h7v7H3ZM14 3h7v7h-7ZM3 14h7v7H3ZM14 14h7v7h-7Z", "/admin/contact-messages" => "M3 5h18v14H3Zm0 0 9 7 9-7", "/admin/guide" => "M3 4h8v16H3Zm10 0h8v16h-8M7 8h2m6 0h2M7 12h2m6 0h2", "/admin/media" => "M3 3h18v18H3Zm0 14 6-6 5 5 3-3 4 4M15 7h2", "/admin/settings" => "M4 7h16M4 17h16M8 4v6m8 4v6", "/admin/documents" => "M5 3h9l5 5v13H5Zm9 0v5h5M8 12h8m-8 4h8", _ => "M5 3h14v18H5ZM8 8h8m-8 4h8m-8 4h5" })" /></svg><span>@link.Label</span></a>
                     }
                     </div>
                 }
@@ -66,8 +66,20 @@
         }
         @if (TempData["AdminSuccess"] is string success) { <p class="alert alert-success" role="status">@success</p> }
         @if (TempData["AdminError"] is string error) { <p class="alert alert-danger" role="alert">@error</p> }
+        @if (signedIn && currentPath != "/admin" && currentPath != "/admin/guide")
+        {
+            <div class="admin-context-help"><p>@(currentPath switch {
+                var p when p.StartsWith("/admin/articles", StringComparison.Ordinal) => "Makaleyi önce taslak olarak kaydedin. İçerik hazır olduğunda yayın durumunu açın; ileri tarih verirseniz yayın zamanı beklenir.",
+                var p when p.StartsWith("/admin/profile", StringComparison.Ordinal) => "Profiliniz için doğrulanmış bilgileri girin. Metinleri düzenledikten sonra inceleme onayını tekrar işaretleyin.",
+                var p when p.StartsWith("/admin/settings", StringComparison.Ordinal) => "E-posta, telefon ve adres gibi her bilgi ayrı bir ayardır. Var olan kaydı düzenleyin; aynı ayarı ikinci kez eklemeyin.",
+                var p when p.StartsWith("/admin/documents", StringComparison.Ordinal) => "Özel PDF'ler yalnızca yönetici hesabıyla indirilebilir. Ziyaretçi sitesine belge yayınlamak için kullanılmaz.",
+                var p when p.StartsWith("/admin/page-contents", StringComparison.Ordinal) => "Ana sayfa ve hukuki metinler burada yönetilir. Bir metnin görünmesi için etkin ve incelenmiş olması gerekir.",
+                var p when p.StartsWith("/admin/locations", StringComparison.Ordinal) => "Yerel sayfaları yalnızca özgün, doğrulanmış ve ziyaretçiye faydalı içerik varsa oluşturun. Eksik içerikler indekslenmez.",
+                _ => "Bu bölümdeki kayıtları ekleyebilir ve düzenleyebilirsiniz. İşlemler ve ilk veri giriş sırası için kullanım rehberini açın."
+            })</p><a href="/admin/guide">Adım adım yardım →</a></div>
+        }
         @RenderBody()
-        <footer class="admin-footer">Av. Cevat Bıyık · Yönetim paneli</footer>
+        <footer class="admin-footer">Av. Cevat Bıyık · Yönetim paneli @if(signedIn){<a href="/admin/guide">Kullanım rehberi</a>}</footer>
     </main>
     </div>
 </body>

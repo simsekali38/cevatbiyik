@@ -1,7 +1,7 @@
 # Zengin metin ve panel kullanımı
 
 Makale, uzmanlık alanı, biyografi/vizyon, kamu sayfası, SSS yanıtı ve lokasyon gövdesinde
-başlık 2/3, kalın/italik/altı çizili, liste, alıntı ve bağlantı kullanılabilir.
+başlık 2/3/4, kalın/italik/altı ve üstü çizili, alt/üst simge, liste, alıntı ve bağlantı kullanılabilir.
 Ana sayfa başlığı sistem tarafından oluşturulur; editör H1 eklemez.
 Kapak/paylaşım görselleri medya kütüphanesinden seçilir; editör içine dosya gömülmez.
 
@@ -18,7 +18,7 @@ içindir. Değişiklikler kaydedilmezse sayfadan ayrılırken tarayıcı uyarır
 Mobilde Menü ile gruplu navigasyon açılır. SEO ve sosyal paylaşım bölümü açılarak meta alanlar
 düzenlenir; önizleme arama motorlarının gerçek sonucunu garanti etmez. Listede Bu sayfada ara
 sadece o sayfadaki kayıtları filtreler; diğer kayıtlar için sayfalama kullanılır.
-Silme seçenekleri altında onay gerekir. Dosya seçerken boyut/tür ön denetimi yapılır;
+Sil düğmesi kayıt adını gösteren onay penceresi açar; Vazgeç işlemi iptal eder. Dosya seçerken boyut/tür ön denetimi yapılır;
 güvenlik denetimi yine sunucuda gerçekleştirilir. Yayın zamanı UTC, yanında Türkiye saati gösterilir.
 
 JavaScript kapalıysa içerikler standart metin alanlarında düzenlenir; güvenli HTML elle girilebilir.
@@ -30,6 +30,11 @@ Dosya, Düzen, Ekle, Görünüm, Biçim ve Araçlar menüleri mevcut komutları 
 Simgelerin üzerine gelince araç adı görünür; ekran okuyucu da aynı adı okur.
 Esc açık menüyü kapatır. Mobilde menü seçenekleri editör genişliğine sığar.
 Sola/ortaya/sağa/iki yana hizalama kaydedilir ve public sayfada korunur.
-Önizleme yalnızca düzenlenen içeriği açar. Kaynak görünümü güvenli HTML'yi salt okunur gösterir.
+Önizleme yalnızca düzenlenen içeriği açar. Kaynak görünümünde HTML düzenlenebilir;
+“HTML değişikliklerini uygula” editörü günceller, kalıcı kayıt için ayrıca Kaydet gerekir.
+Desteklenmeyen etiket/öznitelik veya güvensiz bağlantı reddedilir; mevcut içerik korunur.
+Sunucu kaydetme sırasında aynı güvenlik kurallarını tekrar uygular.
 Tablo, video, serbest renk ve editör içine resim gömme bu sürümün kapsamına dahil değildir;
 kapak ve paylaşım görselleri mevcut medya seçiminden yönetilir.
+
+İlk veri giriş sırası ve tüm bölümlerin açıklaması: [Yönetim paneli kullanım kılavuzu](ADMIN_USER_GUIDE.md).

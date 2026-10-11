@@ -19,8 +19,9 @@ public sealed class ContactController(IContactService contacts, IValidator<Creat
     public async Task<IActionResult> Submit([Bind("Name,Email,Phone,Subject,Message,Consent", Prefix = "Form")] CreateContactMessageDto form,
         CancellationToken cancellationToken, [FromForm(Name = "Website")] string? website = null)
     {
-        var model = ContactFormPolicy.Create(form, environment, configuration);
-        if (environment.IsProduction() && await pages.PublishedAsync("/kvkk", cancellationToken) is null)
+        var model = ContactFormPolicy.Create(form, environment, configuration)
+            with { Privacy = await pages.PublishedAsync("/kvkk", cancellationToken) };
+        if (environment.IsProduction() && model.Privacy is null)
         {
             model = model with { CanSubmit = false };
         }

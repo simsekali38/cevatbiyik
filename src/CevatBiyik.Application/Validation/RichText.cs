@@ -8,7 +8,7 @@ namespace CevatBiyik.Application.Validation;
 /// <summary>One allowlist for CMS input, canonical persistence and defensive output. Contact/meta remain plain text.</summary>
 public static class RichText
 {
-    private static readonly string[] Tags = ["p", "br", "h2", "h3", "strong", "b", "em", "i", "u", "ul", "ol", "li", "blockquote", "a"];
+    private static readonly string[] Tags = ["p", "br", "h2", "h3", "h4", "strong", "b", "em", "i", "u", "s", "del", "sub", "sup", "ul", "ol", "li", "blockquote", "a"];
     public static bool HasMarkup(string? value) => value?.Contains('<') is true;
 
     public static bool IsSafe(string? value)
@@ -37,7 +37,7 @@ public static class RichText
         if (string.IsNullOrEmpty(value)) { return string.Empty; }
         if (!HasMarkup(value) || value.Length > 100000) { return WebUtility.HtmlDecode(value); }
         var document = new HtmlParser().ParseDocument(Clean(value, out _));
-        foreach (var element in document.QuerySelectorAll("p,h2,h3,li,blockquote,br"))
+        foreach (var element in document.QuerySelectorAll("p,h2,h3,h4,li,blockquote,br"))
         {
             element.Parent?.InsertBefore(document.CreateTextNode("\n"), element.NextSibling);
         }
@@ -72,7 +72,7 @@ public static class RichText
         }
         foreach (var element in document.QuerySelectorAll("[class]"))
         {
-            var permitted = element.LocalName is "p" or "h2" or "h3" or "li" or "blockquote";
+            var permitted = element.LocalName is "p" or "h2" or "h3" or "h4" or "li" or "blockquote";
             if (!permitted || element.GetAttribute("class") is not ("content-align-center" or "content-align-right" or "content-align-justify"))
             {
                 element.RemoveAttribute("class"); rejected = true;

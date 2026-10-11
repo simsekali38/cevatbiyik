@@ -1,6 +1,19 @@
 "use strict";
 (() => {
     document.body.classList.remove("admin-no-js");
+    const header = document.querySelector(".admin-header");
+    if (header && window.ResizeObserver) new ResizeObserver(() => {
+        document.documentElement.style.setProperty("--admin-header-height", header.getBoundingClientRect().height + "px");
+    }).observe(header);
+    let keyboardFocus = true;
+    document.addEventListener("pointerdown", () => { keyboardFocus = false; }, true);
+    document.addEventListener("keydown", event => { if (event.key === "Tab") keyboardFocus = true; }, true);
+    document.querySelector(".admin-main")?.addEventListener("focusin", event => {
+        if (!keyboardFocus || !header || event.target.closest("dialog")) return;
+        const bounds = event.target.getBoundingClientRect();
+        if (bounds.top < header.getBoundingClientRect().bottom + 8 || bounds.bottom > innerHeight)
+            event.target.scrollIntoView({block: "start", behavior: "instant"});
+    });
     const editors = [];
     const make = (tag, className, text) => {
         const node = document.createElement(tag);
@@ -38,7 +51,7 @@
         const error = make("p", "field-error"); error.setAttribute("role", "alert"); error.hidden = true;
         wrapper.append(menubar, toolbar, host, footer); footer.append(count, help);
         source.before(wrapper); source.after(error);
-        const editor = new Quill(host, {theme: null, formats: ["header", "bold", "italic", "underline", "blockquote", "list", "link", "align"], modules: {toolbar: false, history: {userOnly: true}}});
+        const editor = new Quill(host, {theme: null, formats: ["header", "bold", "italic", "underline", "strike", "script", "blockquote", "list", "link", "align"], modules: {toolbar: false, history: {userOnly: true}}});
         editor.root.setAttribute("role", "textbox"); editor.root.setAttribute("aria-multiline", "true");
         editor.root.setAttribute("aria-required", String(required));
         editor.root.setAttribute("aria-describedby", help.id);
@@ -70,6 +83,9 @@
             "Numaralı liste": "M9 5h12M9 12h12M9 19h12M3 3v4M2 3h1M2 11q3-2 3 0l-3 3h3M2 18h3l-2 2h2",
             "Alıntı": "M4 7h6v6H5v4H3v-6l1-4Zm11 0h6v6h-5v4h-2v-6l1-4Z",
             "Biçimi temizle": "M5 4h14M12 4l-3 16m5-2 6 4m0-4-6 4",
+            "Üstü çizili": "M5 12h14M17 6c-2-3-9-2-9 2 0 2 3 3 5 3s4 2 4 4c0 4-7 5-10 2",
+            "Alt simge": "m4 5 9 12M13 5 4 17M17 15q5-3 5 1l-5 5h5",
+            "Üst simge": "m4 8 9 12M13 8 4 20M17 3q5-3 5 1l-5 5h5",
             "Genişlet": "M4 9V4h5m6 0h5v5M4 15v5h5m6 0h5v-5",
             "Önizleme": "M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Zm10-3a3 3 0 1 0 0 6 3 3 0 0 0 0-6",
             "Kaynak görünümü": "m8 6-6 6 6 6m8-12 6 6-6 6m-3-14-2 16",
@@ -104,9 +120,12 @@
             control.addEventListener("click", () => { restoreSelection(); action(); updateButtons(); }); toolbar.append(control); return control;
         };
         const formatSelect = make("select"); formatSelect.setAttribute("aria-label", "Paragraf biçimi");
-        [["", "Paragraf"], ["2", "Başlık 2"], ["3", "Başlık 3"]].forEach(([value, text]) => { const option = make("option", "", text); option.value = value; formatSelect.append(option); });
+        [["", "Paragraf"], ["2", "Başlık 2"], ["3", "Başlık 3"], ["4", "Başlık 4"]].forEach(([value, text]) => { const option = make("option", "", text); option.value = value; formatSelect.append(option); });
         formatSelect.addEventListener("change", () => { restoreSelection(); editor.format("header", Number(formatSelect.value) || false, "user"); }); toolbar.append(formatSelect); divider();
         [ ["Kalın", "bold"], ["İtalik", "italic"], ["Altı çizili", "underline"], ["Alıntı", "blockquote"] ].forEach(([text, format]) => button(text, () => editor.format(format, !editor.getFormat()[format], "user"), format));
+        button("Üstü çizili", () => editor.format("strike", !editor.getFormat(selection.index, selection.length).strike, "user"), "strike");
+        button("Alt simge", () => editor.format("script", editor.getFormat(selection.index, selection.length).script === "sub" ? false : "sub", "user"), "script", "sub");
+        button("Üst simge", () => editor.format("script", editor.getFormat(selection.index, selection.length).script === "super" ? false : "super", "user"), "script", "super");
         divider();
         [["Sola hizala", false], ["Ortala", "center"], ["Sağa hizala", "right"], ["İki yana yasla", "justify"]].forEach(([text, value]) => button(text, () => editor.format("align", value, "user"), "align", value));
         divider();
@@ -142,14 +161,17 @@
         const previewTitle = make("h2"); previewTitle.id = `preview-title-${number}`;
         const previewBody = make("div", "admin-editor-preview-body");
         const closePreview = make("button", "btn btn-primary", "Kapat"); closePreview.type = "button"; closePreview.addEventListener("click", () => previewDialog.close());
-        previewDialog.append(previewTitle, previewBody, closePreview); document.body.append(previewDialog);
+        const applySource = make("button", "btn btn-primary", "HTML değişikliklerini uygula"); applySource.type = "button"; applySource.hidden = true;
+        const sourceError = make("p", "field-error"); sourceError.setAttribute("role", "alert");
+        previewDialog.append(previewTitle, previewBody, sourceError, applySource, closePreview); document.body.append(previewDialog);
         keepDialogFocus(previewDialog);
         previewDialog.addEventListener("close", () => editor.focus());
         const showPreview = (mode = "preview") => {
-            sync(false); previewBody.replaceChildren();
+            sync(false); previewBody.replaceChildren(); sourceError.textContent = ""; applySource.hidden = mode !== "source";
             if (mode === "source") {
-                previewTitle.textContent = "Kaynak görünümü";
-                const code = make("textarea", "form-control admin-editor-source"); code.readOnly = true; code.value = source.value; code.setAttribute("aria-label", "Güvenli HTML kaynağı"); previewBody.append(code);
+                previewTitle.textContent = "HTML kaynağını düzenle";
+                const info = make("p", "form-text", "Başlık, paragraf, liste, bağlantı ve metin biçimleri desteklenir. Script, CSS, iframe, tablo ve görsel kodları kabul edilmez. Hatalı kod mevcut içeriğinizi değiştirmez.");
+                const code = make("textarea", "form-control admin-editor-source"); code.value = source.value; code.maxLength = limit; code.spellcheck = false; code.setAttribute("aria-label", "Güvenli HTML kaynağı"); previewBody.append(info, code);
             } else if (mode === "stats") {
                 previewTitle.textContent = "Kelime ve karakter sayısı"; previewBody.append(make("p", "", count.textContent));
             } else {
@@ -159,13 +181,25 @@
             }
             previewDialog.showModal(); closePreview.focus();
         };
+        applySource.addEventListener("click", () => {
+            const value = previewBody.querySelector("textarea").value;
+            const parsed = new DOMParser().parseFromString(value, "text/html");
+            const tags = new Set(["P","BR","H2","H3","H4","STRONG","B","EM","I","U","S","DEL","SUB","SUP","UL","OL","LI","BLOCKQUOTE","A"]);
+            const valid = !parsed.doctype && !parsed.head.children.length && [...parsed.body.querySelectorAll("*")].every(node => tags.has(node.tagName) && [...node.attributes].every(attr =>
+                (node.tagName === "A" && attr.name === "href" && allowedLink(attr.value)) ||
+                (attr.name === "class" && ["P","H2","H3","H4","LI","BLOCKQUOTE"].includes(node.tagName) && /^content-align-(center|right|justify)$/.test(attr.value))));
+            if (!valid || value.length > limit || !parsed.body.textContent.trim()) { sourceError.textContent = "HTML geçersiz veya desteklenmeyen etiket/özellik içeriyor. İçeriğiniz değiştirilmedi."; return; }
+            parsed.body.querySelectorAll("[class]").forEach(node => {node.className = node.className.replace("content-align-", "ql-align-");});
+            editor.setContents(editor.clipboard.convert({html:parsed.body.innerHTML}), "user");
+            sync(); previewDialog.close();
+        });
         button("Önizleme", () => showPreview()); button("Kaynak görünümü", () => showPreview("source"));
         const invoke = name => () => commands.get(name)?.();
         menu("Dosya", [["Değişiklikleri kaydet", () => source.form?.requestSubmit()]]);
         menu("Düzen", [["Geri al", invoke("Geri al")], ["Yinele", invoke("Yinele")], ["Tümünü seç", () => { editor.focus(); editor.setSelection(0, editor.getLength() - 1); }]]);
         menu("Ekle", [["Bağlantı", invoke("Bağlantı")], ["Alıntı", invoke("Alıntı")], ["Madde listesi", invoke("Madde listesi")], ["Numaralı liste", invoke("Numaralı liste")]]);
         menu("Görünüm", [["Önizleme", () => showPreview()], ["Kaynak görünümü", () => showPreview("source")], ["Genişlet / daralt", invoke("Genişlet")]]);
-        menu("Biçim", [["Kalın", invoke("Kalın")], ["İtalik", invoke("İtalik")], ["Altı çizili", invoke("Altı çizili")], ["Biçimi temizle", invoke("Biçimi temizle")]]);
+        menu("Biçim", [["Kalın", invoke("Kalın")], ["İtalik", invoke("İtalik")], ["Altı çizili", invoke("Altı çizili")], ["Üstü çizili", invoke("Üstü çizili")], ["Alt simge", invoke("Alt simge")], ["Üst simge", invoke("Üst simge")], ["Biçimi temizle", invoke("Biçimi temizle")]]);
         menu("Araçlar", [["Kelime ve karakter sayısı", () => showPreview("stats")], ["Bağlantıyı kaldır", invoke("Bağlantıyı kaldır")]]);
         function updateButtons() {
             // Reading without a range makes Quill focus the editor, stealing focus on blur/Tab.
@@ -179,7 +213,7 @@
             documentCopy.body.querySelectorAll("*").forEach(element => {
                 const alignment = element.getAttribute("class")?.match(/^ql-align-(center|right|justify)$/)?.[1];
                 [...element.attributes].forEach(attribute => { if (!(element.tagName === "A" && attribute.name === "href")) element.removeAttribute(attribute.name); });
-                if (alignment && ["P", "H2", "H3", "LI", "BLOCKQUOTE"].includes(element.tagName)) element.className = "content-align-" + alignment;
+                if (alignment && ["P", "H2", "H3", "H4", "LI", "BLOCKQUOTE"].includes(element.tagName)) element.className = "content-align-" + alignment;
                 if (element.tagName === "A" && !allowedLink(element.getAttribute("href"))) element.removeAttribute("href");
             });
             const text = editor.getText().trim(); source.value = text ? documentCopy.body.innerHTML : "";
@@ -223,8 +257,52 @@
         const result = make("p", "form-text"); result.setAttribute("role", "status"); group.append(label, input); toolbar.append(group, hint, result); region.before(toolbar);
         input.addEventListener("input", () => { const term = input.value.trim().toLocaleLowerCase("tr-TR"); rows.forEach(row => { row.hidden = !row.textContent.toLocaleLowerCase("tr-TR").includes(term); }); result.textContent = `${rows.filter(row => !row.hidden).length} / ${rows.length} kayıt gösteriliyor`; });
     });
-    document.querySelectorAll("form.admin-delete").forEach(form => {
-        const details = make("details", "admin-danger-zone"); const summary = make("summary", "", "Silme seçenekleri"); form.before(details); details.append(summary, form);
+    const confirmation = make("dialog", "admin-confirm-dialog");
+    confirmation.setAttribute("aria-labelledby", "admin-confirm-title");
+    const confirmTitle = make("h2", "", "İşlemi onaylayın"); confirmTitle.id = "admin-confirm-title";
+    const confirmRecord = make("p", "admin-confirm-record");
+    const confirmMessage = make("p");
+    const confirmActions = make("div", "admin-dialog-actions");
+    const cancelConfirm = make("button", "btn btn-outline-primary", "Vazgeç"); cancelConfirm.type = "button";
+    const acceptConfirm = make("button", "btn btn-danger", "Onayla"); acceptConfirm.type = "button";
+    confirmActions.append(cancelConfirm, acceptConfirm); confirmation.append(confirmTitle, confirmRecord, confirmMessage, confirmActions);
+    document.body.append(confirmation); keepDialogFocus(confirmation);
+    let pendingAction = null;
+    const allowedSubmissions = new WeakSet();
+    cancelConfirm.addEventListener("click", () => confirmation.close());
+    confirmation.addEventListener("close", () => { pendingAction?.button.focus(); pendingAction = null; });
+    acceptConfirm.addEventListener("click", () => {
+        const pending = pendingAction;
+        if (!pending) return;
+        pending.checkbox.checked = true; allowedSubmissions.add(pending.form);
+        confirmation.close(); pending.form.requestSubmit(pending.button);
+    });
+    document.querySelectorAll('form input[name="confirmed"][type="checkbox"]').forEach(checkbox => {
+        const form = checkbox.form;
+        const button = form.querySelector('button[type="submit"]');
+        if (!button) return;
+        const label = checkbox.closest("label");
+        const message = label?.textContent.trim() || "Bu işlemi gerçekleştirmek istediğinizden emin misiniz?";
+        const actionLabel = button.textContent.trim();
+        checkbox.required = false; if (label) label.hidden = true;
+        form.classList.add("admin-confirm-form");
+        button.classList.add("admin-action");
+        if (/sil|kaldır|kapat|devre dışı/i.test(actionLabel)) button.classList.add("admin-action-danger");
+        const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        icon.setAttribute("viewBox", "0 0 24 24"); icon.setAttribute("aria-hidden", "true"); icon.setAttribute("focusable", "false");
+        const shape = document.createElementNS(icon.namespaceURI, "path");
+        shape.setAttribute("d", /geri al/i.test(actionLabel) ? "M4 10h10a6 6 0 0 1 0 12M4 10l5-5M4 10l5 5" : "M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7");
+        icon.append(shape); button.prepend(icon);
+        form.addEventListener("submit", event => {
+            if (allowedSubmissions.has(form)) { allowedSubmissions.delete(form); return; }
+            event.preventDefault(); checkbox.checked = false;
+            pendingAction = {form, button, checkbox};
+            confirmTitle.textContent = actionLabel + " işlemini onaylayın";
+            confirmRecord.textContent = form.closest("tr")?.querySelector("th,td")?.textContent.trim()
+                || form.closest("article")?.querySelector("h2,h3")?.textContent.trim() || "Seçili kayıt";
+            confirmMessage.textContent = message;
+            acceptConfirm.textContent = actionLabel; confirmation.showModal(); cancelConfirm.focus();
+        });
     });
     document.querySelectorAll("[data-seo-editor]").forEach(panel => {
         const title = panel.querySelector('input[data-seo="title"]'); const description = panel.querySelector('textarea[data-seo="description"]');

@@ -12,4 +12,7 @@ public sealed record ArticleListViewModel(PagedResult<ArticleDto> Result, string
     public IReadOnlyList<TaxonomyDto> Labels { get; init; } = [];
     public int MetadataPage { get; init; } = 1;
 }
-public sealed record ContactViewModel(CreateContactMessageDto Form, bool CanSubmit, string Notice);
+public sealed record ContactViewModel(CreateContactMessageDto Form, bool CanSubmit, string Notice)
+{
+    public PageContentDto? Privacy { get; init; }
+}
