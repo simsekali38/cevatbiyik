@@ -16,14 +16,18 @@ public sealed class SmtpNotificationOptions : IContactNotificationPolicy
     public string Recipient { get; init; } = "";
     public static SmtpNotificationOptions Read(IConfiguration config) => new()
     {
-        Enabled = config.GetValue<bool>("Smtp:Enabled"), Host = config["Smtp:Host"] ?? "",
-        Port = config.GetValue<int?>("Smtp:Port") ?? 587, UserName = config["Smtp:UserName"] ?? "",
-        Password = config["Smtp:Password"] ?? "", From = config["Smtp:From"] ?? "", Recipient = config["Smtp:Recipient"] ?? ""
+        Enabled = config.GetValue<bool>("Smtp:Enabled"),
+        Host = config["Smtp:Host"] ?? "",
+        Port = config.GetValue<int?>("Smtp:Port") ?? 587,
+        UserName = config["Smtp:UserName"] ?? "",
+        Password = config["Smtp:Password"] ?? "",
+        From = config["Smtp:From"] ?? "",
+        Recipient = config["Smtp:Recipient"] ?? ""
     };
     public void Validate()
     {
         if (!Enabled) { return; }
-        if (Uri.CheckHostName(Host) == UriHostNameType.Unknown || Host.Length > 253 || Port != 587 ||
+        if (Uri.CheckHostName(Host) == UriHostNameType.Unknown || Host.Length > 253 ||
             string.IsNullOrWhiteSpace(UserName) || UserName.Length > 254 || UserName.Any(char.IsControl) ||
             string.IsNullOrWhiteSpace(Password) || Password.Length > 1024 ||
             !Mailbox(From) || !Mailbox(Recipient))
