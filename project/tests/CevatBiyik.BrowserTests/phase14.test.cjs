@@ -152,12 +152,13 @@ test('homepage design reflows, keeps local assets and preserves navigation', asy
 test('article designs reflow at mobile and desktop with accessible filters and reading structure', async () => session(async page => {
   for (const [path, name] of [['/makaleler', 'articles-list'], ['/makaleler/test-browser', 'article-detail']]) {
     await goto(page, path);
-    for (const width of [390, 1440]) {
+    for (const width of [320, 390, 768, 1440]) {
       await page.setViewportSize({width, height:900});
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `${path} ${width}px overflow`);
       assert.equal(await page.locator('h1').count(), 1);
       await audit(page);
-      await page.screenshot({path:`../artifacts/test-runs/${name}-${width}.png`, fullPage:true});
+      assert.equal(await page.locator('.public-icon[aria-hidden="true"][focusable="false"]').count() > 0, true);
+      await page.screenshot({path:`../artifacts/test-runs/inner-enriched-${name}-${width}.png`, fullPage:true});
     }
     if (name === 'articles-list') {
       for (const id of ['q', 'category', 'topic', 'tag']) assert.equal(await page.locator('#' + id).evaluate(el => !!el.labels?.length), true);
@@ -180,7 +181,8 @@ test('practice-area list and detail reflow with safe content, links and accessib
       assert.equal(await page.locator('.breadcrumb [aria-current="page"]').count(), 1);
       assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), 'https://cevatbiyik.av.tr' + path);
       await audit(page);
-      await page.screenshot({path:`../artifacts/test-runs/${name}-${width}.png`, fullPage:true});
+      assert.equal(await page.locator('.public-page-art figcaption').innerText().then(text=>text.includes('Temsili')), true);
+      await page.screenshot({path:`../artifacts/test-runs/inner-enriched-${name}-${width}.png`, fullPage:true});
     }
     assert.equal(await page.locator('.practice-contact a').getAttribute('href'), '/iletisim');
     if (name === 'practice-list') assert.equal(await page.locator('.practice-card h2 a').first().getAttribute('href'), '/uzmanlik-alanlari/test-area');
@@ -188,7 +190,7 @@ test('practice-area list and detail reflow with safe content, links and accessib
 }));
 
 test('remaining public pages preserve accessible mobile layouts, CMS states and native controls', async () => {
-  for (const [path, name] of [['/hakkimda','about'], ['/iletisim','contact'], ['/sss','faq'], ['/kvkk','legal'], ['/cerez-politikasi','cookies'], ['/yasal-uyari','disclaimer']]) {
+  for (const [path, name] of [['/hakkimda','about'], ['/iletisim','contact'], ['/sss','faq'], ['/kvkk','legal'], ['/cerez-politikasi','cookies'], ['/yasal-uyari','disclaimer'], ['/konumlar','locations']]) {
     await session(async page => {
       for (const width of [320,390,768,1440]) {
         await page.setViewportSize({width,height:900});
@@ -198,7 +200,8 @@ test('remaining public pages preserve accessible mobile layouts, CMS states and 
         assert.equal(await page.locator('.content-breadcrumb [aria-current="page"]').count(),1);
         assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://cevatbiyik.av.tr'+path);
         await audit(page);
-        await page.screenshot({path:`../artifacts/test-runs/remaining-after-${name}-${width}.png`,fullPage:true});
+        assert.equal(await page.locator('.public-icon[aria-hidden="true"][focusable="false"]').count()>0,true);
+        await page.screenshot({path:`../artifacts/test-runs/inner-enriched-${name}-${width}.png`,fullPage:true});
       }
       if (path === '/hakkimda') {
         assert.equal(await page.locator('.about-portrait img').evaluate(el=>el.complete&&el.naturalWidth>0),true);

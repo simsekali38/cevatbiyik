@@ -244,16 +244,31 @@ h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.2; l
 @media (max-width: 991.98px) { .home-hero-grid { grid-template-columns: minmax(0, 1fr); min-height: 0; } .home-hero-copy { padding: 2.5rem; } .home-hero-visual { min-height: 380px; border-top: 1px solid var(--border-subtle); } .home-hero-visual::before { display: none; } }
 @media (max-width: 575.98px) { .public-site .site-header .brand-emblem, .public-site .site-footer .brand-emblem { width: 48px; height: 48px; } .public-site .site-footer .footer-top { padding-block: 2.5rem; } .site-info-strip .container { flex-direction: column; } .home-public .hero { padding-block: 1.75rem; } .home-hero-copy { padding: 1.75rem; } .home-hero-copy .hero-title { font-size: clamp(2.25rem, 10vw, 2.75rem); } .home-hero-visual { min-height: 300px; } .home-approach .content-card, .home-areas .content-card { min-height: 0; } .home-process li { gap: 1rem; } }
 
-/* Article views: scoped to preserve the homepage, other public pages and Admin. */
+/* Shared public decoration reuses local artwork and decorative icons. */
+.public-icon-badge { display: inline-flex; align-items: center; justify-content: center; width: 3.5rem; height: 3.5rem; margin-bottom: 1.25rem; border-radius: .75rem; color: var(--brand-gold-ink); background: #F1ECDD; }
+.public-heading-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .55fr); align-items: center; gap: 3rem; }
+.public-heading-text-only { grid-template-columns: minmax(0, 1fr); }
+.public-heading-text-only > div { width: 100%; max-width: 860px; margin-inline: auto; }
+.public-heading-grid > div { min-width: 0; }
+.public-page-art { overflow: hidden; border: 1px solid var(--border-subtle); border-radius: .65rem; background: var(--surface-white); box-shadow: 0 8px 24px #18264B0A; }
+.public-page-art img { display: block; width: 100%; height: 230px; object-fit: cover; object-position: center 65%; }
+.public-page-art figcaption { padding: .75rem 1rem; color: var(--text-muted); font-size: .75rem; line-height: 1.5; }
+.public-card-art { display: grid; place-items: center; aspect-ratio: 16 / 10; color: var(--brand-gold); background: radial-gradient(ellipse at top right, #D6B36A25, transparent 70%), var(--brand-navy); }
+.public-card-art .public-icon { width: 3.5rem; height: 3.5rem; }
+.public-cta-icon { color: var(--brand-gold); display: inline-flex; align-items: center; }
+.article-contact, .practice-contact, .content-contact { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; border-radius: .65rem; }
+@media (max-width: 991.98px) { .public-heading-grid { grid-template-columns: minmax(0, 1fr); gap: 2rem; } .public-page-art img { height: 200px; } }
+
+/* Article views retain CMS covers, filters and the shared public shell. */
 .articles-public, .article-detail-public { background: var(--surface-paper); color: var(--brand-navy); }
 .articles-public .page-heading, .article-detail-public .page-heading { background: transparent; border: 0; padding-block: clamp(2.5rem, 6vw, 5rem) 2rem; }
 .articles-public .page-heading h1, .article-detail-public h1 { font-family: "Segoe UI", Arial, sans-serif; font-weight: 700; font-size: clamp(2.1rem, 4vw, 3rem); line-height: 1.2; overflow-wrap: anywhere; }
 .articles-public .page-heading h1::after { content: ""; display: block; width: 64px; height: 2px; margin-top: 1.5rem; background: var(--brand-gold); }
 .articles-results { padding-top: 0; }
-.articles-public .filter-form { padding: 1.5rem; background: var(--surface-white); border: 1px solid var(--border-subtle); border-radius: .35rem; margin-bottom: 1.5rem; }
+.articles-public .filter-form { padding: 1.5rem; background: var(--surface-white); border: 1px solid var(--border-subtle); border-radius: .65rem; margin-bottom: 1.5rem; box-shadow: 0 5px 18px #18264B08; }
 .articles-public .form-control, .articles-public .form-select { min-height: 48px; }
 .articles-public .result-count { color: var(--text-muted); margin-block: 1.5rem; }
-.articles-public .article-card { padding: 0; border-radius: .35rem; overflow: hidden; box-shadow: 0 3px 8px #18264B08; }
+.articles-public .article-card { padding: 0; border-radius: .65rem; overflow: hidden; box-shadow: 0 5px 18px #18264B08; }
 .articles-public .article-card .card-cover { margin: 0; border-radius: 0; width: 100%; aspect-ratio: 16/10; object-fit: cover; }
 .article-card-body { display: flex; flex-direction: column; flex: 1; padding: 1.75rem; gap: .85rem; }
 .article-category { color: var(--brand-gold-ink); font-size: .85rem; font-weight: 700; text-underline-offset: .2em; display: inline-block; }
@@ -269,7 +284,7 @@ h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.2; l
 .article-detail-public h1 { margin-block: 1rem 1.25rem; }
 .article-dates { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; font-size: .9rem; color: var(--text-muted); }
 .article-reading { padding-top: 1rem; }
-.article-cover { width: 100%; height: auto; border-radius: .35rem; margin-bottom: 2rem; }
+.article-cover { width: 100%; height: auto; border-radius: .65rem; margin-bottom: 2rem; }
 .article-detail-public .article-lead { line-height: 1.8; font-size: 1.15rem; overflow-wrap: anywhere; border-left: 2px solid var(--brand-gold); padding-left: 1.25rem; }
 .article-detail-public .rich-content, .article-detail-public .plain-content { font-size: 1.1rem; line-height: 1.9; }
 .article-detail-public .rich-content h2, .article-detail-public .rich-content h3, .article-detail-public .rich-content h4 { font-family: "Segoe UI", Arial, sans-serif; font-weight: 650; margin-top: 2.5rem; }
@@ -293,10 +308,11 @@ h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.2; l
 .practice-public h1::after { content: ""; display: block; width: 64px; height: 2px; margin-top: 1.5rem; background: var(--brand-gold); }
 
 .practice-results { padding-top: 1rem; }
-.practice-public .practice-card { padding: 2rem; border-radius: .35rem; border-top: 2px solid var(--brand-gold); box-shadow: 0 3px 8px #18264B08; }
+.practice-public .practice-card { display: flex; flex-direction: column; align-items: flex-start; padding: 2rem; border: 1px solid var(--border-subtle); border-radius: .65rem; box-shadow: 0 5px 18px #18264B08; }
 .practice-public .practice-card h2 { font-family: "Segoe UI", Arial, sans-serif; font-size: 1.4rem; line-height: 1.4; font-weight: 650; margin-bottom: 1rem; }
 .practice-public .practice-card p { line-height: 1.75; margin-bottom: 1.5rem; }
 .practice-card .text-link, .practice-back { min-height: 44px; align-items: center; }
+.practice-card .text-link { margin-top: auto; }
 .practice-public .page-links { justify-content: center; align-items: center; margin-top: 2rem; }
 .practice-detail .reading-width { max-width: 860px; }
 .practice-public .practice-lead { color: var(--text-muted); font-size: 1.15rem; line-height: 1.8; margin-top: 2rem; overflow-wrap: anywhere; }
@@ -307,6 +323,7 @@ h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.2; l
 .practice-detail .rich-content h3 { font-size: 1.35rem; }
 .practice-contact { background: var(--brand-navy); border-top: 2px solid var(--brand-gold); padding: 2rem; margin-block: 3rem; }
 .practice-contact-list { background: #F0EDE5; border: 1px solid var(--border-subtle); margin-bottom: 0; }
+.practice-contact-list .public-cta-icon { color: var(--brand-gold-ink); }
 @media (max-width: 575.98px) { .practice-public .practice-card, .practice-contact { padding: 1.5rem; }  .practice-detail .rich-content, .practice-detail .plain-content { font-size: 1rem; } }
 
 /* Secondary public content uses the approved shell without changing Admin. */
@@ -324,27 +341,34 @@ h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.2; l
 .content-contact { padding: 2rem; margin-top: 3rem; background: var(--brand-navy); border-top: 2px solid var(--brand-gold); }
 .about-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 3rem; align-items: start; }
 .about-copy { min-width: 0; }
-.about-portrait { padding: 1.5rem; border: 1px solid var(--border-subtle); border-radius: .35rem; background: var(--surface-white); }
-.about-portrait-placeholder { min-height: 430px; padding: 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; background: #F0EDE5; text-align: center; }
-.about-portrait-placeholder img { background: var(--brand-navy); border-radius: .35rem; padding: 1rem; max-width: 100%; height: auto; }
-.about-portrait-placeholder p { margin: 0; color: var(--text-muted); overflow-wrap: anywhere; }
+.about-portrait { overflow: hidden; border: 1px solid var(--border-subtle); border-radius: .65rem; background: var(--surface-white); box-shadow: 0 8px 24px #18264B0A; }
+.about-portrait-placeholder { background: #F0EDE5; }
+.about-portrait-placeholder img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+.about-portrait-placeholder figcaption, .about-portrait-placeholder p { padding: .85rem 1rem; color: var(--text-muted); font-size: .8rem; line-height: 1.6; }
+.about-portrait-placeholder p { margin: 0; padding-top: 0; overflow-wrap: anywhere; }
 .about-section + .about-section { padding-top: 2rem; margin-top: 2rem; border-top: 1px solid var(--border-subtle); }
-@media (max-width: 991.98px) { .about-grid { grid-template-columns: minmax(0, 1fr); gap: 2rem; } .about-portrait-placeholder { min-height: 260px; } }
+@media (max-width: 991.98px) { .about-grid { grid-template-columns: minmax(0, 1fr); gap: 2rem; } .about-portrait-placeholder img { aspect-ratio: 16 / 10; object-position: center 65%; } }
 @media (max-width: 575.98px) {  .content-contact { padding: 1.5rem; } .public-content-page .rich-content, .public-content-page .plain-content { font-size: 1rem; } }
 
-.contact-public .contact-panel, .contact-form-panel { padding: 2rem; border: 1px solid var(--border-subtle); border-radius: .35rem; background: var(--surface-white); }
+.contact-public .contact-panel, .contact-form-panel { padding: 2rem; border: 1px solid var(--border-subtle); border-radius: .65rem; background: var(--surface-white); box-shadow: 0 5px 18px #18264B08; }
 .contact-public .contact-panel { background: #F0EDE5; border-top: 2px solid var(--brand-gold); }
 .contact-public .contact-panel h2 { margin-bottom: 1.5rem; }
 .contact-public .contact-info dd { overflow-wrap: anywhere; margin-bottom: 1.5rem; }
+.contact-public .contact-info dt { display: flex; align-items: center; gap: .65rem; }
+.contact-public .contact-info .public-icon { width: 1.25rem; height: 1.25rem; color: var(--brand-gold-ink); }
 .contact-public .form-title { margin-bottom: .75rem; }
 .contact-public .form-intro { color: var(--text-muted); }
 .contact-public .form-control { background: var(--surface-paper); }
-.faq-public .faq-accordion { border-radius: .35rem; overflow: visible; }
-.faq-public .accordion-item { border: 1px solid var(--border-subtle); border-radius: .35rem; margin-bottom: 1rem; background: var(--surface-white); }
+.faq-public .faq-accordion { border-radius: .65rem; overflow: visible; }
+.faq-public .accordion-item { border: 1px solid var(--border-subtle); border-radius: .65rem; margin-bottom: 1rem; background: var(--surface-white); box-shadow: 0 4px 14px #18264B06; }
 .faq-public .faq-toggle { padding: 1.5rem; font-size: 1.1rem; }
 .faq-public .accordion-item[open] { border-color: var(--brand-gold-ink); }
 .faq-public .accordion-body { padding: 0 1.5rem 1.5rem; }
 .faq-public .page-links { justify-content: center; }
+.legal-document, .public-reading-card { padding: clamp(1.25rem, 4vw, 3rem); border: 1px solid var(--border-subtle); border-radius: .65rem; background: var(--surface-white); box-shadow: 0 5px 18px #18264B08; }
+.location-public .section-pad { padding-top: 0; }
+.location-public .content-card { border-radius: .65rem; border-color: var(--border-subtle); box-shadow: 0 5px 18px #18264B08; }
+.faq-public .faq-toggle::after { color: var(--brand-gold-ink); }
 .legal-public .rich-content h2 { padding-top: 1.5rem; border-top: 1px solid var(--border-subtle); }
 @media (max-width: 575.98px) { .contact-public .contact-panel, .contact-form-panel { padding: 1.25rem; } .faq-public .faq-toggle { padding: 1.25rem; } .faq-public .accordion-body { padding: 0 1.25rem 1.25rem; } }
 

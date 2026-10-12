@@ -72,6 +72,12 @@ Known legal operations/hosting blockers remain open pending real evidence.
 
 ## ADR-036 — Repository categories and reusable public presentation
 
+Presentation follow-up (2026-10-12): shared _PublicIcon and _PublicPageIllustration
+Razor partials reuse the approved local decorative assets across public views.
+Home's icon entry point delegates to the shared set. Representative photographs
+retain visible AI captions and never replace approved CMS article covers. Styling
+does not change publishing/SEO/security gates or introduce CMS schema fields.
+
 Status: Implemented per owner request (2026-10-12).
 
 Move application solution/src/tests/tools and .NET SDK/package/tool configuration

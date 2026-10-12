@@ -4,6 +4,18 @@ All notable project changes should be recorded here.
 
 ## [Unreleased]
 
+### Public inner-page visual enrichment (2026-10-12)
+- Reused approved local legal artwork and a shared decorative SVG partial across
+  article/practice list and detail, profile, contact, FAQ, legal and location pages.
+- Added warm illustrated headings, neutral article cover fallbacks, consistent
+  rounded cards/reading panels and contact icons; no invented professional claims.
+- Kept CMS covers/publication, safe rich text, canonical/schema, contact consent,
+  KVKK modal, filters/pagination and local SEO quality gates intact.
+- Homepage icon partial delegates to the shared icon set without changing its design;
+  no controller, service, Admin, database, migration or dependency changes.
+- Extended article browser checks to 320/390/768/1440 and saved distinct inner-page
+  screenshots; regenerated only changed site CSS through the existing asset tool.
+
 ### Homepage visual enrichment (2026-10-12)
 - Warm paper hero with a locally generated, explicitly representative legal still-life;
   approved Home.HeroMediaId remains first choice and safe fallback behavior is retained.

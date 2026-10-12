@@ -3,11 +3,11 @@
     <div class="container">
 
         <div class="about-grid">
-            <aside class="about-portrait" aria-label="Profil görseli">
-                <div class="about-portrait-placeholder"><img src="~/images/brand/cevat-biyik-emblem.svg" width="144" height="144" alt="" /><p>Onaylı portre henüz yayımlanmadı.</p></div>
+            <aside class="about-portrait" aria-label="Temsili hukuk görseli">
+                <div class="about-portrait-placeholder"><figure class="m-0"><img src="~/images/hero/representative-law-office-768.webp" asp-append-version="true" srcset="/images/hero/representative-law-office-480.webp 480w, /images/hero/representative-law-office-768.webp 768w" sizes="(min-width: 992px) 400px, 100vw" width="768" height="960" loading="eager" decoding="async" alt="Temsili hukuk ofisinde masa, kitaplık ve koltuk" /><figcaption>Temsili hukuk ofisi — yapay zekâ ile oluşturulmuştur.</figcaption></figure><p>Onaylı portre henüz yayımlanmadı.</p></div>
             </aside>
             <div class="about-copy">
-                <header class="content-heading"><h1>Hakkımda</h1></header>
+                <header class="content-heading"><span class="public-icon-badge"><partial name="_PublicIcon" model='@("scales")' /></span><h1>Hakkımda</h1></header>
                 @if (Model is null)
                 {
                     <div class="empty-state"><p class="mb-0">Profil bilgileri henüz yayımlanmadı.</p></div>
@@ -18,7 +18,7 @@
                     <section class="about-section" aria-labelledby="vision-title"><h2 id="vision-title">Vizyon</h2><rich-content value="@Model.Vision"></rich-content></section>
                     <section class="about-section" aria-labelledby="bar-title"><h2 id="bar-title">Baro bilgisi</h2><p>@Model.BarAssociation</p></section>
                 }
-                <div class="content-contact"><a class="btn btn-light" asp-action="Contact">İletişime geç <span aria-hidden="true">↗</span></a></div>
+                <div class="content-contact"><span class="public-cta-icon"><partial name="_PublicIcon" model='@("mail")' /></span><a class="btn btn-light" asp-action="Contact">İletişime geç <span aria-hidden="true">↗</span></a></div>
             </div>
         </div>
     </div>

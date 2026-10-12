@@ -6,7 +6,7 @@
     <header class="page-heading">
         <div class="container">
 
-            <h1>Makaleler</h1>
+            <div class="public-heading-grid"><div><span class="public-icon-badge"><partial name="_PublicIcon" model='@("book")' /></span><h1>Makaleler</h1></div><partial name="_PublicPageIllustration" /></div>
         </div>
     </header>
 <section class="section-pad articles-results"><div class="container">
@@ -40,6 +40,10 @@
                         @if (article.Cover is { } cover)
                         {
                             <img src="@cover.Url" alt="@cover.AltText" width="@cover.Width" height="@cover.Height" class="card-cover" loading="lazy" decoding="async" />
+                        }
+                        else
+                        {
+                            <div class="public-card-art"><partial name="_PublicIcon" model='@("book")' /></div>
                         }
                         <div class="article-card-body">
                             @if (CevatBiyik.Application.Validation.ContentPublication.Complete(article.CategoryName))

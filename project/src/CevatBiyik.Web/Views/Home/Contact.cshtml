@@ -6,14 +6,14 @@
 <div class="public-content-page contact-public">
 <header class="container content-heading">
 
-    <h1>İletişim</h1>
+    <span class="public-icon-badge"><partial name="_PublicIcon" model='@("mail")' /></span><h1>İletişim</h1>
 </header>
 <section class="contact-content"><div class="container"><div class="row g-5">
     <div class="col-lg-4"><aside class="contact-panel" aria-labelledby="contact-info-title"><h2 id="contact-info-title">İletişim bilgileri</h2><dl class="contact-info">
-        @if (CevatBiyik.Application.Validation.ContentPublication.Complete(site.Email)) { <dt>E-posta</dt><dd>@site.Email</dd> }
-        @if (CevatBiyik.Application.Validation.ContentPublication.Complete(site.Phone)) { <dt>Telefon</dt><dd>@site.Phone</dd> }
-        @if (CevatBiyik.Application.Validation.ContentPublication.Complete(site.Address)) { <dt>Adres</dt><dd>@site.Address</dd> }
-        @if (CevatBiyik.Application.Validation.ContentPublication.Complete(site.WorkingHours)) { <dt>Çalışma saatleri</dt><dd>@site.WorkingHours</dd> }
+        @if (CevatBiyik.Application.Validation.ContentPublication.Complete(site.Email)) { <dt><partial name="_PublicIcon" model='@("mail")' /> E-posta</dt><dd>@site.Email</dd> }
+        @if (CevatBiyik.Application.Validation.ContentPublication.Complete(site.Phone)) { <dt><partial name="_PublicIcon" model='@("phone")' /> Telefon</dt><dd>@site.Phone</dd> }
+        @if (CevatBiyik.Application.Validation.ContentPublication.Complete(site.Address)) { <dt><partial name="_PublicIcon" model='@("pin")' /> Adres</dt><dd>@site.Address</dd> }
+        @if (CevatBiyik.Application.Validation.ContentPublication.Complete(site.WorkingHours)) { <dt><partial name="_PublicIcon" model='@("clock")' /> Çalışma saatleri</dt><dd>@site.WorkingHours</dd> }
     </dl>
         @if (!new[] { site.Email, site.Phone, site.Address, site.WorkingHours }.Any(x => CevatBiyik.Application.Validation.ContentPublication.Complete(x))) { <p class="empty-state">İletişim bilgileri henüz yayımlanmadı.</p> }
     </aside></div>

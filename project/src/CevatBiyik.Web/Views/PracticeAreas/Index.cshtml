@@ -2,7 +2,7 @@
 <div class="practice-public practice-list">
     <header class="page-heading"><div class="container">
 
-        <h1>Uzmanlık alanları</h1>
+        <div class="public-heading-grid"><div><span class="public-icon-badge"><partial name="_PublicIcon" model='@("column")' /></span><h1>Uzmanlık alanları</h1></div><partial name="_PublicPageIllustration" /></div>
     </div></header>
     <section class="section-pad practice-results" aria-label="Çalışma alanları"><div class="container">
         @if (Model.Items.Count == 0)
@@ -16,6 +16,7 @@
                 {
                     <div class="col-md-6 col-lg-4">
                         <article class="content-card practice-card h-100">
+                            <span class="public-icon-badge"><partial name="_PublicIcon" model='@("scales")' /></span>
                             <h2><a asp-action="Detail" asp-route-slug="@area.Slug">@area.Name</a></h2>
                             @if (CevatBiyik.Application.Validation.ContentPublication.Complete(area.ShortDescription))
                             {
@@ -35,6 +36,6 @@
                 @if (Model.HasNext) { <a class="btn btn-outline-primary" asp-action="Index" asp-route-page="@(Model.Page + 1)">Sonraki sayfa</a> }
             </nav>
         }
-        <div class="practice-contact practice-contact-list"><a class="btn btn-primary" asp-controller="Home" asp-action="Contact">İletişime geç <span aria-hidden="true">↗</span></a></div>
+        <div class="practice-contact practice-contact-list"><span class="public-cta-icon"><partial name="_PublicIcon" model='@("mail")' /></span><a class="btn btn-primary" asp-controller="Home" asp-action="Contact">İletişime geç <span aria-hidden="true">↗</span></a></div>
     </div></section>
 </div>

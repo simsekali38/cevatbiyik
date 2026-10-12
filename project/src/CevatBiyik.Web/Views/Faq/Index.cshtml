@@ -1,6 +1,6 @@
 @model PagedResult<FaqDto>
 <div class="public-content-page faq-public">
-<header class="container reading-width content-heading"><h1>Sıkça Sorulan Sorular</h1><p>Yanıtı görmek için soruyu açın.</p></header>
+<header class="container reading-width content-heading"><span class="public-icon-badge"><partial name="_PublicIcon" model='@("help")' /></span><h1>Sıkça Sorulan Sorular</h1><p>Yanıtı görmek için soruyu açın.</p></header>
 <section class="faq-content"><div class="container reading-width">
 @if (Model.Items.Count == 0) { <div class="empty-state"><h2>Henüz yayımlanmış soru bulunmuyor</h2><a asp-controller="Home" asp-action="Contact">İletişime geç</a></div> }
 else

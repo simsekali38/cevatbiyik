@@ -5,7 +5,9 @@
 <div class="article-detail-public">
     <article>
         <header class="page-heading">
-            <div class="container reading-width">
+            <div class="container"><div class="public-heading-grid @(Model.Cover is not null ? "public-heading-text-only" : "")"><div>
+
+                <span class="public-icon-badge"><partial name="_PublicIcon" model='@("book")' /></span>
 
                 @if (CevatBiyik.Application.Validation.ContentPublication.Complete(Model.CategoryName))
                 {
@@ -22,7 +24,7 @@
                         }
                     }
                 </div>
-            </div>
+            </div>@if (Model.Cover is null) { <partial name="_PublicPageIllustration" /> }</div></div>
         </header>
         <div class="section-pad article-reading">
             <div class="container reading-width">
@@ -44,7 +46,7 @@
                         }
                     </ul>
                 }
-                <div class="article-contact"><a class="btn btn-light" asp-controller="Home" asp-action="Contact">İletişime geçin <span aria-hidden="true">↗</span></a></div>
+                <div class="article-contact"><span class="public-cta-icon"><partial name="_PublicIcon" model='@("mail")' /></span><a class="btn btn-light" asp-controller="Home" asp-action="Contact">İletişime geçin <span aria-hidden="true">↗</span></a></div>
                 @if (related.Count > 0)
                 {
                     <nav class="article-related" aria-label="İlgili makaleler">
