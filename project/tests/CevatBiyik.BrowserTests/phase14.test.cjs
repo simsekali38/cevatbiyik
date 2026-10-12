@@ -109,6 +109,15 @@ test('editor dialogs meet AA checks, trap focus natively and return focus on Esc
 // Approved homepage shell: retain working navigation at narrow and wide viewports.
 test('homepage design reflows, keeps local assets and preserves navigation', async () => session(async page => {
   await goto(page, '/');
+  // Choose opt-out in this isolated session; screenshots focus on the page, not the banner.
+  const rejectAnalytics = page.getByRole('button', {name:'Analitiği reddet', exact:true});
+  if (await rejectAnalytics.count()) await rejectAnalytics.click();
+  // Full-page screenshots do not scroll lazy images into view automatically.
+  for (const image of await page.locator('.home-public img[loading="lazy"]').all()) {
+    await image.scrollIntoViewIfNeeded();
+    await image.evaluate(el => el.decode());
+  }
+  await page.evaluate(() => window.scrollTo(0, 0));
   assert.equal(await page.locator('main').innerText().then(text => text.includes('CONTENT_REQUIRED')), false);
   const homeLink = page.locator('#ana-menu').getByRole('link', {name:'Ana sayfa', exact:true, includeHidden:true});
   assert.equal(await homeLink.getAttribute('aria-current'), 'page');
@@ -121,10 +130,17 @@ test('homepage design reflows, keeps local assets and preserves navigation', asy
     }
     const columns = await page.locator('.home-hero-grid').evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length);
     assert.equal(columns, width < 992 ? 1 : 2);
-    await page.screenshot({path:`../artifacts/test-runs/home-refined-${width}.png`, fullPage:true});
+    await page.screenshot({path:`../artifacts/test-runs/home-decorated-${width}.png`, fullPage:true});
     await audit(page);
   }
   assert.equal(await page.locator('.home-hero-visual img').evaluate(el => el.complete && el.naturalWidth > 0), true);
+  assert.equal(await page.locator('.home-icon[aria-hidden="true"][focusable="false"]').count() > 0, true);
+  const profileImage = page.locator('.home-profile-visual img');
+  assert.equal(await profileImage.getAttribute('loading'), 'lazy');
+  await profileImage.scrollIntoViewIfNeeded();
+  await profileImage.evaluate(el => el.decode());
+  assert.equal(await profileImage.evaluate(el => el.complete && el.naturalWidth > 0), true);
+  assert.equal(await page.locator('.home-profile-visual figcaption').innerText().then(text => text.includes('Temsili')), true);
   assert.equal(await page.locator('script[src*="tailwind"], script[src*="iconify"], link[href*="fonts.googleapis"]').count(), 0);
   await page.setViewportSize({width:390, height:900});
   await page.locator('.navbar-toggler').click();

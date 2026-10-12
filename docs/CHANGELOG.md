@@ -4,6 +4,16 @@ All notable project changes should be recorded here.
 
 ## [Unreleased]
 
+### Homepage visual enrichment (2026-10-12)
+- Warm paper hero with a locally generated, explicitly representative legal still-life;
+  approved Home.HeroMediaId remains first choice and safe fallback behavior is retained.
+- Added decorative local SVG icons, softer navy/gold card treatments, profile illustration
+  and existing CMS article covers with a neutral icon fallback.
+- Preserved CMS text/publication, routes, metadata, CSP, consent and form security;
+  no shared layout, inner page, Admin, database or package changes.
+- Updated hero asset regressions and homepage browser checks; generated CSS through
+  the existing build-assets tool instead of editing minified output manually.
+
 ### MailKit / MimeKit contact notifications (2026-10-12)
 - Replaced legacy SMTP delivery with MailKit and MimeKit plain-text messages (ADR-039).
 - Mandatory STARTTLS on 587 or implicit TLS on 465; no certificate bypass/plaintext fallback.

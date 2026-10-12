@@ -1,5 +1,10 @@
 # Temsili ofis hero — 2026-10-12
 
+Güncelleme: ana sayfanın yeni varsayılan hero görseli
+REPRESENTATIVE_LEGAL_STILL_LIFE.md içinde belgelenmiştir. Bu mevcut ofis görseli
+ana sayfa profil bölümünde temsili açıklamasıyla yeniden kullanılır. Aşağıdaki
+üretim ve eski hero kullanım notları tarihsel kayıt olarak korunur.
+
 Built-in imagegen kullanıldı. Kaynak representative-law-office.png: 1122×1402.
 Gerçek kişi/ofis fotoğrafı değil; kurgusal hukuk ortamı, insan/kimlik/sertifika/logo yok.
 SVG marka varlığı değiştirilmedi. Public varsayılan görselde temsili/AI açıklaması görünür.
