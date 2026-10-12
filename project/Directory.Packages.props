@@ -8,6 +8,7 @@
   <ItemGroup Label="Runtime (sadece soyutlamalar)">
     <PackageVersion Include="FluentValidation" Version="12.1.1" />
     <PackageVersion Include="HtmlSanitizer" Version="9.2.1039" />
+    <PackageVersion Include="MailKit" Version="4.17.0" />
     <PackageVersion Include="SkiaSharp" Version="3.119.1" />
     <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.29" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.29" />

@@ -4,6 +4,14 @@ All notable project changes should be recorded here.
 
 ## [Unreleased]
 
+### MailKit / MimeKit contact notifications (2026-10-12)
+- Replaced legacy SMTP delivery with MailKit and MimeKit plain-text messages (ADR-039).
+- Mandatory STARTTLS on 587 or implicit TLS on 465; no certificate bypass/plaintext fallback.
+- Added To alias and UseSsl guard; Enabled remains explicit and off by default.
+- Preserved notification leases/retries, fixed headers and record-ID-only message body.
+- Updated MIME serialization, secure port, alias and disabled/cancelled send tests.
+- Updated private JSON setup and production SMTP smoke instructions; no real mail sent.
+
 ### Sitemap, AI discovery and brand favicon (2026-10-12)
 - Shared reviewed public page eligibility; exclude unsupported CMS paths from sitemap.
 - Added explicit UTF-8 XML declaration and no-store discovery responses.

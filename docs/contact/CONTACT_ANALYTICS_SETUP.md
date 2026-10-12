@@ -33,29 +33,36 @@ never blanket forwarding trust. Limiter is in-process and resets on recycle; sha
 
 ## SMTP configuration — disabled by default
 
-Configure deployment settings or user-secrets, not SiteSettings/CMS, public views or source control.
+Configure ignored appsettings.Development.json locally or protected appsettings.Production.json
+on hosting (ADR-034/032), not SiteSettings/CMS, public views or source control.
 Smtp:Enabled=false is the absent-key default. Options are read/validated once at startup; change then recycle safely.
-Enabled config requires Host, Port=587, UserName, Password, From and Recipient (single mailboxes).
-Only authenticated mandatory STARTTLS on 587 is supported; no plaintext fallback, implicit TLS 465, OAuth2 or
-certificate validation bypass. This narrow System.Net.Mail.SmtpClient adapter adds no dependency. Microsoft recommends
-other clients for new/general-purpose mail implementations; add a maintained client via a future ADR if the provider
-requires unsupported authentication/TLS. Confirm STARTTLS, valid certificate chain and port access with Plesk/provider.
+Enabled config requires Host, Port=587 or 465, UserName, Password, From and Recipient
+(single mailboxes). To is an alias for Recipient; Recipient takes precedence when both
+exist. Configuration key casing is insensitive (Username also works).
+UseSsl defaults true and cannot be false when enabled. Port 587 requires STARTTLS;
+465 uses TLS from connection start. MailKit sends MimeKit plain-text messages (ADR-039).
+No plaintext fallback, certificate-validation bypass or OAuth2 provisioning is added.
+Confirm provider TLS support, valid certificate chain and port access with Plesk.
 
-Development templates (fill locally; never send real secrets in chat):
+Private JSON template (fill locally; never commit credentials):
 
-```powershell
-dotnet user-secrets set "Smtp:Host" "<SMTP_HOST>" --project project/src/CevatBiyik.Web
-dotnet user-secrets set "Smtp:Port" "587" --project project/src/CevatBiyik.Web
-dotnet user-secrets set "Smtp:UserName" "<SMTP_USERNAME>" --project project/src/CevatBiyik.Web
-dotnet user-secrets set "Smtp:Password" "<SMTP_PASSWORD>" --project project/src/CevatBiyik.Web
-dotnet user-secrets set "Smtp:From" "<VERIFIED_FROM_EMAIL>" --project project/src/CevatBiyik.Web
-dotnet user-secrets set "Smtp:Recipient" "<APPROVED_ADMIN_EMAIL>" --project project/src/CevatBiyik.Web
-# Enable only after migration/provider and authorized recipient checks:
-dotnet user-secrets set "Smtp:Enabled" "true" --project project/src/CevatBiyik.Web
+```json
+"Smtp": {
+  "Enabled": true,
+  "Host": "<SMTP_HOST>",
+  "Port": 465,
+  "Username": "<SMTP_USERNAME>",
+  "Password": "<SMTP_PASSWORD>",
+  "From": "<VERIFIED_FROM_EMAIL>",
+  "To": "<APPROVED_ADMIN_EMAIL>",
+  "UseSsl": true
+}
 ```
 
-Production equivalents: Smtp__Host, Smtp__Port, Smtp__UserName, Smtp__Password, Smtp__From,
-Smtp__Recipient, Smtp__Enabled in private Plesk environment configuration. Do not run user-secrets list in shared logs.
+Environment overrides remain supported with double underscores (for example
+Smtp__Enabled, Smtp__To). Enable only after authorized recipient/provider checks,
+then recycle the application. Existing messages created while SMTP was disabled are
+not retroactively queued. No real SMTP settings or secrets were changed by this update.
 Delivery contains only a fixed subject/plain-text notice and record ID; no customer name, email, phone, subject,
 message, IP, Reply-To or clickable URL. Recipient and From never come from the public form.
 A form success confirms DB persistence, not email delivery. No request fire-and-forget tasks.

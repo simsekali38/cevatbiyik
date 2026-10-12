@@ -1,5 +1,25 @@
 # Architecture Decision Records
 
+## ADR-039 — MimeKit message composition and MailKit SMTP delivery
+
+Status: Implemented per owner request (2026-10-12).
+
+Supersedes ADR-024's legacy SMTP adapter/587-only choice. MimeKit is a transitive
+dependency of MailKit. Smtp:To aliases Recipient; Recipient takes precedence.
+UseSsl defaults true and cannot disable mandatory TLS. Enabled stays false by default.
+
+Replace System.Net.Mail transport with MailKit in Infrastructure; MailKit includes
+MimeKit for message composition. Add only the direct MailKit dependency centrally,
+leaving Application's IContactEmailSender and persistent notification worker unchanged.
+Existing Smtp keys remain: port 587 requires STARTTLS; port 465 requires TLS on connect.
+Reject other ports; never fall back to plaintext or bypass certificate validation.
+Authenticate after TLS, use async operations/cancellation and a bounded timeout.
+Keep fixed headers and record-ID-only plain-text notifications; no visitor data or
+SMTP credentials are copied into MIME headers/body. No schema or migration changes.
+
+References: https://www.nuget.org/packages/MailKit/4.17.0 and
+https://mimekit.net/docs/html/T_MailKit_Security_SecureSocketOptions.htm.
+
 ## ADR-038 — Public discovery documents share publication gates
 
 Status: Implemented (2026-10-12).
@@ -347,6 +367,9 @@ Details, commands and primary sources: docs/security/SECURITY_HARDENING.md and d
 
 
 ## ADR-024 — Durable contact notifications and basic consent-controlled analytics
+
+SMTP transport amendment: ADR-039 replaces the legacy client and adds TLS/465;
+the durable notification and consent decisions below otherwise remain applicable.
 
 Status: Implemented and owner-approved (Phase 11); commit authorized.
 

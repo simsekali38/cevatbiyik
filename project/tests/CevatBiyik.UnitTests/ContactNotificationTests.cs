@@ -59,7 +59,8 @@ public sealed class ContactNotificationTests
     [Theory]
     [InlineData("bad host", 587, "from@example.test")]
     [InlineData("smtp.example.test", 25, "from@example.test")]
-    [InlineData("smtp.example.test", 465, "from@example.test")]
+    [InlineData("smtp.example.test", 0, "from@example.test")]
+    [InlineData("smtp.example.test", 65536, "from@example.test")]
     [InlineData("smtp.example.test", 587, "from@example.test\r\nBcc:x@example.test")]
     public void Smtp_InvalidOptionsFailWithGenericMessage(string host, int port, string from)
     {
@@ -73,11 +74,60 @@ public sealed class ContactNotificationTests
     {
         using var mail = SmtpContactEmailSender.CreateMessage(new SmtpNotificationOptions
         { Enabled = true, Host = "smtp.example.test", From = "from@example.test", Recipient = "admin@example.test", UserName = "test", Password = "secret" }, 42);
-        Assert.False(mail.IsBodyHtml);
-        Assert.Contains("42", mail.Body, StringComparison.Ordinal);
-        Assert.Equal("admin@example.test", Assert.Single(mail.To).Address);
-        Assert.Empty(mail.ReplyToList);
-        Assert.DoesNotContain("secret", mail.Body, StringComparison.Ordinal);
+        Assert.Null(mail.HtmlBody);
+        Assert.Contains("42", mail.TextBody, StringComparison.Ordinal);
+        Assert.Equal("admin@example.test", Assert.Single(mail.To.Mailboxes).Address);
+        Assert.Equal("from@example.test", Assert.Single(mail.From.Mailboxes).Address);
+        Assert.Equal("Yeni iletişim mesajı", mail.Subject);
+        Assert.Empty(mail.ReplyTo);
+        Assert.Empty(mail.Cc);
+        Assert.Empty(mail.Bcc);
+        using var stream = new MemoryStream();
+        mail.WriteTo(stream);
+        stream.Position = 0;
+        using var parsed = MimeKit.MimeMessage.Load(stream);
+        Assert.Equal(mail.TextBody, Assert.IsType<string>(parsed.TextBody).TrimEnd('\r', '\n'));
+        Assert.Equal(mail.Subject, parsed.Subject);
+        Assert.DoesNotContain("secret", parsed.ToString(), StringComparison.Ordinal);
+    }
+    [Theory]
+    [InlineData(587)]
+    [InlineData(465)]
+    public void Smtp_ExplicitTlsPortsAreAccepted(int port)
+    {
+        new SmtpNotificationOptions { Enabled = true, Host = "smtp.example.test", Port = port,
+            From = "from@example.test", Recipient = "admin@example.test", UserName = "test", Password = "secret" }.Validate();
+    }
+    [Fact]
+    public async Task Smtp_DisabledAndCancelledDeliveryNeverOpensAConnection()
+    {
+        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            new SmtpContactEmailSender(new SmtpNotificationOptions()).SendAsync(42, CancellationToken.None));
+        using var cancellation = new CancellationTokenSource();
+        cancellation.Cancel();
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+            new SmtpContactEmailSender(new SmtpNotificationOptions { Enabled = true }).SendAsync(42, cancellation.Token));
+    }
+    [Fact]
+    public void Smtp_ToAliasAndUsernameCasingAreSupported_WithoutEnablingImplicitly()
+    {
+        var config = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
+        {
+            ["Smtp:Host"] = "smtp.example.test", ["Smtp:Port"] = "465",
+            ["Smtp:Username"] = "from@example.test", ["Smtp:Password"] = "secret",
+            ["Smtp:From"] = "from@example.test", ["Smtp:To"] = "admin@example.test",
+            ["Smtp:UseSsl"] = "true"
+        }).Build();
+        var options = SmtpNotificationOptions.Read(config);
+        Assert.False(options.Enabled);
+        Assert.Equal("from@example.test", options.UserName);
+        Assert.Equal("admin@example.test", options.Recipient);
+        config["Smtp:Enabled"] = "true";
+        SmtpNotificationOptions.Read(config).Validate();
+        config["Smtp:Recipient"] = "preferred@example.test";
+        Assert.Equal("preferred@example.test", SmtpNotificationOptions.Read(config).Recipient);
+        config["Smtp:UseSsl"] = "false";
+        Assert.Throws<InvalidOperationException>(() => SmtpNotificationOptions.Read(config).Validate());
     }
     [Theory]
     [InlineData(false, true)] [InlineData(true, false)]

@@ -129,7 +129,7 @@ AdminBootstrap:UserName/Email/Password are temporary keys in ignored Development
 
 ## Phase 11 integration switches
 
-Absent Smtp:Enabled and Analytics:Enabled are false. SMTP is startup-bound mandatory STARTTLS/587;
+Absent Smtp:Enabled and Analytics:Enabled are false. SMTP is startup-bound mandatory STARTTLS/587 or implicit TLS/465 through MailKit/MimeKit (ADR-039);
 credentials belong in ignored local/server JSON (or explicit environment overrides) and never SiteSettings. Analytics selects one public GTM/GA4 ID,
 reviewed config/legal-page gate, versioned protected consent and per-request CSP. Persist private Data Protection keys.
 Complete key/command templates and AlwaysRunning/IP/container/legal checks: contact/CONTACT_ANALYTICS_SETUP.md.

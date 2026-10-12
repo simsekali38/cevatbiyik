@@ -30,7 +30,7 @@ izole prova kanıtı kullanılır. Gerçek başvuru/kişisel veri veya demo içe
 | ADM-04 | Kategori/etiket, uzmanlık/lokasyon ilişkisi, FAQ/profil/hukuki sayfa ve ayarlar doğru; taslak görünmez | CONTENT_REQUIRED |
 | CON-01 | Hukuki onaylı contact notice/KVKK var; form Enabled kararı doğru; KVKK modal URL/form değerlerini korur | CONTENT_REQUIRED |
 | CON-02 | Yetkili operatörün tek kontrollü mesajı PRG sonrası kaydedilir; admin read/unread çalışır; iletişim verisi logda yok | CONTENT_REQUIRED |
-| CON-03 | SMTP etkinse message ID ve queue durumu kaydedilir; 587 STARTTLS, doğru alıcıya tek kontrollü bildirim ulaşır; DB save mail başarı sayılmaz | CONTENT_REQUIRED |
+| CON-03 | SMTP etkinse message ID ve queue durumu kaydedilir; 587 STARTTLS veya 465 TLS, doğru alıcıya tek kontrollü bildirim ulaşır; DB save mail başarı sayılmaz | CONTENT_REQUIRED |
 | CON-04 | SMTP kapalı kapsam varsa mail beklenmez; Enabled değişimi recycle sonrası doğru; izinli no-store/consent davranışı bozulmaz | CONTENT_REQUIRED |
 | FILE-01 | Owner onaylı temiz görsel ≤5 MiB upload; Skia decode/re-encode WebP, boyut/orientation ve public görüntü doğru | CONTENT_REQUIRED |
 | FILE-02 | Temiz onaylı PDF ≤5 MiB yüklenir; Defender scan başarılı; admin attachment/no-store/nosniff/sandbox indirme doğru | CONTENT_REQUIRED |

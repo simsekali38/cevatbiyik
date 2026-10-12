@@ -10,6 +10,7 @@ public sealed class SmtpNotificationOptions : IContactNotificationPolicy
     public bool Enabled { get; init; }
     public string Host { get; init; } = "";
     public int Port { get; init; } = 587;
+    public bool UseSsl { get; init; } = true;
     public string UserName { get; init; } = "";
     public string Password { get; init; } = "";
     public string From { get; init; } = "";
@@ -19,20 +20,21 @@ public sealed class SmtpNotificationOptions : IContactNotificationPolicy
         Enabled = config.GetValue<bool>("Smtp:Enabled"),
         Host = config["Smtp:Host"] ?? "",
         Port = config.GetValue<int?>("Smtp:Port") ?? 587,
+        UseSsl = config.GetValue<bool?>("Smtp:UseSsl") ?? true,
         UserName = config["Smtp:UserName"] ?? "",
         Password = config["Smtp:Password"] ?? "",
         From = config["Smtp:From"] ?? "",
-        Recipient = config["Smtp:Recipient"] ?? ""
+        Recipient = config["Smtp:Recipient"] ?? config["Smtp:To"] ?? ""
     };
     public void Validate()
     {
         if (!Enabled) { return; }
-        if (Uri.CheckHostName(Host) == UriHostNameType.Unknown || Host.Length > 253 ||
+        if (!UseSsl || Uri.CheckHostName(Host) == UriHostNameType.Unknown || Host.Length > 253 || Port is not (587 or 465) ||
             string.IsNullOrWhiteSpace(UserName) || UserName.Length > 254 || UserName.Any(char.IsControl) ||
             string.IsNullOrWhiteSpace(Password) || Password.Length > 1024 ||
             !Mailbox(From) || !Mailbox(Recipient))
         {
-            throw new InvalidOperationException("SMTP configuration is invalid. Use authenticated STARTTLS on port 587 and single mailboxes.");
+            throw new InvalidOperationException("SMTP configuration is invalid. Use authenticated TLS on port 587 or 465 and single mailboxes.");
         }
     }
     private static bool Mailbox(string value) => value.Length <= 254 && !value.Any(char.IsControl) &&

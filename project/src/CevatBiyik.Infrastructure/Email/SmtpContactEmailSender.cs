@@ -1,33 +1,41 @@
-using System.Net;
-using System.Net.Mail;
-using System.Text;
 using CevatBiyik.Application.Interfaces;
+using MailKit.Net.Smtp;
+using MailKit.Security;
+using MimeKit;
 
 namespace CevatBiyik.Infrastructure.Email;
 
-// Narrow legacy SMTP adapter; TLS is mandatory, recipient/header values never come from a public form.
+// TLS is mandatory; recipient/header values never come from a public form.
 public sealed class SmtpContactEmailSender(SmtpNotificationOptions options) : IContactEmailSender
 {
-    public static MailMessage CreateMessage(SmtpNotificationOptions options, long id)
+    public static MimeMessage CreateMessage(SmtpNotificationOptions options, long id)
     {
         options.Validate();
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(id);
-        return new MailMessage(options.From, options.Recipient)
+        var message = new MimeMessage
         {
             Subject = "Yeni iletişim mesajı",
-            Body = $"Yeni iletişim mesajı kaydedildi. Kayıt numarası: {id}. Ayrıntılar için yönetim panelindeki iletişim mesajlarını açın.",
-            IsBodyHtml = false, BodyEncoding = Encoding.UTF8, SubjectEncoding = Encoding.UTF8
+            Body = new TextPart("plain")
+            {
+                Text = $"Yeni iletişim mesajı kaydedildi. Kayıt numarası: {id}. Ayrıntılar için yönetim panelindeki iletişim mesajlarını açın."
+            }
         };
+        message.From.Add(MailboxAddress.Parse(options.From));
+        message.To.Add(MailboxAddress.Parse(options.Recipient));
+        return message;
     }
     public async Task SendAsync(long messageId, CancellationToken cancellationToken)
     {
         if (!options.Enabled) { throw new InvalidOperationException("SMTP notifications are disabled."); }
+        cancellationToken.ThrowIfCancellationRequested();
         using var message = CreateMessage(options, messageId);
-        using var client = new SmtpClient(options.Host, options.Port)
-        {
-            EnableSsl = true, UseDefaultCredentials = false,
-            Credentials = new NetworkCredential(options.UserName, options.Password), DeliveryMethod = SmtpDeliveryMethod.Network
-        };
-        await client.SendMailAsync(message, cancellationToken);
+        using var client = new SmtpClient { Timeout = 30000 };
+        var security = options.Port == 465 ? SecureSocketOptions.SslOnConnect : SecureSocketOptions.StartTls;
+        await client.ConnectAsync(options.Host, options.Port, security, cancellationToken);
+        await client.AuthenticateAsync(options.UserName, options.Password, cancellationToken);
+        await client.SendAsync(message, cancellationToken);
+        // SMTP accepted the message; a QUIT failure must not turn delivery into a retry.
+        try { await client.DisconnectAsync(true, cancellationToken); }
+        catch (Exception ex) when (ex is IOException or MailKit.ProtocolException or SmtpCommandException or OperationCanceledException) { }
     }
 }
